@@ -1,0 +1,105 @@
+
+
+// Copyright Shunsuke Sogame 2008-2010.
+// Distributed under the terms of an MIT-style license.
+
+
+package com.github.okomok
+package sing
+
+
+/**
+ * The sing Either
+ */
+sealed abstract class Either extends Any {
+    type self <: Either
+    type unsung <: scala.Either[_, _]
+
+    final override  def asEither: asEither = self
+    final override type asEither           = self
+
+     def get: get
+    type get <: Any
+
+     def fold[f <: Function1, g <: Function1](f: f, g: g): fold[f, g]
+    type fold[f <: Function1, g <: Function1] <: Any
+
+     def swap: swap
+    type swap <: Either
+
+     def joinLeft: joinLeft
+    type joinLeft <: Either
+
+     def joinRight: joinRight
+    type joinRight <: Either
+
+     def isLeft: isLeft
+    type isLeft <: Boolean
+
+     def isRight: isRight
+    type isRight <: Boolean
+
+    final override def canEqual(that: scala.Any) = that.isInstanceOf[Either]
+}
+
+
+/**
+ * The sing Left
+ */
+final case class Left[e <: Any](override val get: e) extends Either {
+    type self = Left[e]
+
+    override  def unsung: unsung = scala.Left(get.unsung)
+    override type unsung         = scala.Left[get#unsung, _]
+
+    override type get = e
+
+    override  def fold[f <: Function1, g <: Function1](f: f, g: g): fold[f, g] = f.apply(get)
+    override type fold[f <: Function1, g <: Function1]                         = f#apply[get]
+
+    override  def swap: swap = Right(get)
+    override type swap       = Right[get]
+
+    override  def joinLeft: joinLeft = get.asEither
+    override type joinLeft           = get#asEither
+
+    override  def joinRight: joinRight = self
+    override type joinRight            = self
+
+    override  def isLeft: isLeft = `true`
+    override type isLeft         = `true`
+
+    override  def isRight: isRight = `false`
+    override type isRight          = `false`
+}
+
+
+/**
+ * The sing Right
+ */
+final case class Right[e <: Any](override val get: e) extends Either {
+    type self = Right[e]
+
+    override  def unsung: unsung = scala.Right(get.unsung)
+    override type unsung         = scala.Right[_, get#unsung]
+
+    override type get = e
+
+    override  def fold[f <: Function1, g <: Function1](f: f, g: g): fold[f, g] = g.apply(get)
+    override type fold[f <: Function1, g <: Function1]                        = g#apply[get]
+
+    override  def swap: swap = Left(get)
+    override type swap       = Left[get]
+
+    override  def joinLeft: joinLeft = self
+    override type joinLeft           = self
+
+    override  def joinRight: joinRight = get.asEither
+    override type joinRight            = get#asEither
+
+    override  def isLeft: isLeft = `false`
+    override type isLeft         = `false`
+
+    override  def isRight: isRight = `true`
+    override type isRight          = `true`
+}
