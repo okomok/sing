@@ -69,8 +69,8 @@ Shunsuke Sogame <<okomok@gmail.com>>
 
 
 [MIT License]: http://www.opensource.org/licenses/mit-license.php "MIT License"
-[Browse Source]: http://github.com/okomok/sing/tree/master/src/main/scala/ "Browse Source"
-[Browse Test Source]: http://github.com/okomok/sing/tree/master/src/test/scala/ "Browse Test Source"
+[Browse Source]: http://github.com/okomok/sing/tree/master/src/main/scala/sing "Browse Source"
+[Browse Test Source]: http://github.com/okomok/sing/tree/master/src/test/scala/sing "Browse Test Source"
 [The Scala Programming Language]: http://www.scala-lang.org/ "The Scala Programming Language"
 [PEG]: http://en.wikipedia.org/wiki/Parsing_expression_grammar "PEG"
 [MetaScala]: http://www.assembla.com/wiki/show/metascala "MetaScala"
