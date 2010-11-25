@@ -18,15 +18,15 @@ trait List extends Any {
     type self <: List
     type unsung <: scala.collection.immutable.Seq[scala.Any]
 
-    @constantTime
+    @annotation.constantTime
      def isEmpty: isEmpty
     type isEmpty <: Boolean
 
-    @constantTime
+    @annotation.constantTime
      def head: head
     type head <: Any
 
-    @constantTime
+    @annotation.constantTime
      def tail: tail
     type tail <: List
 
@@ -35,14 +35,14 @@ trait List extends Any {
     final def #::[e](e: e): ::[Box[e]] = ::(Box(e))
 //    final def ::[e](e: e, o: util.Overload = ()): ::[Box[e]] = ::(Box(e))
 
-    @constantTime
+    @annotation.constantTime
      def clear: clear
     type clear <: List
 
      def foreach[f <: Function1](f: f): foreach[f]
     type foreach[f <: Function1] <: Unit
 
-    @linearTime
+    @annotation.linearTime
      def length: length
     type length <: Nat
 
@@ -106,7 +106,7 @@ trait List extends Any {
      def scanRight[z <: Any, f <: Function2](z: z, f: f): scanRight[z, f]
     type scanRight[z <: Any, f <: Function2] <: List
 
-    @linearTime
+    @annotation.linearTime
      def nth[n <: Nat](n: n): nth[n]
     type nth[n <: Nat] <: Any
 

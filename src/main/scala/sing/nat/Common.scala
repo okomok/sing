@@ -10,11 +10,11 @@ package sing; package nat
 
 private[sing]
 class Common {
-    @aliasOf("dense.Dense")
+    @annotation.aliasOf("dense.Dense")
      val Dense = dense.Dense
     type Dense = dense.Dense
 
-    @aliasOf("peano.Peano")
+    @annotation.aliasOf("peano.Peano")
      val Peano = peano.Peano
     type Peano = peano.Peano
 

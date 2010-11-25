@@ -10,13 +10,13 @@ package sing; package nat; package dense
 
 private[sing]
 class Common extends CommonLiteral {
-    @returnThis
+    @annotation.returnThis
     val Literal: CommonLiteral = this
 
-    @equivalentTo("new Nil{}")
+    @annotation.equivalentTo("new Nil{}")
     val Nil: Nil = _Dense.Nil
 
-    @aliasOf("Cons")
+    @annotation.aliasOf("Cons")
      val :: = Cons
     type ::[x <: Boolean, xs <: Dense] = Cons[x, xs]
 }

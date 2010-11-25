@@ -24,15 +24,15 @@ trait Nat extends Any {
      def asPeano: asPeano
     type asPeano <: Peano
 
-    @constantTime
+    @annotation.constantTime
      def isZero: isZero
     type isZero <: Boolean
 
-    @constantTime
+    @annotation.constantTime
      def increment: increment
     type increment <: Nat
 
-    @constantTime
+    @annotation.constantTime
      def decrement: decrement
     type decrement <: Nat
 

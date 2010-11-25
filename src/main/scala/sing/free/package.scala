@@ -8,8 +8,8 @@ package com.github.okomok
 package sing
 
 
-import annotation.elidable
-import annotation.elidable.ALL
+import scala.annotation.elidable
+import scala.annotation.elidable.ALL
 
 
 package object free {

@@ -8,7 +8,7 @@ package com.github.okomok
 package sing; package peg
 
 
-@visibleForTesting
+@annotation.visibleForTesting
 object StartsWith {
      def apply[xs <: List, ys <: List, eqv <: Option](xs: xs, ys: ys, eqv: eqv): apply[xs, ys, eqv] =
         `if`(ys.isEmpty,

@@ -8,7 +8,7 @@ package com.github.okomok
 package sing; package map; package bstree
 
 
-@visibleForTesting
+@annotation.visibleForTesting
 object Balance {
      val delta: delta = nat.dense._5
     type delta        = nat.dense._5

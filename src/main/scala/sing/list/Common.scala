@@ -11,19 +11,19 @@ package sing; package list
 private[list]
 trait Common {
 
-    @equivalentTo("new Nil{}")
+    @annotation.equivalentTo("new Nil{}")
      val Nil = _Nil.value
 
-    @equivalentTo("Cons")
+    @annotation.equivalentTo("Cons")
      val :: = Cons
-    @equivalentTo("x# ::[xs]")
+    @annotation.equivalentTo("x# ::[xs]")
     type ::[x <: Any, xs <: List] = xs# ::[x]
 
-    @equivalentTo("Nil")
+    @annotation.equivalentTo("Nil")
      val empty: empty = Nil
     type empty        = Nil
 
-    @equivalentTo("Nil.::(x)")
+    @annotation.equivalentTo("Nil.::(x)")
      def single[x <: Any](x: x): single[x] = Nil. ::(x)
     type single[x <: Any]                  = Nil# ::[x]
 //     def single[x](x: x, o: util.Overload = ()): single[Box[x]] = single(Box(x)) // scalac sucks.

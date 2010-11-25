@@ -7,8 +7,8 @@
 package com.github.okomok
 
 
-import annotation.elidable
-import annotation.elidable.ASSERTION
+import scala.annotation.elidable
+import scala.annotation.elidable.ASSERTION
 
 
 package object sing {
@@ -16,94 +16,94 @@ package object sing {
 
 // Boolean
 
-    @equivalentTo("new `true`{}")
+    @annotation.equivalentTo("new `true`{}")
      val `true` = _Boolean.`true`
 
-    @equivalentTo("new `false`{}")
+    @annotation.equivalentTo("new `false`{}")
      val `false` = _Boolean.`false`
 
-    @equivalentTo("c.`if`(then, _else)")
+    @annotation.equivalentTo("c.`if`(then, _else)")
      def `if`[c <: Boolean, then <: Function0, _else <: Function0](c: c, then: then, _else: _else): `if`[c, then, _else] = c.`if`(then, _else)
     type `if`[c <: Boolean, then <: Function0, _else <: Function0]                                                       = c#`if`[then, _else]
 
 
 // Function
 
-    @aliasOf("function.const0")
+    @annotation.aliasOf("function.const0")
      def const0[v <: Any](v: => v): const0[v] = function.const0(v)
     type const0[v <: Any]                     = function.const0[v]
 
-    @aliasOf("function.throw0")
+    @annotation.aliasOf("function.throw0")
      def throw0(x: Throwable) = function.throw0(x)
     type throw0[_]            = function.throw0[_]
 
 
 // List
 
-    @aliasOf("list.List")
+    @annotation.aliasOf("list.List")
      val List = list.List
     type List = list.List
 
-    @aliasOf("list.Nil")
+    @annotation.aliasOf("list.Nil")
      val Nil = list.Nil
     type Nil = list.Nil
 
-    @aliasOf("list.::")
+    @annotation.aliasOf("list.::")
      val :: = list.::
     type ::[x <: Any, xs <: List] = list.::[x, xs]
 
 
 // Map
 
-    @aliasOf("map.Map")
+    @annotation.aliasOf("map.Map")
      val Map = map.Map
     type Map = map.Map
 
 
 // Nat
 
-    @aliasOf("nat.Nat")
+    @annotation.aliasOf("nat.Nat")
      val Nat = nat.Nat
     type Nat = nat.Nat
 
 
 // Option
 
-    @equivalentTo("new None{}")
+    @annotation.equivalentTo("new None{}")
      val None = _Option.None
 
 
 // Ordering
 
-    @aliasOf("ordering.Ordering")
+    @annotation.aliasOf("ordering.Ordering")
      val Ordering = ordering.Ordering
     type Ordering = ordering.Ordering
 
 
 // Peg
 
-    @aliasOf("peg.Peg")
+    @annotation.aliasOf("peg.Peg")
      val Peg = peg.Peg
     type Peg = peg.Peg
 
 
 // Product
 
-    @aliasOf("Tuple2")
+    @annotation.aliasOf("Tuple2")
      val Pair = Tuple2
     type Pair[v1 <: Any, v2 <: Any] = Tuple2[v1, v2]
 
 
 // Set
 
-    @aliasOf("set.Set")
+    @annotation.aliasOf("set.Set")
      val Set = set.Set
     type Set = set.Set
 
 
 // Unit
 
-    @equivalentTo("new Unit{}")
+    @annotation.equivalentTo("new Unit{}")
     val Unit: Unit = _Unit.value
 
 
@@ -117,7 +117,7 @@ package object sing {
     type assert[c <: Boolean]                  = Assert.apply[c]
 
     @elidable(ASSERTION)
-    @equivalentTo("assert(c.not)")
+    @annotation.equivalentTo("assert(c.not)")
      def assertNot[c <: Boolean](c: c): assertNot[c] = assert(c.not)
     type assertNot[c <: Boolean]                     = assert[c#not]
 

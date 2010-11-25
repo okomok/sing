@@ -34,7 +34,7 @@ sealed abstract class Dense extends AbstractNat {
     override type bitAnd[that <: Nat] <: Dense
     override type bitOr[that <: Nat] <: Dense
 
-    @equivalentTo("Cons(e. self)")
+    @annotation.equivalentTo("Cons(e. self)")
      def ::[e <: Boolean](e: e): ::[e]
     type ::[e <: Boolean] <: Dense
 
@@ -57,7 +57,7 @@ sealed abstract class AbstractDense extends Dense {
     final override  def asDense: asDense = self
     final override type asDense          = self
 
-    @equivalentTo("Cons(e. self)")
+    @annotation.equivalentTo("Cons(e. self)")
     final override  def ::[e <: Boolean](e: e): ::[e] = Cons(e, self)
     final override type ::[e <: Boolean]              = Cons[e, self]
 

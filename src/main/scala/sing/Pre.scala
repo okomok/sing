@@ -11,7 +11,7 @@ package sing
 /**
  * unneeded if `assert[c]` could be implemented.
  */
-@specializer
+@annotation.specializer
 sealed abstract class Pre[c <: Boolean]
 
 object Pre {

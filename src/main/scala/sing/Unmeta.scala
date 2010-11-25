@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-@specializer
+@annotation.specializer
 trait Unmeta[x <: Any] extends scala.Function0[x]
 
 

@@ -207,8 +207,8 @@ object AsciiLiteral {
     sealed abstract class  ?  extends Strong(_1B :: _1B :: _1B :: _1B :: _1B :: _1B :: Nil) {
         type self =  ?
     }
-    sealed abstract class `@` extends Strong(_0B :: _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: Nil) {
-        type self = `@`
+    sealed abstract class `@annotation.` extends Strong(_0B :: _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: Nil) {
+        type self = `@annotation.`
     }
 	sealed abstract class  A  extends Strong(_1B :: _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: Nil) {
         type self =  A
@@ -348,7 +348,7 @@ object AsciiLiteral {
 }
 
 
-@compilerWorkaround("2.8.0") // One-letter names confuse JVM.
+@annotation.compilerWorkaround("2.8.0") // One-letter names confuse JVM.
 private[sing]
 object _AsciiLiteral {
 

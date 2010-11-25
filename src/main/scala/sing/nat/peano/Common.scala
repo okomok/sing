@@ -10,9 +10,9 @@ package sing; package nat; package peano
 
 private[sing]
 class Common extends CommonLiteral {
-    @returnThis
+    @annotation.returnThis
     val Literal: CommonLiteral = this
 
-    @equivalentTo("new Zero{}")
+    @annotation.equivalentTo("new Zero{}")
     val Zero = _Peano.Zero
 }

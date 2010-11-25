@@ -14,11 +14,11 @@ package sing; package list
 trait RandomAccess extends List {
     type self <: RandomAccess
 
-    @constantTime
+    @annotation.constantTime
     override  def length: length
     override type length <: Nat
 
-    @constantTime
+    @annotation.constantTime
     override  def nth[n <: Nat](n: n): nth[n]
     override type nth[n <: Nat] <: Any
 }

@@ -13,7 +13,7 @@ package sing
  */
 trait Any extends scala.Equals {
 
-    @returnThis
+    @annotation.returnThis
     final val self: self = this.asInstanceOf[self]
     type self <: Any
 
