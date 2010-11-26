@@ -52,7 +52,7 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type v5 = m#get[_5]#get
         val v5: v5 = m.get(_5).get
         free.assertSame[Box[Char], v5]
-        assertEquals('c', v5.unsung)
+        assertEquals('c', v5.unsing)
     }
 
     def testContains {
@@ -74,10 +74,10 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         free.assertSame[`true`, m#contains[_5]]
     }
 
-    def testUnsung {
+    def testUnsing {
         type m   = map.sorted[nat.naturalOrdering]#put[_3, _4]#put[_1, _2]#put[_5, _6]
         val m: m = map.sorted(nat.naturalOrdering).put(_3, _4).put(_1, _2).put(_5, _6)
-        assertEquals(Predef.Map(1 -> 2, 3 -> 4, 5 -> 6), m.unsung)
+        assertEquals(Predef.Map(1 -> 2, 3 -> 4, 5 -> 6), m.unsing)
     }
 
     def testDupePut {
@@ -90,12 +90,12 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type v5 = m#get[_5]#get
         val v5: v5 = m.get(_5).get
         free.assertSame[Box[Char], v5]
-        assertEquals('c', v5.unsung)
+        assertEquals('c', v5.unsing)
 
         type m2 = m.put[_5, Box[String]]
         val m2: m2 = m.put(_5, Box("hw"))
         free.assertSame[Box[String], m2#get[_5]#get]
-        assertEquals("hw", m2.get(_5).get.unsung)
+        assertEquals("hw", m2.get(_5).get.unsing)
     }
 
 }

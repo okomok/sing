@@ -32,7 +32,7 @@ class RuleTest extends org.scalatest.junit.JUnit3Suite {
         type r   = MyRule#matches[xs]
         val r: r = MyRule.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testTrivialFail {
@@ -41,7 +41,7 @@ class RuleTest extends org.scalatest.junit.JUnit3Suite {
         type r   = MyRule#matches[xs]
         val r: r = MyRule.matches(xs)
         free.assertNot[r]
-        assertFalse(r.unsung)
+        assertFalse(r.unsing)
     }
 
 }

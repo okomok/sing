@@ -13,7 +13,7 @@ package sing
  */
 sealed abstract class Boolean extends Any {
     type self <: Boolean
-    type unsung = scala.Boolean
+    type unsing = scala.Boolean
 
      def not: not
     type not <: Boolean
@@ -62,7 +62,7 @@ sealed abstract class AbstractBoolean extends Boolean {
 sealed abstract class `true` extends AbstractBoolean {
     type self = `true`
 
-    override  def unsung: unsung = true
+    override  def unsing: unsing = true
 
     override  def not: not = `false`
     override type not      = `false`
@@ -96,7 +96,7 @@ sealed abstract class `true` extends AbstractBoolean {
 sealed abstract class `false` extends AbstractBoolean {
     type self = `false`
 
-    override  def unsung: unsung = false
+    override  def unsing: unsing = false
 
     override  def not: not = `true`
     override type not      = `true`

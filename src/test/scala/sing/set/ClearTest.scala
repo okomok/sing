@@ -25,7 +25,7 @@ class ClearTest extends org.scalatest.junit.JUnit3Suite {
         val n: n = m1.clear
 
         free.assert[n#isEmpty]
-        assertTrue(n.isEmpty.unsung)
+        assertTrue(n.isEmpty.unsing)
     }
 
 }

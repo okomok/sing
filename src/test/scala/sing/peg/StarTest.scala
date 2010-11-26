@@ -26,7 +26,7 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#matches[xs]
         val r: r = p.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testOneInput {
@@ -37,7 +37,7 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#matches[xs]
         val r: r = p.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testLongInput {
@@ -48,7 +48,7 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#matches[xs]
         val r: r = p.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testParseNoConsume {
@@ -59,7 +59,7 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[Nil, r#get#force]
         assertEquals(Nil, r.get)
         free.assertSame[xs, r#next#force]
@@ -74,7 +74,7 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[(_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: Nil, r#get#force]
         assertEquals((_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: Nil, r.get)
         free.assertSame[_10 :: _11 :: Nil, r#next#force]

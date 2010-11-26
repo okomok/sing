@@ -93,7 +93,7 @@ sealed class Nil extends AbstractDense {
     override  def asPeano: asPeano = peano.Zero
     override type asPeano          = peano.Zero
 
-    override  def unsung: unsung = 0
+    override  def unsing: unsing = 0
 
     override  def head: head = noSuchElement("nat.dense.Nil.head")
     override type head       = noSuchElement[_]
@@ -141,7 +141,7 @@ final case class Cons[x <: Boolean, xs <: Dense](override val head: x, override 
     override  def asPeano: asPeano = peano.Succ(decrement.asPeano)
     override type asPeano          = peano.Succ[decrement#asPeano]
 
-    override  def unsung: unsung = (if (head.unsung) 1 else 0) + (2 * tail.unsung)
+    override  def unsing: unsing = (if (head.unsing) 1 else 0) + (2 * tail.unsing)
 
     override type head = x
     override type tail = xs

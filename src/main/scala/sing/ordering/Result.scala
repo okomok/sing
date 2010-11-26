@@ -10,7 +10,7 @@ package sing; package ordering
 
 sealed abstract class Result extends Any {
     type self <: Result
-    type unsung = scala.Int
+    type unsing = scala.Int
 
      def equal[that <: Result](that: that): equal[that]
     type equal[that <: Result] <: Boolean
@@ -52,7 +52,7 @@ sealed abstract class AbstractResult extends Result {
 sealed abstract class LT extends AbstractResult {
     type self = LT
 
-    override  def unsung: unsung = -1
+    override  def unsing: unsing = -1
 
     override  def equal[that <: Result](that: that): equal[that] = that.isLT
     override type equal[that <: Result]                          = that#isLT
@@ -68,7 +68,7 @@ sealed abstract class LT extends AbstractResult {
 sealed abstract class GT extends AbstractResult {
     type self = GT
 
-    override  def unsung: unsung = 1
+    override  def unsing: unsing = 1
 
     override  def equal[that <: Result](that: that): equal[that] = that.isGT
     override type equal[that <: Result]                          = that#isGT
@@ -84,7 +84,7 @@ sealed abstract class GT extends AbstractResult {
 sealed abstract class EQ extends AbstractResult {
     type self = EQ
 
-    override  def unsung: unsung = 0
+    override  def unsing: unsing = 0
 
     override  def equal[that <: Result](that: that): equal[that] = that.isEQ
     override type equal[that <: Result]                          = that#isEQ

@@ -17,8 +17,8 @@ trait Function0 extends Any {
      def apply: apply
     type apply <: Any
 
-    override  val unsung: unsung = () => apply.unsung
-    override type unsung         = () => apply#unsung
+    override  val unsing: unsing = () => apply.unsing
+    override type unsing         = () => apply#unsing
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Function0]
 }

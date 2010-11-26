@@ -17,11 +17,11 @@ import okomok.sing.nat.Peano
 
 class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
-    def testUnsung {
+    def testUnsing {
         import junit.framework.Assert._
-        assertEquals(0, _0.unsung)
-        assertEquals(7, _6.increment.unsung)
-        assertEquals(10, _10.unsung)
+        assertEquals(0, _0.unsing)
+        assertEquals(7, _6.increment.unsing)
+        assertEquals(10, _10.unsing)
         assertEquals("sing.10", _10.toString)
 
         assertEquals(_2, _2)
@@ -56,7 +56,7 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testTrivial {
-        free.assertSame[scala.Int, _2#unsung]
+        free.assertSame[scala.Int, _2#unsing]
         free.assert[_0# equal [_0]]
 
         free.assert[_0# nequal [_1]]

@@ -19,7 +19,7 @@ class MapTest extends org.scalatest.junit.JUnit3Suite {
 
     class mkString extends Function1 {
         override type self = mkString
-        override  def apply[x <: Any](x: x): apply[x] = Box(x.unsung.toString)
+        override  def apply[x <: Any](x: x): apply[x] = Box(x.unsing.toString)
         override type apply[x <: Any] = Box[String]
     }
     val mkString = new mkString

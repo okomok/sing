@@ -13,6 +13,6 @@ final case class Tuple1[v1 <: Any](override val _1: v1) extends AbstractProduct1
 
     override type _1 = v1
 
-    override  def unsung: unsung = scala.Tuple1(_1.unsung)
-    override type unsung         = scala.Tuple1[_1#unsung]
+    override  def unsing: unsing = scala.Tuple1(_1.unsing)
+    override type unsing         = scala.Tuple1[_1#unsing]
 }

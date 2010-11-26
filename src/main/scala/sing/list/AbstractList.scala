@@ -12,8 +12,8 @@ trait AbstractList extends List {
     final override  def asList: asList = self
     final override type asList         = self
 
-    final override  def unsung: unsung = if (isEmpty.unsung) scala.collection.immutable.Nil else (head.unsung :: tail.unsung.toList)
-    final override type unsung         = scala.collection.immutable.List[scala.Any]
+    final override  def unsing: unsing = if (isEmpty.unsing) scala.collection.immutable.Nil else (head.unsing :: tail.unsing.toList)
+    final override type unsing         = scala.collection.immutable.List[scala.Any]
 
     final override  def ::[x <: Any](x: x): ::[x] = Cons(x, self)
     final override type ::[x <: Any]              = Cons[x, self]

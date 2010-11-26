@@ -12,7 +12,7 @@ private[sing]
 final class Error extends AbstractPeg with ZeroWidth {
     type self = Error
 
-    override  def parse[xs <: List](xs: xs): parse[xs] = throw new ParseError(xs.unsung.toString)
+    override  def parse[xs <: List](xs: xs): parse[xs] = throw new ParseError(xs.unsing.toString)
     override type parse[xs <: List]                    = Nothing
 }
 

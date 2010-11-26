@@ -24,7 +24,7 @@ class EpsTest extends org.scalatest.junit.JUnit3Suite {
         type r = eps#matches[xs]
         val r: r = eps.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testTrivial2 {
@@ -33,7 +33,7 @@ class EpsTest extends org.scalatest.junit.JUnit3Suite {
         type r = eps#matches[xs]
         val r: r = eps.matches(xs)
         free.assertNot[r]
-        assertFalse(r.unsung)
+        assertFalse(r.unsing)
     }
 
     def testParse {

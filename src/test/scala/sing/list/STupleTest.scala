@@ -23,7 +23,7 @@ class STupleTest extends org.scalatest.junit.JUnit3Suite {
         type l = Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Nil
         val l: l = list.fromSTuple(t)
 
-        assertSame(t._2, l.nth(_1).unsung)
+        assertSame(t._2, l.nth(_1).unsing)
     }
 
     def testTo {
@@ -32,6 +32,6 @@ class STupleTest extends org.scalatest.junit.JUnit3Suite {
 
         val t: (Int, String, java.lang.Integer) = l.toSTuple
 
-        assertSame(t._2, l.nth(_1).unsung)
+        assertSame(t._2, l.nth(_1).unsing)
     }
 }

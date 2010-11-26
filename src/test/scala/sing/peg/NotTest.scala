@@ -26,7 +26,7 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#matches[xs]
         val r: r = p.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testTrivial {
@@ -37,7 +37,7 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[Nil, r#get#force]
         assertEquals(Nil, r.get)
         free.assertSame[xs, r#next]
@@ -52,7 +52,7 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assertNot[r#successful]
-        assertFalse(r.successful.unsung)
+        assertFalse(r.successful.unsing)
         free.assertSame[xs, r#next]
         assertEquals(xs, r.next)
     }
@@ -65,7 +65,7 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assertNot[r#successful]
-        assertFalse(r.successful.unsung)
+        assertFalse(r.successful.unsing)
         free.assertSame[xs, r#next]
         assertEquals(xs, r.next)
     }
@@ -78,7 +78,7 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assertNot[r#successful]
-        assertFalse(r.successful.unsung)
+        assertFalse(r.successful.unsing)
     }
 
 }

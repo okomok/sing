@@ -31,7 +31,7 @@ package com.github.okomoktest; package singtest; package example
 
         def createFactory[n <: Nat](n: n) = {
             val option = factoryMap.get(n)
-            option.get.unsung
+            option.get.unsing
         }
 
         def testTrivial {

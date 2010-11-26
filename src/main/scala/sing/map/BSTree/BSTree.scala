@@ -12,7 +12,7 @@ package sing; package map; package bstree
 
 sealed abstract class BSTree extends AbstractMap {
     type self <: BSTree
-    type unsung = scala.collection.immutable.Map[scala.Any, scala.Any]
+    type unsing = scala.collection.immutable.Map[scala.Any, scala.Any]
 
     override type put[k <: Any, v <: Any] <: BSTree
     override type remove[k <: Any] <: BSTree
@@ -50,7 +50,7 @@ sealed abstract class AbstractBSTree extends BSTree {
 final case class Nil[o <: Ordering](override val ord: o) extends AbstractBSTree {
     type self = Nil[o]
 
-    override  def unsung: unsung = scala.collection.immutable.Map.empty
+    override  def unsing: unsing = scala.collection.immutable.Map.empty
 
     override  def size: size = nat.dense._0
     override type size       = nat.dense._0
@@ -99,7 +99,7 @@ final case class Node[k <: Any, v <: Any, l <: BSTree, r <: BSTree](
 
     type self = Node[k, v, l, r]
 
-    override  def unsung: unsung = (left.unsung + (key.unsung -> value.unsung)) ++ right.unsung
+    override  def unsing: unsing = (left.unsing + (key.unsing -> value.unsing)) ++ right.unsing
 
     override  val size: size = left.size.plus(right.size).increment.asInstanceOf[size]
     override type size       = left#size#plus[right#size]#increment

@@ -24,13 +24,13 @@ class LastTest extends org.scalatest.junit.JUnit3Suite {
         type Lst1 = Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Box[Char] :: Box[Int] :: Nil
         val lst1: Lst1 = Box(3) :: Box("hello") :: Box(i) :: Box('a') :: Box(12) :: Nil
         val e: Lst1#last = lst1.last
-        val e_ : Int = e.unsung
+        val e_ : Int = e.unsing
         assertEquals(12, e_)
 
         type Lst2 = Box[String] :: Nil
         val lst2: Lst2 = Box("hello") :: Nil
         val e2: Lst2#last = lst2.last
-        val e2_ : String = e2.unsung
+        val e2_ : String = e2.unsing
         assertEquals("hello", e2_)
     }
 }

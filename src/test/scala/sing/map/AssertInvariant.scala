@@ -16,29 +16,29 @@ import junit.framework.Assert._
 
 object AssertInvariant {
     def apply[m <: map.bstree.BSTree](m: m) {
-        if (m.isEmpty.unsung) {
-            assertEquals(0, m.size.unsung)
+        if (m.isEmpty.unsing) {
+            assertEquals(0, m.size.unsing)
         } else  {
             var sz = 1
-            if (!m.left.isEmpty.unsung) {
+            if (!m.left.isEmpty.unsing) {
                 AssertKeyLT(m.left, m.key)
                 AssertInvariant(m.left)
-                sz += m.left.size.unsung
+                sz += m.left.size.unsing
             }
-            if (!m.right.isEmpty.unsung) {
+            if (!m.right.isEmpty.unsing) {
                 AssertKeyGT(m.right, m.key)
                 AssertInvariant(m.right)
-                sz += m.right.size.unsung
+                sz += m.right.size.unsing
             }
-            assertEquals(m.size.unsung, sz)
+            assertEquals(m.size.unsing, sz)
         }
     }
 }
 
 object AssertKeyLT {
     def apply[m <: map.bstree.BSTree, k <: Any](m: m, k: k) {
-        if (!m.isEmpty.unsung) {
-            assertTrue(m.ord.compare(m.key, k).unsung < 0)
+        if (!m.isEmpty.unsing) {
+            assertTrue(m.ord.compare(m.key, k).unsing < 0)
             AssertKeyLT(m.left, k)
             AssertKeyLT(m.right, k)
         }
@@ -47,8 +47,8 @@ object AssertKeyLT {
 
 object AssertKeyGT {
     def apply[m <: map.bstree.BSTree, k <: Any](m: m, k: k) {
-        if (!m.isEmpty.unsung) {
-            assertTrue(m.ord.compare(k, m.key).unsung < 0)
+        if (!m.isEmpty.unsing) {
+            assertTrue(m.ord.compare(k, m.key).unsing < 0)
             AssertKeyGT(m.left, k)
             AssertKeyGT(m.right, k)
         }

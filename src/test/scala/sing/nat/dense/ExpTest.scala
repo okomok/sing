@@ -30,8 +30,8 @@ class ExpTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testBig {
-        assertEquals(32768, (_2 exp _15).unsung)
-        assertEquals(1073741824, (_8 exp _10).unsung)
+        assertEquals(32768, (_2 exp _15).unsing)
+        assertEquals(1073741824, (_8 exp _10).unsing)
     }
 
     def testDuality {

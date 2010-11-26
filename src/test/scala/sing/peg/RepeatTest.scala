@@ -27,7 +27,7 @@ class RepeatTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[_1 :: _1 :: _1 :: _1 :: Nil, r#get#force]
         assertEquals(_1 :: _1 :: _1 :: _1 :: Nil, r.get)
         free.assertSame[_3 :: Nil, r#next#force]
@@ -42,7 +42,7 @@ class RepeatTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[_1 :: _1 :: _1 :: _1 :: _1 :: Nil, r#get#force]
         assertEquals(_1 :: _1 :: _1 :: _1 :: _1 :: Nil, r.get)
         free.assertSame[_1 :: _1 :: Nil, r#next#force]
@@ -57,7 +57,7 @@ class RepeatTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assertNot[r#successful]
-        assertFalse(r.successful.unsung)
+        assertFalse(r.successful.unsing)
         free.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
@@ -70,7 +70,7 @@ class RepeatTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[xs, r#get#force]
         assertEquals(xs, r.get)
         free.assertSame[Nil, r#next#force]

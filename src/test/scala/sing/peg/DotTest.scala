@@ -24,7 +24,7 @@ class DotTest extends org.scalatest.junit.JUnit3Suite {
         type r = dot#matches[xs]
         val r: r = dot.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testTrivial2 {
@@ -33,7 +33,7 @@ class DotTest extends org.scalatest.junit.JUnit3Suite {
         type r = dot#matches[xs]
         val r: r = dot.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testFail {
@@ -42,7 +42,7 @@ class DotTest extends org.scalatest.junit.JUnit3Suite {
         type r = dot#matches[xs]
         val r: r = dot.matches(xs)
         free.assert[r#not]
-        assertFalse(r.unsung)
+        assertFalse(r.unsing)
     }
 
     def testParse {

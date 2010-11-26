@@ -23,9 +23,9 @@ trait ReferenceEquality extends Any {
  */
 trait ValueEquality extends Any {
     override def equals(that: scala.Any) = that match {
-        case that: Any => (this eq that) || (that canEqual this) && (unsung == that.unsung)
+        case that: Any => (this eq that) || (that canEqual this) && (unsing == that.unsing)
         case _ => false
     }
-    override def hashCode = unsung.hashCode
-    override def toString = "sing." + unsung.toString
+    override def hashCode = unsing.hashCode
+    override def toString = "sing." + unsing.toString
 }

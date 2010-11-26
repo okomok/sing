@@ -26,7 +26,7 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#matches[xs]
         val r: r = p.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testParse {
@@ -37,7 +37,7 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[_3 :: _5 :: _9 :: Nil, r#get#force]
         assertEquals(_3 :: _5 :: _9 :: Nil, r.get)
         free.assertSame[_1 :: _4 :: Nil, r#next#force]
@@ -52,7 +52,7 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assertNot[r#successful]
-        assertFalse(r.successful.unsung)
+        assertFalse(r.successful.unsing)
         free.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
@@ -65,7 +65,7 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#matches[xs]
         val r: r = p.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testNil {
@@ -76,7 +76,7 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[Nil, r#get#force]
         assertEquals(Nil, r.get)
         free.assertSame[xs, r#next#force]

@@ -26,7 +26,7 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assertNot[r#successful]
-        assertFalse(r.successful.unsung)
+        assertFalse(r.successful.unsing)
         free.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
@@ -39,7 +39,7 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assertNot[r#successful]
-        assertFalse(r.successful.unsung)
+        assertFalse(r.successful.unsing)
         free.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
@@ -52,7 +52,7 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
 
         free.assertSame[_3 :: _5 :: _9 :: Nil, r#get]
         assertEquals(_3 :: _5 :: _9 :: Nil, r.get)
@@ -63,7 +63,7 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         type e = r#get#asEither
         val e: e = r.get.asEither
         free.assert[e#isLeft]
-        assertTrue(e.isLeft.unsung)
+        assertTrue(e.isLeft.unsing)
         free.assertSame[_3 :: _5 :: _9 :: Nil, e#get]
         assertEquals(_3 :: _5 :: _9 :: Nil, e.get)
         free.assertSame[_0 :: Nil, r#next#force]
@@ -79,7 +79,7 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
 
         free.assertSame[_4 :: _2 :: Nil, r#get]
         assertEquals(_4 :: _2 :: Nil, r.get)
@@ -90,7 +90,7 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         type e = r#get#asEither
         val e: e = r.get.asEither
         free.assert[e#isRight]
-        assertTrue(e.isRight.unsung)
+        assertTrue(e.isRight.unsing)
         free.assertSame[_4 :: _2 :: Nil, e#get]
         assertEquals(_4 :: _2 :: Nil, e.get)
         free.assertSame[_9 :: _0 :: Nil, r#next]

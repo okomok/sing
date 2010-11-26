@@ -89,15 +89,15 @@ trait Any extends scala.Equals {
     /**
      * Escapes from the sing world.
      */
-     def unsung: unsung = unsupported("Any.unsung")
-    type unsung
+     def unsing: unsing = unsupported("Any.unsing")
+    type unsing
 
     override def equals(that: scala.Any) = that match {
-        case that: Any => (this eq that) || (that canEqual this) && (unsung == that.unsung)
+        case that: Any => (this eq that) || (that canEqual this) && (unsing == that.unsing)
         case _ => false
     }
-    override def hashCode = unsung.hashCode
-    override def toString = "sing." + unsung.toString
+    override def hashCode = unsing.hashCode
+    override def toString = "sing." + unsing.toString
 
     final protected def refEquals(that: scala.Any) = super.equals(that)
     final protected def refHashCode = super.hashCode

@@ -54,14 +54,14 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         free.assertSame[`true`, m#contains[_5]]
     }
 
-    def testUnsung {
+    def testUnsing {
         type o = nat.naturalOrdering
         val o: o = nat.naturalOrdering
 
         type m = set.sorted[o]#add[_3]#add[_5]#add[_1]
         val m: m = set.sorted(o).add(_3).add(_5).add(_1)
 
-        assertEquals(Predef.Set(1, 3, 5), m.unsung)
+        assertEquals(Predef.Set(1, 3, 5), m.unsing)
     }
 
 }

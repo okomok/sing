@@ -26,7 +26,7 @@ object Option {
  */
 sealed abstract class Option extends Any {
     type self <: Option
-    type unsung <: scala.Option[_]
+    type unsing <: scala.Option[_]
 
      def isEmpty: isEmpty
     type isEmpty <: Boolean
@@ -108,8 +108,8 @@ sealed abstract class AbstractOption extends Option {
 sealed abstract class None extends AbstractOption {
     type self = None
 
-    override  def unsung: unsung = scala.None
-    override type unsung         = scala.None.type
+    override  def unsing: unsing = scala.None
+    override type unsing         = scala.None.type
 
     override  def isEmpty: isEmpty = `true`
     override type isEmpty          = `true`
@@ -145,8 +145,8 @@ sealed abstract class None extends AbstractOption {
 final case class Some[e <: Any](override val get: e) extends AbstractOption {
     type self = Some[e]
 
-    override  def unsung: unsung = scala.Some(get.unsung)
-    override type unsung         = scala.Some[get#unsung]
+    override  def unsing: unsing = scala.Some(get.unsing)
+    override type unsing         = scala.Some[get#unsing]
 
     override  def isEmpty: isEmpty = `false`
     override type isEmpty          = `false`

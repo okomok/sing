@@ -24,7 +24,7 @@ class TermTest extends org.scalatest.junit.JUnit3Suite {
         type r = term[_3]#matches[xs]
         val r: r = term(_3).matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testTrivial2 {
@@ -33,7 +33,7 @@ class TermTest extends org.scalatest.junit.JUnit3Suite {
         type r = term[_3]#matches[xs]
         val r: r = term(_3).matches(xs)
         free.assertNot[r]
-        assertFalse(r.unsung)
+        assertFalse(r.unsing)
     }
 
     def testFail {
@@ -42,7 +42,7 @@ class TermTest extends org.scalatest.junit.JUnit3Suite {
         type r = term[_5]#matches[xs]
         val r: r = term(_5).matches(xs)
         free.assertNot[r]
-        assertFalse(r.unsung)
+        assertFalse(r.unsing)
     }
 
     def testParse {

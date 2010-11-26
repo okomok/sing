@@ -16,7 +16,7 @@ object Set extends Common
  */
 trait Set extends Any {
     type self <: Set
-    type unsung <: scala.collection.Set[scala.Any]
+    type unsing <: scala.collection.Set[scala.Any]
 
      def size: size
     type size <: Nat

@@ -20,7 +20,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         type s = Some[Box[Int]]
         val s: s = Some(Box(3))
         val e: s#get = s.get
-        val k: Int = e.unsung
+        val k: Int = e.unsing
         assertEquals(3, k)
 
         type n = None
@@ -69,20 +69,20 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         ()
     }
 
-    def testUnsung {
+    def testUnsing {
         {
             type s = Some[Box[Int]]
             val s: s = Some(Box(3))
-            free.assertSame[scala.Some[Int], s#unsung]
-            val e: s#unsung = s.unsung
+            free.assertSame[scala.Some[Int], s#unsing]
+            val e: s#unsing = s.unsing
             assertEquals(scala.Some(3), e)
         }
         {
             type s = None
             val s: s = None
-            free.assertSame[scala.None.type, s#unsung]
-            val e: s#unsung = s.unsung
-            assertSame(scala.None, s.unsung)
+            free.assertSame[scala.None.type, s#unsing]
+            val e: s#unsing = s.unsing
+            assertSame(scala.None, s.unsing)
         }
         ()
     }
@@ -235,7 +235,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
 
     case class AddTo(result: java.util.ArrayList[Int]) extends Function1 {
         override type self = AddTo
-        override def apply[n <: Any](n: n): apply[n] = { result.add(n.asNat.unsung); Unit }
+        override def apply[n <: Any](n: n): apply[n] = { result.add(n.asNat.unsing); Unit }
         override type apply[n <: Any] = Unit
     }
 
@@ -309,9 +309,9 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testLift {
         val x = Option.lift(scala.None)
-        assertEquals(scala.None, x.unsung)
+        assertEquals(scala.None, x.unsing)
         val y = Option.lift(scala.Some(15))
-        val scala.Some(15) = y.unsung
+        val scala.Some(15) = y.unsing
         ()
     }
 

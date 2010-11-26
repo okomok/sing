@@ -32,7 +32,7 @@ class DualityTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     class PrintSquare2[n <: sing.Nat](n: n) {
-        val a: scala.Int = n.times(n).unsung
+        val a: scala.Int = n.times(n).unsing
         println(a)
     }
 
@@ -100,7 +100,7 @@ class ListTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial {
         val xs = _3 :: _4 :: _5 :: _6 :: sing.Nil
         val u = xs.map(add2) // returns a view
-        assertEquals(5 :: 6 :: 7 :: 8 :: Nil, u.unsung)
+        assertEquals(5 :: 6 :: 7 :: 8 :: Nil, u.unsing)
         locally {
             import sing.::
             val v: _5 :: _6 :: _7 :: _8 :: sing.Nil = u.force
@@ -114,21 +114,21 @@ class NormalTest extends org.scalatest.junit.JUnit3Suite {
 
     import sing.nat.peano.Literal._
 
-    def testUnsung {
-        val i: scala.Int = _3.times(_2).unsung
+    def testUnsing {
+        val i: scala.Int = _3.times(_2).unsing
         assertEquals(6, i)
     }
 
     def testBox {
         val j = sing.Tuple2(sing.Box(2), sing.Box(3))
-        assertEquals(3, j._2.unsung)
+        assertEquals(3, j._2.unsing)
     }
 
     def testLift {
         val j = sing.Tuple(2, 3) // == Tuple2(Box(2), Box(3))
         val xs = 3 #:: 4 #:: 5 #:: sing.Nil // == Box(3) :: Box(4) :: Box(5) :: Nil
         val y = xs.foldLeft(j._1, sing.Function((y: Int, x: Int) => y + x))
-        assertEquals(2+3+4+5, y.unsung)
+        assertEquals(2+3+4+5, y.unsing)
     }
 
 }

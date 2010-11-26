@@ -16,7 +16,7 @@ object Map extends Common
  */
 trait Map extends Any {
     type self <: Map
-    type unsung <: scala.collection.Map[scala.Any, scala.Any]
+    type unsing <: scala.collection.Map[scala.Any, scala.Any]
 
      def asBSTree: asBSTree = unsupported("Map.asBSTree")
     type asBSTree <: bstree.BSTree

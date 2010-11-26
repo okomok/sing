@@ -43,10 +43,10 @@ class LiftTest extends org.scalatest.junit.JUnit3Suite {
         val Box(-1.625) :: Box(true) :: Nil = z2
 
         locally {
-            // escape from the sing world using `unsung`.
+            // escape from the sing world using `unsing`.
             val :: = scala.::
-            val 10.25 :: false :: scala.Nil = z1.unsung
-            val -1.625 :: true :: scala.Nil = z2.unsung
+            val 10.25 :: false :: scala.Nil = z1.unsing
+            val -1.625 :: true :: scala.Nil = z2.unsing
         }
     }
 

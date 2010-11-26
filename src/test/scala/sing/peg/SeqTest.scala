@@ -26,7 +26,7 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assertNot[r#successful]
-        assertFalse(r.successful.unsung)
+        assertFalse(r.successful.unsing)
         free.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
@@ -39,7 +39,7 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assertNot[r#successful]
-        assertFalse(r.successful.unsung)
+        assertFalse(r.successful.unsing)
         free.assertSame[xs, r#next]
         assertEquals(xs, r.next)
     }
@@ -52,7 +52,7 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#matches[xs]
         val r: r = p.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testSubmatch {
@@ -63,7 +63,7 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         type e = r#get#asProduct2
         val e: e = r.get.asProduct2
         free.assertSame[_3 :: _5 :: _9 :: Nil, e#_1]

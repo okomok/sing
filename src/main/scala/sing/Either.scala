@@ -13,7 +13,7 @@ package sing
  */
 sealed abstract class Either extends Any {
     type self <: Either
-    type unsung <: scala.Either[_, _]
+    type unsing <: scala.Either[_, _]
 
     final override  def asEither: asEither = self
     final override type asEither           = self
@@ -49,8 +49,8 @@ sealed abstract class Either extends Any {
 final case class Left[e <: Any](override val get: e) extends Either {
     type self = Left[e]
 
-    override  def unsung: unsung = scala.Left(get.unsung)
-    override type unsung         = scala.Left[get#unsung, _]
+    override  def unsing: unsing = scala.Left(get.unsing)
+    override type unsing         = scala.Left[get#unsing, _]
 
     override type get = e
 
@@ -80,8 +80,8 @@ final case class Left[e <: Any](override val get: e) extends Either {
 final case class Right[e <: Any](override val get: e) extends Either {
     type self = Right[e]
 
-    override  def unsung: unsung = scala.Right(get.unsung)
-    override type unsung         = scala.Right[_, get#unsung]
+    override  def unsing: unsing = scala.Right(get.unsing)
+    override type unsing         = scala.Right[_, get#unsing]
 
     override type get = e
 

@@ -16,7 +16,7 @@ object List extends Common with ToSTuple
 */
 trait List extends Any {
     type self <: List
-    type unsung <: scala.collection.immutable.Seq[scala.Any]
+    type unsing <: scala.collection.immutable.Seq[scala.Any]
 
     @annotation.constantTime
      def isEmpty: isEmpty

@@ -11,8 +11,8 @@ package sing
 sealed abstract class Unit extends Any {
     type self = Unit
 
-    override  def unsung: unsung = ()
-    override type unsung         = scala.Unit
+    override  def unsing: unsing = ()
+    override type unsing         = scala.Unit
 
     override  def asUnit: asUnit = self
     override type asUnit         = self

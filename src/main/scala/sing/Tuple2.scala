@@ -14,6 +14,6 @@ final case class Tuple2[v1 <: Any, v2 <: Any](override val _1: v1, override val 
     override type _1 = v1
     override type _2 = v2
 
-    override  def unsung: unsung = scala.Tuple2(_1.unsung, _2.unsung)
-    override type unsung         = scala.Tuple2[_1#unsung, _2#unsung]
+    override  def unsing: unsing = scala.Tuple2(_1.unsing, _2.unsing)
+    override type unsing         = scala.Tuple2[_1#unsing, _2#unsing]
 }

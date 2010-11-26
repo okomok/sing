@@ -78,8 +78,8 @@ trait Forwarder extends Any {
     final override  def naturalOrdering: naturalOrdering = delegate.naturalOrdering
     final override type naturalOrdering                  = delegate#naturalOrdering
 
-    final override  def unsung: unsung = delegate.unsung
-    final override type unsung         = delegate#unsung
+    final override  def unsing: unsing = delegate.unsing
+    final override type unsing         = delegate#unsing
 
     override def equals(that: scala.Any) = that match {
         case that: Forwarder => delegate.equals(that.delegate)

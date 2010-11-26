@@ -16,7 +16,7 @@ object Nat extends Common
  */
 trait Nat extends Any {
     type self <: Nat
-    type unsung = scala.Int
+    type unsing = scala.Int
 
      def asDense: asDense
     type asDense <: Dense

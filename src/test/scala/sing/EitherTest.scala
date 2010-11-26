@@ -36,18 +36,18 @@ class EitherTest extends org.scalatest.junit.JUnit3Suite {
     }
 
 
-    def testUnsungLeft {
+    def testUnsingLeft {
         type s = Left[_3]
         val s: s = Left(_3)
-        free.assertSame[scala.Left[Int, _], s#unsung]
-        assertEquals(scala.Left(3), s.unsung)
+        free.assertSame[scala.Left[Int, _], s#unsing]
+        assertEquals(scala.Left(3), s.unsing)
     }
 
-    def testUnsungRight {
+    def testUnsingRight {
         type s = Right[_3]
         val s: s = Right(_3)
-        free.assertSame[scala.Right[_, Int], s#unsung]
-        assertEquals(scala.Right(3), s.unsung)
+        free.assertSame[scala.Right[_, Int], s#unsing]
+        assertEquals(scala.Right(3), s.unsing)
     }
 
 

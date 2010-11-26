@@ -12,8 +12,8 @@ private[sing]
 final case class BSTree[impl <: map.bstree.BSTree](impl: impl) extends AbstractSet {
     type self = BSTree[impl]
 
-    override  def unsung: unsung = impl.unsung.keySet
-    override type unsung         = scala.collection.Set[scala.Any]
+    override  def unsing: unsing = impl.unsing.keySet
+    override type unsing         = scala.collection.Set[scala.Any]
 
     override  def size: size = impl.size
     override type size       = impl#size

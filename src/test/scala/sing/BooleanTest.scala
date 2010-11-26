@@ -20,8 +20,8 @@ import okomok.sing.nat.Peano
 class BooleanTest extends org.scalatest.junit.JUnit3Suite {
     def testConvert {
         import junit.framework.Assert._
-        assertEquals(true, `true`.unsung)
-        assertEquals(false, `false`.unsung)
+        assertEquals(true, `true`.unsing)
+        assertEquals(false, `false`.unsing)
         assertEquals(`true`, `true`)
         assertEquals(`false`, `false`)
         AssertNotEquals(`false`, `true`)
@@ -29,7 +29,7 @@ class BooleanTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testTrivial {
-        free.assertSame[scala.Boolean, `true`#unsung]
+        free.assertSame[scala.Boolean, `true`#unsing]
         free.assertSame[`true`, `true`]
      //   free.assert[`false` === if_Boolean[`true`, `false`, `true`]]
      //   free.assert[`false` === if_Boolean[`false`, `true`, `false`]]

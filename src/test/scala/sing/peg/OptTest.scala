@@ -26,7 +26,7 @@ class OptTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#matches[xs]
         val r: r = p.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testOneInput {
@@ -37,7 +37,7 @@ class OptTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#matches[xs]
         val r: r = p.matches(xs)
         free.assert[r]
-        assertTrue(r.unsung)
+        assertTrue(r.unsing)
     }
 
     def testParseNoConsume {
@@ -48,7 +48,7 @@ class OptTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[None, r#get]
         assertEquals(None, r.get)
         free.assertSame[xs, r#next]
@@ -63,7 +63,7 @@ class OptTest extends org.scalatest.junit.JUnit3Suite {
         type r = p#parse[xs]
         val r: r = p.parse(xs)
         free.assert[r#successful]
-        assertTrue(r.successful.unsung)
+        assertTrue(r.successful.unsing)
         free.assertSame[Some[_3 :: _5 :: _9 :: Nil], r#get]
         assertEquals(Some(_3 :: _5 :: _9 :: Nil), r.get)
         free.assertSame[_10 :: _11 :: Nil, r#next]

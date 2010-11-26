@@ -10,7 +10,7 @@ package sing; package peg
 
 sealed abstract class Result extends Any {
     type self <: Result
-    type unsung <: UnsungResult[_]
+    type unsing <: UnsingResult[_]
 
      def get: get
     type get <: Any
@@ -41,8 +41,8 @@ sealed abstract class AbstractResult extends Result {
 final case class Success[x <: Any, ys <: List](override val get: x, override val next: ys) extends AbstractResult {
     type self = Success[x, ys]
 
-    override  def unsung: unsung = UnsungSuccess(get.unsung, next.unsung)
-    override type unsung         = UnsungSuccess[get#unsung]
+    override  def unsing: unsing = UnsingSuccess(get.unsing, next.unsing)
+    override type unsing         = UnsingSuccess[get#unsing]
 
     override type get = x
     override type next = ys
@@ -61,8 +61,8 @@ final case class Success[x <: Any, ys <: List](override val get: x, override val
 final case class Failure[ys <: List](override val next: ys) extends AbstractResult {
     type self = Failure[ys]
 
-    override  def unsung: unsung = UnsungFailure(next.unsung)
-    override type unsung         = UnsungFailure
+    override  def unsing: unsing = UnsingFailure(next.unsing)
+    override type unsing         = UnsingFailure
 
     override  def get: get = noSuchElement("peg.Failure.get")
     override type get      = noSuchElement[_]

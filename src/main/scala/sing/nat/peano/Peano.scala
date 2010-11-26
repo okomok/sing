@@ -99,7 +99,7 @@ sealed trait Zero extends AbstractPeano {
     override  def isEven: isEven = `true`
     override type isEven         = `true`
 
-    override def unsung: unsung = 0
+    override def unsing: unsing = 0
 }
 
 
@@ -123,7 +123,7 @@ final case class Succ[n <: Peano](override val decrement: n) extends AbstractPea
     override lazy val isEven: isEven = decrement.isEven.not
     override     type isEven         = decrement#isEven#not
 
-    override def unsung: unsung = 1 + decrement.unsung
+    override def unsing: unsing = 1 + decrement.unsing
 }
 
 

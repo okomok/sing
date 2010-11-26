@@ -15,6 +15,6 @@ final case class Tuple3[v1 <: Any, v2 <: Any, v3 <: Any](override val _1: v1, ov
     override type _2 = v2
     override type _3 = v3
 
-    override  def unsung: unsung = scala.Tuple3(_1.unsung, _2.unsung, _3.unsung)
-    override type unsung         = scala.Tuple3[_1#unsung, _2#unsung, _3#unsung]
+    override  def unsing: unsing = scala.Tuple3(_1.unsing, _2.unsing, _3.unsing)
+    override type unsing         = scala.Tuple3[_1#unsing, _2#unsing, _3#unsing]
 }

@@ -27,14 +27,14 @@ class BitwiseTest extends org.scalatest.junit.JUnit3Suite {
         free.assertSame[_3, _7#bitAnd[_3]]
         free.assertSame[_2, _2#bitAnd[_7]]
 
-        assertEquals(0 & 0, (_0 bitAnd _0).unsung)
-        assertEquals(1 & 1, (_1 bitAnd _1).unsung)
-        assertEquals(2 & 5, (_2 bitAnd _5).unsung)
-        assertEquals(8 & 4, (_8 bitAnd _4).unsung)
-        assertEquals(7 & 5, (_7 bitAnd _5).unsung)
-        assertEquals(5 & 0, (_5 bitAnd _0).unsung)
-        assertEquals(7 & 3, (_7 bitAnd _3).unsung)
-        assertEquals(2 & 7, (_2 bitAnd _7).unsung)
+        assertEquals(0 & 0, (_0 bitAnd _0).unsing)
+        assertEquals(1 & 1, (_1 bitAnd _1).unsing)
+        assertEquals(2 & 5, (_2 bitAnd _5).unsing)
+        assertEquals(8 & 4, (_8 bitAnd _4).unsing)
+        assertEquals(7 & 5, (_7 bitAnd _5).unsing)
+        assertEquals(5 & 0, (_5 bitAnd _0).unsing)
+        assertEquals(7 & 3, (_7 bitAnd _3).unsing)
+        assertEquals(2 & 7, (_2 bitAnd _7).unsing)
     }
 
     def testOr {
@@ -47,13 +47,13 @@ class BitwiseTest extends org.scalatest.junit.JUnit3Suite {
         free.assertSame[_7, _7#bitOr[_3]]
         free.assertSame[_7, _2#bitOr[_7]]
 
-        assertEquals(0 | 0, (_0 bitOr _0).unsung)
-        assertEquals(1 | 1, (_1 bitOr _1).unsung)
-        assertEquals(2 | 5, (_2 bitOr _5).unsung)
-        assertEquals(8 | 4, (_8 bitOr _4).unsung)
-        assertEquals(7 | 5, (_7 bitOr _5).unsung)
-        assertEquals(5 | 0, (_5 bitOr _0).unsung)
-        assertEquals(7 | 3, (_7 bitOr _3).unsung)
-        assertEquals(2 | 7, (_2 bitOr _7).unsung)
+        assertEquals(0 | 0, (_0 bitOr _0).unsing)
+        assertEquals(1 | 1, (_1 bitOr _1).unsing)
+        assertEquals(2 | 5, (_2 bitOr _5).unsing)
+        assertEquals(8 | 4, (_8 bitOr _4).unsing)
+        assertEquals(7 | 5, (_7 bitOr _5).unsing)
+        assertEquals(5 | 0, (_5 bitOr _0).unsing)
+        assertEquals(7 | 3, (_7 bitOr _3).unsing)
+        assertEquals(2 | 7, (_2 bitOr _7).unsing)
     }
 }
