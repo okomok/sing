@@ -3,7 +3,7 @@
 
 `sing` is a type-level metaprogramming library for Scala.
 This is based upon the singleton type emulation.
-"sing" represents "singleon" and "compiletime and runtime methods sing in chorus":
+"sing" represents "singleon" and "compile-time and runtime methods sing in chorus":
 
     import com.github.okomok.sing
     import sing.{map, Nat, Box}
