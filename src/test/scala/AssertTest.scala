@@ -16,7 +16,20 @@ import okomok.sing._
 //import boolean.Operator._
 
 
+object _Assert {
+      def apply[c <: Boolean](c: c): apply[c] = `if`(c, const0(Unit), Else(c)).apply
+     type apply[c <: Boolean]                 = `if`[c, const0[Unit], Else[c]]#apply
+
+     case class Else[c <: Boolean](c: c) extends Function0 {
+         type self = Else[c]
+         override  def apply: apply = throw new AssertionError("sing.assert")
+         override type apply        = _Assert.apply[c]
+     }
+}
+
 class AssertTest extends org.scalatest.junit.JUnit3Suite {
+
+    type k = _Assert.apply[`true`]
 
     def testTrivial {
         okomok.sing.assert(`true`)
