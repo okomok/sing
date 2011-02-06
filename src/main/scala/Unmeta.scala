@@ -30,8 +30,19 @@ object Unmeta {
     implicit val _ofListNil = new Unmeta[list.Nil] {
         override def apply: list.Nil = list.Nil
     }
-    implicit def _ofListCons[x <: Any, xs <: list.List](implicit _unmetaX: Unmeta[x], _unmetaXS: Unmeta[xs]) = new Unmeta[list.Cons[x, xs]] {
-        override def apply: list.Cons[x, xs] = new list.Cons(_unmetaX.apply, _unmetaXS.apply)
+    implicit def _ofListCons[x <: Any, xs <: list.List](implicit _unmetaX: Unmeta[x], _unmetaXs: Unmeta[xs]) = new Unmeta[list.Cons[x, xs]] {
+        override def apply: list.Cons[x, xs] = new list.Cons(_unmetaX.apply, _unmetaXs.apply)
+    }
+
+
+// nat.Dense (contributed by @akihiro4chawon)
+
+    implicit val _ofNatDenseZero = new Unmeta[nat.dense.Nil] {
+        override def apply: nat.dense.Nil = nat.dense.Nil
+    }
+
+    implicit def _ofNatDenseCons[x <: Boolean, xs <: nat.dense.Dense](implicit _unmetaX: Unmeta[x], _unmetaXs: Unmeta[xs]) = new Unmeta[nat.dense.Cons[x, xs]] {
+        override def apply: nat.dense.Cons[x, xs] = nat.dense.Cons(_unmetaX.apply, _unmetaXs.apply)
     }
 
 
