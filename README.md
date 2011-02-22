@@ -25,7 +25,7 @@ This is based upon the singleton type system emulation.
             def createButton = new OSXButton
         }
 
-        // Needs explicit boxing to make a sing object from an "unsung" one.
+        // Needs explicit boxing to make a sing object from an "unsing" one.
         val factoryMap = map.sorted1(_0, Box(WinFactory)).put(_1, Box(OSXFactory))
 
         def createFactory[n <: Nat](n: n) = {
