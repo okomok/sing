@@ -49,8 +49,9 @@ trait Common {
     /**
      * Makes a lexicographical Ordering from element natural ordering.
      */
-     val naturalOrdering: naturalOrdering = LexicographicalOrdering.apply(None)
-    type naturalOrdering                  = LexicographicalOrdering.apply[None]
+    // `lazy` because `None` is initialized later in `package sing`.
+    lazy val naturalOrdering: naturalOrdering = LexicographicalOrdering.apply(None)
+        type naturalOrdering                  = LexicographicalOrdering.apply[None]
 
     /**
      * Makes a lexicographical Ordering from element Ordering.

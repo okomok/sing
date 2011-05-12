@@ -16,7 +16,7 @@ import nat.peano.Literal._
 
 class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     import junit.framework.Assert._
-    assertFalse(scala.Nil eq Nil)
+    // assertFalse(scala.Nil eq Nil)
 
     def testAt = {
         val i = new java.lang.Integer(10)

@@ -14,7 +14,7 @@ import okomok.sing._
 
 class UnzipTest extends org.scalatest.junit.JUnit3Suite {
     import junit.framework.Assert._
-    assertFalse(scala.Nil eq Nil)
+    // assertFalse(scala.Nil eq Nil)
 
     def testTrivial {
         val i = new java.lang.Integer(10)

@@ -14,7 +14,7 @@ import okomok.sing._
 
 class ForeachTest extends org.scalatest.junit.JUnit3Suite {
     import junit.framework.Assert._
-    assertFalse(scala.Nil eq Nil)
+    // assertFalse(scala.Nil eq Nil)
 
     def testTrivial {
         type xs = Box[Int] :: Box[String] :: Box[Char] :: Nil

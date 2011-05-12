@@ -15,7 +15,7 @@ import nat.peano.Literal._
 
 class MapTest extends org.scalatest.junit.JUnit3Suite {
     import junit.framework.Assert._
-    assertFalse(scala.Nil eq Nil)
+    // assertFalse(scala.Nil eq Nil)
 
     class mkString extends Function1 {
         override type self = mkString
@@ -44,7 +44,7 @@ class MapTest extends org.scalatest.junit.JUnit3Suite {
 
 class MapNatTest extends org.scalatest.junit.JUnit3Suite {
     import junit.framework.Assert._
-    assertFalse(scala.Nil eq Nil)
+    // assertFalse(scala.Nil eq Nil)
 
     class add2 extends Function1 {
         override type self = add2

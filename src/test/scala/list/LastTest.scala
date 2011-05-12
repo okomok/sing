@@ -14,7 +14,7 @@ import okomok.sing._
 
 class LastTest extends org.scalatest.junit.JUnit3Suite {
     import junit.framework.Assert._
-    assertFalse(scala.Nil eq Nil)
+    // assertFalse(scala.Nil eq Nil)
 
     type lastOf[l <: List] = l#last
     free.assertSame[Box[Int], lastOf[Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Box[Char] :: Box[Int] :: Nil]]
@@ -39,7 +39,7 @@ class LastTest extends org.scalatest.junit.JUnit3Suite {
 
 class LastOrElseTest extends org.scalatest.junit.JUnit3Suite {
     import junit.framework.Assert._
-    assertFalse(scala.Nil eq Nil)
+    // assertFalse(scala.Nil eq Nil)
 
     def testTrivial {
         val i = new java.lang.Integer(10)

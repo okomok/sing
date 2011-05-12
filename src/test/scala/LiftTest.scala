@@ -37,10 +37,10 @@ class LiftTest extends org.scalatest.junit.JUnit3Suite {
 
         // `zipBy` returns a view(unspecified type). `force` turns a view into a concrete list.
         val z1: Box[scala.Double] :: Box[scala.Boolean] :: Nil = z.zipBy(y1, Apply).force
-        val Box(10.25) :: Box(false) :: Nil = z1
+        val Box(10.25) :: Box(false) :: Nil() = z1
 
         val z2: Box[scala.Double] :: Box[scala.Boolean] :: Nil = z.zipBy(y2, Apply).force
-        val Box(-1.625) :: Box(true) :: Nil = z2
+        val Box(-1.625) :: Box(true) :: Nil() = z2
 
         locally {
             // escape from the sing world using `unsing`.

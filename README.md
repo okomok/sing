@@ -48,7 +48,7 @@ This is based upon the singleton type system emulation.
 
 Append this in your project definition:
 
-    val sing = "com.github.okomok" %% "sing" % "0.1.0-SNAPSHOT"
+    val sing = "com.github.okomok" % "sing_2.9.0" % "0.1.0-SNAPSHOT"
     val okomokSnapshots = "okomok snapshots" at "http://okomok.github.com/maven-repo/snapshots"
 
 Append this to `compileOptions`:

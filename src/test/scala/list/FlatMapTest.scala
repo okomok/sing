@@ -14,7 +14,7 @@ import okomok.sing._
 
 class FlatMapTest extends org.scalatest.junit.JUnit3Suite {
     import junit.framework.Assert._
-    assertFalse(scala.Nil eq Nil)
+    // assertFalse(scala.Nil eq Nil)
 
     class oops extends Function1 {
         override type self = oops

@@ -9,7 +9,7 @@ import sbt._
 
 class Sing(info: ProjectInfo) extends DefaultProject(info) {
     val junit = "junit" % "junit" % "4.4" % "test"
-    val scalatest = "org.scalatest" % "scalatest" % "1.2" % "test"
+    val scalatest = "org.scalatest" % "scalatest_2.9.0" % "1.4.1" % "test"
 
     override def compileOptions = super.compileOptions ++
         Seq(Deprecation, Unchecked/*, ExplainTypes*/) ++

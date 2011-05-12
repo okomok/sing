@@ -24,8 +24,10 @@ trait AbstractList extends List {
     final override  def foreach[f <: Function1](f: f): foreach[f] = Foreach.apply(self, f)
     final override type foreach[f <: Function1]                   = Foreach.apply[self, f]
 
-    final override lazy val length: length = Length.apply(self)
-    final override     type length         = Length.apply[self]
+    @annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
+    private[this] lazy val _length: length = Length.apply(self)
+    final override  def length: length = _length
+    final override type length         = Length.apply[self]
 
     final override  def append[that <: List](that: that): append[that] = Append.apply(self, that)
     final override type append[that <: List]                           = Append.apply[self, that]
