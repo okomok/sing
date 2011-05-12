@@ -24,8 +24,8 @@ object Term {
 
     final case class Else[y <: Any, xs <: List](y: y, xs: xs) extends Function0 {
         type self = Else[y, xs]
-        private lazy val x: x = xs.head
-        private     type x    = xs#head
+        private[this] lazy val x: x = xs.head
+        private[this]     type x    = xs#head
         override  def apply: apply =
             `if`(y.naturalOrdering.equiv(y, x), const0(Success(x, xs.tail)), const0(Failure(xs))).apply.asInstanceOf[apply]
         override type apply =

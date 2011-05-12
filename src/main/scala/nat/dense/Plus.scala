@@ -25,16 +25,16 @@ object Plus {
 
     case class CaseXF[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
         type self = CaseXF[xs, ys]
-        private   def xst_add_yst: xst_add_yst = xs.tail.plus(ys.tail).asInstanceOf[xst_add_yst]
-        private  type xst_add_yst              = xs#tail#plus[ys#tail]
+        private[this]   def xst_add_yst: xst_add_yst = xs.tail.plus(ys.tail).asInstanceOf[xst_add_yst]
+        private[this]  type xst_add_yst              = xs#tail#plus[ys#tail]
         override  def apply: apply = Cons(xs.head, xst_add_yst)
         override type apply        = Cons[xs#head, xst_add_yst]
     }
 
     case class CaseFX[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
         type self = CaseFX[xs, ys]
-        private   def xst_add_yst: xst_add_yst = xs.tail.plus(ys.tail).asInstanceOf[xst_add_yst]
-        private  type xst_add_yst              = xs#tail#plus[ys#tail]
+        private[this]   def xst_add_yst: xst_add_yst = xs.tail.plus(ys.tail).asInstanceOf[xst_add_yst]
+        private[this]  type xst_add_yst              = xs#tail#plus[ys#tail]
         override  def apply: apply = Cons(ys.head, xst_add_yst)
         override type apply        = Cons[ys#head, xst_add_yst]
     }

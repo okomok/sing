@@ -15,8 +15,8 @@ object Force {
 
     case class Else[xs <: List](xs: xs) extends Function0 {
         type self = Else[xs]
-        private lazy val r: r = Force.apply(xs.tail).asInstanceOf[r]
-        private     type r    = Force.apply[xs#tail]
+        private[this] lazy val r: r = Force.apply(xs.tail).asInstanceOf[r]
+        private[this]     type r    = Force.apply[xs#tail]
         override  def apply: apply = Cons(xs.head, r)
         override type apply        = Cons[xs#head, r]
     }

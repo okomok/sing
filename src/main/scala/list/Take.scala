@@ -16,8 +16,8 @@ object Take {
     case class Impl[xs <: List, n <: Nat](xs: xs, n: n) extends AbstractList {
         type self = Impl[xs, n]
 
-        private lazy val ys: ys = `if`(n.isZero, const0(Nil), const0(xs)).apply.asList
-        private     type ys     = `if`[n#isZero, const0[Nil], const0[xs]]#apply#asList
+        private[this] lazy val ys: ys = `if`(n.isZero, const0(Nil), const0(xs)).apply.asList
+        private[this]     type ys     = `if`[n#isZero, const0[Nil], const0[xs]]#apply#asList
 
         override  def isEmpty: isEmpty = ys.isEmpty
         override type isEmpty          = ys#isEmpty
@@ -39,8 +39,8 @@ object TakeWhile {
     case class Impl[xs <: List, f <: Function1](xs: xs, f: f) extends AbstractList {
         type self = Impl[xs, f]
 
-        private lazy val ys: ys = `if`(xs.isEmpty, const0(xs), Else(xs, f)).apply.asList
-        private     type ys     = `if`[xs#isEmpty, const0[xs], Else[xs, f]]#apply#asList
+        private[this] lazy val ys: ys = `if`(xs.isEmpty, const0(xs), Else(xs, f)).apply.asList
+        private[this]     type ys     = `if`[xs#isEmpty, const0[xs], Else[xs, f]]#apply#asList
 
         override  def isEmpty: isEmpty = ys.isEmpty
         override type isEmpty          = ys#isEmpty

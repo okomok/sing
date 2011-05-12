@@ -37,8 +37,8 @@ object Equal {
 
     case class PredApplyElse[ov <: Option, v <: Any, ve <: Option](ov: ov, v: v, ve: ve) extends Function0 {
         type self = PredApplyElse[ov, v, ve]
-        private lazy val _ve: _ve = ve.getOrNaturalEquiv(v)
-        private     type _ve      = ve#getOrNaturalEquiv[v]
+        private[this] lazy val _ve: _ve = ve.getOrNaturalEquiv(v)
+        private[this]     type _ve      = ve#getOrNaturalEquiv[v]
         override  def apply: apply = _ve.equiv(ov.get, v)
         override type apply        = _ve#equiv[ov#get, v]
     }

@@ -44,8 +44,8 @@ object Minus {
 
     case class CaseTF[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
         type self = CaseTF[xs, ys]
-        private   def xst_sub_yst: xst_sub_yst = xs.tail.minus(ys.tail).asInstanceOf[xst_sub_yst]
-        private  type xst_sub_yst              = xs#tail#minus[ys#tail]
+        private[this]   def xst_sub_yst: xst_sub_yst = xs.tail.minus(ys.tail).asInstanceOf[xst_sub_yst]
+        private[this]  type xst_sub_yst              = xs#tail#minus[ys#tail]
         override  def apply: apply = Cons(`true`, xst_sub_yst)
         override type apply        = Cons[`true`, xst_sub_yst]
     }

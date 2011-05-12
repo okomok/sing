@@ -17,8 +17,8 @@ object Equal {
 
     case class Else[xs <: List, ys <: List, ee <: Option](xs: xs, ys: ys, ee: ee) extends Function0 {
         type self = Else[xs, ys, ee]
-        private lazy val _ee: _ee = ee.getOrNaturalEquiv(xs.head)
-        private     type _ee      = ee#getOrNaturalEquiv[xs#head]
+        private[this] lazy val _ee: _ee = ee.getOrNaturalEquiv(xs.head)
+        private[this]     type _ee      = ee#getOrNaturalEquiv[xs#head]
         override  def apply: apply = `if`(_ee.equiv(xs.head, ys.head), Then(xs, ys, ee), const0(`false`)).apply.asInstanceOf[apply]
         override type apply        = `if`[_ee#equiv[xs#head, ys#head], Then[xs, ys, ee], const0[`false`]]#apply
     }

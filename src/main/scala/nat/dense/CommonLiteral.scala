@@ -19,8 +19,8 @@ trait CommonLiteral {
      val _1B = `true`
     type _1B = `true`
 
-    private  val __Nil: Nil = _Dense.Nil
-    private type __::[x <: Boolean, xs <: Dense] = Cons[x, xs]
+    private[this]  val __Nil: Nil = _Dense.Nil
+    private[this] type __::[x <: Boolean, xs <: Dense] = Cons[x, xs]
 
 	 val  _0:  _0 = __Nil
 

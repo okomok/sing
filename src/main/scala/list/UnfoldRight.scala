@@ -16,8 +16,8 @@ object UnfoldRight {
     case class Impl[z <: Any, f <: Function1](z: z, f: f) extends AbstractList {
         type self = Impl[z, f]
 
-        private lazy val acc: acc = f.apply(z).asOption
-        private     type acc      = f#apply[z]#asOption
+        private[this] lazy val acc: acc = f.apply(z).asOption
+        private[this]     type acc      = f#apply[z]#asOption
 
         override  def isEmpty: isEmpty = acc.isEmpty
         override type isEmpty          = acc#isEmpty

@@ -19,8 +19,8 @@ object BitAnd {
 
     case class CaseTT[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
         type self = CaseTT[xs, ys]
-        private   def xst_and_yst: xst_and_yst = xs.tail.bitAnd(ys.tail).asInstanceOf[xst_and_yst]
-        private  type xst_and_yst              = xs#tail#bitAnd[ys#tail]
+        private[this]   def xst_and_yst: xst_and_yst = xs.tail.bitAnd(ys.tail).asInstanceOf[xst_and_yst]
+        private[this]  type xst_and_yst              = xs#tail#bitAnd[ys#tail]
         override  def apply: apply = Cons(`true`, xst_and_yst)
         override type apply        = Cons[`true`, xst_and_yst]
     }
@@ -44,16 +44,16 @@ object BitOr {
 
     case class CaseFF[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
         type self = CaseFF[xs, ys]
-        private   def xst_or_yst: xst_or_yst = xs.tail.bitOr(ys.tail).asInstanceOf[xst_or_yst]
-        private  type xst_or_yst             = xs#tail#bitOr[ys#tail]
+        private[this]   def xst_or_yst: xst_or_yst = xs.tail.bitOr(ys.tail).asInstanceOf[xst_or_yst]
+        private[this]  type xst_or_yst             = xs#tail#bitOr[ys#tail]
         override  def apply: apply = Cons(`false`, xst_or_yst)
         override type apply        = Cons[`false`, xst_or_yst]
     }
 
     case class Else[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
         type self = Else[xs, ys]
-        private   def xst_or_yst: xst_or_yst = xs.tail.bitOr(ys.tail).asInstanceOf[xst_or_yst]
-        private  type xst_or_yst             = xs#tail#bitOr[ys#tail]
+        private[this]   def xst_or_yst: xst_or_yst = xs.tail.bitOr(ys.tail).asInstanceOf[xst_or_yst]
+        private[this]  type xst_or_yst             = xs#tail#bitOr[ys#tail]
         override  def apply: apply = Cons(`true`, xst_or_yst)
         override type apply        = Cons[`true`, xst_or_yst]
     }

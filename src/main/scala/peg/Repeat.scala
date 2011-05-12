@@ -23,16 +23,16 @@ object Repeat {
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)
         override type parse[xs <: List]                    = _aux[p#parse[xs], xs]
 
-        private  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
+        private[this]  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
             `if`(r.successful, Then(p, r, n, m, xs), const0(r)).apply.asPegResult.asInstanceOf[_aux[r, xs]]
-        private type _aux[r <: Result, xs <: List] =
+        private[this] type _aux[r <: Result, xs <: List] =
             `if`[r#successful, Then[p, r, n, m, xs], const0[r]]#apply#asPegResult
     }
 
     final case class Then[p <: Peg, r <: Result, n <: Nat, m <: Nat, xs <: List](p: p, r: r, n: n, m: m, xs: xs) extends Function0 {
         type self = Then[p, r, n, m, xs]
-        private lazy val s: s = Repeat.apply(p, n.decrement, m.decrement).parse(r.next).asInstanceOf[s]
-        private     type s    = Repeat.apply[p, n#decrement, m#decrement]#parse[r#next]
+        private[this] lazy val s: s = Repeat.apply(p, n.decrement, m.decrement).parse(r.next).asInstanceOf[s]
+        private[this]     type s    = Repeat.apply[p, n#decrement, m#decrement]#parse[r#next]
         override  def apply: apply = `if`(s.successful, ThenThen(r, s), const0(Failure(xs))).apply
         override type apply        = `if`[s#successful, ThenThen[r, s], const0[Failure[xs]]]#apply
     }
@@ -43,8 +43,8 @@ object Repeat {
         override type apply        = Success[r#get :: s#get#asList, s#next]
     }
 
-    private  def safeDec[n <: Nat](n: n): safeDec[n] = `if`(n.isZero, const0(n), Dec(n)).apply.asNat
-    private type safeDec[n <: Nat]                   = `if`[n#isZero, const0[n], Dec[n]]#apply#asNat
+    private[this]  def safeDec[n <: Nat](n: n): safeDec[n] = `if`(n.isZero, const0(n), Dec(n)).apply.asNat
+    private[this] type safeDec[n <: Nat]                   = `if`[n#isZero, const0[n], Dec[n]]#apply#asNat
 
     final case class Dec[n <: Nat](n: n) extends Function0 {
         type self = Dec[n]
@@ -67,9 +67,9 @@ object RepeatAtMost {
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs))
         override type parse[xs <: List]                    = _aux[p#parse[xs]]
 
-        private  def _aux[r <: Result](r: r): _aux[r] =
+        private[this]  def _aux[r <: Result](r: r): _aux[r] =
             `if`(r.successful, Then(p, r, n), const0(Success(Nil, r.next))).apply.asPegResult.asInstanceOf[_aux[r]]
-        private type _aux[r <: Result] =
+        private[this] type _aux[r <: Result] =
             `if`[r#successful, Then[p, r, n], const0[Success[Nil, r#next]]]#apply#asPegResult
     }
 

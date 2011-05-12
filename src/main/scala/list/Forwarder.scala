@@ -14,9 +14,9 @@ trait Forwarder extends List with sing.Forwarder {
     protected  def around[that <: List](that: that): around[that]
     protected type around[that <: List] <: List
 
-    final private  def around2[that <: Product2](that: that): around2[that] =
+    final private[this]  def around2[that <: Product2](that: that): around2[that] =
         Tuple2(around(that._1.asList), around(that._2.asList))
-    final private type around2[that <: Product2] =
+    final private[this] type around2[that <: Product2] =
         Tuple2[around[that#_1#asList], around[that#_2#asList]]
 
     final override  def isEmpty: isEmpty = delegate.isEmpty

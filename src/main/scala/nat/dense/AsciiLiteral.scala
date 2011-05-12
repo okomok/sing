@@ -10,11 +10,11 @@ package sing; package nat; package dense
 
 object AsciiLiteral {
 
-    private  val _0B = `false`
-    private type _0B = `false`
+    private[this]  val _0B = `false`
+    private[this] type _0B = `false`
 
-    private  val _1B = `true`
-    private type _1B = `true`
+    private[this]  val _1B = `true`
+    private[this] type _1B = `true`
 
      val ` `: ` ` = new ` `{}
      val  ! :  !  = new  ! {}

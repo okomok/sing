@@ -19,9 +19,9 @@ object And {
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)
         override type parse[xs <: List]                    = _aux[p#parse[xs], xs]
 
-        private  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
+        private[this]  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
             `if`(r.successful, Then(r, xs), const0(r)).apply.asPegResult.asInstanceOf[_aux[r, xs]]
-        private type _aux[r <: Result, xs <: List] =
+        private[this] type _aux[r <: Result, xs <: List] =
             `if`[r#successful, Then[r, xs], const0[r]]#apply#asPegResult
     }
 

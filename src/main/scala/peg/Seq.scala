@@ -22,17 +22,17 @@ object Seq {
         override  def width: width = p.width.plus(q.width)
         override type width        = p#width#plus[q#width]
 
-        private  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
+        private[this]  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
             `if`(r.successful, Then(q, r, xs), const0(r)).apply.asPegResult
-        private type _aux[r <: Result, xs <: List] =
+        private[this] type _aux[r <: Result, xs <: List] =
             `if`[r#successful, Then[q, r, xs], const0[r]]#apply#asPegResult
     }
 
     final case class Then[q <: Peg, r <: Result, xs <: List](q: q, r: r, xs: xs) extends Function0 {
         type self = Then[q, r, xs]
 
-        private lazy val s: s = q.parse(r.next)
-        private     type s    = q#parse[r#next]
+        private[this] lazy val s: s = q.parse(r.next)
+        private[this]     type s    = q#parse[r#next]
 
         override  def apply: apply =
             `if`(s.successful, ThenThen(r, s), const0(Failure(xs))).apply.asPegResult

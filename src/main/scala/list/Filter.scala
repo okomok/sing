@@ -16,8 +16,8 @@ object Filter {
     case class Impl[xs <: List, f <: Function1](xs: xs, f: f) extends AbstractList {
         type self = Impl[xs, f]
 
-        private lazy val ys: ys = xs.dropWhile(f.not)
-        private     type ys     = xs#dropWhile[f#not]
+        private[this] lazy val ys: ys = xs.dropWhile(f.not)
+        private[this]     type ys     = xs#dropWhile[f#not]
 
         override  def isEmpty: isEmpty = ys.isEmpty.asInstanceOf[isEmpty]
         override type isEmpty          = ys#isEmpty

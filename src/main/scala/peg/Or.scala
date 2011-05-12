@@ -19,17 +19,17 @@ object Or {
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)
         override type parse[xs <: List]                    = _aux[p#parse[xs], xs]
 
-        private lazy val pw: pw = p.width
-        private     type pw     = p#width
+        private[this] lazy val pw: pw = p.width
+        private[this]     type pw     = p#width
 
         override  def width: width =
             `if`(pw.equal(q.width), const0(pw), throw0(new UnsupportedOperationException("sing.peg.or.width"))).apply.asNat.asInstanceOf[width]
         override type width =
             `if`[pw#equal[q#width], const0[pw], throw0[_]]#apply#asNat
 
-        private  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
+        private[this]  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
             `if`(r.successful, const0(r), Else(q, xs)).apply.asPegResult
-        private type _aux[r <: Result, xs <: List] =
+        private[this] type _aux[r <: Result, xs <: List] =
             `if`[r#successful, const0[r], Else[q, xs]]#apply#asPegResult
     }
 

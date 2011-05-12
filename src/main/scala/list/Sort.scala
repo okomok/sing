@@ -17,8 +17,8 @@ object Sort {
 
     case class Then[xs <: List, o <: Option](xs: xs, o: o) extends Function0 {
         type self = Then[xs, o]
-        private lazy val r: r = xs.splitAt(xs.length.quot(nat.peano._2)) // TODO: remove `length`.
-        private     type r    = xs#splitAt[xs#length#quot[nat.peano._2]]
+        private[this] lazy val r: r = xs.splitAt(xs.length.quot(nat.peano._2)) // TODO: remove `length`.
+        private[this]     type r    = xs#splitAt[xs#length#quot[nat.peano._2]]
         override  def apply: apply = Merge.apply(Sort.apply(r._1.asList, o), Sort.apply(r._2.asList, o), o).asInstanceOf[apply]
         override type apply        = Merge.apply[Sort.apply[r#_1#asList, o], Sort.apply[r#_2#asList, o], o]
     }
@@ -34,8 +34,8 @@ object Merge {
 
     case class Else[xs <: List, ys <: List, o <: Option](xs: xs, ys: ys, o: o) extends Function0 {
         type self = Else[xs, ys, o]
-        private lazy val _o: _o = o.getOrNaturalOrdering(xs.head)
-        private     type _o     = o#getOrNaturalOrdering[xs#head]
+        private[this] lazy val _o: _o = o.getOrNaturalOrdering(xs.head)
+        private[this]     type _o     = o#getOrNaturalOrdering[xs#head]
         override  def apply: apply = `if`(_o.lteq(xs.head, ys.head), ElseThen(xs, ys, o), ElseElse(xs, ys, o)).apply.asInstanceOf[apply]
         override type apply        = `if`[_o#lteq[xs#head, ys#head], ElseThen[xs, ys, o], ElseElse[xs, ys, o]]#apply
     }
