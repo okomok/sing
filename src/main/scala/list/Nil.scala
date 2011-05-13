@@ -20,8 +20,7 @@ sealed abstract class Nil extends AbstractList {
     override  def tail: tail = noSuchElement("list.Nil.tail")
     override type tail       = noSuchElement[_]
 
-    @annotation.compilerWorkaround("2.9.0") // crashes in generating matcher.
-    final def unapply(x: Any) = x == this
+    final def unapply(that: Nil) = true
 }
 
 private[sing]
