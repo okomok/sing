@@ -1,5 +1,5 @@
 
-# sing 0.1.0-SNAPSHOT
+# sing 0.1.0
 
 `sing` is a type-level metaprogramming library for Scala.
 This is based upon the singleton type system emulation.
@@ -48,8 +48,8 @@ This is based upon the singleton type system emulation.
 
 Append this in your project definition:
 
-    val sing = "com.github.okomok" % "sing_2.9.0" % "0.1.0-SNAPSHOT"
-    val okomokSnapshots = "okomok snapshots" at "http://okomok.github.com/maven-repo/snapshots"
+    val sing = "com.github.okomok" % "sing_2.9.0" % "0.1.0"
+    val okomokReleases = "okomok releases" at "http://okomok.github.com/maven-repo/releases"
 
 Append this to `compileOptions`:
 
