@@ -25,12 +25,12 @@ This is based upon the singleton type system emulation.
             def createButton = new OSXButton
         }
 
-        // Needs explicit boxing to make a sing object from an "unsing" one.
+        // Needs explicit boxing to make a sing object from a non-sing one.
         val factoryMap = map.sorted1(_0, Box(WinFactory)).put(_1, Box(OSXFactory))
 
         def createFactory[n <: Nat](n: n) = {
             val option = factoryMap.get(n)
-            option.get.unsung
+            option.get.unsing
         }
 
         def testTrivial {
