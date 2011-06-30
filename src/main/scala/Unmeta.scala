@@ -9,6 +9,7 @@ package sing
 
 
 @annotation.specializer
+@scala.annotation.implicitNotFound("No implicit Unmeta defined for ${x}.")
 trait Unmeta[x <: Any] extends scala.Function0[x]
 
 
@@ -62,4 +63,11 @@ object Unmeta {
         override def apply: Unit = Unit
     }
 
+
+/* Singular
+
+    implicit def _ofSingular[x <: Singular](implicit m: ClassManifest[x]): Unmeta[x] = new Unmeta[x] {
+        override def apply: x = m.erasure.newInstance().asInstanceOf[x]
+    }
+*/
 }

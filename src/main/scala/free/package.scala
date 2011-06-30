@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-import scala.annotation.elidable
+import scala.annotation.{elidable, implicitNotFound}
 import scala.annotation.elidable.ALL
 
 
@@ -46,5 +46,13 @@ package object free {
      * type assertion if <code>a</code> is lower than <code>b</code>.
      */
     def assertConforms[a <: b, b]: scala.Unit = ()
+
+    /**
+     * Prints a type-name as a compile-error.
+     * (type-alias isn't expanded.)
+     */
+    @implicitNotFound("sing.printe: ${T}")
+    sealed trait Printe[T]
+    def printe[T](implicit i: Printe[T]): scala.Unit = ()
 
 }
