@@ -44,8 +44,8 @@ trait AbstractList extends List {
     final override  def filter[f <: Function1](f: f): filter[f] = Filter.apply(self, f)
     final override type filter[f <: Function1]                  = Filter.apply[self, f]
 
-    final override  def partition[f <: Function1](f: f): partition[f] = Tuple2(filter(f), filter(f.not))
-    final override type partition[f <: Function1]                     = Tuple2[filter[f], filter[f#not]]
+    final override  def partition[f <: Function1](f: f): partition[f] = Tuple2(filter(f), filter(Function1.not(f)))
+    final override type partition[f <: Function1]                     = Tuple2[filter[f], filter[Function1.not[f]]]
 
     final override  def sort: sort = Sort.apply(self, None)
     final override type sort       = Sort.apply[self, None]
@@ -59,8 +59,8 @@ trait AbstractList extends List {
     final override  def isSortedWith[o <: Ordering](o: o): isSortedWith[o] = IsSorted.apply(self, Some(o))
     final override type isSortedWith[o <: Ordering]                        = IsSorted.apply[self, Some[o]]
 
-    final override  def forall[f <: Function1](f: f): forall[f] = exists(f.not).not.asInstanceOf[forall[f]]
-    final override type forall[f <: Function1]                  = exists[f#not]#not
+    final override  def forall[f <: Function1](f: f): forall[f] = exists(Function1.not(f)).not
+    final override type forall[f <: Function1]                  = exists[Function1.not[f]]#not
 
     final override  def exists[f <: Function1](f: f): exists[f] = find(f).isEmpty.not
     final override type exists[f <: Function1]                  = find[f]#isEmpty#not

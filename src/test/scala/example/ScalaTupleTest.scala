@@ -19,7 +19,9 @@ class ScalaTupleTest extends org.scalatest.junit.JUnit3Suite {
         val res1 = ('geso , new java.util.Date , 9999L )
         val res2 = tuple.Lift2(res0).asList
         val res3 = tuple.Lift3(res1).asList
-        val (1, "a", 'geso , _, 9999L): (Int, String, Symbol, java.util.Date, Long) = (res2 append res3).force.toSTuple
+
+        val x = ((res2 append res3).force.toSTuple): (Int, String, Symbol, java.util.Date, Long)
+        val (1, "a", 'geso , _, 9999L) = x
 
         ()
     }

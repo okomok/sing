@@ -22,8 +22,8 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testCurried {
-        type c = Plus#curried
-        val c: c = Plus().curried
+        type c = Function2.curried[Plus]
+        val c: c = Function2.curried(Plus())
 
         type a = c#apply[_3]
         val a: a = c.apply(_3)
@@ -38,8 +38,8 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testTupled {
-        type c = Plus#tupled
-        val c: c = Plus().tupled
+        type c = Function2.tupled[Plus]
+        val c: c = Function2.tupled(Plus())
 
         type k = c#apply[Tuple2[_3, _4]]
         val k : k = c.apply(Tuple2(_3, _4))
@@ -62,8 +62,8 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testCompose {
-        type c = Plus2#compose[Minus3]
-        val c: c = Plus2().compose(Minus3())
+        type c = Function1.compose[Plus2, Minus3]
+        val c: c = Function1.compose(Plus2(), Minus3())
         val r: c#apply[_5] = c.apply(_5)
         okomok.sing.assert(r equal _4)
         val k: _4 = r
@@ -71,9 +71,9 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testAndThen {
-        val k: _3 = (Minus3() andThen Plus2())(_4)
+        val k: _3 = Function1.andThen(Minus3(), Plus2())(_4)
         try {
-            Minus3().andThen(Plus2()).apply(_2)
+            Function1.andThen(Minus3(), Plus2()).apply(_2)
             fail("never come here")
         } catch {
             case _: UnsupportedOperationException =>
@@ -91,8 +91,8 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testCurried3 {
-        type c = PlusTimes#curried
-        val c: c = PlusTimes().curried
+        type c = Function3.curried[PlusTimes]
+        val c: c = Function3.curried(PlusTimes())
 
         type a = c#apply[_2]
         val a: a = c.apply(_2)
@@ -107,14 +107,14 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testTupled3 {
-        type c = PlusTimes#tupled
-        val c: c = PlusTimes().tupled
+        type c = Function3.tupled[PlusTimes]
+        val c: c = Function3.tupled(PlusTimes())
         free.assert(c(Tuple3(_2, _1, _3)) equal _9)
     }
 
     def testTupledLeft3 {
-        type c = PlusTimes#tupledLeft
-        val c: c = PlusTimes().tupledLeft
+        type c = Function3.tupledLeft[PlusTimes]
+        val c: c = Function3.tupledLeft(PlusTimes())
         free.assert(c(Pair(Pair(_2, _1), _3)) equal _9)
     }
 
