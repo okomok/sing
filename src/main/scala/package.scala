@@ -13,6 +13,8 @@ import scala.annotation.elidable.ASSERTION
 
 package object sing {
 
+    import scala.language.higherKinds
+
 
 // Boolean
 
@@ -22,9 +24,9 @@ package object sing {
     @annotation.equivalentTo("new `false`{}")
      val `false` = _Boolean.`false`
 
-    @annotation.equivalentTo("c.`if`(then, _else)")
-     def `if`[c <: Boolean, then <: Function0, _else <: Function0](c: c, then: then, _else: _else): `if`[c, then, _else] = c.`if`(then, _else)
-    type `if`[c <: Boolean, then <: Function0, _else <: Function0]                                                       = c#`if`[then, _else]
+    @annotation.equivalentTo("c.`if`(_then, _else)")
+     def `if`[c <: Boolean, _then <: Function0, _else <: Function0](c: c, _then: _then, _else: _else): `if`[c, _then, _else] = c.`if`(_then, _else)
+    type `if`[c <: Boolean, _then <: Function0, _else <: Function0]                                                       = c#`if`[_then, _else]
 
 
 // Function

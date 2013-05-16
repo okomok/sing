@@ -70,7 +70,7 @@ class ProjectEuler1Test extends org.scalatest.junit.JUnit3Suite {
     type sumOfm15= sumOfArithmeticSeq#apply[_15, _N, _15]
     type ans2 = sumOfm3#plus[sumOfm5]#minus[sumOfm15]
     //println(sing.unmeta[ans2])
-    expect(233168)(sing.unmeta[ans2].unsing)
+    expectResult(233168)(sing.unmeta[ans2].unsing)
 
     // run time
     val _N = _10 times _10 times _10
@@ -79,7 +79,7 @@ class ProjectEuler1Test extends org.scalatest.junit.JUnit3Suite {
     val sumOfm15= sumOfArithmeticSeq().apply(_15, _N, _15)
     val ans2 = sumOfm3.plus(sumOfm5).minus(sumOfm15)
     //println(ans2)
-    expect(233168)(ans2.unsing)
+    expectResult(233168)(ans2.unsing)
 
     ()
   }

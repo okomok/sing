@@ -12,6 +12,7 @@ import com.github.okomok
 
 import okomok.sing._
 import junit.framework.Assert._
+import scala.language.postfixOps
 
 
 class StrongTest extends org.scalatest.junit.JUnit3Suite {

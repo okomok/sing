@@ -14,8 +14,8 @@ package com.github.okomoktest; package singtest; package example
         trait Buzz extends sing.Any
         trait FizzBuzz extends sing.Any
 
-        trait fizzbuzz extends sing.Function1 {
-            override type self = fizzbuzz
+        trait doFizzBuzz extends sing.Function1 {
+            override type self = doFizzBuzz
             override type apply[x <: sing.Any] =
                 sing.`if`[x#asNat#rem[_15]#equal[_0],
                     sing.const0[FizzBuzz],
@@ -32,9 +32,9 @@ package com.github.okomoktest; package singtest; package example
         trait testTrivial {
             import sing.::
 
-            // sing.free.printe[sing.List.range[_1, _16]#map[fizzbuzz]#force]
+            // sing.free.printe[sing.List.range[_1, _16]#map[doFizzBuzz]#force]
 
-            sing.free.assertSame[sing.List.range[_1, _16]#map[fizzbuzz]#force,
+            sing.free.assertSame[sing.List.range[_1, _16]#map[doFizzBuzz]#force,
                 _1 :: _2 :: Fizz :: _4 :: Buzz :: Fizz :: _7 :: _8 :: Fizz :: Buzz :: _11 :: Fizz :: _13 :: _14 :: FizzBuzz :: sing.Nil]
 
         }

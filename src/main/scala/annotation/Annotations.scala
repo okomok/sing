@@ -8,6 +8,9 @@ package com.github.okomok
 package sing; package annotation
 
 
+import scala.annotation.StaticAnnotation
+
+
 /**
 * Contains implicit conversions. (All the names must be "long".)
 */

@@ -38,6 +38,6 @@ package com.github.okomoktest; package singtest; package example
             // Concrete types are preserved.
             val factory = createFactory(_0)
             val button = factory.createButton
-            expect("I'm a WinButton")(button.paint)
+            expectResult("I'm a WinButton")(button.paint)
         }
     }

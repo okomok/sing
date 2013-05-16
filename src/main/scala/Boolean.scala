@@ -30,8 +30,8 @@ sealed abstract class Boolean extends Any {
      def or[that <: Boolean](that: that): or[that]
     type or[that <: Boolean] <: Boolean
 
-     def `if`[then <: Function0, _else <: Function0](then: then, _else: _else): `if`[then, _else]
-    type `if`[then <: Function0, _else <: Function0] <: Function0
+     def `if`[_then <: Function0, _else <: Function0](_then: _then, _else: _else): `if`[_then, _else]
+    type `if`[_then <: Function0, _else <: Function0] <: Function0
 
     private[sing]  def isTrue: isTrue
     private[sing] type isTrue <: Boolean
@@ -76,8 +76,8 @@ sealed abstract class `true` extends AbstractBoolean {
     override  def or[that <: Boolean](that: that): or[that] = `true`
     override type or[that <: Boolean]                       = `true`
 
-    override  def `if`[then <: Function0, _else <: Function0](then: then, _else: _else): `if`[then, _else] = then
-    override type `if`[then <: Function0, _else <: Function0]                                              = then
+    override  def `if`[_then <: Function0, _else <: Function0](_then: _then, _else: _else): `if`[_then, _else] = _then
+    override type `if`[_then <: Function0, _else <: Function0]                                              = _then
 
     override  def asNat: asNat = nat.peano._1
     override type asNat        = nat.peano._1
@@ -110,8 +110,8 @@ sealed abstract class `false` extends AbstractBoolean {
     override  def or[that <: Boolean](that: that): or[that] = that
     override type or[that <: Boolean]                       = that
 
-    override  def `if`[then <: Function0, _else <: Function0](then: then, _else: _else): `if`[then, _else] = _else
-    override type `if`[then <: Function0, _else <: Function0]                                              = _else
+    override  def `if`[_then <: Function0, _else <: Function0](_then: _then, _else: _else): `if`[_then, _else] = _else
+    override type `if`[_then <: Function0, _else <: Function0]                                              = _else
 
     override  def asNat: asNat = nat.peano._0
     override type asNat        = nat.peano._0

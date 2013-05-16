@@ -53,6 +53,6 @@ class FizzBuzz2Test extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         type result = sing.List.range[_1, _16]#map[fizzbuzz]#force
-        expect(List(1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz))(sing.unmeta[result].unsing)
+        expectResult(List(1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz))(sing.unmeta[result].unsing)
     }
 }

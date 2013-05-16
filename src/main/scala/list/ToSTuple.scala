@@ -8,6 +8,9 @@ package com.github.okomok
 package sing; package list
 
 
+import scala.language.implicitConversions
+
+
 private[sing]
 trait ToSTuple {
 

@@ -17,7 +17,7 @@ class MatchTest extends org.scalatest.junit.JUnit3Suite {
         import okomok.sing._
         val Box(10.25) :: Box(false) :: Nil() = Box(10.25) :: Box(false) :: Nil
         val Box(-1.625) :: Box(x) :: Nil() = Box(-1.625) :: Box(true) :: Nil
-        expect(true)(x)
+        expectResult(true)(x)
 
     /* shall fail to compile.
         val Box(10) :: Box(true) :: Nil() = Box(10) :: Box('c') :: Nil

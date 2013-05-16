@@ -51,7 +51,7 @@ class FoldTest extends org.scalatest.junit.JUnit3Suite {
             val u: xs#reduceRight[Sub] = xs.reduceRight(Sub())
             fail("never come here")
         } catch {
-            case _ =>
+            case _ : Throwable =>
         }
         ()
     }
