@@ -9,7 +9,7 @@ package sing; package nat
 
 
 private[sing]
-class Common {
+trait Common {
     @annotation.aliasOf("dense.Dense")
      val Dense = dense.Dense
     type Dense = dense.Dense

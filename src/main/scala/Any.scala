@@ -11,11 +11,14 @@ package sing
 /**
  * The sing Any
  */
-trait Any extends scala.Equals {
+trait Any extends Term with scala.Equals {
 
     @annotation.returnThis
     final val self: self = this.asInstanceOf[self]
     type self <: Any
+
+    final override  def is[K <: Type](K: K): is[K] = typeId.equal(K.typeId)
+    final override type is[K <: Type]              = typeId#equal[K#typeId]
 
      def asBoolean: asBoolean = unsupported("Any.asBoolean")
     type asBoolean <: Boolean

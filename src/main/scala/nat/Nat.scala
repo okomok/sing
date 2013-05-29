@@ -8,7 +8,10 @@ package com.github.okomok
 package sing; package nat
 
 
-object Nat extends Common
+object Nat extends Type with Common {
+    override  def typeId = dense._0
+    override type typeId = dense._0
+}
 
 
 /**

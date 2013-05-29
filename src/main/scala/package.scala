@@ -9,11 +9,11 @@ package com.github.okomok
 
 import scala.annotation.elidable
 import scala.annotation.elidable.ASSERTION
+import scala.language.experimental.macros
+import scala.reflect.macros.Context
 
 
 package object sing {
-
-    import scala.language.higherKinds
 
 
 // Boolean
@@ -130,5 +130,10 @@ package object sing {
      * Returns corresponding runtime value.
      */
      def unmeta[x <: Any](implicit _unmeta: Unmeta[x]): x = _unmeta.apply
+
+
+// New
+
+    // type New = macro Macros.NewImpl
 
 }
