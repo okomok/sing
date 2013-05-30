@@ -1,7 +1,7 @@
 
 
-// Copyright Shunsuke Sogame 2008-2010.
-// Distributed under the terms of an MIT-style license.
+// Copyright Shunsuke Sogame 2008-2013.
+// Distributed under the New BSD license.
 
 
 // by @akihiro4chawon https://ideone.com/YRcNt https://ideone.com/LR6zh

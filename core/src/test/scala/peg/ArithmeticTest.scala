@@ -1,6 +1,6 @@
 
 
-// Copyright Shunsuke Sogame 2008-2010.
+// Copyright Shunsuke Sogame 2008-2013.
 // Distributed under the terms of an MIT\-tyle license.
 
 
