@@ -87,9 +87,9 @@ object Macros {
 
     // Special thanks to: https://github.com/leonardschneider/macrogen
 
-    type WeakTypeOf[T](x: T) = macro WeakTypeOfImpl[T]
+    type weakTypeOf[T](x: T) = macro weakTypeOfImpl[T]
 
-    def WeakTypeOfImpl[T: c.WeakTypeTag](c: Context)(x: c.Expr[T]): c.Tree = {
+    def weakTypeOfImpl[T: c.WeakTypeTag](c: Context)(x: c.Expr[T]): c.Tree = {
         import c.universe._
         tq"${weakTypeOf[T]}"
     }

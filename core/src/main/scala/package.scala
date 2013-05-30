@@ -136,4 +136,14 @@ package object sing {
 
     // type New = macro Macros.NewImpl
 
+
+// compatibility
+
+    @annotation.normativelyDeprecated
+     val UnMeta = TermOf
+    type UnMeta[x <: Any] = TermOf[x]
+
+    @annotation.normativelyDeprecated
+    val free: weak.Common = new weak.Common{}
+
 }
