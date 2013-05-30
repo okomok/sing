@@ -51,10 +51,9 @@ trait Common {
     def assertConforms[a <: b, b]: scala.Unit = ()
 
     /**
-     * Prints a type-name as a compile-error.
-     * (type-alias isn't expanded.)
+     * type assertion for terms
      */
-    def printe[T](implicit i: Printe[T]): scala.Unit = ()
+    def assertTypeOf[T](x: ({type id = T})#id): scala.Unit = ()
 
     /**
      * type of an expression
@@ -62,9 +61,15 @@ trait Common {
     type typeOf[T](x: T) = macro Macros.weakTypeOfImpl[T]
 
     /**
-     * type assertion for terms
+     * Returns corresponding runtime value.
      */
-    def assertTypeOf[T](x: ({type id = T})#id): scala.Unit = ()
+    def termOf[x <: Any](implicit i: TermOf[x]): x = i.apply
+
+    /**
+     * Prints a type-name as a compile-error.
+     * (type-alias isn't expanded.)
+     */
+    def printe[T](implicit i: Printe[T]): scala.Unit = ()
 
 }
 

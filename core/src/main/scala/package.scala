@@ -124,26 +124,13 @@ package object sing {
     type assertNot[c <: Boolean]                     = assert[c#not]
 
 
-// util
+// backward-compatibility
 
-    /**
-     * Returns corresponding runtime value.
-     */
-     def unmeta[x <: Any](implicit _unmeta: TermOf[x]): x = _unmeta.apply
+    @annotation.obsolete("use weak.TermOf instead")
+     val Unmeta = weak.TermOf
+    type Unmeta[x <: Any] = weak.TermOf[x]
 
-
-// New
-
-    // type New = macro Macros.NewImpl
-
-
-// compatibility
-
-    @annotation.normativelyDeprecated
-     val UnMeta = TermOf
-    type UnMeta[x <: Any] = TermOf[x]
-
-    @annotation.normativelyDeprecated
-    val free: weak.Common = new weak.Common{}
+    @annotation.obsolete("use weak.termOf instead")
+     def unmeta[x <: Any](implicit i: weak.TermOf[x]): x = weak.termOf(i)
 
 }

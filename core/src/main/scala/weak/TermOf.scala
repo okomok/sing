@@ -5,7 +5,7 @@
 
 
 package com.github.okomok
-package sing
+package sing; package weak
 
 
 @annotation.specializer

@@ -119,7 +119,7 @@ class visibleForMacro extends StaticAnnotation
 /**
  * Deprecated, but unlikely to be removed.
  */
-class normativelyDeprecated(msg: String = "", since: String = "") extends StaticAnnotation
+class obsolete(msg: String = "", since: String = "") extends StaticAnnotation
 
 
 /**

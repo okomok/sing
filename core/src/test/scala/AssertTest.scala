@@ -71,6 +71,7 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testMeta {
+        free.assert[`true`] // backward-compatibility
         weak.assert[`true`]
         weak.assertNot[`false`]
         weak.assert[`true`# equal [`true`]]

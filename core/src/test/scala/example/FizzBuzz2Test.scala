@@ -26,13 +26,13 @@ class FizzBuzz2Test extends org.scalatest.junit.JUnit3Suite {
         override def toString = "FizzBuzz"
     }
 
-    implicit object TermOfFizz extends sing.TermOf[Fizz.type] {
+    implicit object TermOfFizz extends sing.weak.TermOf[Fizz.type] {
         override def apply = Fizz
     }
-    implicit object TermOfBuzz extends sing.TermOf[Buzz.type] {
+    implicit object TermOfBuzz extends sing.weak.TermOf[Buzz.type] {
         override def apply = Buzz
     }
-    implicit object TermOfFizzBuzz extends sing.TermOf[FizzBuzz.type] {
+    implicit object TermOfFizzBuzz extends sing.weak.TermOf[FizzBuzz.type] {
         override def apply = FizzBuzz
     }
 
@@ -53,6 +53,6 @@ class FizzBuzz2Test extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         type result = sing.List.range[_1, _16]#map[fizzbuzz]#force
-        expectResult(List(1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz))(sing.unmeta[result].unsing)
+        expectResult(List(1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz))(sing.weak.termOf[result].unsing)
     }
 }
