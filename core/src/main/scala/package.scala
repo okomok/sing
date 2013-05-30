@@ -129,7 +129,7 @@ package object sing {
     /**
      * Returns corresponding runtime value.
      */
-     def unmeta[x <: Any](implicit _unmeta: Unmeta[x]): x = _unmeta.apply
+     def unmeta[x <: Any](implicit _unmeta: TermOf[x]): x = _unmeta.apply
 
 
 // New

@@ -8,13 +8,13 @@ package com.github.okomok
 package sing; package map
 
 
-object Map extends Common with Macros.HasTypeId
+object Map extends Common with Macros.HasKindId
 
 
 /**
  * The sing Map
  */
-trait Map extends Macros.AsType {
+trait Map extends Macros.NewKind {
     type self <: Map
     type unsing <: scala.collection.Map[scala.Any, scala.Any]
 

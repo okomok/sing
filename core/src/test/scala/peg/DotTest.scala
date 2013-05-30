@@ -23,7 +23,7 @@ class DotTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _3 :: Nil
         type r = dot#matches[xs]
         val r: r = dot.matches(xs)
-        free.assert[r]
+        weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -32,7 +32,7 @@ class DotTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _7 :: Nil
         type r = dot#matches[xs]
         val r: r = dot.matches(xs)
-        free.assert[r]
+        weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -41,7 +41,7 @@ class DotTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type r = dot#matches[xs]
         val r: r = dot.matches(xs)
-        free.assert[r#not]
+        weak.assert[r#not]
         assertFalse(r.unsing)
     }
 
@@ -50,9 +50,9 @@ class DotTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _3 :: _5 :: _6 :: Nil
         type r = dot#parse[xs]
         val r: r = dot.parse(xs)
-        free.assert[r#successful]
-        free.assertSame[_3, r#get]
-        free.assertSame[_5 :: _6 :: Nil, r#next#force]
+        weak.assert[r#successful]
+        weak.assertSame[_3, r#get]
+        weak.assertSame[_5 :: _6 :: Nil, r#next#force]
         assertEquals(_3, r.get)
         assertEquals(_5 :: _6 :: Nil, r.next)
     }

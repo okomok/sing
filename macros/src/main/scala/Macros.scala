@@ -27,7 +27,7 @@ object Macros {
         val zuper: c.Tree = tq"$singlib.ReferenceEquality"
 
         val Template(parents, _, body) = c.enclosingTemplate
-        val newBody = body ++ typeIdDef(c) ++ selfDef(c) ++ unsingDef(c) ++ naturalOrderingDef(c)
+        val newBody = body ++ kindIdDef(c) ++ selfDef(c) ++ unsingDef(c) ++ naturalOrderingDef(c)
         val res = Template(replace(c)(parents, zuper), emptyValDef, newBody)
         //println(res.toString)
         res
@@ -48,44 +48,51 @@ object Macros {
     }
 
 
-    type HasTypeId = macro HasTypeIdImpl
+    type HasKindId = macro HasKindIdImpl
 
-    def HasTypeIdImpl(c: Context): c.Tree = {
+    def HasKindIdImpl(c: Context): c.Tree = {
         import c.universe._
 
         val singlib: c.Tree = q"com.github.okomok.sing"
-        val zuper: c.Tree = tq"$singlib.AnyType"
+        val zuper: c.Tree = tq"$singlib.AnyKind"
 
-        provideTypeIdDef(c)(zuper)
+        provideKindIdDef(c)(zuper)
     }
 
 
-    type AsType = macro AsTypeImpl
+    type NewKind = macro NewKindImpl
 
-    def AsTypeImpl(c: Context): c.Tree = {
+    def NewKindImpl(c: Context): c.Tree = {
         import c.universe._
 
         val singlib: c.Tree = q"com.github.okomok.sing"
         val zuper: c.Tree = tq"$singlib.Any"
 
-        provideTypeIdDef(c)(zuper)
+        provideKindIdDef(c)(zuper)
     }
 
 
-    def provideTypeIdDef(c: Context)(zuper: c.Tree): c.Tree = {
+    def provideKindIdDef(c: Context)(zuper: c.Tree): c.Tree = {
         import c.universe._
 
         val singlib: c.Tree = q"com.github.okomok.sing"
         val _trait: c.Tree = tq"$singlib.Any"
 
         val Template(parents, _, body) = c.enclosingTemplate
-        val res = Template(replace(c)(parents, zuper), emptyValDef, body ++ typeIdDef(c))
+        val res = Template(replace(c)(parents, zuper), emptyValDef, body ++ kindIdDef(c))
         //println(res.toString)
         res
     }
 
 
     // Special thanks to: https://github.com/leonardschneider/macrogen
+
+    type WeakTypeOf[T](x: T) = macro WeakTypeOfImpl[T]
+
+    def WeakTypeOfImpl[T: c.WeakTypeTag](c: Context)(x: c.Expr[T]): c.Tree = {
+        import c.universe._
+        tq"${weakTypeOf[T]}"
+    }
 
     def selfDef(c: Context): List[c.Tree] = {
         import c.universe._
@@ -115,8 +122,8 @@ object Macros {
 
     def naturalOrderingDef(c: Context): List[c.Tree] = {
         import c.universe._
-        val vdef = q"override lazy val naturalOrdering: naturalOrdering = typeId.naturalOrdering"
-        val tdef = q"override     type naturalOrdering                  = typeId#naturalOrdering"
+        val vdef = q"override lazy val naturalOrdering: naturalOrdering = kindId.naturalOrdering"
+        val tdef = q"override     type naturalOrdering                  = kindId#naturalOrdering"
         List(vdef, tdef)
     }
 
@@ -135,7 +142,7 @@ object Macros {
     }
 
 
-    def typeIdDef(c: Context): List[c.Tree] = {
+    def kindIdDef(c: Context): List[c.Tree] = {
         import c.universe._
 
 //      val fullId = c.enclosingImpl.symbol.fullName.toString // scalac is too slow.
@@ -143,30 +150,30 @@ object Macros {
 
         val ids = fullId.split("\\.").reverse.toList // reverse for a faster search
 
-        val vtpid = vmkTypeId(c)( vmkList(c)( ids.map { id => vmkNat(c)(mkBooleans(id)) } ) )
-        val ttpid = tmkTypeId(c)( tmkList(c)( ids.map { id => tmkNat(c)(mkBooleans(id)) } ) )
+        val vtpid = vmkKindId(c)( vmkList(c)( ids.map { id => vmkNat(c)(mkBooleans(id)) } ) )
+        val ttpid = tmkKindId(c)( tmkList(c)( ids.map { id => tmkNat(c)(mkBooleans(id)) } ) )
 
-        val vdef = q"override lazy val typeId: typeId = $vtpid"
-        val tdef = q"override     type typeId         = $ttpid"
+        val vdef = q"override lazy val kindId: kindId = $vtpid"
+        val tdef = q"override     type kindId         = $ttpid"
 
         List(vdef, tdef)
     }
 
 
-    // TypeId construction from Nat List
-    def vmkTypeId(c: Context)(impl: c.Tree): c.Tree = {
+    // KindId construction from Nat List
+    def vmkKindId(c: Context)(impl: c.Tree): c.Tree = {
         import c.universe._
         val singlib: c.Tree = q"com.github.okomok.sing"
 
-        val mk: c.Tree = q"$singlib.TypeId.From"
+        val mk: c.Tree = q"$singlib.KindId.From"
         Apply(mk, List(impl))
     }
 
-    def tmkTypeId(c: Context)(impl: c.Tree): c.Tree = {
+    def tmkKindId(c: Context)(impl: c.Tree): c.Tree = {
         import c.universe._
         val singlib: c.Tree = q"com.github.okomok.sing"
 
-        val mk: c.Tree = tq"$singlib.TypeId.From"
+        val mk: c.Tree = tq"$singlib.KindId.From"
         AppliedTypeTree(mk, List(impl))
     }
 

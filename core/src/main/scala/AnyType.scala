@@ -8,16 +8,19 @@ package com.github.okomok
 package sing
 
 
-/**
- * Metatype, or kind
- */
-trait AnyType {
+trait AnyType extends AnyKind {
 
     /**
-     * ID number
+     * Likely to work.
      */
-     def typeId: typeId = ???
-    type typeId <: TypeId
+     def is[K <: AnyKind](K: K): is[K] = ???
+    type is[K <: AnyKind] <: Boolean
+
+    /**
+     * Unlikely to work.
+     */
+     def as[K <: AnyKind](K: K): as[K] = ???
+    type as[K <: AnyKind] <: K
 
 }
 

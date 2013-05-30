@@ -43,7 +43,7 @@ class DropTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object DropTezt {
-    import free.{ assert, assertSame }
+    import weak.{ assert, assertSame }
 
     trait testTrivial {
         type lst = Box[Int] :: Box[String] :: Box[Double] :: Box[Char] :: Box[Float] :: Nil

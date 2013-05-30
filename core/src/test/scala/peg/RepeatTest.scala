@@ -26,11 +26,11 @@ class RepeatTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = term(_1).repeat(_2, _5)
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assert[r#successful]
+        weak.assert[r#successful]
         assertTrue(r.successful.unsing)
-        free.assertSame[_1 :: _1 :: _1 :: _1 :: Nil, r#get#force]
+        weak.assertSame[_1 :: _1 :: _1 :: _1 :: Nil, r#get#force]
         assertEquals(_1 :: _1 :: _1 :: _1 :: Nil, r.get)
-        free.assertSame[_3 :: Nil, r#next#force]
+        weak.assertSame[_3 :: Nil, r#next#force]
         assertEquals(_3 :: Nil, r.next)
     }
 
@@ -41,11 +41,11 @@ class RepeatTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = term(_1).repeat(_2, _5)
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assert[r#successful]
+        weak.assert[r#successful]
         assertTrue(r.successful.unsing)
-        free.assertSame[_1 :: _1 :: _1 :: _1 :: _1 :: Nil, r#get#force]
+        weak.assertSame[_1 :: _1 :: _1 :: _1 :: _1 :: Nil, r#get#force]
         assertEquals(_1 :: _1 :: _1 :: _1 :: _1 :: Nil, r.get)
-        free.assertSame[_1 :: _1 :: Nil, r#next#force]
+        weak.assertSame[_1 :: _1 :: Nil, r#next#force]
         assertEquals(_1 :: _1 :: Nil, r.next)
     }
 
@@ -56,9 +56,9 @@ class RepeatTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = term(_1).repeat(_3, _5)
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assertNot[r#successful]
+        weak.assertNot[r#successful]
         assertFalse(r.successful.unsing)
-        free.assertSame[xs, r#next#force]
+        weak.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
 
@@ -69,11 +69,11 @@ class RepeatTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = term(_1).repeat(_3, _3)
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assert[r#successful]
+        weak.assert[r#successful]
         assertTrue(r.successful.unsing)
-        free.assertSame[xs, r#get#force]
+        weak.assertSame[xs, r#get#force]
         assertEquals(xs, r.get)
-        free.assertSame[Nil, r#next#force]
+        weak.assertSame[Nil, r#next#force]
         assertEquals(Nil, r.next)
     }
 

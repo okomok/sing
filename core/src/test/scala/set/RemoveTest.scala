@@ -26,8 +26,8 @@ class RemoveTest extends org.scalatest.junit.JUnit3Suite {
 
         type rm = m#remove[_5]
         val rm: rm = m.remove(_5)
-        free.assertSame[nat.dense._2, rm#size]
-        free.assertSame[`false`, rm#contains[_5]]
+        weak.assertSame[nat.dense._2, rm#size]
+        weak.assertSame[`false`, rm#contains[_5]]
         ()
     }
 

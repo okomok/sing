@@ -21,7 +21,7 @@ class StrongTest extends org.scalatest.junit.JUnit3Suite {
         }
         val myMap = new myMap
 
-        free.assert(myMap.get(_3).get.equal(_13))
+        weak.assert(myMap.get(_3).get.equal(_13))
     }
 
 }

@@ -25,12 +25,12 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
         AssertInvariant(s)
 
-        free.assertSame[nat.dense._1, s#size]
-        free.assertSame[_3, s#key]
-        free.assertSame[Box[Int], s#value]
-        free.assertSame[map.sorted[o], s#left]
-        free.assertSame[map.sorted[o], s#right]
-        free.assertSame[o, s#ord]
+        weak.assertSame[nat.dense._1, s#size]
+        weak.assertSame[_3, s#key]
+        weak.assertSame[Box[Int], s#value]
+        weak.assertSame[map.sorted[o], s#left]
+        weak.assertSame[map.sorted[o], s#right]
+        weak.assertSame[o, s#ord]
         ()
     }
 
@@ -43,15 +43,15 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
         AssertInvariant(m)
 
-        free.assertSame[nat.dense._3, m#size]
+        weak.assertSame[nat.dense._3, m#size]
 
         type v8 = m#get[_8]
         val v8: v8 = m.get(_8)
-        free.assertSame[None, v8]
+        weak.assertSame[None, v8]
 
         type v5 = m#get[_5]#get
         val v5: v5 = m.get(_5).get
-        free.assertSame[Box[Char], v5]
+        weak.assertSame[Box[Char], v5]
         assertEquals('c', v5.unsing)
     }
 
@@ -62,16 +62,16 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type m = map.sorted[o]#put[_3, Box[Int]]#put[_5, Box[Char]]#put[_1, Box[String]]
         val m: m = map.sorted(o).put(_3, Box(3)).put(_5, Box('c')).put(_1, Box("wow"))
 
-        free.assertSame[`false`, m#contains[_9]]
-        free.assertSame[`true`, m#contains[_5]]
+        weak.assertSame[`false`, m#contains[_9]]
+        weak.assertSame[`true`, m#contains[_5]]
     }
 
     def testSorted1 {
         type m = map.sorted1[_3, Box[Int]]#put[_5, Box[Char]]#put[_1, Box[String]]
         val m: m = map.sorted1(_3, Box(3)).put(_5, Box('c')).put(_1, Box("wow"))
 
-        free.assertSame[`false`, m#contains[_9]]
-        free.assertSame[`true`, m#contains[_5]]
+        weak.assertSame[`false`, m#contains[_9]]
+        weak.assertSame[`true`, m#contains[_5]]
     }
 
     def testUnsing {
@@ -89,12 +89,12 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
         type v5 = m#get[_5]#get
         val v5: v5 = m.get(_5).get
-        free.assertSame[Box[Char], v5]
+        weak.assertSame[Box[Char], v5]
         assertEquals('c', v5.unsing)
 
         type m2 = m.put[_5, Box[String]]
         val m2: m2 = m.put(_5, Box("hw"))
-        free.assertSame[Box[String], m2#get[_5]#get]
+        weak.assertSame[Box[String], m2#get[_5]#get]
         assertEquals("hw", m2.get(_5).get.unsing)
     }
 

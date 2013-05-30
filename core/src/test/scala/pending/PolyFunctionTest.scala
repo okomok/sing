@@ -27,23 +27,23 @@ class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
         override type apply[x <: Any] = x#asBoolean#not
     }
 
-    val poly = map.sorted1(Nat.typeId, Inc).put(Boolean.typeId, Not)
+    val poly = map.sorted1(Nat.kindId, Inc).put(Boolean.kindId, Not)
 
     val xs = _0 :: _2 :: `true` :: _3 :: `false` :: Nil
 
     object Ap extends Macros.New with Function1 {
-        override  def apply[x <: Any](x: x): apply[x] = poly.get(x.typeId).get.asFunction1.apply(x).asInstanceOf[apply[x]]
-        override type apply[x <: Any] = poly.get[x#typeId]#get#asFunction1#apply[x]
+        override  def apply[x <: Any](x: x): apply[x] = poly.get(x.kindId).get.asFunction1.apply(x).asInstanceOf[apply[x]]
+        override type apply[x <: Any] = poly.get[x#kindId]#get#asFunction1#apply[x]
     }
 
 
     def testTrivial() {
 
-        `true`.typeId
-        nat.peano._3.typeId
-        nat.dense._3.typeId
-        Nil.typeId
-        (`true` :: `false` :: Nil).typeId
+        `true`.kindId
+        nat.peano._3.kindId
+        nat.dense._3.kindId
+        Nil.kindId
+        (`true` :: `false` :: Nil).kindId
 
 
         val res: _1 :: _3 :: `false` :: _4 :: `true` :: Nil = xs.map(Ap).force

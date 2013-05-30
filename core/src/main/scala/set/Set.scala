@@ -8,13 +8,13 @@ package com.github.okomok
 package sing; package set
 
 
-object Set extends Common with Macros.HasTypeId
+object Set extends Common with Macros.HasKindId
 
 
 /**
  * The sing Set
  */
-trait Set extends Macros.AsType {
+trait Set extends Macros.NewKind {
     type self <: Set
     type unsing <: scala.collection.Set[scala.Any]
 

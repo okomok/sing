@@ -22,11 +22,11 @@ class MacroTest extends org.scalatest.junit.JUnit3Suite {
 
     trait Foo
 
-    class My extends AsType with Foo with ReferenceEquality {
+    class My extends NewKind with Foo with ReferenceEquality {
         val x = 3
     }
 
-    class My2[A <: Foo] extends AsType with Foo with ReferenceEquality {
+    class My2[A <: Foo] extends NewKind with Foo with ReferenceEquality {
         val x = 3
     }
 
@@ -39,11 +39,11 @@ class MacroTest extends org.scalatest.junit.JUnit3Suite {
 
     case class PP[A](override val unsing: scala.List[A]) extends AsBoxed
 
-//    sing.free.printe[My#typeid]
+//    sing.weak.printe[My#typeid]
 
     def testTrivial() {
 
-    println( new My{}.typeId )
+    println( new My{}.kindId )
 
 
     }

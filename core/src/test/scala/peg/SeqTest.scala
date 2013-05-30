@@ -25,9 +25,9 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).seq(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assertNot[r#successful]
+        weak.assertNot[r#successful]
         assertFalse(r.successful.unsing)
-        free.assertSame[xs, r#next#force]
+        weak.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
 
@@ -38,9 +38,9 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).seq(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assertNot[r#successful]
+        weak.assertNot[r#successful]
         assertFalse(r.successful.unsing)
-        free.assertSame[xs, r#next]
+        weak.assertSame[xs, r#next]
         assertEquals(xs, r.next)
     }
 
@@ -51,7 +51,7 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).seq(fromList(_4 :: _2 :: Nil))
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        free.assert[r]
+        weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -62,15 +62,15 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).seq(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assert[r#successful]
+        weak.assert[r#successful]
         assertTrue(r.successful.unsing)
         type e = r#get#asProduct2
         val e: e = r.get.asProduct2
-        free.assertSame[_3 :: _5 :: _9 :: Nil, e#_1]
+        weak.assertSame[_3 :: _5 :: _9 :: Nil, e#_1]
         assertEquals(_3 :: _5 :: _9 :: Nil, e._1)
-        free.assertSame[_4 :: _2 :: Nil, e#_2]
+        weak.assertSame[_4 :: _2 :: Nil, e#_2]
         assertEquals(_4 :: _2 :: Nil, e._2)
-        free.assertSame[_1 :: _5 :: Nil, r#next]
+        weak.assertSame[_1 :: _5 :: Nil, r#next]
         assertEquals(_1 :: _5 :: Nil, r.next)
     }
 

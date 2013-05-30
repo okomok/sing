@@ -101,21 +101,21 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
         val b: b = a.apply(_1)
 
         val z: b#apply[_3] = b.apply(_3)
-        free.assert(z equal _9)
+        weak.assert(z equal _9)
         val d: c#apply[_2]#apply[_1]#apply[_3] = c(_2)(_1)(_3)
-        free.assert(d equal _9)
+        weak.assert(d equal _9)
     }
 
     def testTupled3 {
         type c = Function3.tupled[PlusTimes]
         val c: c = Function3.tupled(PlusTimes())
-        free.assert(c(Tuple3(_2, _1, _3)) equal _9)
+        weak.assert(c(Tuple3(_2, _1, _3)) equal _9)
     }
 
     def testTupledLeft3 {
         type c = Function3.tupledLeft[PlusTimes]
         val c: c = Function3.tupledLeft(PlusTimes())
-        free.assert(c(Pair(Pair(_2, _1), _3)) equal _9)
+        weak.assert(c(Pair(Pair(_2, _1), _3)) equal _9)
     }
 
 }

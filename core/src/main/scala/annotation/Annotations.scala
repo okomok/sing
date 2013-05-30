@@ -12,102 +12,114 @@ import scala.annotation.StaticAnnotation
 
 
 /**
-* Contains implicit conversions. (All the names must be "long".)
-*/
+ * Contains implicit conversions. (All the names must be "long".)
+ */
 class compatibles extends StaticAnnotation
 
 
 /**
-* An explicit conversion
-*/
+ * An explicit conversion
+ */
 class conversion extends StaticAnnotation
 
 /**
-* A lightweight conversion
-*/
+ * A lightweight conversion
+ */
 class compatibleConversion extends conversion
 
 
 /**
-* Implementation detail. Don't use the name.
-*/
+ * Implementation detail. Don't use the name.
+ */
 class detail extends StaticAnnotation
 
 
 /**
-* An equivalent expression
-*/
+ * An equivalent expression
+ */
 class equivalentTo(expr: String) extends StaticAnnotation
 
 /**
-* An alias of the expression
-*/
+ * An alias of the expression
+ */
 class aliasOf(expr: String) extends equivalentTo(expr)
 
 
 /**
-* Not thread-safe.
-*/
+ * Not thread-safe.
+ */
 class notThreadSafe extends StaticAnnotation
 
 
 /**
-* Overrides only for optimization.
-*/
+ * Overrides only for optimization.
+ */
 class optimize extends StaticAnnotation
 
 
 /**
-* Not override but overload.
-*/
+ * Not override but overload.
+ */
 class overload extends StaticAnnotation
 
 
 /**
-* Precondition
-*/
+ * Precondition
+ */
 class pre(expr: String) extends StaticAnnotation
 
 /**
-* Postcondition
-*/
+ * Postcondition
+ */
 class post(expr: String) extends StaticAnnotation
 
 
 /**
-* Returns <code>this</code>.
-*/
+ * Returns <code>this</code>.
+ */
 class returnThis extends StaticAnnotation
 
 /**
-* Returns the passed argument as is. (Useful to trigger implicit conversion "explicitly".)
-*/
+ * Returns the passed argument as is. (Useful to trigger implicit conversion "explicitly".)
+ */
 class returnThat extends StaticAnnotation
 
 
 /**
-* An annotation that designates the definition
-* to which it is used to associate type with value.
-*/
+ * An annotation that designates the definition
+ * to which it is used to associate type with value.
+ */
 class specializer extends StaticAnnotation
 
 
 /**
-* Marks an unfixable compiler bug.
-*/
+ * Marks an unfixable compiler bug.
+ */
 class compilerBug(version: String) extends StaticAnnotation
 
 /**
-* An annotation that designates the definition
-* to which it is used to work around a compiler bug.
-*/
+ * An annotation that designates the definition
+ * to which it is used to work around a compiler bug.
+ */
 class compilerWorkaround(version: String) extends StaticAnnotation
 
 
 /**
-* Visible only for testing: don't touch this.
-*/
+ * Visible only for testing: don't touch this.
+ */
 class visibleForTesting extends StaticAnnotation
+
+
+/**
+ * Visible only for macros: don't touch this.
+ */
+class visibleForMacro extends StaticAnnotation
+
+
+/**
+ * Deprecated, but unlikely to be removed.
+ */
+class normativelyDeprecated(msg: String = "", since: String = "") extends StaticAnnotation
 
 
 /**

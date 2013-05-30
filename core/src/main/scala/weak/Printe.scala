@@ -5,7 +5,7 @@
 
 
 package com.github.okomok
-package sing; package free
+package sing; package weak
 
 
 import scala.annotation.implicitNotFound

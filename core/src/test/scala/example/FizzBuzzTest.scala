@@ -32,9 +32,9 @@ package com.github.okomoktest; package singtest; package example
         trait testTrivial {
             import sing.::
 
-            // sing.free.printe[sing.List.range[_1, _16]#map[doFizzBuzz]#force]
+            // sing.weak.printe[sing.List.range[_1, _16]#map[doFizzBuzz]#force]
 
-            sing.free.assertSame[sing.List.range[_1, _16]#map[doFizzBuzz]#force,
+            sing.weak.assertSame[sing.List.range[_1, _16]#map[doFizzBuzz]#force,
                 _1 :: _2 :: Fizz :: _4 :: Buzz :: Fizz :: _7 :: _8 :: Fizz :: Buzz :: _11 :: Fizz :: _13 :: _14 :: FizzBuzz :: sing.Nil]
 
         }

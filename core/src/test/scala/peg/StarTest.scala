@@ -25,7 +25,7 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).star
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        free.assert[r]
+        weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -36,7 +36,7 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).star
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        free.assert[r]
+        weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -47,7 +47,7 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).star
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        free.assert[r]
+        weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -58,11 +58,11 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).star
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assert[r#successful]
+        weak.assert[r#successful]
         assertTrue(r.successful.unsing)
-        free.assertSame[Nil, r#get#force]
+        weak.assertSame[Nil, r#get#force]
         assertEquals(Nil, r.get)
-        free.assertSame[xs, r#next#force]
+        weak.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
 
@@ -73,11 +73,11 @@ class StarTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).star
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assert[r#successful]
+        weak.assert[r#successful]
         assertTrue(r.successful.unsing)
-        free.assertSame[(_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: Nil, r#get#force]
+        weak.assertSame[(_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: Nil, r#get#force]
         assertEquals((_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: (_3 :: _5 :: _9 :: Nil) :: Nil, r.get)
-        free.assertSame[_10 :: _11 :: Nil, r#next#force]
+        weak.assertSame[_10 :: _11 :: Nil, r#next#force]
         assertEquals(_10 :: _11 :: Nil, r.next)
     }
 

@@ -25,9 +25,9 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).or(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assertNot[r#successful]
+        weak.assertNot[r#successful]
         assertFalse(r.successful.unsing)
-        free.assertSame[xs, r#next#force]
+        weak.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
 
@@ -38,9 +38,9 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).or(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assertNot[r#successful]
+        weak.assertNot[r#successful]
         assertFalse(r.successful.unsing)
-        free.assertSame[xs, r#next#force]
+        weak.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
 
@@ -51,22 +51,22 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).or(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assert[r#successful]
+        weak.assert[r#successful]
         assertTrue(r.successful.unsing)
 
-        free.assertSame[_3 :: _5 :: _9 :: Nil, r#get]
+        weak.assertSame[_3 :: _5 :: _9 :: Nil, r#get]
         assertEquals(_3 :: _5 :: _9 :: Nil, r.get)
-        free.assertSame[_0 :: Nil, r#next]
+        weak.assertSame[_0 :: Nil, r#next]
         assertEquals(_0 :: Nil, r.next)
 
         /*
         type e = r#get#asEither
         val e: e = r.get.asEither
-        free.assert[e#isLeft]
+        weak.assert[e#isLeft]
         assertTrue(e.isLeft.unsing)
-        free.assertSame[_3 :: _5 :: _9 :: Nil, e#get]
+        weak.assertSame[_3 :: _5 :: _9 :: Nil, e#get]
         assertEquals(_3 :: _5 :: _9 :: Nil, e.get)
-        free.assertSame[_0 :: Nil, r#next#force]
+        weak.assertSame[_0 :: Nil, r#next#force]
         assertEquals(_0 :: Nil, r.next)
         */
     }
@@ -78,22 +78,22 @@ class OrTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).or(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        free.assert[r#successful]
+        weak.assert[r#successful]
         assertTrue(r.successful.unsing)
 
-        free.assertSame[_4 :: _2 :: Nil, r#get]
+        weak.assertSame[_4 :: _2 :: Nil, r#get]
         assertEquals(_4 :: _2 :: Nil, r.get)
-        free.assertSame[_9 :: _0 :: Nil, r#next]
+        weak.assertSame[_9 :: _0 :: Nil, r#next]
         assertEquals(_9 :: _0 :: Nil, r.next)
 
         /*
         type e = r#get#asEither
         val e: e = r.get.asEither
-        free.assert[e#isRight]
+        weak.assert[e#isRight]
         assertTrue(e.isRight.unsing)
-        free.assertSame[_4 :: _2 :: Nil, e#get]
+        weak.assertSame[_4 :: _2 :: Nil, e#get]
         assertEquals(_4 :: _2 :: Nil, e.get)
-        free.assertSame[_9 :: _0 :: Nil, r#next]
+        weak.assertSame[_9 :: _0 :: Nil, r#next]
         assertEquals(_9 :: _0 :: Nil, r.next)
         */
     }

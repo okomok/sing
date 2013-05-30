@@ -32,7 +32,7 @@ class FoldTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _15 :: _1 :: _2 :: _3 :: _4 :: Nil
         val xs: xs = _15 :: _1 :: _2 :: _3 :: _4 :: Nil
         val u: xs#reduceLeft[Sub] = xs.reduceLeft(Sub())
-        free.assertSame[_5, xs#reduceLeft[Sub]]
+        weak.assertSame[_5, xs#reduceLeft[Sub]]
         assertEquals(_5, u)
     }
 
@@ -40,7 +40,7 @@ class FoldTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _1 :: _2 :: _3 :: _4 :: Nil
         val xs: xs = _1 :: _2 :: _3 :: _4 :: Nil
         val u: xs#reduceRight[Plus] = xs.reduceRight(Plus())
-        free.assertSame[_10, xs#reduceRight[Plus]]
+        weak.assertSame[_10, xs#reduceRight[Plus]]
         assertEquals(_10, u)
     }
 

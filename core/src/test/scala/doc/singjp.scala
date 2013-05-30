@@ -5,7 +5,7 @@
 
 
 package com.github.okomoktest
-package singtest; package doctest; package dualjp
+package singtest; package doctest; package singjp
 
 
 import com.github.okomok
@@ -13,11 +13,11 @@ import okomok.sing
 import junit.framework.Assert.assertEquals
 
 
-class DualityTest extends org.scalatest.junit.JUnit3Suite {
+class SingityTest extends org.scalatest.junit.JUnit3Suite {
 
     def myAssert(a: sing.`true`) = ()
 
-    def testDuality {
+    def testSingity {
         import sing.nat.peano.Literal._
         val i: _3 = _3
         val j: _5#minus[_2] = _5.minus(_2)

@@ -21,8 +21,8 @@ class StrongTest extends org.scalatest.junit.JUnit3Suite {
         }
         val mySet = new mySet
 
-        free.assert(mySet.contains(_3))
-        free.assertNot(mySet.contains(_6))
+        weak.assert(mySet.contains(_3))
+        weak.assertNot(mySet.contains(_6))
     }
 
 }

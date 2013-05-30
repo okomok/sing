@@ -11,14 +11,14 @@ package sing
 /**
  * The sing Any
  */
-trait Any extends AnyTerm with scala.Equals {
+trait Any extends AnyType with scala.Equals {
 
     @annotation.returnThis
     final val self: self = this.asInstanceOf[self]
     type self <: Any
 
-    final override  def is[K <: AnyType](K: K): is[K] = typeId.equal(K.typeId)
-    final override type is[K <: AnyType]              = typeId#equal[K#typeId]
+    final override  def is[K <: AnyKind](K: K): is[K] = kindId.equal(K.kindId)
+    final override type is[K <: AnyKind]              = kindId#equal[K#kindId]
 
      def asBoolean: asBoolean = unsupported("Any.asBoolean")
     type asBoolean <: Boolean
@@ -83,8 +83,8 @@ trait Any extends AnyTerm with scala.Equals {
      def asUnit: asUnit = unsupported("Any.asUnit")
     type asUnit <: Unit
 
-     def asTypeId: asTypeId = unsupported("Any.asTypeId")
-    type asTypeId <: TypeId
+     def asKindId: asKindId = unsupported("Any.asKindId")
+    type asKindId <: KindId
 
     /**
      * Returns the natural ordering.

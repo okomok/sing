@@ -8,13 +8,13 @@ package com.github.okomok
 package sing
 
 
-object Either extends Macros.HasTypeId
+object Either extends Macros.HasKindId
 
 
 /**
  * The sing Either
  */
-sealed abstract class Either extends Macros.AsType {
+sealed abstract class Either extends Macros.NewKind {
     type self <: Either
     type unsing <: scala.Either[_, _]
 

@@ -20,7 +20,7 @@ class NthTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val u: xs#nth[_2] = xs.nth(_2)
-        free.assertSame[_7, xs#nth[_2]]
+        weak.assertSame[_7, xs#nth[_2]]
         assertEquals(_7, u)
     }
 
@@ -29,7 +29,7 @@ class NthTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val u: xs#nthOption[_2] = xs.nthOption(_2)
-        free.assertSame[Some[_7], xs#nthOption[_2]]
+        weak.assertSame[Some[_7], xs#nthOption[_2]]
         assertEquals(Some(_7), u)
     }
 
@@ -37,7 +37,7 @@ class NthTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val u: xs#nthOption[_10] = xs.nthOption(_10)
-        free.assertSame[None, xs#nthOption[_10]]
+        weak.assertSame[None, xs#nthOption[_10]]
         assertEquals(None, u)
     }
 
@@ -45,7 +45,7 @@ class NthTest extends org.scalatest.junit.JUnit3Suite {
         type xs = Nil
         val xs: xs = Nil
         val u: xs#nthOption[_10] = xs.nthOption(_10)
-        free.assertSame[None, xs#nthOption[_10]]
+        weak.assertSame[None, xs#nthOption[_10]]
         assertEquals(None, u)
     }
 */

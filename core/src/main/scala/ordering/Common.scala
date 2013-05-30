@@ -21,8 +21,8 @@ trait Common {
     type alwaysEQ = AlwaysEQ
 
     /*
-     * The ordering based on typeId
+     * The ordering based on kindId
 
-     val typeIdOrdering: typeIdOrdering = new TypeIdOrdering
-    type typeIdOrdering                 =     TypeIdOrdering     */
+     val kindIdOrdering: kindIdOrdering = new KindIdOrdering
+    type kindIdOrdering                 =     KindIdOrdering     */
 }

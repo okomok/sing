@@ -10,9 +10,14 @@ package sing
 
 import scala.annotation.elidable
 import scala.annotation.elidable.ALL
+import scala.language.experimental.macros
+import scala.reflect.macros.Macro
 
 
-package object free {
+/**
+ * Works only in the type-independent context.
+ */
+package object weak {
 
     /**
      * assertion
@@ -52,5 +57,15 @@ package object free {
      * (type-alias isn't expanded.)
      */
     def printe[T](implicit i: Printe[T]): scala.Unit = ()
+
+    /**
+     * type of an expression
+     */
+    type typeOf[T](x: T) = macro Macros.WeakTypeOfImpl[T]
+
+    /**
+     * type assertion for terms
+     */
+    def assertTypeOf[T](x: ({type id = T})#id): scala.Unit = ()
 
 }
