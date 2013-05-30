@@ -5,6 +5,7 @@
 
 
 package com.github.okomoktest; package singtest
+package pending
 
 
 import com.github.okomok.sing
@@ -13,7 +14,7 @@ import sing._
 import junit.framework.Assert._
 
 
-class IdGenTest extends org.scalatest.junit.JUnit3Suite {
+class MacroTest extends org.scalatest.junit.JUnit3Suite {
 
     import Macros._
 
@@ -21,11 +22,11 @@ class IdGenTest extends org.scalatest.junit.JUnit3Suite {
 
     trait Foo
 
-    class My extends AsType with Foo {
+    class My extends AsType with Foo with ReferenceEquality {
         val x = 3
     }
 
-    class My2[A <: Foo] extends AsType with Foo {
+    class My2[A <: Foo] extends AsType with Foo with ReferenceEquality {
         val x = 3
     }
 

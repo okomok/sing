@@ -8,13 +8,13 @@ package com.github.okomok
 package sing; package list
 
 
-object List extends Common with ToSTuple
+object List extends Common with ToSTuple with Macros.HasTypeId
 
 
 /**
 * The sing List
 */
-trait List extends Any {
+trait List extends Macros.AsType {
     type self <: List
     type unsing <: scala.collection.immutable.Seq[scala.Any]
 

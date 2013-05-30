@@ -8,19 +8,19 @@ package com.github.okomok
 package sing
 
 
-trait Term extends Type {
+trait AnyTerm extends AnyType {
 
     /**
      * Likely to work.
      */
-     def is[K <: Type](K: K): is[K] = ???
-    type is[K <: Type] <: Boolean
+     def is[K <: AnyType](K: K): is[K] = ???
+    type is[K <: AnyType] <: Boolean
 
     /**
      * Unlikely to work.
      */
-     def as[K <: Type](K: K): as[K] = ???
-    type as[K <: Type] <: K
+     def as[K <: AnyType](K: K): as[K] = ???
+    type as[K <: AnyType] <: K
 
 }
 

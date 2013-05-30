@@ -8,6 +8,9 @@ package com.github.okomok
 package sing
 
 
+object Equiv
+
+
 trait Equiv extends Any with ReferenceEquality {
     type self <: Equiv
 

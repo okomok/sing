@@ -8,9 +8,9 @@ package com.github.okomok
 package sing; package nat
 
 
-object Nat extends Type with Common {
-    override  def typeId = dense._0
-    override type typeId = dense._0
+object Nat extends Common with AnyType {
+    override lazy val typeId: typeId = TypeId.From(dense.Nil :: list.Nil)
+    override     type typeId         = TypeId.From[dense.Nil :: list.Nil]
 }
 
 
@@ -18,6 +18,13 @@ object Nat extends Type with Common {
  * The sing natural number
  */
 trait Nat extends Any {
+    // You can't use Macros.AsType:
+    //   Macros.AsType depends on nat.Dense, which in turn, needs Nat.
+    //   Then typeId can't be defined. (AbstractMethodError)
+    override lazy val typeId: typeId = TypeId.From(dense.Nil :: list.Nil)
+    override     type typeId         = TypeId.From[dense.Nil :: list.Nil]
+
+
     type self <: Nat
     type unsing = scala.Int
 

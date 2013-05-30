@@ -24,11 +24,11 @@ object build extends Build {
         publishArtifact in packageDoc := false
     )
 
-    lazy val sing = Project(
-        "sing",
-        file("."),
+    lazy val root = Project(
+        "root",
+        file("core"),
         settings = theSettings
-    ) dependsOn(macros)
+    ) aggregate(macros, core)
 
     lazy val macros = Project(
         "macros",
@@ -36,4 +36,10 @@ object build extends Build {
         settings = theSettings ++ Seq(
             libraryDependencies <+= (scalaVersion)("org.scala-lang.macro-paradise" % "scala-reflect" % _))
     )
+
+    lazy val core = Project(
+        "core",
+        file("core"),
+        settings = theSettings
+    ) dependsOn(macros)
 }

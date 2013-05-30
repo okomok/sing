@@ -11,13 +11,13 @@ package sing
 /**
  * Metatype, or kind
  */
-trait Type {
+trait AnyType {
 
     /**
      * ID number
      */
      def typeId: typeId = ???
-    type typeId <: Nat
+    type typeId <: TypeId
 
 }
 
