@@ -160,7 +160,7 @@ object Macros {
             toList.
             filterNot(s => s == "type")
 
-        val ids = List(_ids.head) // because scalac is too slow
+        val ids = _ids.take(2) // because scalac is too slow
 
         val v = vmkKindId(c)( vmkList(c)( ids.map { id => vmkNat(c)(mkBooleans(id)) } ) )
         val t = tmkKindId(c)( tmkList(c)( ids.map { id => tmkNat(c)(mkBooleans(id)) } ) )
