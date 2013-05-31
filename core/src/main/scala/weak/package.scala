@@ -9,7 +9,7 @@ package sing
 
 
 /**
- * Works only in the type-independent context.
+ * Works only for the concrete invocations
  */
 package object weak extends Common
 

@@ -10,7 +10,7 @@ package com.github.okomoktest; package singtest; package example
     import sing.::
     import sing.nat.dense.Literal._
 
-    class DualityTest extends org.scalatest.junit.JUnit3Suite {
+    class Singletonest extends org.scalatest.junit.JUnit3Suite {
         // Define 0-ary dualmethod `not2`.
         final class not2 extends sing.Function1 { // No meta-generics. `Function1` isn't parameterized.
             type self = not2 // `self` is the sing version of `this` reference. Manual setup is needed.
@@ -24,6 +24,6 @@ package com.github.okomoktest; package singtest; package example
             // Filter a heterogeneous list.
             val xs = _2 :: _3 :: _4 :: _2 :: _5 :: _6 :: _2 :: sing.Nil
             val ys = _3 :: _4 :: _5 :: _6 :: sing.Nil
-            sing.weak.assert(xs.filter(not2).equal(ys)) // checked in compile-time thanks to the duality.
+            sing.weak.assert(xs.filter(not2).equal(ys)) // checked in compile-time thanks to the singleton.
         }
     }

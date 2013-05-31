@@ -145,20 +145,27 @@ object Macros {
     def kindIdDef(c: Context): List[c.Tree] = {
         import c.universe._
 
-//      val fullId = c.enclosingImpl.symbol.fullName.toString // scalac is too slow.
-        val fullId = c.enclosingImpl.name.toString
+        val fullName = c.enclosingImpl.symbol.fullName.toString
+        val (vkid, tkid) = skindId(c)(fullName)
 
-        val ids = fullId.split("\\.").reverse.toList // reverse for a faster search
-
-        val vtpid = vmkKindId(c)( vmkList(c)( ids.map { id => vmkNat(c)(mkBooleans(id)) } ) )
-        val ttpid = tmkKindId(c)( tmkList(c)( ids.map { id => tmkNat(c)(mkBooleans(id)) } ) )
-
-        val vdef = q"override lazy val kindId: kindId = $vtpid"
-        val tdef = q"override     type kindId         = $ttpid"
+        val vdef = q"override lazy val kindId: kindId = $vkid"
+        val tdef = q"override     type kindId         = $tkid"
 
         List(vdef, tdef)
     }
 
+    def skindId(c: Context)(fullName: String): (c.Tree, c.Tree) = {
+        val _ids = fullName.split("\\.").
+            reverse. // for a faster search
+            toList.
+            filterNot(s => s == "type")
+
+        val ids = List(_ids.head) // because scalac is too slow
+
+        val v = vmkKindId(c)( vmkList(c)( ids.map { id => vmkNat(c)(mkBooleans(id)) } ) )
+        val t = tmkKindId(c)( tmkList(c)( ids.map { id => tmkNat(c)(mkBooleans(id)) } ) )
+        (v, t)
+    }
 
     // KindId construction from Nat List
     def vmkKindId(c: Context)(impl: c.Tree): c.Tree = {

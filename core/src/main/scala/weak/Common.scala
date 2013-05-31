@@ -51,7 +51,7 @@ trait Common {
     def assertConforms[a <: b, b]: scala.Unit = ()
 
     /**
-     * type assertion for terms
+     * TODO: type assertion for terms
      */
     def assertTypeOf[T](x: ({type id = T})#id): scala.Unit = ()
 

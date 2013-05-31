@@ -15,10 +15,11 @@ import junit.framework.Assert._
 
 import okomok.sing.nat.dense.Literal._
 import okomok.sing.nat.dense.{Nil, ::, _1B, _0B}
+// import SlowFibonacci._
 import FastFibonacci._
 
 
-class MemoizeTest {
+class MemoizeDepTest {
 
     trait Bar[t] {
         type kk = t
@@ -26,8 +27,9 @@ class MemoizeTest {
 
 
     trait testMemoize {
-        type t = fibonacci[_15#plus[_12]]
-        weak.assertSame[`true`, t# equal[_0B ::_1B ::_0B ::_0B ::_0B ::_0B ::_1B ::_0B ::_1B ::_1B ::_1B ::_1B ::_1B ::_1B ::_1B ::_1B ::_0B ::_1B :: Nil]]
+        type t1 = fibonacci[_13]
+        type t2 = Bar[fibonacci[_13]]
+        type t3 = Bar[Bar[fibonacci[_13]]]
     }
 
 }

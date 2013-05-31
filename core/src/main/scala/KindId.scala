@@ -32,8 +32,8 @@ object KindId {
 
         override type asList = ns
 
-        override  def naturalOrdering = asList.naturalOrdering
-        override type naturalOrdering = asList#naturalOrdering
+        override  def naturalOrdering: naturalOrdering = asList.naturalOrdering
+        override type naturalOrdering                  = asList#naturalOrdering
 
         override  def equal[that <: KindId](that: that): equal[that] = naturalOrdering.equiv(asList, that.asList)
         override type equal[that <: KindId]                          = naturalOrdering#equiv[asList, that#asList]
