@@ -10,13 +10,13 @@ package singtest; package settest
 
 import com.github.okomok
 import okomok.sing._
-import nat.dense.Literal._
+import Dense.Literal._
 
 
 class StrongTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-        final class mySet extends set.Strong(set.sorted(nat.naturalOrdering).add(_3).add(_5).add(_1)) {
+        final class mySet extends set.Strong(Set.sorted(Nat.naturalOrdering).add(_3).add(_5).add(_1)) {
             type self = mySet
         }
         val mySet = new mySet

@@ -8,9 +8,6 @@ package com.github.okomok
 package sing; package nat
 
 
-import ordering.{LT, GT, EQ}
-
-
 private[sing]
 final class NaturalOrdering extends AbstractOrdering {
     type self = NaturalOrdering

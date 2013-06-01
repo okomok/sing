@@ -11,8 +11,8 @@ import com.github.okomok
 
 import okomok.sing._
 import okomok.sing.Weak._
-import okomok.sing.nat.Peano
-import okomok.sing.nat.peano.Literal._
+import okomok.sing.Peano
+import okomok.sing.Peano.Literal._
 // import junit.framework.Assert._
 
 

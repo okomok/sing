@@ -12,8 +12,8 @@ import com.github.okomok
 import okomok.sing._
 //import junit.framework.Assert._
 
-import okomok.sing.nat.peano.Literal._
-import okomok.sing.nat.Peano
+import okomok.sing.Peano.Literal._
+import okomok.sing.Peano
 //import boolean.Operator._
 
 

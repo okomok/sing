@@ -8,7 +8,7 @@ package com.github.okomok
 package sing; package list
 
 
-import nat.dense._0
+import Dense._0
 
 private[sing]
 object Length {

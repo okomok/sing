@@ -10,8 +10,8 @@ package singtest; package nattest; package densetest
 
 import com.github.okomok
 
-import okomok.sing.weak
-import okomok.sing.nat.dense._
+import okomok.sing.Weak
+import okomok.sing.Dense._
 import junit.framework.Assert._
 
 

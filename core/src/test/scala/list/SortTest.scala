@@ -10,7 +10,7 @@ package com.github.okomoktest; package singtest; package listtest
 import com.github.okomok
 
 import okomok.sing._
-import nat.peano.Literal._
+import Peano.Literal._
 import junit.framework.Assert._
 
 
@@ -19,8 +19,8 @@ class SortTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial {
         type xs = _9 :: _2 :: _6 :: _10 :: _7 :: _9 :: _8 :: Nil
         val xs: xs = _9 :: _2 :: _6 :: _10 :: _7 :: _9 :: _8 :: Nil
-        type u = xs#sortWith[nat.naturalOrdering]
-        val u: u = xs.sortWith(nat.naturalOrdering)
+        type u = xs#sortWith[Nat.naturalOrdering]
+        val u: u = xs.sortWith(Nat.naturalOrdering)
         Weak.assertSame[_2 :: _6 :: _7 :: _8 :: _9 :: _9 :: _10 :: Nil, u#force]
         assertEquals(_2 :: _6 :: _7 :: _8 :: _9 :: _9 :: _10 :: Nil, u)
     }
@@ -28,8 +28,8 @@ class SortTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivialOne {
         type xs = _3 :: Nil
         val xs: xs = _3 :: Nil
-        type u = xs#sortWith[nat.naturalOrdering]
-        val u: u = xs.sortWith(nat.naturalOrdering)
+        type u = xs#sortWith[Nat.naturalOrdering]
+        val u: u = xs.sortWith(Nat.naturalOrdering)
         Weak.assertSame[_3 :: Nil, u#force]
         assertEquals(_3 :: Nil, u)
     }
@@ -37,8 +37,8 @@ class SortTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivialTwo {
         type xs = _4 :: _3 :: Nil
         val xs: xs = _4 :: _3 :: Nil
-        type u = xs#sortWith[nat.naturalOrdering]
-        val u: u = xs.sortWith(nat.naturalOrdering)
+        type u = xs#sortWith[Nat.naturalOrdering]
+        val u: u = xs.sortWith(Nat.naturalOrdering)
         Weak.assertSame[_3 :: _4 :: Nil, u#force]
         assertEquals(_3 :: _4 :: Nil, u)
     }
@@ -46,8 +46,8 @@ class SortTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivialNil {
         type xs = Nil
         val xs: xs = Nil
-        type u = xs#sortWith[nat.naturalOrdering]
-        val u: u = xs.sortWith(nat.naturalOrdering)
+        type u = xs#sortWith[Nat.naturalOrdering]
+        val u: u = xs.sortWith(Nat.naturalOrdering)
         Weak.assertSame[Nil, u#force]
         assertEquals(Nil, u)
     }

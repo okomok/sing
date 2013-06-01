@@ -8,7 +8,7 @@ package com.github.okomoktest; package singtest; package example
 
     import com.github.okomok.sing
     import sing.::
-    import sing.nat.dense.Literal._
+    import sing.Dense.Literal._
 
     class Singletonest extends org.scalatest.junit.JUnit3Suite {
         // Define 0-ary dualmethod `not2`.
@@ -21,7 +21,7 @@ package com.github.okomoktest; package singtest; package example
         val not2 = new not2
 
         def testTrivial {
-            // Filter a heterogeneous list.
+            // Filter a heterogeneous List.
             val xs = _2 :: _3 :: _4 :: _2 :: _5 :: _6 :: _2 :: sing.Nil
             val ys = _3 :: _4 :: _5 :: _6 :: sing.Nil
             sing.Weak.assert(xs.filter(not2).equal(ys)) // checked in compile-time thanks to the singleton.

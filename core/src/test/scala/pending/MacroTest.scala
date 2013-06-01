@@ -10,7 +10,7 @@ package pending
 
 import com.github.okomok.sing
 import sing._
-//import sing.nat.peano.Literal._
+//import sing.Peano.Literal._
 import junit.framework.Assert._
 
 
@@ -18,7 +18,7 @@ class MacroTest extends org.scalatest.junit.JUnit3Suite {
 
     import Macros._
 
-    val x = com.github.okomok.sing.nat.dense.Nil
+    val x = com.github.okomok.sing.DNil
 
     trait Foo
 

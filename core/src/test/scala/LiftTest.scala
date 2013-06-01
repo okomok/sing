@@ -13,7 +13,7 @@ package singtest
 
 import com.github.okomok
 import okomok.sing._
-import nat.peano.Literal._
+import Peano.Literal._
 import junit.framework.Assert._
 import scala.language.existentials
 
@@ -36,7 +36,7 @@ class LiftTest extends org.scalatest.junit.JUnit3Suite {
         // `Function` too is a kind of boxing, which turns a normal function into sing one.
         val z = Function.lift1((_: Double) + .5) :: Function.lift1((_: Char).isUpper) :: Nil
 
-        // `zipBy` returns a view(unspecified type). `force` turns a view into a concrete list.
+        // `zipBy` returns a view(unspecified type). `force` turns a view into a concrete List.
         val z1 = z.zipBy(y1, Apply).force
         val Box(10.25) :: Box(false) :: Nil() = z1
 

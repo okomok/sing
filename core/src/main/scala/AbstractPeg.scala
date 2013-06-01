@@ -39,8 +39,8 @@ trait AbstractPeg extends Peg {
     final override  def repeat[n <: Nat, m <: Nat](n: n, m: m): repeat[n, m] = Repeat.apply(self, n, m)
     final override type repeat[n <: Nat, m <: Nat]                           = Repeat.apply[self, n, m]
 
-    final override  def map[f <: Function1](f: f): map[f] = Map.apply(self, f)
-    final override type map[f <: Function1]               = Map.apply[self, f]
+    final override  def map[f <: Function1](f: f): map[f] = peg.Map.apply(self, f)
+    final override type map[f <: Function1]               = peg.Map.apply[self, f]
 
     final override  def matches[xs <: List](xs: xs): matches[xs] = Matches.apply(self, xs)
     final override type matches[xs <: List]                      = Matches.apply[self, xs]

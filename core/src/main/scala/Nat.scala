@@ -8,17 +8,12 @@ package com.github.okomok
 package sing
 
 
+import nat._
+
+
 object Nat extends AnyKind {
-    override lazy val kindId: kindId = KindId.From(dense.Nil :: list.Nil)
-    override     type kindId         = KindId.From[dense.Nil :: list.Nil]
-
-    @Annotation.aliasOf("dense.Dense")
-     val Dense = dense.Dense
-    type Dense = dense.Dense
-
-    @Annotation.aliasOf("peano.Peano")
-     val Peano = peano.Peano
-    type Peano = peano.Peano
+    override lazy val kindId: kindId = KindId.From(DNil :: Nil)
+    override     type kindId         = KindId.From[DNil :: Nil]
 
     /**
      * The natural ordering of Nat
@@ -33,10 +28,10 @@ object Nat extends AnyKind {
  */
 trait Nat extends Any {
     // You can't use Macros.NewKind:
-    //   Macros.NewKind depends on nat.Dense, which in turn, needs Nat.
+    //   Macros.NewKind depends on Dense, which in turn, needs Nat.
     //   Then kindId can't be defined. (AbstractMethodError)
-    override lazy val kindId: kindId = KindId.From(dense.Nil :: list.Nil)
-    override     type kindId         = KindId.From[dense.Nil :: list.Nil]
+    override lazy val kindId: kindId = KindId.From(DNil :: Nil)
+    override     type kindId         = KindId.From[DNil :: Nil]
 
 
     type self <: Nat

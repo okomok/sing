@@ -41,31 +41,38 @@ package object sing {
 // List
 
     @Annotation.equivalentTo("new Nil{}")
-     val Nil: Nil = new Nil{}
+    val Nil: Nil = _Nil.value
 
     @Annotation.aliasOf("Cons")
-     val :: = Cons
-    type ::[x <: Any, xs <: List] = Cons[x, xs]
+    val :: = Cons
+
+    @Annotation.equivalentTo("x# ::[xs]")
+    type ::[x <: Any, xs <: List] = xs# ::[x]
 
 
-// Nat
+// Dense
 
-    @Annotation.aliasOf("nat.Nat")
-     val Nat = nat.Nat
-    type Nat = nat.Nat
+    @Annotation.equivalentTo("new DNil{}")
+    val DNil: DNil = _DNil.value
+
+
+// Peano
+
+    @Annotation.equivalentTo("new Zero{}")
+    val Zero: Zero = _Zero.value
 
 
 // Option
 
     @Annotation.equivalentTo("new None{}")
-     val None: None = new None{}
+    val None: None = _None.value
 
 
-// Peg
+// Ordering
 
-    @Annotation.aliasOf("peg.Peg")
-     val Peg = peg.Peg
-    type Peg = peg.Peg
+    val LT: LT = _OrderingResult.LT
+    val GT: GT = _OrderingResult.GT
+    val EQ: EQ = _OrderingResult.EQ
 
 
 // Product
@@ -78,7 +85,7 @@ package object sing {
 // Unit
 
     @Annotation.equivalentTo("new Unit{}")
-     val Unit: Unit = new Unit{}
+    val Unit: Unit = _Unit.value
 
 
 // assertions

@@ -8,9 +8,6 @@ package com.github.okomok
 package sing
 
 
-import nat.peano
-
-
 trait Product3 extends Product {
     type self <: Product3
 
@@ -32,15 +29,15 @@ trait Product3 extends Product {
 
 private[sing]
 trait AbstractProduct3 extends Product3 {
-    final override  def arity: arity = peano._3
-    final override type arity        = peano._3
+    final override  def arity: arity = Peano._3
+    final override type arity        = Peano._3
 
     final override  def productElement[n <: Nat](n: n): productElement[n] =
-        `if`(n.equal(peano._0),
+        `if`(n.equal(Peano._0),
             const0(_1),
-            `if`(n.equal(peano._1),
+            `if`(n.equal(Peano._1),
                 const0(_2),
-                `if`(n.equal(peano._2),
+                `if`(n.equal(Peano._2),
                     const0(_3),
                     throw0(new IndexOutOfBoundsException(n.toString))
                 )
@@ -48,11 +45,11 @@ trait AbstractProduct3 extends Product3 {
         ).apply.asInstanceOf[productElement[n]]
 
     final override type productElement[n <: Nat] =
-        `if`[n#equal[peano._0],
+        `if`[n#equal[Peano._0],
             const0[_1],
-            `if`[n#equal[peano._1],
+            `if`[n#equal[Peano._1],
                 const0[_2],
-                `if`[n#equal[peano._2],
+                `if`[n#equal[Peano._2],
                     const0[_3],
                     throw0[_]
                 ]
@@ -62,6 +59,6 @@ trait AbstractProduct3 extends Product3 {
     final override  def asList: asList = _1 :: _2 :: _3 :: Nil
     final override type asList         = _1 :: _2 :: _3 :: Nil
 
-    final override  def naturalOrdering: naturalOrdering = list.naturalOrdering
-    final override type naturalOrdering                  = list.naturalOrdering
+    final override  def naturalOrdering: naturalOrdering = List.naturalOrdering
+    final override type naturalOrdering                  = List.naturalOrdering
 }

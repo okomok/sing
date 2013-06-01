@@ -41,18 +41,12 @@ class TermOfTest extends org.scalatest.junit.JUnit3Suite {
         assertSame(Nil, l)
     }
 
-    def testBackwardCompatiblity {
-        type r = Unit
-        val r: Unit = unmeta[r]
-        assertSame(Unit, r)
-    }
-
 }
 
 
 class TermOfNatPeanoTest extends org.scalatest.junit.JUnit3Suite {
 
-    import nat.peano.Literal._
+    import Peano.Literal._
 
     def testNatPeano {
         type r = _1#plus[_3]#plus[_4]
@@ -78,7 +72,7 @@ class TermOfNatPeanoTest extends org.scalatest.junit.JUnit3Suite {
 
 class TermOfNatDenseTest extends org.scalatest.junit.JUnit3Suite {
 
-    import nat.dense.Literal._
+    import Dense.Literal._
 
     def testNatDense {
         type r = _1#plus[_3]#plus[_4]

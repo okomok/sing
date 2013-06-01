@@ -11,9 +11,9 @@ package singtest; package pegtest
 import com.github.okomok
 
 import okomok.sing._
-import nat.dense.Literal._
+import Dense.Literal._
 import junit.framework.Assert._
-import peg.term
+import Peg.term
 
 
 class RepeatTest extends org.scalatest.junit.JUnit3Suite {

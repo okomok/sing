@@ -13,10 +13,10 @@ import com.github.okomok.sing
 
 class ProjectEuler1Test extends org.scalatest.junit.JUnit3Suite {
 
-  //import sing.nat.peano.Literal._
-  import sing.nat.dense.Literal._
+  //import sing.Peano.Literal._
+  import sing.Dense.Literal._
 
-  final case class isMultipleOf[n <: sing.nat.Nat](val n: n) extends sing.Function1 {
+  final case class isMultipleOf[n <: sing.Nat](val n: n) extends sing.Function1 {
     override type self = isMultipleOf[n]
     override  def apply[m <: sing.Any](m: m): apply[m] = m.asNat.rem(n).isZero
     override type apply[m <: sing.Any]                 = m#asNat#rem[n]#isZero
@@ -48,10 +48,10 @@ class ProjectEuler1Test extends org.scalatest.junit.JUnit3Suite {
 
   def testMain : Unit = {
     class make1000 {
-      import sing.nat.dense.Nil
+      import sing.DNil
       private type _0B = sing.`false`
       private type _1B = sing.`true`
-      private type __::[x <: sing.Boolean, xs <: sing.nat.Dense] = sing.nat.dense.Cons[x, xs]
+      private type __::[x <: sing.Boolean, xs <: sing.Dense] = sing.DCons[x, xs]
 
       // 1000.toBinaryString.reverse.iterator.mkString("type _1000 = _", "B __:: _", "B __:: Nil")
       type _1000 = _10#times[_10]#times[_10] //
@@ -61,7 +61,7 @@ class ProjectEuler1Test extends org.scalatest.junit.JUnit3Suite {
     type _N = make1000#_1000//_10
 
     // too slow
-    //type ans = sing.list.range[_1, _N]#filter[shouldBeSummed]#reduceLeft[plus]
+    //type ans = sing.List.range[_1, _N]#filter[shouldBeSummed]#reduceLeft[plus]
     //println(sing.Weak.termOf[ans])
 
     // type level (compile time)

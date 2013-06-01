@@ -13,8 +13,8 @@ import com.github.okomok
 import okomok.sing._
 import okomok.sing.Weak.{assert, assertNot}
 //import okomok.sing.nat.Operator._
-import okomok.sing.nat.dense.Literal._
-import okomok.sing.nat.Dense
+import okomok.sing.Dense.Literal._
+import okomok.sing.Dense
 
 
 /*

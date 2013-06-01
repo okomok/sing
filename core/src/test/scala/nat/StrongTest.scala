@@ -18,13 +18,13 @@ import scala.language.postfixOps
 class StrongTest extends org.scalatest.junit.JUnit3Suite {
 
     def testDense {
-        import nat.dense.StrongLiteral._
+        import dense.StrongLiteral._
         Weak.assert(_5 plus _4 equal _9)
         assertEquals(8, _2 plus _6 unsing)
     }
 
     def testPeano {
-        import nat.peano.StrongLiteral._
+        import peano.StrongLiteral._
         Weak.assert(_5 plus _4 equal _9)
         assertEquals(8, _2 plus _6 unsing)
     }

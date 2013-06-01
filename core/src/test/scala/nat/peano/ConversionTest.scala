@@ -10,25 +10,23 @@ package singtest; package nattest; package peanotest
 
 import com.github.okomok
 
-import okomok.sing.assert
-import okomok.sing.weak
-import okomok.sing.nat._
+import okomok.sing._
 
 
 class ConversionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testToDense {
         import junit.framework.Assert._
-        Weak.assertSame[dense._0, peano._0#asNat#asDense]
-        Weak.assertSame[dense._1, peano._1#asNat#asDense]
-        Weak.assertSame[dense._6, peano._6#asNat#asDense]
-        Weak.assertSame[dense._5, peano._2#plus[peano._3]#asNat#asDense]
+        Weak.assertSame[Dense._0, Peano._0#asNat#asDense]
+        Weak.assertSame[Dense._1, Peano._1#asNat#asDense]
+        Weak.assertSame[Dense._6, Peano._6#asNat#asDense]
+        Weak.assertSame[Dense._5, Peano._2#plus[Peano._3]#asNat#asDense]
 
-        type x = peano._5
-         val x: x = peano._5
+        type x = Peano._5
+         val x: x = Peano._5
         type y = x#asNat#asDense
          val y: y = x.asNat.asDense
-        okomok.sing.assert(dense._5 equal y)
+        okomok.sing.assert(Dense._5 equal y)
     }
 
 }

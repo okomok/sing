@@ -9,6 +9,6 @@ package sing; package peg
 
 
 trait ZeroWidth extends Peg {
-    override  def width: width = nat.dense._0
-    override type width        = nat.dense._0
+    override  def width: width = Dense._0
+    override type width        = Dense._0
 }

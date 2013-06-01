@@ -96,8 +96,8 @@ sealed abstract class AbstractOption extends Option {
     final override  def orElse[f <: Function0](f: f): orElse[f] = `if`(isEmpty, f, const0(self)).apply.asOption
     final override type orElse[f <: Function0]                  = `if`[isEmpty, f, const0[self]]#apply#asOption
 
-    final override  def naturalOrdering: naturalOrdering = list.naturalOrdering
-    final override type naturalOrdering                  = list.naturalOrdering
+    final override  def naturalOrdering: naturalOrdering = List.naturalOrdering
+    final override type naturalOrdering                  = List.naturalOrdering
 
     final override  def canEqual(that: scala.Any) = that.isInstanceOf[Option]
 }
@@ -137,6 +137,11 @@ sealed abstract class None extends AbstractOption {
 
     override  def asList: asList = Nil
     override type asList         = Nil
+}
+
+private[sing]
+object _None {
+    val value: None = new None{}
 }
 
 

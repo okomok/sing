@@ -10,8 +10,7 @@ package com.github.okomoktest; package singtest
 import com.github.okomok.sing
 import sing._
 import junit.framework.Assert._
-import nat.peano.Literal._
-import nat.Peano
+import Peano.Literal._
 import scala.language.existentials
 
 

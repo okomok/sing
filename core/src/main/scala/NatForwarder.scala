@@ -8,7 +8,10 @@ package com.github.okomok
 package sing; package nat
 
 
-trait Forwarder extends Nat with sing.Forwarder {
+import nat._
+
+
+trait NatForwarder extends Nat with Forwarder {
     override protected type delegate <: Nat
 
     final override  def asDense: asDense = delegate.asDense

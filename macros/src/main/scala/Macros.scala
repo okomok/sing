@@ -191,8 +191,8 @@ object Macros {
 
         val singlib: c.Tree = q"com.github.okomok.sing"
 
-        val vnil: c.Tree = q"$singlib.list.Nil"
-        val vcons: c.Tree = q"$singlib.list.Cons"
+        val vnil: c.Tree = q"$singlib.Nil"
+        val vcons: c.Tree = q"$singlib.Cons"
 
         ns.foldRight(vnil) { (n, x) => Apply(vcons, List(n, x)) }
     }
@@ -201,8 +201,8 @@ object Macros {
         import c.universe._
         val singlib: c.Tree = q"com.github.okomok.sing"
 
-        val tnil: c.Tree = tq"$singlib.list.Nil"
-        val tcons: c.Tree = tq"$singlib.list.Cons"
+        val tnil: c.Tree = tq"$singlib.Nil"
+        val tcons: c.Tree = tq"$singlib.Cons"
 
         ns.foldRight(tnil) { (n, x) => AppliedTypeTree(tcons, List(n, x)) }
     }
@@ -215,8 +215,8 @@ object Macros {
 
         val vzero: c.Tree = q"$singlib.`false`"
         val vone: c.Tree  = q"$singlib.`true`"
-        val vnil: c.Tree  = q"$singlib.nat.dense.Nil"
-        val vcons: c.Tree = q"$singlib.nat.dense.Cons"
+        val vnil: c.Tree  = q"$singlib.DNil"
+        val vcons: c.Tree = q"$singlib.DCons"
         def vbit(b: Boolean): c.Tree = if (b) vone else vzero
 
         bs.foldRight(vnil) { (b, x) => Apply(vcons, List(vbit(b), x)) }
@@ -228,8 +228,8 @@ object Macros {
 
         val tzero: c.Tree = tq"$singlib.`false`"
         val tone: c.Tree  = tq"$singlib.`true`"
-        val tnil: c.Tree  = tq"$singlib.nat.dense.Nil"
-        val tcons: c.Tree = tq"$singlib.nat.dense.Cons"
+        val tnil: c.Tree  = tq"$singlib.DNil"
+        val tcons: c.Tree = tq"$singlib.DCons"
         def tbit(b: Boolean): c.Tree = if (b) tone else tzero
 
         bs.foldRight(tnil) { (b, x) => AppliedTypeTree(tcons, List(tbit(b), x)) }

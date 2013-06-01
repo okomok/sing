@@ -10,7 +10,7 @@ package pending
 
 import com.github.okomok.sing
 import sing._
-import sing.nat.peano.Literal._
+import sing.Peano.Literal._
 import junit.framework.Assert._
 
 
@@ -27,7 +27,7 @@ class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
         override type apply[x <: Any] = x#asBoolean#not
     }
 
-    val poly = map.sorted1(Nat.kindId, Inc).put(Boolean.kindId, Not)
+    val poly = Map.sorted1(Nat.kindId, Inc).put(Boolean.kindId, Not)
 
     val xs = _0 :: _2 :: `true` :: _3 :: `false` :: Nil
 
@@ -40,8 +40,8 @@ class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial() {
 
         `true`.kindId
-        nat.peano._3.kindId
-        nat.dense._3.kindId
+        Peano._3.kindId
+        Dense._3.kindId
         Nil.kindId
         (`true` :: `false` :: Nil).kindId
 

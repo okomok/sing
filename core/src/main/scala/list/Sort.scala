@@ -17,8 +17,8 @@ object Sort {
 
     case class Then[xs <: List, o <: Option](xs: xs, o: o) extends Function0 {
         type self = Then[xs, o]
-        private[this] lazy val r: r = xs.splitAt(xs.length.quot(nat.peano._2)) // TODO: remove `length`.
-        private[this]     type r    = xs#splitAt[xs#length#quot[nat.peano._2]]
+        private[this] lazy val r: r = xs.splitAt(xs.length.quot(Peano._2)) // TODO: remove `length`.
+        private[this]     type r    = xs#splitAt[xs#length#quot[Peano._2]]
         override  def apply: apply = Merge.apply(Sort.apply(r._1.asList, o), Sort.apply(r._2.asList, o), o).asInstanceOf[apply]
         override type apply        = Merge.apply[Sort.apply[r#_1#asList, o], Sort.apply[r#_2#asList, o], o]
     }

@@ -11,7 +11,7 @@ package singtest; package nattest; package densetest
 import com.github.okomok
 
 import okomok.sing._
-import okomok.sing.nat.dense.Literal._
+import okomok.sing.Dense.Literal._
 import junit.framework.Assert._
 
 

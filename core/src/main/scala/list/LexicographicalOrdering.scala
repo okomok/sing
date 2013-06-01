@@ -8,9 +8,6 @@ package com.github.okomok
 package sing; package list
 
 
-import ordering.{LT, GT, EQ}
-
-
 private[sing]
 object LexicographicalOrdering {
      def apply[eo <: Option](eo: eo): apply[eo] = Impl(eo)

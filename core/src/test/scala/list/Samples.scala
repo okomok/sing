@@ -11,7 +11,7 @@ import com.github.okomok
 
 
 import okomok.sing._
-import nat.peano.Literal._
+import Peano.Literal._
 
 
 object Samples {

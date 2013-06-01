@@ -10,8 +10,8 @@ package sing; package list
 
 private[sing]
 object Iterate {
-     def apply[z <: Any, f <: Function1](z: z, f: f): apply[z, f] = unfoldRight(z, Iter(f))
-    type apply[z <: Any, f <: Function1]                          = unfoldRight[z, Iter[f]]
+     def apply[z <: Any, f <: Function1](z: z, f: f): apply[z, f] = List.unfoldRight(z, Iter(f))
+    type apply[z <: Any, f <: Function1]                          = List.unfoldRight[z, Iter[f]]
 
     case class Iter[f <: Function1](f: f) extends Function1 {
         type self = Iter[f]

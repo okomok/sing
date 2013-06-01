@@ -5,20 +5,19 @@
 
 
 package com.github.okomok
-package sing; package ordering
+package sing
+
+
+import ordering._
 
 
 object Ordering {
 
-    val LT: LT = _Result.LT
-    val GT: GT = _Result.GT
-    val EQ: EQ = _Result.EQ
-
     /**
      * Always returns `EQ`.
      */
-     val alwaysEQ = new AlwaysEQ
-    type alwaysEQ = AlwaysEQ
+     val alwaysEQ: alwaysEQ = new AlwaysEQ
+    type alwaysEQ           = AlwaysEQ
 
     /*
      * The ordering based on kindId

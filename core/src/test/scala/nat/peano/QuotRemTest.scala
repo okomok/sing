@@ -11,8 +11,8 @@ package singtest; package nattest; package peanotest
 import com.github.okomok
 
 import okomok.sing._
-import okomok.sing.nat.peano.Literal._
-import okomok.sing.nat.Peano
+import okomok.sing.Peano.Literal._
+import okomok.sing.Peano
 import junit.framework.Assert._
 
 

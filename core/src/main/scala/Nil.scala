@@ -17,17 +17,18 @@ sealed abstract class Nil extends AbstractList {
     override  def isEmpty: isEmpty = `true`
     override type isEmpty          = `true`
 
-    override  def head: head = noSuchElement("list.Nil.head")
+    override  def head: head = noSuchElement("Nil.head")
     override type head       = noSuchElement[_]
 
-    override  def tail: tail = noSuchElement("list.Nil.tail")
+    override  def tail: tail = noSuchElement("Nil.tail")
     override type tail       = noSuchElement[_]
 
     final def unapply(that: Nil) = true
 }
 
+
 private[sing]
 object _Nil {
-    val value = new Nil{}
+    val value: Nil = new Nil{}
 }
 

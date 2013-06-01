@@ -10,7 +10,7 @@ package com.github.okomoktest; package singtest; package listtest
 import com.github.okomok
 
 import okomok.sing._
-import nat.peano.Literal._
+import Peano.Literal._
 
 
 class FilterTest extends org.scalatest.junit.JUnit3Suite {

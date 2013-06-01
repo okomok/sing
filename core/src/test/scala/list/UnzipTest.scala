@@ -31,7 +31,7 @@ class UnzipTest extends org.scalatest.junit.JUnit3Suite {
 
         type k = z#unzip
         val k: k = z.unzip
-        Weak.assertSame[Tuple2[_Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: Nil, _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: Nil], list.force2[k]]
+        Weak.assertSame[Tuple2[_Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: Nil, _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: Nil], List.force2[k]]
 
         assertEquals(l1, k._1)
         assertEquals(l2, k._2)
@@ -50,7 +50,7 @@ class UnzipTest extends org.scalatest.junit.JUnit3Suite {
 
         type k = z#unzip
         val k: k = z.unzip
-        Weak.assertSame[Tuple2[Nil, Nil], list.force2[k]]
+        Weak.assertSame[Tuple2[Nil, Nil], List.force2[k]]
 
         assertEquals(Tuple2(Nil, Nil), k)
     }

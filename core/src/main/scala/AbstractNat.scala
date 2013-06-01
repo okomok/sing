@@ -5,7 +5,7 @@
 
 
 package com.github.okomok
-package sing; package nat
+package sing
 
 
 private[sing]
@@ -28,8 +28,8 @@ trait AbstractNat extends Nat {
     final override  def gteq[that <: Nat](that: that): gteq[that] = that.lteq(self)
     final override type gteq[that <: Nat]                         = that#lteq[self]
 
-    final override  def naturalOrdering: naturalOrdering = nat.naturalOrdering
-    final override type naturalOrdering                  = nat.naturalOrdering
+    final override  def naturalOrdering: naturalOrdering = Nat.naturalOrdering
+    final override type naturalOrdering                  = Nat.naturalOrdering
 
     final override  def canEqual(that: scala.Any) = that.isInstanceOf[Nat]
 }

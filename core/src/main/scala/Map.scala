@@ -16,8 +16,8 @@ object Map extends Macros.HasKindId {
     /**
      * Constructs an empty sorted map.
      */
-     def sorted[o <: Ordering](o: o): sorted[o] = bstree.Nil(o)
-    type sorted[o <: Ordering]                  = bstree.Nil[o]
+     def sorted[o <: Ordering](o: o): sorted[o] = BSNil(o)
+    type sorted[o <: Ordering]                  = BSNil[o]
 
 
     /**
@@ -38,7 +38,7 @@ trait Map extends Macros.NewKind {
     type unsing <: scala.collection.Map[scala.Any, scala.Any]
 
      def asBSTree: asBSTree = unsupported("Map.asBSTree")
-    type asBSTree <: bstree.BSTree
+    type asBSTree <: BSTree
 
      def size: size
     type size <: Nat

@@ -8,6 +8,9 @@ package com.github.okomok
 package sing; package peg
 
 
+import Peg.eps
+
+
 private[sing]
 object Repeat {
      def apply[p <: Peg, n <: Nat, m <: Nat](p: p, n: n, m: m): apply[p, n, m] =

@@ -102,8 +102,9 @@ sealed abstract class EQ extends AbstractOrderingResult {
 
 
 private[sing]
-object _Result {
-    val LT = new LT{}
-    val GT = new GT{}
-    val EQ = new EQ{}
+object _OrderingResult {
+    val LT: LT = new LT{}
+    val GT: GT = new GT{}
+    val EQ: EQ = new EQ{}
 }
+

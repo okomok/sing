@@ -35,8 +35,8 @@ trait AbstractList extends List {
     final override  def append[that <: List](that: that): append[that] = Append.apply(self, that)
     final override type append[that <: List]                           = Append.apply[self, that]
 
-    final override  def map[f <: Function1](f: f): map[f] = Map.apply(self, f)
-    final override type map[f <: Function1]               = Map.apply[self, f]
+    final override  def map[f <: Function1](f: f): map[f] = list.Map.apply(self, f)
+    final override type map[f <: Function1]               = list.Map.apply[self, f]
 
     final override  def flatMap[f <: Function1](f: f): flatMap[f] = map(f).flatten
     final override type flatMap[f <: Function1]                   = map[f]#flatten
@@ -149,8 +149,8 @@ trait AbstractList extends List {
     final override  def times[n <: Nat](n: n): times[n] = Times.apply(self, n)
     final override type times[n <: Nat]                 = Times.apply[self, n]
 
-    final override  def naturalOrdering: naturalOrdering = list.naturalOrdering
-    final override type naturalOrdering                  = list.naturalOrdering
+    final override  def naturalOrdering: naturalOrdering = List.naturalOrdering
+    final override type naturalOrdering                  = List.naturalOrdering
 
     override  def canEqual(that: scala.Any) = that.isInstanceOf[List]
 }

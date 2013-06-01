@@ -9,8 +9,7 @@ package com.github.okomoktest; package singtest; package listtest
 
 import com.github.okomok
 
-import okomok.sing.List
-import List.Nil
+import okomok.sing.{List, Nil}
 
 
 class CommonTest extends org.scalatest.junit.JUnit3Suite {

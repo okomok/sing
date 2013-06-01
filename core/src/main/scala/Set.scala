@@ -16,8 +16,8 @@ object Set extends Macros.HasKindId {
     /**
      * Constructs an empty sorted set.
      */
-     def sorted[o <: Ordering](o: o): sorted[o] = BSTree(map.bstree.Nil(o))
-    type sorted[o <: Ordering]                  = BSTree[map.bstree.Nil[o]]
+     def sorted[o <: Ordering](o: o): sorted[o] = BSUnitTree(BSNil(o))
+    type sorted[o <: Ordering]                  = BSUnitTree[BSNil[o]]
 
 
     /**

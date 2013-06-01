@@ -8,7 +8,7 @@ package com.github.okomoktest; package singtest; package example
 
 
 import com.github.okomok.sing
-import sing.nat.dense.Literal._
+import sing.Dense.Literal._
 
 
 class FizzBuzz2Test extends org.scalatest.junit.JUnit3Suite {
@@ -26,13 +26,13 @@ class FizzBuzz2Test extends org.scalatest.junit.JUnit3Suite {
         override def toString = "FizzBuzz"
     }
 
-    implicit object TermOfFizz extends sing.Weak.TermOf[Fizz.type] {
+    implicit object TermOfFizz extends sing.weak.TermOf[Fizz.type] {
         override def apply = Fizz
     }
-    implicit object TermOfBuzz extends sing.Weak.TermOf[Buzz.type] {
+    implicit object TermOfBuzz extends sing.weak.TermOf[Buzz.type] {
         override def apply = Buzz
     }
-    implicit object TermOfFizzBuzz extends sing.Weak.TermOf[FizzBuzz.type] {
+    implicit object TermOfFizzBuzz extends sing.weak.TermOf[FizzBuzz.type] {
         override def apply = FizzBuzz
     }
 

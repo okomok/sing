@@ -11,20 +11,20 @@ package singtest; package settest
 import com.github.okomok
 
 import okomok.sing._
-import nat.peano.Literal._
+import Peano.Literal._
 import junit.framework.Assert._
 
 
 class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
     def testAdd {
-        type o = nat.naturalOrdering
-        val o: o = nat.naturalOrdering
+        type o = Nat.naturalOrdering
+        val o: o = Nat.naturalOrdering
 
-        type m = set.sorted[o]#add[_3]#add[_5]#add[_1]
-        val m: m = set.sorted(o).add(_3).add(_5).add(_1)
+        type m = Set.sorted[o]#add[_3]#add[_5]#add[_1]
+        val m: m = Set.sorted(o).add(_3).add(_5).add(_1)
 
-        Weak.assertSame[nat.dense._3, m#size]
+        Weak.assertSame[Dense._3, m#size]
 
         type v8 = m#contains[_8]
         val v8: v8 = m.contains(_8)
@@ -36,30 +36,30 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testContains {
-        type o = nat.naturalOrdering
-        val o: o = nat.naturalOrdering
+        type o = Nat.naturalOrdering
+        val o: o = Nat.naturalOrdering
 
-        type m = set.sorted[o]#add[_3]#add[_5]#add[_1]
-        val m: m = set.sorted(o).add(_3).add(_5).add(_1)
+        type m = Set.sorted[o]#add[_3]#add[_5]#add[_1]
+        val m: m = Set.sorted(o).add(_3).add(_5).add(_1)
 
         Weak.assertSame[`false`, m#contains[_9]]
         Weak.assertSame[`true`, m#contains[_5]]
     }
 
     def testSorted1 {
-        type m = set.sorted1[_3]#add[_5]#add[_1]
-        val m: m = set.sorted1(_3).add(_5).add(_1)
+        type m = Set.sorted1[_3]#add[_5]#add[_1]
+        val m: m = Set.sorted1(_3).add(_5).add(_1)
 
         Weak.assertSame[`false`, m#contains[_9]]
         Weak.assertSame[`true`, m#contains[_5]]
     }
 
     def testUnsing {
-        type o = nat.naturalOrdering
-        val o: o = nat.naturalOrdering
+        type o = Nat.naturalOrdering
+        val o: o = Nat.naturalOrdering
 
-        type m = set.sorted[o]#add[_3]#add[_5]#add[_1]
-        val m: m = set.sorted(o).add(_3).add(_5).add(_1)
+        type m = Set.sorted[o]#add[_3]#add[_5]#add[_1]
+        val m: m = Set.sorted(o).add(_3).add(_5).add(_1)
 
         assertEquals(Predef.Set(1, 3, 5), m.unsing)
     }

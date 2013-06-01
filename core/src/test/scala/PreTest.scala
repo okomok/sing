@@ -9,7 +9,7 @@ package com.github.okomoktest; package singtest
 
 import com.github.okomok
 import okomok.sing._
-import nat.peano.Literal._
+import Peano.Literal._
 
 
 class PreTest extends org.scalatest.junit.JUnit3Suite {

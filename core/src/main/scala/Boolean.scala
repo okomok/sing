@@ -82,8 +82,8 @@ sealed abstract class `true` extends AbstractBoolean {
     override  def `if`[_then <: Function0, _else <: Function0](_then: _then, _else: _else): `if`[_then, _else] = _then
     override type `if`[_then <: Function0, _else <: Function0]                                              = _then
 
-    override  def asNat: asNat = nat.peano._1
-    override type asNat        = nat.peano._1
+    override  def asNat: asNat = Peano._1
+    override type asNat        = Peano._1
 
     override private[sing]  def isTrue: isTrue = `true`
     override private[sing] type isTrue         = `true`
@@ -116,8 +116,8 @@ sealed abstract class `false` extends AbstractBoolean {
     override  def `if`[_then <: Function0, _else <: Function0](_then: _then, _else: _else): `if`[_then, _else] = _else
     override type `if`[_then <: Function0, _else <: Function0]                                              = _else
 
-    override  def asNat: asNat = nat.peano._0
-    override type asNat        = nat.peano._0
+    override  def asNat: asNat = Peano._0
+    override type asNat        = Peano._0
 
     override private[sing]  def isTrue: isTrue = `false`
     override private[sing] type isTrue         = `false`
@@ -131,8 +131,6 @@ private[sing]
 object _Boolean {
     val `true` = new `true`{}
     val `false` = new `false`{}
-
-    import ordering.{LT, GT, EQ}
 
     val NaturalOrdering = new NaturalOrdering
     final class NaturalOrdering extends AbstractOrdering {

@@ -28,32 +28,32 @@ object TermOf {
 
 // List
 
-    implicit val _listNil = new TermOf[list.Nil] {
-        override def apply: list.Nil = list.Nil
+    implicit val _listNil = new TermOf[Nil] {
+        override def apply: Nil = Nil
     }
-    implicit def _listCons[x <: Any, xs <: list.List](implicit _termOfX: TermOf[x], _termOfXs: TermOf[xs]) = new TermOf[list.Cons[x, xs]] {
-        override def apply: list.Cons[x, xs] = new list.Cons(_termOfX.apply, _termOfXs.apply)
-    }
-
-
-// nat.Dense (contributed by @akihiro4chawon)
-
-    implicit val _natDenseZero = new TermOf[nat.dense.Nil] {
-        override def apply: nat.dense.Nil = nat.dense.Nil
-    }
-
-    implicit def _natDenseCons[x <: Boolean, xs <: nat.dense.Dense](implicit _termOfX: TermOf[x], _termOfXs: TermOf[xs]) = new TermOf[nat.dense.Cons[x, xs]] {
-        override def apply: nat.dense.Cons[x, xs] = nat.dense.Cons(_termOfX.apply, _termOfXs.apply)
+    implicit def _listCons[x <: Any, xs <: List](implicit _termOfX: TermOf[x], _termOfXs: TermOf[xs]) = new TermOf[Cons[x, xs]] {
+        override def apply: Cons[x, xs] = new Cons(_termOfX.apply, _termOfXs.apply)
     }
 
 
-// nat.Peano
+// Dense (contributed by @akihiro4chawon)
 
-    implicit val _natPeanoZero = new TermOf[nat.peano.Zero] {
-        override def apply: nat.peano.Zero = nat.peano.Zero
+    implicit val _natDenseZero = new TermOf[DNil] {
+        override def apply: DNil = DNil
     }
-    implicit def _natPeanoSucc[n <: nat.peano.Peano](implicit _termOf: TermOf[n]) = new TermOf[nat.peano.Succ[n]] {
-        override def apply: nat.peano.Succ[n] = nat.peano.Succ(_termOf.apply)
+
+    implicit def _natDenseCons[x <: Boolean, xs <: Dense](implicit _termOfX: TermOf[x], _termOfXs: TermOf[xs]) = new TermOf[DCons[x, xs]] {
+        override def apply: DCons[x, xs] = DCons(_termOfX.apply, _termOfXs.apply)
+    }
+
+
+// Peano
+
+    implicit val _natPeanoZero = new TermOf[Zero] {
+        override def apply: Zero = Zero
+    }
+    implicit def _natPeanoSucc[n <: Peano](implicit _termOf: TermOf[n]) = new TermOf[Succ[n]] {
+        override def apply: Succ[n] = Succ(_termOf.apply)
     }
 
 

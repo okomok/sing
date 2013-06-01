@@ -159,7 +159,7 @@ trait ListForwarder extends List with Forwarder {
 }
 
 
-trait TrivialForwarder extends Forwarder {
+trait TrivialForwarder extends ListForwarder {
     final override protected  def around[that <: List](that: that): around[that] = that
     final override protected type around[that <: List]                           = that
 }

@@ -19,7 +19,7 @@ class SingityTest extends org.scalatest.junit.JUnit3Suite {
     def myAssert(a: sing.`true`) = ()
 
     def testSingity {
-        import sing.nat.peano.Literal._
+        import sing.Peano.Literal._
         val i: _3 = _3
         val j: _5#minus[_2] = _5.minus(_2)
         myAssert(i.equal(j)) // compile-time check
@@ -43,7 +43,7 @@ class SingityTest extends org.scalatest.junit.JUnit3Suite {
 
 class FibonacciTest1 {
 
-    import sing.nat.peano.Literal._
+    import sing.Peano.Literal._
 
     type fibonacci[n <: sing.Nat] = sing.`if`[n#lt[_2], sing.const0[n], FibElse[n]]#apply#asNat
 
@@ -56,7 +56,7 @@ class FibonacciTest1 {
 
 class FibonacciTest2 {
 
-    import sing.nat.peano.Literal._
+    import sing.Peano.Literal._
 
     type fibonacci[n <: sing.Nat] = sing.`if`[n#lt[_2], sing.const0[n], FibElse[n]]#apply#asNat
 
@@ -90,7 +90,7 @@ class ImplementationProblemTest {
 
 class ListTest extends org.scalatest.junit.JUnit3Suite {
 
-    import sing.nat.peano.Literal._
+    import sing.Peano.Literal._
 
     object add2 extends sing.Function1 {
         override type self = add2.type
@@ -112,7 +112,7 @@ class ListTest extends org.scalatest.junit.JUnit3Suite {
 
 class NormalTest extends org.scalatest.junit.JUnit3Suite {
 
-    import sing.nat.peano.Literal._
+    import sing.Peano.Literal._
 
     import sing._ // workaround for implicit lookup
 
@@ -129,7 +129,7 @@ class NormalTest extends org.scalatest.junit.JUnit3Suite {
     def testLift {
         val j = sing.Tuple.lift2(2, 3)
         val xs = 3 #:: 4 #:: 5 #:: sing.Nil
-        val y = xs.foldLeft(j._1, sing.Function((y: Int, x: Int) => y + x))
+        val y = xs.foldLeft(j._1, sing.Function.lift2((y: Int, x: Int) => y + x))
         assertEquals(2+3+4+5, y.unsing)
     }
 

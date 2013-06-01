@@ -44,26 +44,26 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
     }
 /*
     def testListSingle {
-        val xs = list.single(3)
+        val xs = List.single(3)
         val x: Box[Int] = xs.head
-        val ys = list.single(Box(3))
+        val ys = List.single(Box(3))
         val y: Box[Int] = ys.head
         ()
     }
     def testMap {
-        import nat.dense.Literal._
-        val m = map.sorted1(_3, 3).put(_2, 2).put(_4, 4)
+        import Dense.Literal._
+        val m = Map.sorted1(_3, 3).put(_2, 2).put(_4, 4)
         val v: Box[Int] = m.get(_2).get
         val i: Int = v
         assertEquals(2, i)
     }
 
     def testMap2 {
-        import nat.dense.Literal._
+        import Dense.Literal._
         class Wow {
             def foo = ()
         }
-        val m = map.sorted1(_3, 3).put(_2, new Wow).put(_4, 4)
+        val m = Map.sorted1(_3, 3).put(_2, new Wow).put(_4, 4)
         val v: Box[Wow] = m.get(_2).get
         m.get(_2).get.foo
     }

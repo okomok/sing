@@ -11,8 +11,8 @@ package singtest; package pegtest
 import com.github.okomok
 
 import okomok.sing._
-import nat.dense.{AsciiLiteral => Ch}
-import nat.dense.StrongLiteral._
+import dense.{AsciiLiteral => Ch}
+import dense.StrongLiteral._
 
 
 // too slow to compile
@@ -20,23 +20,23 @@ import nat.dense.StrongLiteral._
 
 object Arithmetic {
 /*
-     val PLUS: PLUS = peg.term(Ch.+)
-    type PLUS       = peg.term[Ch.+]
+     val PLUS: PLUS = Peg.term(Ch.+)
+    type PLUS       = Peg.term[Ch.+]
 
-     val MINUS: MINUS = peg.term(Ch.-)
-    type MINUS        = peg.term[Ch.-]
+     val MINUS: MINUS = Peg.term(Ch.-)
+    type MINUS        = Peg.term[Ch.-]
 
-     val TIMES: TIMES = peg.term(Ch.*)
-    type TIMES        = peg.term[Ch.*]
+     val TIMES: TIMES = Peg.term(Ch.*)
+    type TIMES        = Peg.term[Ch.*]
 
-     val DIV: DIV = peg.term(Ch./)
-    type DIV      = peg.term[Ch./]
+     val DIV: DIV = Peg.term(Ch./)
+    type DIV      = Peg.term[Ch./]
 
-     val LP: LP = peg.term(Ch.`(`)
-    type LP     = peg.term[Ch.`(`]
+     val LP: LP = Peg.term(Ch.`(`)
+    type LP     = Peg.term[Ch.`(`]
 
-     val RP: RP = peg.term(Ch.`)`)
-    type RP     = peg.term[Ch.`)`]
+     val RP: RP = Peg.term(Ch.`)`)
+    type RP     = Peg.term[Ch.`)`]
 */
 
 
@@ -44,81 +44,81 @@ object Arithmetic {
     val expr = new expr
     final class expr extends peg.Rule {
         type self = expr
-        override  def rule: rule = term.seq( peg.term(Ch.+).seq(term).or(peg.term(Ch.-).seq(term)).star )
-        override type rule       = term#seq[ peg.term[Ch.+]#seq[term]#or[peg.term[Ch.-]#seq[term]]#star ]
+        override  def rule: rule = term.seq( Peg.term(Ch.+).seq(term).or(Peg.term(Ch.-).seq(term)).star )
+        override type rule       = term#seq[ Peg.term[Ch.+]#seq[term]#or[Peg.term[Ch.-]#seq[term]]#star ]
     }
 
     val term = new term
     final class term extends peg.Rule {
         type self = term
-        override  def rule: rule = factor.seq( peg.term(Ch.*).seq(factor).or(peg.term(Ch./).seq(factor)).star )
-        override type rule       = factor#seq[ peg.term[Ch.*]#seq[factor]#or[peg.term[Ch./]#seq[factor]]#star ]
+        override  def rule: rule = factor.seq( Peg.term(Ch.*).seq(factor).or(Peg.term(Ch./).seq(factor)).star )
+        override type rule       = factor#seq[ Peg.term[Ch.*]#seq[factor]#or[Peg.term[Ch./]#seq[factor]]#star ]
     }
 
     val factor = new factor
     final class factor extends peg.Rule {
         type self = factor
-        override  def rule: rule = number//.or( peg.term(Ch.`(`).seq(expr).seq(peg.term(Ch.`)`)) )
-        override type rule       = number//#or[ peg.term[Ch.`(`]#seq[expr]#seq[peg.term[Ch.`)`]] ]
+        override  def rule: rule = number//.or( Peg.term(Ch.`(`).seq(expr).seq(Peg.term(Ch.`)`)) )
+        override type rule       = number//#or[ Peg.term[Ch.`(`]#seq[expr]#seq[Peg.term[Ch.`)`]] ]
     }
 
     val number = new number
     final class number extends peg.Rule {
         type self = number
-        override  def rule: rule = peg.term(_1).or(peg.term(_2)).or(peg.term(_3))
-        override type rule       = peg.term[_1]#or[peg.term[_2]]#or[peg.term[_3]]
+        override  def rule: rule = Peg.term(_1).or(Peg.term(_2)).or(Peg.term(_3))
+        override type rule       = Peg.term[_1]#or[Peg.term[_2]]#or[Peg.term[_3]]
     }
 */
 
 /*
     // order matters.
-     val number: number = peg.term(_1).or(peg.term(_2)).or(peg.term(_3))
-    type number         = peg.term[_1]#or[peg.term[_2]]#or[peg.term[_3]]
+     val number: number = Peg.term(_1).or(Peg.term(_2)).or(Peg.term(_3))
+    type number         = Peg.term[_1]#or[Peg.term[_2]]#or[Peg.term[_3]]
 
-     val factor: factor = number//.or( peg.term(Ch.`(`).seq(expr).seq(peg.term(Ch.`)`)) )
-    type factor         = number//#or[ peg.term[Ch.`(`]#seq[expr]#seq[peg.term[Ch.`)`]] ]
+     val factor: factor = number//.or( Peg.term(Ch.`(`).seq(expr).seq(Peg.term(Ch.`)`)) )
+    type factor         = number//#or[ Peg.term[Ch.`(`]#seq[expr]#seq[Peg.term[Ch.`)`]] ]
 
-     val term: term = factor.seq( peg.term(Ch.*).seq(factor).or(peg.term(Ch./).seq(factor)).star )
-    type term       = factor#seq[ peg.term[Ch.*]#seq[factor]#or[peg.term[Ch./]#seq[factor]]#star ]
+     val term: term = factor.seq( Peg.term(Ch.*).seq(factor).or(Peg.term(Ch./).seq(factor)).star )
+    type term       = factor#seq[ Peg.term[Ch.*]#seq[factor]#or[Peg.term[Ch./]#seq[factor]]#star ]
 
-     val expr: expr = term.seq( peg.term(Ch.+).seq(term).or(peg.term(Ch.-).seq(term)).star )
-    type expr       = term#seq[ peg.term[Ch.+]#seq[term]#or[peg.term[Ch.-]#seq[term]]#star ]
+     val expr: expr = term.seq( Peg.term(Ch.+).seq(term).or(Peg.term(Ch.-).seq(term)).star )
+    type expr       = term#seq[ Peg.term[Ch.+]#seq[term]#or[Peg.term[Ch.-]#seq[term]]#star ]
 */
 /*s.
     val number: number = new number
-    final class number extends peg.Strong(peg.term(_1).or(peg.term(_2)).or(peg.term(_3))) { type self = number }
+    final class number extends peg.Strong(Peg.term(_1).or(Peg.term(_2)).or(Peg.term(_3))) { type self = number }
 
-     val factor: factor = number//.or( peg.term(Ch.`(`).seq(expr).seq(peg.term(Ch.`)`)) )
-    type factor         = number//#or[ peg.term[Ch.`(`]#seq[expr]#seq[peg.term[Ch.`)`]] ]
+     val factor: factor = number//.or( Peg.term(Ch.`(`).seq(expr).seq(Peg.term(Ch.`)`)) )
+    type factor         = number//#or[ Peg.term[Ch.`(`]#seq[expr]#seq[Peg.term[Ch.`)`]] ]
 
     val term: term = new term
-    final class term extends peg.Strong(factor.seq( peg.term(Ch.*).seq(factor).or(peg.term(Ch./).seq(factor)).star )) { type self = term }
+    final class term extends peg.Strong(factor.seq( Peg.term(Ch.*).seq(factor).or(Peg.term(Ch./).seq(factor)).star )) { type self = term }
 
     val expr: expr = new expr
-    final class expr extends peg.Strong(term.seq( peg.term(Ch.+).seq(term).or(peg.term(Ch.-).seq(term)).star )) { type self = expr }
+    final class expr extends peg.Strong(term.seq( Peg.term(Ch.+).seq(term).or(Peg.term(Ch.-).seq(term)).star )) { type self = expr }
 */
 
     // Hmm, nothing changes.
     val T_1: T_1 = new T_1
-    final class T_1 extends peg.Strong(peg.term(_1)) { type self = T_1 }
+    final class T_1 extends peg.Strong(Peg.term(_1)) { type self = T_1 }
     val T_2: T_2 = new T_2
-    final class T_2 extends peg.Strong(peg.term(_2)) { type self = T_2 }
+    final class T_2 extends peg.Strong(Peg.term(_2)) { type self = T_2 }
     val T_3: T_3 = new T_3
-    final class T_3 extends peg.Strong(peg.term(_3)) { type self = T_3 }
+    final class T_3 extends peg.Strong(Peg.term(_3)) { type self = T_3 }
     val T_TIMES: T_TIMES = new T_TIMES
-    final class T_TIMES extends peg.Strong(peg.term(Ch.*)) { type self = T_TIMES }
+    final class T_TIMES extends peg.Strong(Peg.term(Ch.*)) { type self = T_TIMES }
     val T_DIV: T_DIV = new T_DIV
-    final class T_DIV extends peg.Strong(peg.term(Ch./)) { type self = T_DIV }
+    final class T_DIV extends peg.Strong(Peg.term(Ch./)) { type self = T_DIV }
     val T_PLUS: T_PLUS = new T_PLUS
-    final class T_PLUS extends peg.Strong(peg.term(Ch.+)) { type self = T_PLUS }
+    final class T_PLUS extends peg.Strong(Peg.term(Ch.+)) { type self = T_PLUS }
     val T_MINUS: T_MINUS = new T_MINUS
-    final class T_MINUS extends peg.Strong(peg.term(Ch.-)) { type self = T_MINUS }
+    final class T_MINUS extends peg.Strong(Peg.term(Ch.-)) { type self = T_MINUS }
 
     val number: number = new number
     final class number extends peg.Strong(T_1 or T_2 or T_3) { type self = number }
 
-     val factor: factor = number//.or( peg.term(Ch.`(`).seq(expr).seq(peg.term(Ch.`)`)) )
-    type factor         = number//#or[ peg.term[Ch.`(`]#seq[expr]#seq[peg.term[Ch.`)`]] ]
+     val factor: factor = number//.or( Peg.term(Ch.`(`).seq(expr).seq(Peg.term(Ch.`)`)) )
+    type factor         = number//#or[ Peg.term[Ch.`(`]#seq[expr]#seq[Peg.term[Ch.`)`]] ]
 
     val term: term = new term
     final class term extends peg.Strong(factor seq ((T_TIMES seq factor) or (T_DIV seq factor)).star) { type self = term }
@@ -132,19 +132,19 @@ object Arithmetic {
 /*
 final case class ArithmeticC[num <: Peg](num: num) extends Peg {
     override  def parse[xs <: List](xs: xs): parse[xs] =
-        term(num).seq( peg.term(Ch.+).seq(term(num)).or(peg.term(Ch.-).seq(term(num))).star ).parse(xs)
+        term(num).seq( Peg.term(Ch.+).seq(term(num)).or(Peg.term(Ch.-).seq(term(num))).star ).parse(xs)
     override type parse[xs <: List] =
-        term[num]#seq[ peg.term[Ch.+]#seq[term[num]]#or[peg.term[Ch.-]#seq[term[num]]]#star ]#parse[xs]
+        term[num]#seq[ Peg.term[Ch.+]#seq[term[num]]#or[Peg.term[Ch.-]#seq[term[num]]]#star ]#parse[xs]
 
      def factor[num <: Peg](num: num): factor[num] =
-        num.or( peg.term(Ch.`(`).seq(self).seq(peg.term(Ch.`)`)) )
+        num.or( Peg.term(Ch.`(`).seq(self).seq(Peg.term(Ch.`)`)) )
     type factor[num <: Peg] =
-        num#or[ peg.term[Ch.`(`]#seq[self]#seq[peg.term[Ch.`)`]] ]
+        num#or[ Peg.term[Ch.`(`]#seq[self]#seq[Peg.term[Ch.`)`]] ]
 
      def term[num <: Peg](num: num): term[num] =
-        factor(num).seq( peg.term(Ch.*).seq(factor(num)).or(peg.term(Ch./).seq(factor(num))).star )
+        factor(num).seq( Peg.term(Ch.*).seq(factor(num)).or(Peg.term(Ch./).seq(factor(num))).star )
     type term[num <: Peg] =
-        factor[num]#seq[ peg.term[Ch.*]#seq[factor[num]]#or[peg.term[Ch./]#seq[factor[num]]]#star ]}
+        factor[num]#seq[ Peg.term[Ch.*]#seq[factor[num]]#or[Peg.term[Ch./]#seq[factor[num]]]#star ]}
 */
 
 class ArithmeticTest extends org.scalatest.junit.JUnit3Suite {

@@ -7,7 +7,7 @@
 package com.github.okomoktest; package singtest; package example
 
     import com.github.okomok.sing
-    import sing.nat.dense.Literal._
+    import sing.Dense.Literal._
 
     trait FizzBuzzCompile {
         trait Fizz extends sing.Any

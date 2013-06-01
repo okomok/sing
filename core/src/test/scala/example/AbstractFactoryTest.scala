@@ -8,7 +8,7 @@ package com.github.okomoktest; package singtest; package example
 
     import com.github.okomok.sing
     import sing.{map, Nat, Box}
-    import sing.nat.dense.Literal._
+    import sing.Dense.Literal._
     import scala.language.existentials
 
 
@@ -36,7 +36,7 @@ package com.github.okomoktest; package singtest; package example
 
     class AbstractFactoryTest extends org.scalatest.junit.JUnit3Suite {
         // Needs explicit boxing to make a sing object from a non-sing one.
-        val factoryMap = map.sorted1(_0, Box(WinFactory)).put(_1, Box(OSXFactory))
+        val factoryMap = Map.sorted1(_0, Box(WinFactory)).put(_1, Box(OSXFactory))
 
         def createFactory[n <: Nat](n: n) = {
             val option = factoryMap.get(n)

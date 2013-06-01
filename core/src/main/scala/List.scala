@@ -13,14 +13,6 @@ import list._
 
 object List extends ToSTuple with Macros.HasKindId {
 
-    @Annotation.equivalentTo("new Nil{}")
-     val Nil = _Nil.value
-
-    @Annotation.equivalentTo("Cons")
-     val :: = Cons
-    @Annotation.equivalentTo("x# ::[xs]")
-    type ::[x <: Any, xs <: List] = xs# ::[x]
-
     @Annotation.equivalentTo("Nil")
      val empty: empty = Nil
     type empty        = Nil
@@ -28,7 +20,6 @@ object List extends ToSTuple with Macros.HasKindId {
     @Annotation.equivalentTo("Nil.::(x)")
      def single[x <: Any](x: x): single[x] = Nil. ::(x)
     type single[x <: Any]                  = Nil# ::[x]
-//     def single[x](x: x, o: util.Overload = ()): single[Box[x]] = single(Box(x)) // scalac sucks.
 
      def range[n <: Nat, m <: Nat](n: n, m: m): range[n, m] = Range.apply(n, m)
     type range[n <: Nat, m <: Nat]                          = Range.apply[n, m]
@@ -99,8 +90,8 @@ trait List extends Macros.NewKind {
 
      def ::[e <: Any](e: e): ::[e]
     type ::[e <: Any] <: List
+
     final def #::[A](x: A)(implicit _A: BoxKind[A]): ::[Box[A, _A.self]] = ::(Box(x)(_A))
-//    final def ::[e](e: e, o: util.Overload = ()): ::[Box[e]] = ::(Box(e))
 
     @Annotation.constantTime
      def clear: clear

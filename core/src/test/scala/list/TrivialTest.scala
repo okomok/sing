@@ -11,7 +11,7 @@ package singtest; package listtest
 import com.github.okomok
 
 import okomok.sing._
-import nat.peano.Literal._
+import Peano.Literal._
 
 
 class TrivialTest extends org.scalatest.junit.JUnit3Suite {
@@ -72,8 +72,8 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         val i = new java.lang.Integer(10)
         val el: sequence.List[Any] = 3 :: "hello" :: i :: 'a' :: sequence.Nil.of[Any]
         val tl = 3 :: "hello" :: i :: 'a' :: Nil
-        assertEquals(tl, list.typed[Int :: String :: java.lang.Integer :: Char :: Nil](el))
-        assertEquals(Nil, list.typed[Nil](sequence.Nil))
+        assertEquals(tl, List.typed[Int :: String :: java.lang.Integer :: Char :: Nil](el))
+        assertEquals(Nil, List.typed[Nil](sequence.Nil))
         ()
     }
 */

@@ -9,6 +9,6 @@ package sing; package peg
 
 
 trait OneWidth extends Peg {
-    override  def width: width = nat.dense._1
-    override type width        = nat.dense._1
+    override  def width: width = Dense._1
+    override type width        = Dense._1
 }

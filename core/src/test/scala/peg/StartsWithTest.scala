@@ -11,7 +11,7 @@ package singtest; package pegtest
 import com.github.okomok
 
 import okomok.sing._
-import nat.dense.Literal._
+import Dense.Literal._
 import junit.framework.Assert._
 
 
