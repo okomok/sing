@@ -18,17 +18,17 @@ class FlatMapTest extends org.scalatest.junit.JUnit3Suite {
 
     class oops extends Function1 {
         override type self = oops
-        override  def apply[x <: Any](x: x): apply[x] = x :: Box("oops") :: Nil
-        override type apply[x <: Any] = x :: Box[String] :: Nil
+        override  def apply[x <: Any](x: x): apply[x] = x :: _Box("oops") :: Nil
+        override type apply[x <: Any] = x :: _Box[String] :: Nil
     }
     val oops = new oops
 
     def testTrivial {
-        type xs = Box[Int] :: Box[String] :: Box[Char] :: Nil
-        val xs: xs = Box(3) :: Box("hello") :: Box('a') :: Nil
+        type xs = _Box[Int] :: _Box[String] :: _Box[Char] :: Nil
+        val xs: xs = _Box(3) :: _Box("hello") :: _Box('a') :: Nil
         val u: xs#flatMap[oops] = xs.flatMap(oops)
-        val v: Box[Int] :: Box[String] :: Box[String] :: Box[String] :: Box[Char] :: Box[String] :: Nil = u.force
-        assertEquals(Box(3) :: Box("oops") :: Box("hello") :: Box("oops") :: Box('a') :: Box("oops")  :: Nil, v)
+        val v: _Box[Int] :: _Box[String] :: _Box[String] :: _Box[String] :: _Box[Char] :: _Box[String] :: Nil = u.force
+        assertEquals(_Box(3) :: _Box("oops") :: _Box("hello") :: _Box("oops") :: _Box('a') :: _Box("oops")  :: Nil, v)
     }
 
     def testTrivialNil {

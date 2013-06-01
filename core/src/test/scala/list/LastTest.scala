@@ -17,18 +17,18 @@ class LastTest extends org.scalatest.junit.JUnit3Suite {
     // assertFalse(scala.Nil eq Nil)
 
     type lastOf[l <: List] = l#last
-    weak.assertSame[Box[Int], lastOf[Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Box[Char] :: Box[Int] :: Nil]]
+    weak.assertSame[_Box[Int], lastOf[_Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: Nil]]
 
     def testTrivial {
         val i = new java.lang.Integer(10)
-        type Lst1 = Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Box[Char] :: Box[Int] :: Nil
-        val lst1: Lst1 = Box(3) :: Box("hello") :: Box(i) :: Box('a') :: Box(12) :: Nil
+        type Lst1 = _Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: Nil
+        val lst1: Lst1 = _Box(3) :: _Box("hello") :: _Box(i) :: _Box('a') :: _Box(12) :: Nil
         val e: Lst1#last = lst1.last
         val e_ : Int = e.unsing
         assertEquals(12, e_)
 
-        type Lst2 = Box[String] :: Nil
-        val lst2: Lst2 = Box("hello") :: Nil
+        type Lst2 = _Box[String] :: Nil
+        val lst2: Lst2 = _Box("hello") :: Nil
         val e2: Lst2#last = lst2.last
         val e2_ : String = e2.unsing
         assertEquals("hello", e2_)

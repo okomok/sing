@@ -18,7 +18,7 @@ class CommonTest extends org.scalatest.junit.JUnit3Suite {
     // assertFalse(scala.Nil eq Nil)
 
     def testTrivial {
-        val k: List = okomok.sing.Box(3) :: Nil
+        val k: List = _Box(3) :: Nil
         ()
     }
 

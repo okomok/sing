@@ -18,8 +18,8 @@ class UnsingTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         val i = new java.lang.Integer(10)
-        type l = Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Box[Char] :: Box[Int] :: Nil
-        val l: l = Box(3) :: Box("hello") :: Box(i) :: Box('a') :: Box(12) :: Nil
+        type l = _Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: Nil
+        val l: l = _Box(3) :: _Box("hello") :: _Box(i) :: _Box('a') :: _Box(12) :: Nil
 
         val r: l#unsing = l.unsing
         val k: scala.collection.immutable.List[scala.Any] = r

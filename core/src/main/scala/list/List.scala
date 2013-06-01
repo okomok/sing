@@ -32,7 +32,7 @@ trait List extends Macros.NewKind {
 
      def ::[e <: Any](e: e): ::[e]
     type ::[e <: Any] <: List
-    final def #::[e](e: e): ::[Box[e]] = ::(Box(e))
+    final def #::[A](x: A)(implicit _A: BoxKind[A]): ::[Box[A, _A.self]] = ::(Box(x)(_A))
 //    final def ::[e](e: e, o: util.Overload = ()): ::[Box[e]] = ::(Box(e))
 
     @annotation.constantTime

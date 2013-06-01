@@ -18,16 +18,16 @@ class ZipTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         val i = new java.lang.Integer(10)
-        type l1 = Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Nil
-        val l1: l1 = Box(3) :: Box("hello") :: Box(i) :: Nil
+        type l1 = _Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: Nil
+        val l1: l1 = _Box(3) :: _Box("hello") :: _Box(i) :: Nil
 
-        type l2 = Box[java.lang.Integer] :: Box[Char] :: Box[Int] :: Nil
-        val l2: l2 = Box(i) :: Box('a') :: Box(12) :: Nil
+        type l2 = _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: Nil
+        val l2: l2 = _Box(i) :: _Box('a') :: _Box(12) :: Nil
 
         val _z: l1#zip[l2] = l1.zip(l2)
-        val z: Tuple2[Box[Int], Box[java.lang.Integer]] :: Tuple2[Box[String], Box[Char]] :: Tuple2[Box[java.lang.Integer], Box[Int]] :: Nil = _z.force
+        val z: Tuple2[_Box[Int], _Box[java.lang.Integer]] :: Tuple2[_Box[String], _Box[Char]] :: Tuple2[_Box[java.lang.Integer], _Box[Int]] :: Nil = _z.force
 
-        val a = Tuple2(Box(3), Box(i)) :: Tuple2(Box("hello"), Box('a')) :: Tuple2(Box(i), Box(12)) :: Nil
+        val a = Tuple2(_Box(3), _Box(i)) :: Tuple2(_Box("hello"), _Box('a')) :: Tuple2(_Box(i), _Box(12)) :: Nil
         assertEquals(a, z)
     }
 
@@ -47,31 +47,31 @@ class ZipTest extends org.scalatest.junit.JUnit3Suite {
 
     def testLonger {
         val i = new java.lang.Integer(10)
-        type l1 = Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Nil
-        val l1: l1 = Box(3) :: Box("hello") :: Box(i) :: Nil
+        type l1 = _Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: Nil
+        val l1: l1 = _Box(3) :: _Box("hello") :: _Box(i) :: Nil
 
-        type l2 = Box[java.lang.Integer] :: Box[Char] :: Box[Int] :: Box[String] :: Nil
-        val l2: l2 = Box(i) :: Box('a') :: Box(12) :: Box("ignored") :: Nil
+        type l2 = _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: _Box[String] :: Nil
+        val l2: l2 = _Box(i) :: _Box('a') :: _Box(12) :: _Box("ignored") :: Nil
 
         val _z: l1#zip[l2] = l1.zip(l2)
-        val z: Tuple2[Box[Int], Box[java.lang.Integer]] :: Tuple2[Box[String], Box[Char]] :: Tuple2[Box[java.lang.Integer], Box[Int]] :: Nil = _z.force
+        val z: Tuple2[_Box[Int], _Box[java.lang.Integer]] :: Tuple2[_Box[String], _Box[Char]] :: Tuple2[_Box[java.lang.Integer], _Box[Int]] :: Nil = _z.force
 
-        val a = Tuple2(Box(3), Box(i)) :: Tuple2(Box("hello"), Box('a')) :: Tuple2(Box(i), Box(12)) :: Nil
+        val a = Tuple2(_Box(3), _Box(i)) :: Tuple2(_Box("hello"), _Box('a')) :: Tuple2(_Box(i), _Box(12)) :: Nil
         assertEquals(a, z)
     }
 
     def testShorter {
         val i = new java.lang.Integer(10)
-        type l1 = Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Nil
-        val l1: l1 = Box(3) :: Box("hello") :: Box(i) :: Nil
+        type l1 = _Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: Nil
+        val l1: l1 = _Box(3) :: _Box("hello") :: _Box(i) :: Nil
 
-        type l2 = Box[java.lang.Integer] :: Box[Char] :: Box[Int] :: Box[String] :: Nil
-        val l2: l2 = Box(i) :: Box('a') :: Box(12) :: Box("ignored") :: Nil
+        type l2 = _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: _Box[String] :: Nil
+        val l2: l2 = _Box(i) :: _Box('a') :: _Box(12) :: _Box("ignored") :: Nil
 
         val _z: l2#zip[l1] = l2.zip(l1)
-        val z: Tuple2[Box[java.lang.Integer], Box[Int]] :: Tuple2[Box[Char], Box[String]] :: Tuple2[Box[Int], Box[java.lang.Integer]] :: Nil = _z.force
+        val z: Tuple2[_Box[java.lang.Integer], _Box[Int]] :: Tuple2[_Box[Char], _Box[String]] :: Tuple2[_Box[Int], _Box[java.lang.Integer]] :: Nil = _z.force
 
-        val a = Tuple2(Box(i), Box(3)) :: Tuple2(Box('a'), Box("hello")) :: Tuple2(Box(12), Box(i)) :: Nil
+        val a = Tuple2(_Box(i), _Box(3)) :: Tuple2(_Box('a'), _Box("hello")) :: Tuple2(_Box(12), _Box(i)) :: Nil
         assertEquals(a, z)
     }
 }

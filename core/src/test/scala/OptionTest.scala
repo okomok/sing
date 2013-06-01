@@ -12,13 +12,14 @@ import sing._
 import junit.framework.Assert._
 import nat.peano.Literal._
 import nat.Peano
+import scala.language.existentials
 
 
 class OptionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-        type s = Some[Box[Int]]
-        val s: s = Some(Box(3))
+        type s = Some[_Box[Int]]
+        val s: s = Some(_Box(3))
         val e: s#get = s.get
         val k: Int = e.unsing
         assertEquals(3, k)
@@ -35,8 +36,8 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testIsEmpty {
         {
-            type s = Some[Box[Int]]
-            val s: s = Some(Box(3))
+            type s = Some[_Box[Int]]
+            val s: s = Some(_Box(3))
             weak.assertSame[`false`, s#isEmpty]
             val e: s#isEmpty = s.isEmpty
             val k: `false` = e
@@ -53,8 +54,8 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testIsDefined {
         {
-            type s = Some[Box[Int]]
-            val s: s = Some(Box(3))
+            type s = Some[_Box[Int]]
+            val s: s = Some(_Box(3))
             weak.assertSame[`true`, s#isDefined]
             val e: s#isDefined = s.isDefined
             val k: `true` = e
@@ -71,8 +72,8 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testUnsing {
         {
-            type s = Some[Box[Int]]
-            val s: s = Some(Box(3))
+            type s = Some[_Box[Int]]
+            val s: s = Some(_Box(3))
             weak.assertSame[scala.Some[Int], s#unsing]
             val e: s#unsing = s.unsing
             assertEquals(scala.Some(3), e)
@@ -89,9 +90,9 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
 
 
     def testMatch {
-        val s = Some(Box(3))
+        val s = Some(_Box(3))
         s match {
-            case Some(Box(e)) => assertEquals(3, e)
+            case Some(_Box(e)) => assertEquals(3, e)
             case _ => fail("doh")
         }
 

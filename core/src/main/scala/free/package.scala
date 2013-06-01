@@ -9,7 +9,7 @@ package sing
 
 
 /**
- * @obsolete("use weak instead")
+ * @annotation.obsolete("Use weak instead.")
  */
 package object free extends weak.Common
 

@@ -123,8 +123,8 @@ class obsolete(msg: String = "", since: String = "") extends StaticAnnotation
 
 
 /**
-* Describes method time-complexity.
-*/
+ * Describes method time-complexity.
+ */
 sealed trait TimeComplexity extends StaticAnnotation
 
 class constantTime extends TimeComplexity

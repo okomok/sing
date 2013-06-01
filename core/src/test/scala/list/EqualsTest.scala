@@ -17,11 +17,11 @@ class EqualsTest extends org.scalatest.junit.JUnit3Suite {
     // assertFalse(scala.Nil eq Nil)
 
     def testTrivial {
-        type l = Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Nil
-        val l1: l = Box(3) :: Box("hello") :: Box(new java.lang.Integer(10)) :: Nil
-        val l2: l = Box(3) :: Box("hello") :: Box(new java.lang.Integer(10)) :: Nil
-        val l3 = Box(3) :: Box("helll") :: Box(new java.lang.Integer(10)) :: Nil
-        val l4 = Box(3) :: Box("hello") :: Box(new java.lang.Integer(10)) :: Box(2.0) :: Nil
+        type l = _Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: Nil
+        val l1: l = _Box(3) :: _Box("hello") :: _Box(new java.lang.Integer(10)) :: Nil
+        val l2: l = _Box(3) :: _Box("hello") :: _Box(new java.lang.Integer(10)) :: Nil
+        val l3 = _Box(3) :: _Box("helll") :: _Box(new java.lang.Integer(10)) :: Nil
+        val l4 = _Box(3) :: _Box("hello") :: _Box(new java.lang.Integer(10)) :: _Box(2.0) :: Nil
 
         assertEquals(l2, l1)
         AssertNotEquals(Nil, l1)

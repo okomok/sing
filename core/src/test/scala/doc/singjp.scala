@@ -11,6 +11,7 @@ package singtest; package doctest; package singjp
 import com.github.okomok
 import okomok.sing
 import junit.framework.Assert.assertEquals
+import scala.language.existentials
 
 
 class SingityTest extends org.scalatest.junit.JUnit3Suite {
@@ -109,10 +110,11 @@ class ListTest extends org.scalatest.junit.JUnit3Suite {
 
 }
 
-
 class NormalTest extends org.scalatest.junit.JUnit3Suite {
 
     import sing.nat.peano.Literal._
+
+    import sing._ // workaround for implicit lookup
 
     def testUnsing {
         val i: scala.Int = _3.times(_2).unsing
@@ -120,13 +122,13 @@ class NormalTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testBox {
-        val j = sing.Tuple2(sing.Box(2), sing.Box(3))
+        val j = sing.Tuple2(_Box(2), _Box(3))
         assertEquals(3, j._2.unsing)
     }
 
     def testLift {
-        val j = sing.Tuple(2, 3) // == Tuple2(Box(2), Box(3))
-        val xs = 3 #:: 4 #:: 5 #:: sing.Nil // == Box(3) :: Box(4) :: Box(5) :: Nil
+        val j = sing.tuple.lift2(2, 3)
+        val xs = 3 #:: 4 #:: 5 #:: sing.Nil
         val y = xs.foldLeft(j._1, sing.Function((y: Int, x: Int) => y + x))
         assertEquals(2+3+4+5, y.unsing)
     }

@@ -112,7 +112,7 @@ package object sing {
 // assertions
 
     /**
-     * assertion (metamethod is not implemented yet.)
+     * assertion (typemethod is not implemented yet.)
      */
     @elidable(ASSERTION)
      def assert[c <: Boolean](c: c): assert[c] = Assert.apply(c)
@@ -126,11 +126,11 @@ package object sing {
 
 // backward-compatibility
 
-    @annotation.obsolete("use weak.TermOf instead")
+    @annotation.obsolete("Use weak.TermOf instead.")
      val Unmeta = weak.TermOf
     type Unmeta[x <: Any] = weak.TermOf[x]
 
-    @annotation.obsolete("use weak.termOf instead")
+    @annotation.obsolete("Use weak.termOf instead.")
      def unmeta[x <: Any](implicit i: weak.TermOf[x]): x = weak.termOf(i)
 
 }

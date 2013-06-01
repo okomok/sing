@@ -62,15 +62,37 @@ trait Common {
     /**
      * Lifts `scala.TupleN` to sing one.
      */
-    def fromSTuple[T1](from: scala.Tuple1[T1]): Box[T1] :: Nil = fromSTuple1(from)
-    def fromSTuple[T1, T2](from: scala.Tuple2[T1, T2]): Box[T1] :: Box[T2] :: Nil = fromSTuple2(from)
-    def fromSTuple[T1, T2, T3](from: scala.Tuple3[T1, T2, T3]): Box[T1] :: Box[T2] :: Box[T3] :: Nil = fromSTuple3(from)
-    def fromSTuple[T1, T2, T3, T4](from: scala.Tuple4[T1, T2, T3, T4]): Box[T1] :: Box[T2] :: Box[T3] :: Box[T4] :: Nil = fromSTuple4(from)
-    def fromSTuple[T1, T2, T3, T4, T5](from: scala.Tuple5[T1, T2, T3, T4, T5]): Box[T1] :: Box[T2] :: Box[T3] :: Box[T4] :: Box[T5] :: Nil = fromSTuple5(from)
-    def fromSTuple1[T1](from: scala.Tuple1[T1]): Box[T1] :: Nil = Box(from._1) :: Nil
-    def fromSTuple2[T1, T2](from: scala.Tuple2[T1, T2]): Box[T1] :: Box[T2] :: Nil = Box(from._1) :: Box(from._2) :: Nil
-    def fromSTuple3[T1, T2, T3](from: scala.Tuple3[T1, T2, T3]): Box[T1] :: Box[T2] :: Box[T3] :: Nil = Box(from._1) :: Box(from._2) :: Box(from._3) :: Nil
-    def fromSTuple4[T1, T2, T3, T4](from: scala.Tuple4[T1, T2, T3, T4]): Box[T1] :: Box[T2] :: Box[T3] :: Box[T4] :: Nil = Box(from._1) :: Box(from._2) :: Box(from._3) :: Box(from._4) :: Nil
-    def fromSTuple5[T1, T2, T3, T4, T5](from: scala.Tuple5[T1, T2, T3, T4, T5]): Box[T1] :: Box[T2] :: Box[T3] :: Box[T4] :: Box[T5] :: Nil = Box(from._1) :: Box(from._2) :: Box(from._3) :: Box(from._4) :: Box(from._5) :: Nil
+    def fromSTuple[T1](from: scala.Tuple1[T1])(implicit _T1: BoxKind[T1]): Box[T1, _T1.self] :: Nil = Box(from._1)(_T1) :: Nil
+    def fromSTuple[T1, T2](from: scala.Tuple2[T1, T2])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Nil
+    def fromSTuple[T1, T2, T3](from: scala.Tuple3[T1, T2, T3])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Nil
+    def fromSTuple[T1, T2, T3, T4](from: scala.Tuple4[T1, T2, T3, T4])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3], _T4: BoxKind[T4]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Box[T4, _T4.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Box(from._4)(_T4) :: Nil
+    def fromSTuple[T1, T2, T3, T4, T5](from: scala.Tuple5[T1, T2, T3, T4, T5])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3], _T4: BoxKind[T4], _T5: BoxKind[T5]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Box[T4, _T4.self] :: Box[T5, _T5.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Box(from._4)(_T4) :: Box(from._5)(_T5) :: Nil
+
+    def fromSTuple1[T1](from: scala.Tuple1[T1])(implicit _T1: BoxKind[T1]): Box[T1, _T1.self] :: Nil = Box(from._1)(_T1) :: Nil
+    def fromSTuple2[T1, T2](from: scala.Tuple2[T1, T2])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Nil
+    def fromSTuple3[T1, T2, T3](from: scala.Tuple3[T1, T2, T3])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Nil
+    def fromSTuple4[T1, T2, T3, T4](from: scala.Tuple4[T1, T2, T3, T4])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3], _T4: BoxKind[T4]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Box[T4, _T4.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Box(from._4)(_T4) :: Nil
+    def fromSTuple5[T1, T2, T3, T4, T5](from: scala.Tuple5[T1, T2, T3, T4, T5])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3], _T4: BoxKind[T4], _T5: BoxKind[T5]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Box[T4, _T4.self] :: Box[T5, _T5.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Box(from._4)(_T4) :: Box(from._5)(_T5) :: Nil
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,6 +15,7 @@ import com.github.okomok
 import okomok.sing._
 import nat.peano.Literal._
 import junit.framework.Assert._
+import scala.language.existentials
 
 
 class LiftTest extends org.scalatest.junit.JUnit3Suite {
@@ -28,18 +29,18 @@ class LiftTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         // Normal types are not first-class citizen in sing world.
-        // `Box` turns them into sing ones.
-        val y1 = 9.75 #:: 'x' #:: Nil // == Box(9.75) :: Box('x') :: Nil
+        // `_Box` turns them into sing ones.
+        val y1 = 9.75 #:: 'x' #:: Nil // == Box<9.75> :: Box<'x'> :: Nil
         val y2 = -2.125 #:: 'X' #:: Nil
 
         // `Function` too is a kind of boxing, which turns a normal function into sing one.
-        val z = Function((_: Double) + .5) :: Function((_: Char).isUpper) :: Nil
+        val z = Function.lift1((_: Double) + .5) :: Function.lift1((_: Char).isUpper) :: Nil
 
         // `zipBy` returns a view(unspecified type). `force` turns a view into a concrete list.
-        val z1: Box[scala.Double] :: Box[scala.Boolean] :: Nil = z.zipBy(y1, Apply).force
+        val z1 = z.zipBy(y1, Apply).force
         val Box(10.25) :: Box(false) :: Nil() = z1
 
-        val z2: Box[scala.Double] :: Box[scala.Boolean] :: Nil = z.zipBy(y2, Apply).force
+        val z2 = z.zipBy(y2, Apply).force
         val Box(-1.625) :: Box(true) :: Nil() = z2
 
         locally {
@@ -52,7 +53,7 @@ class LiftTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial2 {
         val y1 = 9.75 #:: 'x' #:: Nil
-        val z = Function((_: Double) + .5) :: Box(3) :: Nil
+        val z = Function.lift1((_: Double) + .5) :: Box(3) :: Nil
         z.zipBy(y1, Apply) // doesn't crash for now, because this is a view...
         ()
     }

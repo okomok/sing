@@ -17,7 +17,7 @@ import junit.framework.Assert._
 import scala.language.existentials
 
 
-class BoxedTest extends org.scalatest.junit.JUnit3Suite {
+class BoxTest extends org.scalatest.junit.JUnit3Suite {
 
 
     def testTrivial() {
@@ -25,9 +25,9 @@ class BoxedTest extends org.scalatest.junit.JUnit3Suite {
         class MMM
         val mmm = new MMM
 
-        val bi = Boxed(mmm)
-        val k = Boxed.kindOf[MMM]
-        val id = Boxed.kindIdOf[MMM]
+        val bi = Box(mmm)
+        val k = Box.kindOf[MMM]
+        val id = Box.kindIdOf[MMM]
         type id = weak.typeOf(id)
 
         weak.assertSame[bi.kindId, k.kindId]
@@ -42,12 +42,12 @@ class BoxedTest extends org.scalatest.junit.JUnit3Suite {
         class A
         val a = new A
 
-        val ax = Boxed(a)
+        val ax = Box(a)
 
         class B
         val b = new B
 
-        val bx = Boxed(b)
+        val bx = Box(b)
 
         val x: `false` = ax.equal(bx)
         val y: `true` = ax.equal(ax)
@@ -56,18 +56,18 @@ class BoxedTest extends org.scalatest.junit.JUnit3Suite {
 
     def testPoly {
 
-        val IntKind = Boxed.kindOf[Int]
-        val StringKind = Boxed.kindOf[String]
-        val BooleanKind = Boxed.kindOf[scala.Boolean]
+        val IntKind = Box.kindOf[Int]
+        val StringKind = Box.kindOf[String]
+        val BooleanKind = Box.kindOf[scala.Boolean]
 
         object c
-        val cKind = Boxed.kindOf[c.type]
+        val cKind = Box.kindOf[c.type]
 
-        val poly = map.sorted1(IntKind.kindId, Boxed.lift1((x: Int) => x + 1)).
-            put(StringKind.kindId, Boxed.lift1((x: String) => x.reverse)).
-            put(BooleanKind.kindId, Boxed.lift1((x: scala.Boolean) => c))
+        val poly = map.sorted1(IntKind.kindId, function.lift1((x: Int) => x + 1)).
+            put(StringKind.kindId, function.lift1((x: String) => x.reverse)).
+            put(BooleanKind.kindId, function.lift1((x: scala.Boolean) => c))
 
-        val xs = Boxed(0) :: Boxed("hello") :: Boxed(10) :: Boxed(true) :: Nil
+        val xs = Box(0) :: Box("hello") :: Box(10) :: Box(true) :: Nil
 
         object Ap extends Macros.New with Function1 {
             override  def apply[x <: Any](x: x): apply[x] = poly.get(x.kindId).get.asFunction1.apply(x).asInstanceOf[apply[x]]

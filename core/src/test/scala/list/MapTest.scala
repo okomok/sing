@@ -19,17 +19,17 @@ class MapTest extends org.scalatest.junit.JUnit3Suite {
 
     class mkString extends Function1 {
         override type self = mkString
-        override  def apply[x <: Any](x: x): apply[x] = Box(x.unsing.toString)
-        override type apply[x <: Any] = Box[String]
+        override  def apply[x <: Any](x: x): apply[x] = _Box(x.unsing.toString)
+        override type apply[x <: Any] = _Box[String]
     }
     val mkString = new mkString
 
     def testTrivial {
-        type xs = Box[Int] :: Box[String] :: Box[Char] :: Nil
-        val xs: xs = Box(3) :: Box("hello") :: Box('a') :: Nil
+        type xs = _Box[Int] :: _Box[String] :: _Box[Char] :: Nil
+        val xs: xs = _Box(3) :: _Box("hello") :: _Box('a') :: Nil
         val u: xs#map[mkString] = xs.map(mkString)
-        val v: Box[String] :: Box[String] :: Box[String] :: Nil = u.force
-        assertEquals(Box("3") :: Box("hello") :: Box("a") :: Nil, v)
+        val v: _Box[String] :: _Box[String] :: _Box[String] :: Nil = u.force
+        assertEquals(_Box("3") :: _Box("hello") :: _Box("a") :: Nil, v)
     }
 
     def testTrivialNil {

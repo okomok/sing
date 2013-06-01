@@ -11,12 +11,13 @@ package sing
 object Option {
 
     /**
-     * Lifts `scala.Option` to sing one.
+     * Lifts scala.Options.
      */
     def lift(x: scala.None.type): None = liftNone(x)
-    def lift[A](x: scala.Some[A]): Some[Box[A]] = liftSome(x)
+    def lift[A](x: scala.Some[A])(implicit _A: BoxKind[A]): Some[Box[A, _A.self]] = liftSome(x)(_A)
+
     def liftNone(x: scala.None.type): None = None
-    def liftSome[A](x: scala.Some[A]): Some[Box[A]] = Some(Box(x.get))
+    def liftSome[A](x: scala.Some[A])(implicit _A: BoxKind[A]): Some[Box[A, _A.self]] = Some(Box(x.get)(_A))
 
 }
 

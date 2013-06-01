@@ -10,6 +10,7 @@ package com.github.okomoktest; package singtest; package example; package projec
 
 
 import com.github.okomok.sing._
+import scala.language.existentials
 
 
 class ScalaTupleTest extends org.scalatest.junit.JUnit3Suite {

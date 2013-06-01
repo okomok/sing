@@ -17,8 +17,8 @@ class ForeachTest extends org.scalatest.junit.JUnit3Suite {
     // assertFalse(scala.Nil eq Nil)
 
     def testTrivial {
-        type xs = Box[Int] :: Box[String] :: Box[Char] :: Nil
-        val xs: xs = Box(3) :: Box("hello") :: Box('a') :: Nil
+        type xs = _Box[Int] :: _Box[String] :: _Box[Char] :: Nil
+        val xs: xs = _Box(3) :: _Box("hello") :: _Box('a') :: Nil
 
         val r = new java.util.ArrayList[String]
         class AddString extends Function1 {

@@ -20,19 +20,19 @@ class TakeTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         val i = new java.lang.Integer(10)
-        val lst = Box(3) :: Box("hello") :: Box(i) :: Box('a') :: Box(12) :: Nil
+        val lst = _Box(3) :: _Box("hello") :: _Box(i) :: _Box('a') :: _Box(12) :: Nil
         val a = lst.take(_0)
-        val b: Box[Int] :: Box[String] :: Nil = lst.take(_2).force
+        val b: _Box[Int] :: _Box[String] :: Nil = lst.take(_2).force
         val c = lst.take(_5)
         assertEquals(Nil, a)
-        assertEquals(Box(3) :: Box("hello") :: Nil, b)
-        assertEquals(Box(3) :: Box("hello") :: Box(i) :: Box('a') :: Box(12) :: Nil, c)
+        assertEquals(_Box(3) :: _Box("hello") :: Nil, b)
+        assertEquals(_Box(3) :: _Box("hello") :: _Box(i) :: _Box('a') :: _Box(12) :: Nil, c)
     }
 
     def testTooMany {
         val i = new java.lang.Integer(10)
-        type lst = Box[Int] :: Box[String] :: Box[java.lang.Integer] :: Box[Char] :: Box[Int] :: Nil
-        val lst: lst = Box(3) :: Box("hello") :: Box(i) :: Box('a') :: Box(12) :: Nil
+        type lst = _Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: Nil
+        val lst: lst = _Box(3) :: _Box("hello") :: _Box(i) :: _Box('a') :: _Box(12) :: Nil
         val s: lst#take[_10] = lst.take(_10)
         val k: lst = s.force
         assertEquals(lst, k)
@@ -44,9 +44,9 @@ object TakeTezt {
     import weak.{ assert, assertSame }
 
     trait testTrivial {
-        type lst = Box[Int] :: Box[String] :: Box[Double] :: Box[Char] :: Box[Float] :: Nil
+        type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil
         assertSame[Nil, lst#take[_0]#force]
-        assertSame[Box[Int] :: Box[String] :: Nil, lst#take[_2]#force]
-        assertSame[Box[Int] :: Box[String] :: Box[Double] :: Box[Char] :: Box[Float] :: Nil, lst#take[_5]#force]
+        assertSame[_Box[Int] :: _Box[String] :: Nil, lst#take[_2]#force]
+        assertSame[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#take[_5]#force]
     }
 }
