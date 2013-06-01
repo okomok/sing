@@ -8,302 +8,178 @@ package com.github.okomok
 package sing; package dense
 
 
-import nat.Strong
-import Dense.{_0B, _1B}
+import Dense.{::, _0B, _1B}
 
 
 object AsciiLiteral {
 
-     val ` `: ` ` = new ` `{}
-     val  ! :  !  = new  ! {}
-     val `"`: `"` = new `"`{}
-     val `#`: `#` = new `#`{}
-     val `$`: `$` = new `$`{}
-     val  % :  %  = new  % {}
-     val  & :  &  = new  & {}
-     val `'`: `'` = new `'`{}
-     val `(`: `(` = new `(`{}
-     val `)`: `)` = new `)`{}
-     val  * :  *  = new  * {}
-     val  + :  +  = new  + {}
-     val `,`: `,` = new `,`{}
-     val  - :  -  = new  - {}
-     val `.`: `.` = new `.`{}
-     val  / :  /  = new  / {}
-     val `0`: `0` = new `0`{}
-     val `1`: `1` = new `1`{}
-     val `2`: `2` = new `2`{}
-     val `3`: `3` = new `3`{}
-     val `4`: `4` = new `4`{}
-     val `5`: `5` = new `5`{}
-     val `6`: `6` = new `6`{}
-     val `7`: `7` = new `7`{}
-     val `8`: `8` = new `8`{}
-     val `9`: `9` = new `9`{}
-     val `:`: `:` = new `:`{}
-     val `;`: `;` = new `;`{}
-     val  < :  <  = new  < {}
-     val `=`: `=` = new `=`{}
-     val  > :  >  = new  > {}
-     val  ? :  ?  = new  ? {}
-	 val  A :  A  = new  A {}
-	 val  B :  B  = new  B {}
-	 val  C :  C  = new  C {}
-	 val  D :  D  = new  D {}
-	 val  E :  E  = new  E {}
-	 val  F :  F  = new  F {}
-	 val  G :  G  = new  G {}
-	 val  H :  H  = new  H {}
-	 val  I :  I  = new  I {}
-     val  J :  J  = new  J {}
-	 val  K :  K  = new  K {}
-	 val  L :  L  = new  L {}
-	 val  M :  M  = new  M {}
-	 val  N :  N  = new  N {}
-	 val  O :  O  = new  O {}
-	 val  P :  P  = new  P {}
-	 val  Q :  Q  = new  Q {}
-	 val  R :  R  = new  R {}
-	 val  S :  S  = new  S {}
-	 val  T :  T  = new  T {}
-	 val  U :  U  = new  U {}
-	 val  V :  V  = new  V {}
-	 val  W :  W  = new  W {}
-	 val  X :  X  = new  X {}
-	 val  Y :  Y  = new  Y {}
-	 val  Z :  Z  = new  Z {}
-     val `[`: `[` = new `[`{}
-     val BSL: BSL = new BSL{}
-     val `]`: `]` = new `]`{}
-     val  ^ :  ^  = new  ^ {}
-     val UNS: UNS = new UNS{}
-     val BQ : BQ  = new BQ {}
-     val  a :  a  = new  a {}
-     val  b :  b  = new  b {}
-     val  c :  c  = new  c {}
-     val  d :  d  = new  d {}
-     val  e :  e  = new  e {}
-     val  f :  f  = new  f {}
-     val  g :  g  = new  g {}
-     val  h :  h  = new  h {}
-     val  i :  i  = new  i {}
-     val  j :  j  = new  j {}
-     val  k :  k  = new  k {}
-     val  l :  l  = new  l {}
-     val  m :  m  = new  m {}
-     val  n :  n  = new  n {}
-     val  o :  o  = new  o {}
-     val  p :  p  = new  p {}
-     val  q :  q  = new  q {}
-     val  r :  r  = new  r {}
-     val  s :  s  = new  s {}
-     val  t :  t  = new  t {}
-     val  u :  u  = new  u {}
-     val  v :  v  = new  v {}
-     val  w :  w  = new  w {}
-     val  x :  x  = new  x {}
-     val  y :  y  = new  y {}
-     val  z :  z  = new  z {}
-     val `{`: `{` = new `{`{}
-     val  | :  |  = new  | {}
-     val `}`: `}` = new `}`{}
-     val  ~ :  ~  = new  ~ {}
+    val ` ` : ` ` = _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+    val  !  :  !  = _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+    val `"` : `"` = _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+    val `#` : `#` = _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+    val `$` : `$` = _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+    val  %  :  %  = _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+    val  &  :  &  = _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+    val `'` : `'` = _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+    val `(` : `(` = _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+    val `)` : `)` = _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+    val  *  :  *  = _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+    val  +  :  +  = _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+    val `,` : `,` = _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val  -  :  -  = _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val `.` : `.` = _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val  /  :  /  = _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val `0` : `0` = _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val `1` : `1` = _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val `2` : `2` = _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val `3` : `3` = _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val `4` : `4` = _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val `5` : `5` = _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val `6` : `6` = _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val `7` : `7` = _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val `8` : `8` = _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val `9` : `9` = _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val `:` : `:` = _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val `;` : `;` = _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val  <  :  <  = _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    val `=` : `=` = _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    val  >  :  >  = _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
+    val  ?  :  ?  = _1B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
 
-    sealed abstract class ` ` extends Strong(_0B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self = ` `
-    }
-    sealed abstract class  !  extends Strong(_1B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  !
-    }
-    sealed abstract class `"` extends Strong(_0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self = `"`
-    }
-    sealed abstract class `#` extends Strong(_0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self = `#`
-    }
-    sealed abstract class `$` extends Strong(_0B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self = `$`
-    }
-    sealed abstract class  %  extends Strong(_1B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  %
-    }
-    sealed abstract class  &  extends Strong(_0B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  &
-    }
-    sealed abstract class `'` extends Strong(_1B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self = `'`
-    }
-    sealed abstract class `(` extends Strong(_0B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self = `(`
-    }
-    sealed abstract class `)` extends Strong(_1B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self = `)`
-    }
-    sealed abstract class  *  extends Strong(_0B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  *
-    }
-    sealed abstract class  +  extends Strong(_1B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  +
-    }
-    sealed abstract class `,` extends Strong(_0B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self = `,`
-    }
-    sealed abstract class  -  extends Strong(_1B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  -
-    }
-    sealed abstract class `.` extends Strong(_0B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self = `.`
-    }
-    sealed abstract class  /  extends Strong(_1B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  /
-    }
-    sealed abstract class `0` extends Strong(_0B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self = `0`
-    }
-    sealed abstract class `1` extends Strong(_1B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self = `1`
-    }
-    sealed abstract class `2` extends Strong(_0B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self = `2`
-    }
-    sealed abstract class `3` extends Strong(_1B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self = `3`
-    }
-    sealed abstract class `4` extends Strong(_0B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self = `4`
-    }
-    sealed abstract class `5` extends Strong(_1B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self = `5`
-    }
-    sealed abstract class `6` extends Strong(_0B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self = `6`
-    }
-    sealed abstract class `7` extends Strong(_1B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self = `7`
-    }
-    sealed abstract class `8` extends Strong(_0B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self = `8`
-    }
-    sealed abstract class `9` extends Strong(_1B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self = `9`
-    }
-    sealed abstract class `:` extends Strong(_0B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self = `:`
-    }
-    sealed abstract class `;` extends Strong(_1B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self = `;`
-    }
-    sealed abstract class  <  extends Strong(_0B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  <
-    }
-    sealed abstract class `=` extends Strong(_1B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self = `=`
-    }
-    sealed abstract class  >  extends Strong(_0B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  >
-    }
-    sealed abstract class  ?  extends Strong(_1B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  ?
-    }
-    sealed abstract class `@Annotation.` extends Strong(_0B :: _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self = `@Annotation.`
-    }
-	sealed abstract class  A  extends Strong(_1B :: _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  A
-    }
-	sealed abstract class  B  extends Strong(_0B :: _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  B
-    }
-	sealed abstract class  C  extends Strong(_1B :: _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  C
-    }
-	sealed abstract class  D  extends Strong(_0B :: _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  D
-    }
-	sealed abstract class  E  extends Strong(_1B :: _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  E
-    }
-	sealed abstract class  F  extends Strong(_0B :: _1B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  F
-    }
-	sealed abstract class  G  extends Strong(_1B :: _1B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  G
-    }
-	sealed abstract class  H  extends Strong(_0B :: _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  H
-    }
-	sealed abstract class  I  extends Strong(_1B :: _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  I
-    }
-    sealed abstract class  J  extends Strong(_0B :: _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  J
-    }
-	sealed abstract class  K  extends Strong(_1B :: _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  K
-    }
-	sealed abstract class  L  extends Strong(_0B :: _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  L
-    }
-	sealed abstract class  M  extends Strong(_1B :: _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  M
-    }
-	sealed abstract class  N  extends Strong(_0B :: _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  N
-    }
-	sealed abstract class  O  extends Strong(_1B :: _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil) {
-        type self =  O
-    }
-	sealed abstract class  P  extends Strong(_0B :: _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  P
-    }
-	sealed abstract class  Q  extends Strong(_1B :: _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  Q
-    }
-	sealed abstract class  R  extends Strong(_0B :: _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  R
-    }
-	sealed abstract class  S  extends Strong(_1B :: _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  S
-    }
-	sealed abstract class  T  extends Strong(_0B :: _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  T
-    }
-	sealed abstract class  U  extends Strong(_1B :: _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  U
-    }
-	sealed abstract class  V  extends Strong(_0B :: _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  V
-    }
-	sealed abstract class  W  extends Strong(_1B :: _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  W
-    }
-	sealed abstract class  X  extends Strong(_0B :: _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  X
-    }
-	sealed abstract class  Y  extends Strong(_1B :: _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  Y
-    }
-	sealed abstract class  Z  extends Strong(_0B :: _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  Z
-    }
-    sealed abstract class `[` extends Strong(_1B :: _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self = `[`
-    }
-    sealed abstract class BSL extends Strong(_0B :: _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self = BSL
-    }
-    sealed abstract class `]` extends Strong(_1B :: _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self = `]`
-    }
-    sealed abstract class  ^  extends Strong(_0B :: _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self =  ^
-    }
-    sealed abstract class UNS extends Strong(_1B :: _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil) {
-        type self = UNS
-    }
-    sealed abstract class BQ  extends Strong(_0B :: _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self = BQ
-    }
+    val `@` : `@` = _0B :: _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+	val  A  :  A  = _1B :: _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+	val  B  :  B  = _0B :: _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+	val  C  :  C  = _1B :: _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+	val  D  :  D  = _0B :: _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+	val  E  :  E  = _1B :: _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+	val  F  :  F  = _0B :: _1B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+	val  G  :  G  = _1B :: _1B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+	val  H  :  H  = _0B :: _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+	val  I  :  I  = _1B :: _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+    val  J  :  J  = _0B :: _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+	val  K  :  K  = _1B :: _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+	val  L  :  L  = _0B :: _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+	val  M  :  M  = _1B :: _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+	val  N  :  N  = _0B :: _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+	val  O  :  O  = _1B :: _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+	val  P  :  P  = _0B :: _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+	val  Q  :  Q  = _1B :: _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+	val  R  :  R  = _0B :: _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+	val  S  :  S  = _1B :: _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+	val  T  :  T  = _0B :: _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+	val  U  :  U  = _1B :: _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+	val  V  :  V  = _0B :: _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+	val  W  :  W  = _1B :: _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+	val  X  :  X  = _0B :: _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+	val  Y  :  Y  = _1B :: _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+	val  Z  :  Z  = _0B :: _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val `[` : `[` = _1B :: _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val BSL : BSL = _0B :: _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val `]` : `]` = _1B :: _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val  ^  :  ^  = _0B :: _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val UNS : UNS = _1B :: _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    val BQ  : BQ  = _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+
+    val  a  :  a  = _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val  b  :  b  = _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val  c  :  c  = _1B :: _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val  d  :  d  = _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val  e  :  e  = _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val  f  :  f  = _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val  g  :  g  = _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    val  h  :  h  = _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val  i  :  i  = _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val  j  :  j  = _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val  k  :  k  = _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val  l  :  l  = _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val  m  :  m  = _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val  n  :  n  = _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val  o  :  o  = _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    val  p  :  p  = _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val  q  :  q  = _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val  r  :  r  = _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val  s  :  s  = _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val  t  :  t  = _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val  u  :  u  = _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val  v  :  v  = _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val  w  :  w  = _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    val  x  :  x  = _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    val  y  :  y  = _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    val  z  :  z  = _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+
+    val `{` : `{` = _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    val  |  :  |  = _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
+    val `}` : `}` = _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
+    val  ~  :  ~  = _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
+
+
+    type ` ` = _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+    type  !  = _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+    type `"` = _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+    type `#` = _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+    type `$` = _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+    type  %  = _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+    type  &  = _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+    type `'` = _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+    type `(` = _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+    type `)` = _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+    type  *  = _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+    type  +  = _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+    type `,` = _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type  -  = _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type `.` = _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type  /  = _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type `0` = _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type `1` = _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type `2` = _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type `3` = _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type `4` = _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type `5` = _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type `6` = _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type `7` = _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type `8` = _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type `9` = _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type `:` = _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type `;` = _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type  <  = _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    type `=` = _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    type  >  = _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
+    type  ?  = _1B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
+
+    type `@` = _0B :: _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+	type  A  = _1B :: _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+	type  B  = _0B :: _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+	type  C  = _1B :: _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: DNil
+	type  D  = _0B :: _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+	type  E  = _1B :: _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+	type  F  = _0B :: _1B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+	type  G  = _1B :: _1B :: _1B :: _0B :: _0B :: _0B :: _1B :: DNil
+	type  H  = _0B :: _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+	type  I  = _1B :: _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+    type  J  = _0B :: _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+	type  K  = _1B :: _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: DNil
+	type  L  = _0B :: _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+	type  M  = _1B :: _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+	type  N  = _0B :: _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+	type  O  = _1B :: _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: DNil
+	type  P  = _0B :: _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+	type  Q  = _1B :: _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+	type  R  = _0B :: _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+	type  S  = _1B :: _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: DNil
+	type  T  = _0B :: _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+	type  U  = _1B :: _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+	type  V  = _0B :: _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+	type  W  = _1B :: _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: DNil
+	type  X  = _0B :: _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+	type  Y  = _1B :: _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+	type  Z  = _0B :: _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type `[` = _1B :: _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type BSL = _0B :: _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type `]` = _1B :: _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type  ^  = _0B :: _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type UNS = _1B :: _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: DNil
+    type BQ  = _0B :: _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+
     type a = _AsciiLiteral.a
     type b = _AsciiLiteral.b
     type c = _AsciiLiteral.c
@@ -330,18 +206,11 @@ object AsciiLiteral {
     type x = _AsciiLiteral.x
     type y = _AsciiLiteral.y
     type z = _AsciiLiteral.z
-    sealed abstract class `{` extends Strong(_1B :: _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self = `{`
-    }
-    sealed abstract class  |  extends Strong(_0B :: _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  |
-    }
-    sealed abstract class `}` extends Strong(_1B :: _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self = `}`
-    }
-    sealed abstract class  ~  extends Strong(_0B :: _1B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  ~
-    }
+
+    type `{` = _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    type  |  = _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
+    type `}` = _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
+    type  ~  = _0B :: _1B :: _1B :: _1B :: _1B :: _1B :: _1B :: DNil
 
 }
 
@@ -350,83 +219,31 @@ object AsciiLiteral {
 private[sing]
 object _AsciiLiteral {
 
-    sealed abstract class  a  extends Strong(_1B :: _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  a
-    }
-    sealed abstract class  b  extends Strong(_0B :: _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  b
-    }
-    sealed abstract class  c  extends Strong(_1B :: _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  c
-    }
-    sealed abstract class  d  extends Strong(_0B :: _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  d
-    }
-    sealed abstract class  e  extends Strong(_1B :: _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  e
-    }
-    sealed abstract class  f  extends Strong(_0B :: _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  f
-    }
-    sealed abstract class  g  extends Strong(_1B :: _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  g
-    }
-    sealed abstract class  h  extends Strong(_0B :: _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  h
-    }
-    sealed abstract class  i  extends Strong(_1B :: _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  i
-    }
-    sealed abstract class  j  extends Strong(_0B :: _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  j
-    }
-    sealed abstract class  k  extends Strong(_1B :: _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  k
-    }
-    sealed abstract class  l  extends Strong(_0B :: _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  l
-    }
-    sealed abstract class  m  extends Strong(_1B :: _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  m
-    }
-    sealed abstract class  n  extends Strong(_0B :: _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  n
-    }
-    sealed abstract class  o  extends Strong(_1B :: _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil) {
-        type self =  o
-    }
-    sealed abstract class  p  extends Strong(_0B :: _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  p
-    }
-    sealed abstract class  q  extends Strong(_1B :: _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  q
-    }
-    sealed abstract class  r  extends Strong(_0B :: _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  r
-    }
-    sealed abstract class  s  extends Strong(_1B :: _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  s
-    }
-    sealed abstract class  t  extends Strong(_0B :: _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  t
-    }
-    sealed abstract class  u  extends Strong(_1B :: _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  u
-    }
-    sealed abstract class  v  extends Strong(_0B :: _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  v
-    }
-    sealed abstract class  w  extends Strong(_1B :: _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  w
-    }
-    sealed abstract class  x  extends Strong(_0B :: _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  x
-    }
-    sealed abstract class  y  extends Strong(_1B :: _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  y
-    }
-    sealed abstract class  z  extends Strong(_0B :: _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil) {
-        type self =  z
-    }
+    type  a  = _1B :: _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type  b  = _0B :: _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type  c  = _1B :: _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type  d  = _0B :: _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type  e  = _1B :: _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type  f  = _0B :: _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type  g  = _1B :: _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: DNil
+    type  h  = _0B :: _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type  i  = _1B :: _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type  j  = _0B :: _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type  k  = _1B :: _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type  l  = _0B :: _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type  m  = _1B :: _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type  n  = _0B :: _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type  o  = _1B :: _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: DNil
+    type  p  = _0B :: _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type  q  = _1B :: _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type  r  = _0B :: _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type  s  = _1B :: _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type  t  = _0B :: _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type  u  = _1B :: _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type  v  = _0B :: _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type  w  = _1B :: _1B :: _1B :: _0B :: _1B :: _1B :: _1B :: DNil
+    type  x  = _0B :: _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    type  y  = _1B :: _0B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
+    type  z  = _0B :: _1B :: _0B :: _1B :: _1B :: _1B :: _1B :: DNil
 
 }

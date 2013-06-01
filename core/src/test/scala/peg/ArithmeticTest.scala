@@ -12,7 +12,7 @@ import com.github.okomok
 
 import okomok.sing._
 import dense.{AsciiLiteral => Ch}
-import dense.StrongLiteral._
+import Dense.Literal._
 
 
 // too slow to compile
@@ -98,6 +98,8 @@ object Arithmetic {
     final class expr extends peg.Strong(term.seq( Peg.term(Ch.+).seq(term).or(Peg.term(Ch.-).seq(term)).star )) { type self = expr }
 */
 
+
+/*
     // Hmm, nothing changes.
     val T_1: T_1 = new T_1
     final class T_1 extends peg.Strong(Peg.term(_1)) { type self = T_1 }
@@ -125,7 +127,7 @@ object Arithmetic {
 
     val expr: expr = new expr
     final class expr extends peg.Strong(term seq   ((T_PLUS seq term) or (T_MINUS seq term)).star ) { type self = expr }
-
+*/
 
 }
 
@@ -150,12 +152,12 @@ final case class ArithmeticC[num <: Peg](num: num) extends Peg {
 class ArithmeticTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-
+/*
         final class myList extends list.Strong(_3 :: Ch.+ /*:: _2 :: Ch.-*/ :: _1 :: Nil) { type self = myList }
         val myList = new myList
         //println(Arithmetic.expr.parse(myList))
        Weak.assert(Arithmetic.expr.matches(myList))
-
+*/
     //   Weak.assert(Arithmetic.expr.matches(_3 :: Ch.+ :: _2 :: Ch.- :: _1 :: Nil))
 
    //    Weak.assert(Arithmetic.expr.matches(_3 :: Ch.+ :: _2 :: Nil))
