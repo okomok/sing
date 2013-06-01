@@ -58,7 +58,7 @@ trait Peg extends Any with ReferenceEquality {
      * The parse method
      */
      def parse[xs <: List](xs: xs): parse[xs]
-    type parse[xs <: List] <: Result
+    type parse[xs <: List] <: PegResult
 
     /**
      * Returns a mathced width.

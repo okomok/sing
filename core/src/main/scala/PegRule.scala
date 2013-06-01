@@ -5,13 +5,16 @@
 
 
 package com.github.okomok
-package sing; package peg
+package sing
+
+
+import peg._
 
 
 /**
  * Helps to build a recursive grammar.
  */
-trait Rule extends AbstractPeg {
+trait PegRule extends AbstractPeg {
     protected  def rule: rule
     protected type rule <: Peg
 

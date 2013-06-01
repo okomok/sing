@@ -12,6 +12,6 @@ private[sing]
 final class Fail extends AbstractPeg with ZeroWidth {
     type self = Fail
 
-    override  def parse[xs <: List](xs: xs): parse[xs] = Failure(xs)
-    override type parse[xs <: List]                    = Failure[xs]
+    override  def parse[xs <: List](xs: xs): parse[xs] = PegFailure(xs)
+    override type parse[xs <: List]                    = PegFailure[xs]
 }

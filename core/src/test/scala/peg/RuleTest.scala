@@ -20,7 +20,7 @@ class RuleTest extends org.scalatest.junit.JUnit3Suite {
 
 
     val MyRule = new MyRule
-    final class MyRule extends peg.Rule {
+    final class MyRule extends PegRule {
         type self = MyRule
         override  def rule: rule = term(_1).seq(self.opt).seq(term(_2))
         override type rule       = term[_1]#seq[self#opt]#seq[term[_2]]

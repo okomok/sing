@@ -42,28 +42,28 @@ object Arithmetic {
 
 /*
     val expr = new expr
-    final class expr extends peg.Rule {
+    final class expr extends PegRule {
         type self = expr
         override  def rule: rule = term.seq( Peg.term(Ch.+).seq(term).or(Peg.term(Ch.-).seq(term)).star )
         override type rule       = term#seq[ Peg.term[Ch.+]#seq[term]#or[Peg.term[Ch.-]#seq[term]]#star ]
     }
 
     val term = new term
-    final class term extends peg.Rule {
+    final class term extends PegRule {
         type self = term
         override  def rule: rule = factor.seq( Peg.term(Ch.*).seq(factor).or(Peg.term(Ch./).seq(factor)).star )
         override type rule       = factor#seq[ Peg.term[Ch.*]#seq[factor]#or[Peg.term[Ch./]#seq[factor]]#star ]
     }
 
     val factor = new factor
-    final class factor extends peg.Rule {
+    final class factor extends PegRule {
         type self = factor
         override  def rule: rule = number//.or( Peg.term(Ch.`(`).seq(expr).seq(Peg.term(Ch.`)`)) )
         override type rule       = number//#or[ Peg.term[Ch.`(`]#seq[expr]#seq[Peg.term[Ch.`)`]] ]
     }
 
     val number = new number
-    final class number extends peg.Rule {
+    final class number extends PegRule {
         type self = number
         override  def rule: rule = Peg.term(_1).or(Peg.term(_2)).or(Peg.term(_3))
         override type rule       = Peg.term[_1]#or[Peg.term[_2]]#or[Peg.term[_3]]

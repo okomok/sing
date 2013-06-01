@@ -19,9 +19,9 @@ object Not {
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)
         override type parse[xs <: List]                    = _aux[p#parse[xs], xs]
 
-        private[this]  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
-            `if`(r.successful, const0(Failure(xs)), const0(Success(Nil, xs))).apply.asPegResult.asInstanceOf[_aux[r, xs]]
-        private[this] type _aux[r <: Result, xs <: List] =
-            `if`[r#successful, const0[Failure[xs]], const0[Success[Nil, xs]]]#apply#asPegResult
+        private[this]  def _aux[r <: PegResult, xs <: List](r: r, xs: xs): _aux[r, xs] =
+            `if`(r.successful, const0(PegFailure(xs)), const0(PegSuccess(Nil, xs))).apply.asPegResult.asInstanceOf[_aux[r, xs]]
+        private[this] type _aux[r <: PegResult, xs <: List] =
+            `if`[r#successful, const0[PegFailure[xs]], const0[PegSuccess[Nil, xs]]]#apply#asPegResult
     }
 }

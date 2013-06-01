@@ -27,9 +27,9 @@ object Or {
         override type width =
             `if`[pw#equal[q#width], const0[pw], throw0[_]]#apply#asNat
 
-        private[this]  def _aux[r <: Result, xs <: List](r: r, xs: xs): _aux[r, xs] =
+        private[this]  def _aux[r <: PegResult, xs <: List](r: r, xs: xs): _aux[r, xs] =
             `if`(r.successful, const0(r), Else(q, xs)).apply.asPegResult
-        private[this] type _aux[r <: Result, xs <: List] =
+        private[this] type _aux[r <: PegResult, xs <: List] =
             `if`[r#successful, const0[r], Else[q, xs]]#apply#asPegResult
     }
 
@@ -39,10 +39,10 @@ object Or {
         override type apply        = q#parse[xs]
     }
 /*
-    final case class Then[r <: Result](r: r) extends Function0 {
+    final case class Then[r <: PegResult](r: r) extends Function0 {
         type self = Then[r]
-        override  def apply: apply = Success(Left(r.get), r.next)
-        override type apply        = Success[Left[r#get], r#next]
+        override  def apply: apply = PegSuccess(Left(r.get), r.next)
+        override type apply        = PegSuccess[Left[r#get], r#next]
     }
 
     final case class Else[q <: Peg, xs <: List](q: q, xs: xs) extends Function0 {

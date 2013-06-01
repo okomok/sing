@@ -5,11 +5,14 @@
 
 
 package com.github.okomok
-package sing; package peg
+package sing
 
 
-sealed abstract class Result extends Any {
-    type self <: Result
+import peg._
+
+
+sealed abstract class PegResult extends Any {
+    type self <: PegResult
     type unsing <: UnsingResult[_]
 
      def get: get
@@ -22,24 +25,24 @@ sealed abstract class Result extends Any {
     type successful <: Boolean
 
      def map[f <: Function1](f: f): map[f]
-    type map[f <: Function1] <: Result
+    type map[f <: Function1] <: PegResult
 
      def append[f <: Function0](f: f): append[f]
-    type append[f <: Function0] <: Result
+    type append[f <: Function0] <: PegResult
 }
 
 
 private[sing]
-sealed abstract class AbstractResult extends Result {
+sealed abstract class AbstractPegResult extends PegResult {
     final override  def asPegResult: asPegResult = self
     final override type asPegResult              = self
 
-    final override  def canEqual(that: scala.Any) = that.isInstanceOf[Result]
+    final override  def canEqual(that: scala.Any) = that.isInstanceOf[PegResult]
 }
 
 
-final case class Success[x <: Any, ys <: List](override val get: x, override val next: ys) extends AbstractResult {
-    type self = Success[x, ys]
+final case class PegSuccess[x <: Any, ys <: List](override val get: x, override val next: ys) extends AbstractPegResult {
+    type self = PegSuccess[x, ys]
 
     override  def unsing: unsing = UnsingSuccess(get.unsing, next.unsing)
     override type unsing         = UnsingSuccess[get#unsing]
@@ -50,21 +53,21 @@ final case class Success[x <: Any, ys <: List](override val get: x, override val
     override  def successful: successful = `true`
     override type successful             = `true`
 
-    override  def map[f <: Function1](f: f): map[f] = Success(f.apply(get), next)
-    override type map[f <: Function1]               = Success[f#apply[get], next]
+    override  def map[f <: Function1](f: f): map[f] = PegSuccess(f.apply(get), next)
+    override type map[f <: Function1]               = PegSuccess[f#apply[get], next]
 
     override  def append[f <: Function0](f: f): append[f] = self
     override type append[f <: Function0]                  = self
 }
 
 
-final case class Failure[ys <: List](override val next: ys) extends AbstractResult {
-    type self = Failure[ys]
+final case class PegFailure[ys <: List](override val next: ys) extends AbstractPegResult {
+    type self = PegFailure[ys]
 
     override  def unsing: unsing = UnsingFailure(next.unsing)
     override type unsing         = UnsingFailure
 
-    override  def get: get = noSuchElement("peg.Failure.get")
+    override  def get: get = noSuchElement("PegFailure.get")
     override type get      = noSuchElement[_]
     override type next = ys
 

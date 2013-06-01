@@ -19,15 +19,15 @@ object Opt {
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs))
         override type parse[xs <: List]                    = _aux[p#parse[xs]]
 
-        private[this]  def _aux[r <: Result](r: r): _aux[r] =
-            `if`(r.successful, Then(r), const0(Success(None, r.next))).apply.asPegResult.asInstanceOf[_aux[r]]
-        private[this] type _aux[r <: Result] =
-            `if`[r#successful, Then[r], const0[Success[None, r#next]]]#apply#asPegResult
+        private[this]  def _aux[r <: PegResult](r: r): _aux[r] =
+            `if`(r.successful, Then(r), const0(PegSuccess(None, r.next))).apply.asPegResult.asInstanceOf[_aux[r]]
+        private[this] type _aux[r <: PegResult] =
+            `if`[r#successful, Then[r], const0[PegSuccess[None, r#next]]]#apply#asPegResult
     }
 
-    final case class Then[r <: Result](r: r) extends Function0 {
+    final case class Then[r <: PegResult](r: r) extends Function0 {
         type self = Then[r]
-        override  def apply: apply = Success(Some(r.get), r.next)
-        override type apply        = Success[Some[r#get], r#next]
+        override  def apply: apply = PegSuccess(Some(r.get), r.next)
+        override type apply        = PegSuccess[Some[r#get], r#next]
     }
 }

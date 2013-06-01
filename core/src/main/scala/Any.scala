@@ -66,7 +66,7 @@ trait Any extends AnyType with scala.Equals {
     type asPeg <: Peg
 
      def asPegResult: asPegResult = unsupported("Any.asPegResult")
-    type asPegResult <: peg.Result
+    type asPegResult <: PegResult
 
      def asProduct: asProduct = unsupported("Any.asProduct")
     type asProduct <: Product
