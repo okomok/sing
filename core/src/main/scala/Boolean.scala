@@ -135,7 +135,7 @@ object _Boolean {
     import ordering.{LT, GT, EQ}
 
     val NaturalOrdering = new NaturalOrdering
-    final class NaturalOrdering extends ordering.AbstractOrdering {
+    final class NaturalOrdering extends AbstractOrdering {
         type self = NaturalOrdering
 
         override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asBoolean.equal(y.asBoolean)

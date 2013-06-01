@@ -79,14 +79,14 @@ sealed abstract class AbstractOption extends Option {
     final override type nonEmpty           = isEmpty#not
 
     final override  def getOrNaturalEquiv[x <: Any](x: x): getOrNaturalEquiv[x] =
-        getOrElse(GetNaturalOrdering(x)).asEquiv
+        getOrElse(NaturalOrderingOf(x)).asEquiv
     final override type getOrNaturalEquiv[x <: Any] =
-        getOrElse[GetNaturalOrdering[x]]#asEquiv
+        getOrElse[NaturalOrderingOf[x]]#asEquiv
 
     final override  def getOrNaturalOrdering[x <: Any](x: x): getOrNaturalOrdering[x] =
-        getOrElse(GetNaturalOrdering(x)).asOrdering
+        getOrElse(NaturalOrderingOf(x)).asOrdering
     final override type getOrNaturalOrdering[x <: Any] =
-        getOrElse[GetNaturalOrdering[x]]#asOrdering
+        getOrElse[NaturalOrderingOf[x]]#asOrdering
 
     final override  def isDefined: isDefined = isEmpty.not
     final override type isDefined            = isEmpty#not
@@ -175,8 +175,3 @@ final case class Some[e <: Any](override val get: e) extends AbstractOption {
     override type asList         = get :: Nil
 }
 
-
-private[sing]
-object _Option {
-    val None = new None{}
-}

@@ -11,7 +11,7 @@ package sing
 /**
  * unneeded if `assert[c]` could be implemented.
  */
-@annotation.specializer
+@Annotation.specializer
 @scala.annotation.implicitNotFound("Cannot prove preconditon ${c}.")
 sealed abstract class Pre[c <: Boolean]
 

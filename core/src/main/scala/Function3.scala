@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-import function._
+import Function._
 
 
 trait Function3 extends Any with ReferenceEquality {

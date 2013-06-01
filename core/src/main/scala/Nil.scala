@@ -5,7 +5,10 @@
 
 
 package com.github.okomok
-package sing; package list
+package sing
+
+
+import list._
 
 
 sealed abstract class Nil extends AbstractList {
@@ -27,3 +30,4 @@ private[sing]
 object _Nil {
     val value = new Nil{}
 }
+

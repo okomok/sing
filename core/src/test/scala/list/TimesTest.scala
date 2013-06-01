@@ -22,7 +22,7 @@ class TimesTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _1 :: _2 :: _3 :: Nil
         type rs = xs#times[_3]
         val rs: rs = xs.times(_3)
-        weak.assert[rs#equalWith[_1 :: _2 :: _3 :: _1 :: _2 :: _3 :: _1 :: _2 :: _3 :: Nil, nat.naturalOrdering]]
+        Weak.assert[rs#equalWith[_1 :: _2 :: _3 :: _1 :: _2 :: _3 :: _1 :: _2 :: _3 :: Nil, nat.naturalOrdering]]
         assertEquals(_1 :: _2 :: _3 :: _1 :: _2 :: _3 :: _1 :: _2 :: _3 :: Nil, rs)
     }
 
@@ -31,7 +31,7 @@ class TimesTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type rs = xs#times[_3]
         val rs: rs = xs.times(_3)
-        weak.assertSame[Nil, rs#force]
+        Weak.assertSame[Nil, rs#force]
         assertEquals(Nil, rs)
     }
 
@@ -40,7 +40,7 @@ class TimesTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _1 :: _2 :: _3 :: Nil
         type rs = xs#times[_0]
         val rs: rs = xs.times(_0)
-        weak.assertSame[Nil, rs#force]
+        Weak.assertSame[Nil, rs#force]
         assertEquals(Nil, rs)
     }
 

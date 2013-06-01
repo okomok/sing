@@ -127,7 +127,7 @@ class NormalTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testLift {
-        val j = sing.tuple.lift2(2, 3)
+        val j = sing.Tuple.lift2(2, 3)
         val xs = 3 #:: 4 #:: 5 #:: sing.Nil
         val y = xs.foldLeft(j._1, sing.Function((y: Int, x: Int) => y + x))
         assertEquals(2+3+4+5, y.unsing)

@@ -24,9 +24,9 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = set.sorted[nat.naturalOrdering]#add[_3]#add[_4]#add[_0]#add[_2]#add[_5]#add[_1]
         val m2: m2 = set.sorted(nat.naturalOrdering).add(_3).add(_4).add(_0).add(_2).add(_5).add(_1)
 
-        weak.assertSame[`true`, m#equal[m]]
-        weak.assertSame[`true`, m#equal[m2]]
-        weak.assertSame[`true`, m2#equal[m]]
+        Weak.assertSame[`true`, m#equal[m]]
+        Weak.assertSame[`true`, m#equal[m2]]
+        Weak.assertSame[`true`, m2#equal[m]]
         assertEquals(`true`, m.equal(m2))
     }
 
@@ -37,8 +37,8 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = set.sorted[nat.naturalOrdering]#add[_3]#add[_4]#add[_0]#add[_2]#add[_5]#add[_1]
         val m2: m2 = set.sorted(nat.naturalOrdering).add(_3).add(_4).add(_0).add(_2).add(_5).add(_1)
 
-        weak.assertSame[`false`, m#equal[m2]]
-        weak.assertSame[`false`, m2#equal[m]]
+        Weak.assertSame[`false`, m#equal[m2]]
+        Weak.assertSame[`false`, m2#equal[m]]
         assertEquals(`false`, m.equal(m2))
     }
 
@@ -49,8 +49,8 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = set.sorted[nat.naturalOrdering]#add[_3]#add[_4]#add[_0]#add[_2]#add[_5]#add[_1]
         val m2: m2 = set.sorted(nat.naturalOrdering).add(_3).add(_4).add(_0).add(_2).add(_5).add(_1)
 
-        weak.assertSame[`false`, m#equal[m2]]
-        weak.assertSame[`false`, m2#equal[m]]
+        Weak.assertSame[`false`, m#equal[m2]]
+        Weak.assertSame[`false`, m2#equal[m]]
         assertEquals(`false`, m.equal(m2))
     }
 
@@ -61,9 +61,9 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = set.sorted[nat.naturalOrdering]
         val m2: m2 = set.sorted(nat.naturalOrdering)
 
-        weak.assertSame[`true`, m#equal[m]]
-        weak.assertSame[`true`, m#equal[m2]]
-        weak.assertSame[`true`, m2#equal[m]]
+        Weak.assertSame[`true`, m#equal[m]]
+        Weak.assertSame[`true`, m#equal[m2]]
+        Weak.assertSame[`true`, m2#equal[m]]
         assertEquals(`true`, m.equal(m2))
     }
 

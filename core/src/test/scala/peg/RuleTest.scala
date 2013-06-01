@@ -31,7 +31,7 @@ class RuleTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _1 :: _1 :: _2 :: _2 :: Nil
         type r   = MyRule#matches[xs]
         val r: r = MyRule.matches(xs)
-        weak.assert[r]
+        Weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -40,7 +40,7 @@ class RuleTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _1 :: _1 :: _1 :: _2 :: _2 :: Nil
         type r   = MyRule#matches[xs]
         val r: r = MyRule.matches(xs)
-        weak.assertNot[r]
+        Weak.assertNot[r]
         assertFalse(r.unsing)
     }
 

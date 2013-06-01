@@ -5,7 +5,10 @@
 
 
 package com.github.okomok
-package sing; package set
+package sing
+
+
+import set._
 
 
 trait AbstractSet extends Set {
@@ -35,3 +38,4 @@ trait AbstractSet extends Set {
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Set]
 }
+

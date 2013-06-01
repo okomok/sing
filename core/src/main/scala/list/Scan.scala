@@ -19,7 +19,7 @@ object ScanLeft {
         override  def isEmpty: isEmpty = xs.isEmpty
         override type isEmpty          = xs#isEmpty
 
-        @annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
+        @Annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
         private[this] lazy val _head: head = f.apply(z, xs.head)
         override  def head: head = _head
         override type head       = f#apply[z, xs#head]

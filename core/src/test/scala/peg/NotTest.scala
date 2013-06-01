@@ -25,7 +25,7 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).not
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        weak.assert[r]
+        Weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -36,11 +36,11 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).not
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        weak.assert[r#successful]
+        Weak.assert[r#successful]
         assertTrue(r.successful.unsing)
-        weak.assertSame[Nil, r#get#force]
+        Weak.assertSame[Nil, r#get#force]
         assertEquals(Nil, r.get)
-        weak.assertSame[xs, r#next]
+        Weak.assertSame[xs, r#next]
         assertEquals(xs, r.next)
     }
 
@@ -51,9 +51,9 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).not
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        weak.assertNot[r#successful]
+        Weak.assertNot[r#successful]
         assertFalse(r.successful.unsing)
-        weak.assertSame[xs, r#next]
+        Weak.assertSame[xs, r#next]
         assertEquals(xs, r.next)
     }
 
@@ -64,9 +64,9 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).not
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        weak.assertNot[r#successful]
+        Weak.assertNot[r#successful]
         assertFalse(r.successful.unsing)
-        weak.assertSame[xs, r#next]
+        Weak.assertSame[xs, r#next]
         assertEquals(xs, r.next)
     }
 
@@ -77,7 +77,7 @@ class NotTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(Nil).not
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        weak.assertNot[r#successful]
+        Weak.assertNot[r#successful]
         assertFalse(r.successful.unsing)
     }
 

@@ -12,7 +12,7 @@ import ordering.{LT, GT, EQ}
 
 
 private[sing]
-final class NaturalOrdering extends ordering.AbstractOrdering {
+final class NaturalOrdering extends AbstractOrdering {
     type self = NaturalOrdering
 
     override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asNat.equal(y.asNat)

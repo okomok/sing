@@ -11,11 +11,11 @@ package sing; package nat; package dense
 private[sing]
 trait CommonLiteral {
 
-    @annotation.aliasOf("`false`")
+    @Annotation.aliasOf("`false`")
      val _0B = `false`
     type _0B = `false`
 
-    @annotation.aliasOf("`true`")
+    @Annotation.aliasOf("`true`")
      val _1B = `true`
     type _1B = `true`
 

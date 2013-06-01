@@ -28,12 +28,12 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
         val bi = Box(mmm)
         val k = Box.kindOf[MMM]
         val id = Box.kindIdOf[MMM]
-        type id = weak.typeOf(id)
+        type id = Weak.typeOf(id)
 
-        weak.assertSame[bi.kindId, k.kindId]
-        weak.assertSame[k.kindId, id.self] // id.type fails.
-        weak.assertSame[k.kindId, id]
-        weak.assertSame[id.self, bi.kindId]
+        Weak.assertSame[bi.kindId, k.kindId]
+        Weak.assertSame[k.kindId, id.self] // id.type fails.
+        Weak.assertSame[k.kindId, id]
+        Weak.assertSame[id.self, bi.kindId]
 
         ()
     }
@@ -63,9 +63,9 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
         object c
         val cKind = Box.kindOf[c.type]
 
-        val poly = map.sorted1(IntKind.kindId, function.lift1((x: Int) => x + 1)).
-            put(StringKind.kindId, function.lift1((x: String) => x.reverse)).
-            put(BooleanKind.kindId, function.lift1((x: scala.Boolean) => c))
+        val poly = map.sorted1(IntKind.kindId, Function.lift1((x: Int) => x + 1)).
+            put(StringKind.kindId, Function.lift1((x: String) => x.reverse)).
+            put(BooleanKind.kindId, Function.lift1((x: scala.Boolean) => c))
 
         val xs = Box(0) :: Box("hello") :: Box(10) :: Box(true) :: Nil
 

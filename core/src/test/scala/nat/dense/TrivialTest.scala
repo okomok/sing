@@ -55,73 +55,73 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testTrivial {
-        weak.assertSame[scala.Int, _2#unsing]
-        weak.assert[_0# equal [_0]]
+        Weak.assertSame[scala.Int, _2#unsing]
+        Weak.assert[_0# equal [_0]]
 
-        weak.assert[_0# nequal [_1]]
-        weak.assert[_1# nequal [_0]]
+        Weak.assert[_0# nequal [_1]]
+        Weak.assert[_1# nequal [_0]]
 
-        weak.assert[_1# equal [_1]]
+        Weak.assert[_1# equal [_1]]
 
-        weak.assert[_1# nequal [_2]]
-        weak.assert[_1# nequal [_3]]
-        weak.assert[_2# nequal [_1]]
-        weak.assert[_3# nequal[_1]]
+        Weak.assert[_1# nequal [_2]]
+        Weak.assert[_1# nequal [_3]]
+        Weak.assert[_2# nequal [_1]]
+        Weak.assert[_3# nequal[_1]]
 
-        weak.assert[_7# equal[_7]]
-        weak.assert[_2# nequal[_7]]
-        weak.assert[_7# nequal[_2]]
-        weak.assert[_6# nequal[_7]]
-        weak.assert[_7# nequal[_6]]
-        weak.assert[_0# nequal[_7]]
-        weak.assert[_7# nequal[_0]]
-        weak.assert[_1# nequal[_7]]
-        weak.assert[_7# nequal[_1]]
+        Weak.assert[_7# equal[_7]]
+        Weak.assert[_2# nequal[_7]]
+        Weak.assert[_7# nequal[_2]]
+        Weak.assert[_6# nequal[_7]]
+        Weak.assert[_7# nequal[_6]]
+        Weak.assert[_0# nequal[_7]]
+        Weak.assert[_7# nequal[_0]]
+        Weak.assert[_1# nequal[_7]]
+        Weak.assert[_7# nequal[_1]]
 
-        weak.assert[_1#increment# equal [_2]]
-        weak.assert[_1#increment#increment# equal [_3]]
+        Weak.assert[_1#increment# equal [_2]]
+        Weak.assert[_1#increment#increment# equal [_3]]
 
-        weak.assert[_1#decrement# equal [_0]]
-        weak.assert[_3#decrement#decrement# equal [_1]]
-        weak.assert[_4#decrement# equal [_3]]
-        weak.assert[_7#increment#decrement#decrement# equal [_6]]
+        Weak.assert[_1#decrement# equal [_0]]
+        Weak.assert[_3#decrement#decrement# equal [_1]]
+        Weak.assert[_4#decrement# equal [_3]]
+        Weak.assert[_7#increment#decrement#decrement# equal [_6]]
     }
 
     trait testAdd {
-        weak.assert[_0#plus[_0]# equal[_0]]
-        weak.assert[_0#plus[_3]# equal[_3]]
-        weak.assert[_4#plus[_3]# equal[_7]]
-        weak.assert[_1#plus[_8]# equal[_9]]
-        weak.assert[_5#plus[_2]# equal[_7]]
+        Weak.assert[_0#plus[_0]# equal[_0]]
+        Weak.assert[_0#plus[_3]# equal[_3]]
+        Weak.assert[_4#plus[_3]# equal[_7]]
+        Weak.assert[_1#plus[_8]# equal[_9]]
+        Weak.assert[_5#plus[_2]# equal[_7]]
     }
 
     trait testSubtract {
-        weak.assert[_0# minus[_0]# equal[_0]]
-        weak.assert[_1# minus[_1]# equal[_0]]
-        weak.assert[_3# minus[_0]# equal[_3]]
-        weak.assert[_4# minus[_3]# equal[_1]]
-        weak.assert[_8# minus[_1]# equal[_7]]
-        weak.assert[_5# minus[_2]# equal[_3]]
-        weak.assert[_6# minus[_5]# equal[_1]]
-        weak.assert[_5# minus[_5]# equal[_0]]
+        Weak.assert[_0# minus[_0]# equal[_0]]
+        Weak.assert[_1# minus[_1]# equal[_0]]
+        Weak.assert[_3# minus[_0]# equal[_3]]
+        Weak.assert[_4# minus[_3]# equal[_1]]
+        Weak.assert[_8# minus[_1]# equal[_7]]
+        Weak.assert[_5# minus[_2]# equal[_3]]
+        Weak.assert[_6# minus[_5]# equal[_1]]
+        Weak.assert[_5# minus[_5]# equal[_0]]
     }
 
     trait testComparison {
-        weak.assert[_0#lt[_2]]
-        weak.assert[_3#lt[_5]]
-        weak.assert[_3#lteq[_3]]
-        weak.assert[_5#gt[_3]]
-        weak.assert[_4#gt[_0]]
-        weak.assert[_4# gteq[_2]]
-        weak.assert[_0#lteq[_0]]
-        weak.assert[_0# gteq[_0]]
-        weak.assertNot[_3#gt[_5]]
-        weak.assertNot[_0#lt[_0]]
-        weak.assertNot[_0#gt[_0]]
-        weak.assertNot[_4# gteq[_5]]
-        weak.assertNot[_4#lteq[_2]]
-        weak.assertNot[_4#lt[_4]]
-        weak.assertNot[_4#gt[_4]]
+        Weak.assert[_0#lt[_2]]
+        Weak.assert[_3#lt[_5]]
+        Weak.assert[_3#lteq[_3]]
+        Weak.assert[_5#gt[_3]]
+        Weak.assert[_4#gt[_0]]
+        Weak.assert[_4# gteq[_2]]
+        Weak.assert[_0#lteq[_0]]
+        Weak.assert[_0# gteq[_0]]
+        Weak.assertNot[_3#gt[_5]]
+        Weak.assertNot[_0#lt[_0]]
+        Weak.assertNot[_0#gt[_0]]
+        Weak.assertNot[_4# gteq[_5]]
+        Weak.assertNot[_4#lteq[_2]]
+        Weak.assertNot[_4#lt[_4]]
+        Weak.assertNot[_4#gt[_4]]
     }
 
     trait testPropagation {
@@ -129,17 +129,17 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type id[n <: Dense] = n#increment#decrement
         type equaL[n <: Dense, m <: Dense] = plusPlus[n]# equal [id[m]]
 
-        weak.assert[plusPlus[_4]# equal [_6]]
-        weak.assert[plusPlus[_7]# equal [_9]]
-        weak.assert[id[_9]# equal [_9]]
-        weak.assert[id[_7]# equal [_7]]
+        Weak.assert[plusPlus[_4]# equal [_6]]
+        Weak.assert[plusPlus[_7]# equal [_9]]
+        Weak.assert[id[_9]# equal [_9]]
+        Weak.assert[id[_7]# equal [_7]]
 
-        weak.assert[equaL[_3, _5]]
-        weak.assert[equaL[_4, _6]]
+        Weak.assert[equaL[_3, _5]]
+        Weak.assert[equaL[_4, _6]]
 
         // Must work.
         type subsub[n <: Dense, m <: Dense] = n# minus[m]# minus[m]
-        weak.assert[subsub[_9, _2]# equal [_5]]
+        Weak.assert[subsub[_9, _2]# equal [_5]]
     }
 
 }

@@ -5,10 +5,13 @@
 
 
 package com.github.okomok
-package sing; package list
+package sing
 
 
-trait Forwarder extends List with sing.Forwarder {
+import list._
+
+
+trait ListForwarder extends List with Forwarder {
     override protected type delegate <: List
 
     protected  def around[that <: List](that: that): around[that]

@@ -14,15 +14,15 @@ import okomok.sing._
 class WeakTest {
 
     def testTrueFalse {
-        weak.assert(`true`)
-        weak.assert[`true`]
-        weak.assertNot(`false`)
-        weak.assertNot[`false`]
+        Weak.assert(`true`)
+        Weak.assert[`true`]
+        Weak.assertNot(`false`)
+        Weak.assertNot[`false`]
 
-        //weak.assert(`false`)
-        //weak.assert[`false`]
-        //weak.assertNot(`true`)
-        //weak.assertNot[`true`]
+        //Weak.assert(`false`)
+        //Weak.assert[`false`]
+        //Weak.assertNot(`true`)
+        //Weak.assertNot[`true`]
     }
 
     class A
@@ -30,33 +30,33 @@ class WeakTest {
 
     def testSame {
         /*
-        weak.assertSame(3, 2)
+        Weak.assertSame(3, 2)
         */
-        weak.assertSame[Int, Int]
+        Weak.assertSame[Int, Int]
 
-        //weak.assertSame(new A, new B)
+        //Weak.assertSame(new A, new B)
         /*
-        weak.assertSame(new B, new A)
+        Weak.assertSame(new B, new A)
         */
 
-        //weak.assertSame(3, '2')
-        //weak.assertSame[Int, Char]
+        //Weak.assertSame(3, '2')
+        //Weak.assertSame[Int, Char]
     }
 
     def testConforms {
         /*
-        weak.assertConforms(new B, new A)
+        Weak.assertConforms(new B, new A)
         */
-        weak.assertConforms[B, A]
+        Weak.assertConforms[B, A]
         /*
-        weak.assertConforms(new A, new A)
+        Weak.assertConforms(new A, new A)
         */
-        weak.assertConforms[A, A]
+        Weak.assertConforms[A, A]
 
         /*
-        weak.assertConforms(new A, new B)
+        Weak.assertConforms(new A, new B)
         */
-        //weak.assertConforms[A, B]
+        //Weak.assertConforms[A, B]
     }
 
 }

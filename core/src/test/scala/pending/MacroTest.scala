@@ -39,7 +39,7 @@ class MacroTest extends org.scalatest.junit.JUnit3Suite {
 
     case class PP[A](override val unsing: scala.List[A]) extends AsBoxed
 
-//    sing.weak.printe[My#typeid]
+//    sing.Weak.printe[My#typeid]
 
     def testTrivial() {
 

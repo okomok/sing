@@ -24,7 +24,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
 
-        weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#equiv[xs, ys]]
+        Weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#equiv[xs, ys]]
         dassert(list.lexicographicalOrdering(nat.naturalOrdering).equiv(xs, ys))
     }
 
@@ -35,7 +35,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = Nil
         val ys: ys = Nil
 
-        weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#equiv[xs, ys]]
+        Weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#equiv[xs, ys]]
         dassert(list.lexicographicalOrdering(nat.naturalOrdering).equiv(xs, ys))
     }
 
@@ -46,7 +46,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: Nil
         val ys: ys = _5 :: _6 :: Nil
 
-        weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#lt[xs, ys]]
+        Weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#lt[xs, ys]]
         dassert(list.lexicographicalOrdering(nat.naturalOrdering).lt(xs, ys))
     }
 
@@ -57,7 +57,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = Nil
         val ys: ys = Nil
 
-        weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#gt[xs, ys]]
+        Weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#gt[xs, ys]]
         dassert(list.lexicographicalOrdering(nat.naturalOrdering).gt(xs, ys))
     }
 
@@ -68,7 +68,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: Nil
 
-        weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#gt[xs, ys]]
+        Weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#gt[xs, ys]]
         dassert(list.lexicographicalOrdering(nat.naturalOrdering).gt(xs, ys))
     }
 
@@ -79,7 +79,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
 
-        weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#lt[xs, ys]]
+        Weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#lt[xs, ys]]
         dassert(list.lexicographicalOrdering(nat.naturalOrdering).lt(xs, ys))
     }
 
@@ -90,7 +90,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
 
-        weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#gt[xs, ys]]
+        Weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#gt[xs, ys]]
         dassert(list.lexicographicalOrdering(nat.naturalOrdering).gt(xs, ys))
     }
 
@@ -101,7 +101,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
 
-        weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#lt[ys, xs]]
+        Weak.assert[list.lexicographicalOrdering[nat.naturalOrdering]#lt[ys, xs]]
         dassert(list.lexicographicalOrdering(nat.naturalOrdering).lt(ys, xs))
     }
 

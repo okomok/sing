@@ -5,7 +5,10 @@
 
 
 package com.github.okomok
-package sing; package peg
+package sing
+
+
+import peg._
 
 
 trait AbstractPeg extends Peg {
@@ -42,3 +45,4 @@ trait AbstractPeg extends Peg {
     final override  def matches[xs <: List](xs: xs): matches[xs] = Matches.apply(self, xs)
     final override type matches[xs <: List]                      = Matches.apply[self, xs]
 }
+

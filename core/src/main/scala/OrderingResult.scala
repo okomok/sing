@@ -5,18 +5,21 @@
 
 
 package com.github.okomok
-package sing; package ordering
+package sing
 
 
-sealed abstract class Result extends Any {
-    type self <: Result
+import ordering._
+
+
+sealed abstract class OrderingResult extends Any {
+    type self <: OrderingResult
     type unsing = scala.Int
 
-     def equal[that <: Result](that: that): equal[that]
-    type equal[that <: Result] <: Boolean
+     def equal[that <: OrderingResult](that: that): equal[that]
+    type equal[that <: OrderingResult] <: Boolean
 
-     def nequal[that <: Result](that: that): nequal[that]
-    type nequal[that <: Result] <: Boolean
+     def nequal[that <: OrderingResult](that: that): nequal[that]
+    type nequal[that <: OrderingResult] <: Boolean
 
      def isLT: isLT
     type isLT <: Boolean
@@ -33,29 +36,29 @@ sealed abstract class Result extends Any {
 
 
 private[sing]
-sealed abstract class AbstractResult extends Result {
+sealed abstract class AbstractOrderingResult extends OrderingResult {
     final override  def asOrderingResult: asOrderingResult = self
     final override type asOrderingResult                   = self
 
-    final override  def nequal[that <: Result](that: that): nequal[that] = equal(that).not
-    final override type nequal[that <: Result]                           = equal[that]#not
+    final override  def nequal[that <: OrderingResult](that: that): nequal[that] = equal(that).not
+    final override type nequal[that <: OrderingResult]                           = equal[that]#not
 
     final override  def isLTEQ: isLTEQ = isLT.or(isEQ)
     final override type isLTEQ         = isLT#or[isEQ]
     final override  def isGTEQ: isGTEQ = isGT.or(isEQ)
     final override type isGTEQ         = isGT#or[isEQ]
 
-    final override def canEqual(that: scala.Any) = that.isInstanceOf[Result]
+    final override def canEqual(that: scala.Any) = that.isInstanceOf[OrderingResult]
 }
 
 
-sealed abstract class LT extends AbstractResult {
+sealed abstract class LT extends AbstractOrderingResult {
     type self = LT
 
     override  def unsing: unsing = -1
 
-    override  def equal[that <: Result](that: that): equal[that] = that.isLT
-    override type equal[that <: Result]                          = that#isLT
+    override  def equal[that <: OrderingResult](that: that): equal[that] = that.isLT
+    override type equal[that <: OrderingResult]                          = that#isLT
 
     override  def isLT: isLT = `true`
     override type isLT       = `true`
@@ -65,13 +68,13 @@ sealed abstract class LT extends AbstractResult {
     override type isEQ       = `false`
 }
 
-sealed abstract class GT extends AbstractResult {
+sealed abstract class GT extends AbstractOrderingResult {
     type self = GT
 
     override  def unsing: unsing = 1
 
-    override  def equal[that <: Result](that: that): equal[that] = that.isGT
-    override type equal[that <: Result]                          = that#isGT
+    override  def equal[that <: OrderingResult](that: that): equal[that] = that.isGT
+    override type equal[that <: OrderingResult]                          = that#isGT
 
     override  def isLT: isLT = `false`
     override type isLT       = `false`
@@ -81,13 +84,13 @@ sealed abstract class GT extends AbstractResult {
     override type isEQ       = `false`
 }
 
-sealed abstract class EQ extends AbstractResult {
+sealed abstract class EQ extends AbstractOrderingResult {
     type self = EQ
 
     override  def unsing: unsing = 0
 
-    override  def equal[that <: Result](that: that): equal[that] = that.isEQ
-    override type equal[that <: Result]                          = that#isEQ
+    override  def equal[that <: OrderingResult](that: that): equal[that] = that.isEQ
+    override type equal[that <: OrderingResult]                          = that#isEQ
 
     override  def isLT: isLT = `false`
     override type isLT       = `false`

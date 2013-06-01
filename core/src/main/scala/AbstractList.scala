@@ -5,7 +5,10 @@
 
 
 package com.github.okomok
-package sing; package list
+package sing
+
+
+import list._
 
 
 trait AbstractList extends List {
@@ -24,7 +27,7 @@ trait AbstractList extends List {
     final override  def foreach[f <: Function1](f: f): foreach[f] = Foreach.apply(self, f)
     final override type foreach[f <: Function1]                   = Foreach.apply[self, f]
 
-    @annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
+    @Annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
     private[this] lazy val _length: length = Length.apply(self)
     final override  def length: length = _length
     final override type length         = Length.apply[self]
@@ -151,3 +154,4 @@ trait AbstractList extends List {
 
     override  def canEqual(that: scala.Any) = that.isInstanceOf[List]
 }
+

@@ -5,7 +5,10 @@
 
 
 package com.github.okomok
-package sing; package ordering
+package sing
+
+
+import ordering._
 
 
 trait AbstractOrdering extends Ordering {

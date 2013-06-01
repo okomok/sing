@@ -27,7 +27,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        weak.assertSame[`true`, set.sorted[nat.naturalOrdering]#add[_4]#add[_3]#add[_5]#add[_0]#add[_1]#add[_2]#equal[um]]
+        Weak.assertSame[`true`, set.sorted[nat.naturalOrdering]#add[_4]#add[_3]#add[_5]#add[_0]#add[_1]#add[_2]#equal[um]]
         assertEquals(set.sorted(nat.naturalOrdering).add(_4).add(_3).add(_5).add(_0).add(_1).add(_2), um)
    }
 
@@ -41,7 +41,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        weak.assertSame[set.sorted[nat.naturalOrdering], um]
+        Weak.assertSame[set.sorted[nat.naturalOrdering], um]
         assertEquals(set.sorted(nat.naturalOrdering), um)
    }
 
@@ -55,7 +55,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        weak.assertSame[`true`,  set.sorted[nat.naturalOrdering]#add[_3]#add[_1]#add[_2]#equal[um]]
+        Weak.assertSame[`true`,  set.sorted[nat.naturalOrdering]#add[_3]#add[_1]#add[_2]#equal[um]]
         assertEquals(set.sorted(nat.naturalOrdering).add(_3).add(_1).add(_2), um)
    }
 
@@ -69,7 +69,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        weak.assertSame[`true`,  set.sorted[nat.naturalOrdering]#add[_4]#add[_3]#add[_5]#add[_0]#add[_2]#equal[um]]
+        Weak.assertSame[`true`,  set.sorted[nat.naturalOrdering]#add[_4]#add[_3]#add[_5]#add[_0]#add[_2]#equal[um]]
         assertEquals(set.sorted(nat.naturalOrdering).add(_4).add(_3).add(_5).add(_0).add(_2), um)
    }
 

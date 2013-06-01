@@ -5,7 +5,7 @@
 
 
 package com.github.okomok
-package sing; package weak
+package sing
 
 
 import scala.annotation.elidable
@@ -14,8 +14,10 @@ import scala.language.experimental.macros
 import scala.reflect.macros.Macro
 
 
-private[sing]
-trait Common {
+import weak._
+
+
+object Weak {
 
     /**
      * assertion

@@ -24,7 +24,7 @@ class FindTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         type xs = _5 :: Nil
-        weak.assertSame[Some[_5], xs#find[Gt3]]
+        Weak.assertSame[Some[_5], xs#find[Gt3]]
     }
 
 }

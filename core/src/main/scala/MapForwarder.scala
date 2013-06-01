@@ -5,10 +5,13 @@
 
 
 package com.github.okomok
-package sing; package map
+package sing
 
 
-trait Forwarder extends Map with sing.Forwarder {
+import map._
+
+
+trait MapForwarder extends Map with Forwarder {
     override protected type delegate <: Map
 
     final override  def asBSTree: asBSTree = delegate.asBSTree
@@ -56,3 +59,4 @@ trait Forwarder extends Map with sing.Forwarder {
     final override  def union[that <: Map](that: that): union[that] = delegate.union(that)
     final override type union[that <: Map]                          = delegate#union[that]
 }
+

@@ -24,9 +24,9 @@ class StartsWithTest extends org.scalatest.junit.JUnit3Suite {
         val ys: ys = _3 :: _4 :: _5 :: Nil
         type r   = peg.StartsWith.apply[xs, ys, None]
         val r: r = peg.StartsWith.apply(xs, ys, None)
-        weak.assert[r#isEmpty#not]
-        weak.assertSame[ys, r#get#asProduct2#_1#asList#force]
-        weak.assertSame[_6 :: Nil, r#get#asProduct2#_2#asList#force]
+        Weak.assert[r#isEmpty#not]
+        Weak.assertSame[ys, r#get#asProduct2#_1#asList#force]
+        Weak.assertSame[_6 :: Nil, r#get#asProduct2#_2#asList#force]
         assertEquals(ys, r.get.asProduct2._1)
         assertEquals(_6 :: Nil, r.get.asProduct2._2)
     }
@@ -38,9 +38,9 @@ class StartsWithTest extends org.scalatest.junit.JUnit3Suite {
         val ys: ys = Nil
         type r   = peg.StartsWith.apply[xs, ys, None]
         val r: r = peg.StartsWith.apply(xs, ys, None)
-        weak.assert[r#isEmpty#not]
-        weak.assertSame[Nil, r#get#asProduct2#_1#asList#force]
-        weak.assertSame[xs, r#get#asProduct2#_2#asList#force]
+        Weak.assert[r#isEmpty#not]
+        Weak.assertSame[Nil, r#get#asProduct2#_1#asList#force]
+        Weak.assertSame[xs, r#get#asProduct2#_2#asList#force]
         assertEquals(Nil, r.get.asProduct2._1)
         assertEquals(xs, r.get.asProduct2._2)
     }
@@ -52,9 +52,9 @@ class StartsWithTest extends org.scalatest.junit.JUnit3Suite {
         val ys: ys = Nil
         type r   = peg.StartsWith.apply[xs, ys, None]
         val r: r = peg.StartsWith.apply(xs, ys, None)
-        weak.assert[r#isEmpty#not]
-        weak.assertSame[Nil, r#get#asProduct2#_1#asList#force]
-        weak.assertSame[Nil, r#get#asProduct2#_2#asList#force]
+        Weak.assert[r#isEmpty#not]
+        Weak.assertSame[Nil, r#get#asProduct2#_1#asList#force]
+        Weak.assertSame[Nil, r#get#asProduct2#_2#asList#force]
         assertEquals(Nil, r.get.asProduct2._1)
         assertEquals(Nil, r.get.asProduct2._2)
     }
@@ -66,7 +66,7 @@ class StartsWithTest extends org.scalatest.junit.JUnit3Suite {
         val ys: ys = _5 :: _6 :: Nil
         type r   = peg.StartsWith.apply[xs, ys, None]
         val r: r = peg.StartsWith.apply(xs, ys, None)
-        weak.assert[r#isEmpty]
+        Weak.assert[r#isEmpty]
         assertEquals(None, r)
     }
 
@@ -77,9 +77,9 @@ class StartsWithTest extends org.scalatest.junit.JUnit3Suite {
         val ys: ys = _3 :: _4 :: _5 :: _6 :: Nil
         type r   = peg.StartsWith.apply[xs, ys, None]
         val r: r = peg.StartsWith.apply(xs, ys, None)
-        weak.assert[r#isEmpty#not]
-        weak.assertSame[xs, r#get#asProduct2#_1#asList#force]
-        weak.assertSame[Nil, r#get#asProduct2#_2#asList#force]
+        Weak.assert[r#isEmpty#not]
+        Weak.assertSame[xs, r#get#asProduct2#_1#asList#force]
+        Weak.assertSame[Nil, r#get#asProduct2#_2#asList#force]
         assertEquals(xs, r.get.asProduct2._1)
         assertEquals(Nil, r.get.asProduct2._2)
     }

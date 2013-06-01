@@ -27,8 +27,8 @@ class RemoveTest extends org.scalatest.junit.JUnit3Suite {
 
         type rm = m#remove[_5]
         val rm: rm = m.remove(_5)
-        weak.assertSame[nat.dense._2, rm#size]
-        weak.assertSame[None, rm#get[_5]]
+        Weak.assertSame[nat.dense._2, rm#size]
+        Weak.assertSame[None, rm#get[_5]]
         AssertInvariant(rm)
         ()
     }
@@ -39,8 +39,8 @@ class RemoveTest extends org.scalatest.junit.JUnit3Suite {
 
         type rm = m#remove[_1]
         val rm: rm = m.remove(_1)
-        weak.assertSame[nat.dense._8, rm#size]
-        weak.assertSame[None, rm#get[_1]]
+        Weak.assertSame[nat.dense._8, rm#size]
+        Weak.assertSame[None, rm#get[_1]]
         AssertInvariant(rm)
         ()
     }
@@ -51,8 +51,8 @@ class RemoveTest extends org.scalatest.junit.JUnit3Suite {
 
         type rm = m#remove[_3]
         val rm: rm = m.remove(_3)
-        weak.assertSame[nat.dense._8, rm#size]
-        weak.assertSame[None, rm#get[_3]]
+        Weak.assertSame[nat.dense._8, rm#size]
+        Weak.assertSame[None, rm#get[_3]]
         AssertInvariant(rm)
         //println(rm)
         ()
@@ -64,8 +64,8 @@ class RemoveTest extends org.scalatest.junit.JUnit3Suite {
 
         type rm = m#remove[_8]
         val rm: rm = m.remove(_8)
-        weak.assertSame[nat.dense._8, rm#size]
-        weak.assertSame[None, rm#get[_8]]
+        Weak.assertSame[nat.dense._8, rm#size]
+        Weak.assertSame[None, rm#get[_8]]
         AssertInvariant(rm)
         ()
     }
@@ -76,8 +76,8 @@ class RemoveTest extends org.scalatest.junit.JUnit3Suite {
 
         type rm = m#remove[_14]
         val rm: rm = m.remove(_14)
-        weak.assertSame[nat.dense._8, rm#size]
-        weak.assertSame[None, rm#get[_14]]
+        Weak.assertSame[nat.dense._8, rm#size]
+        Weak.assertSame[None, rm#get[_14]]
         AssertInvariant(rm)
         ()
     }
@@ -88,8 +88,8 @@ class RemoveTest extends org.scalatest.junit.JUnit3Suite {
 
         type rm = m#remove[_6]
         val rm: rm = m.remove(_6)
-        weak.assertSame[nat.dense._8, rm#size]
-        weak.assertSame[None, rm#get[_6]]
+        Weak.assertSame[nat.dense._8, rm#size]
+        Weak.assertSame[None, rm#get[_6]]
         AssertInvariant(rm)
         ()
     }

@@ -69,7 +69,7 @@ final class Box[A, _A <: BoxKind[A]](override val unsing: A, _A: _A) extends Any
 }
 
 object Box {
-    // Typemethod part is clearly infeasible, but you have weak.typeOf.
+    // Typemethod part is clearly infeasible, but you have Weak.typeOf.
 
 //  Implicit lookup fails...
 //     val Kind    = BoxKind

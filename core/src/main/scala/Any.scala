@@ -13,7 +13,7 @@ package sing
  */
 trait Any extends AnyType with scala.Equals {
 
-    @annotation.returnThis
+    @Annotation.returnThis
     final val self: self = this.asInstanceOf[self]
     type self <: Any
 
@@ -60,7 +60,7 @@ trait Any extends AnyType with scala.Equals {
     type asOrdering <: Ordering
 
      def asOrderingResult: asOrderingResult = unsupported("Any.asOrderingResult")
-    type asOrderingResult <: ordering.Result
+    type asOrderingResult <: OrderingResult
 
      def asPeg: asPeg = unsupported("Any.asPeg")
     type asPeg <: Peg

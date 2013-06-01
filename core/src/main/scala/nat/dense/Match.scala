@@ -25,7 +25,7 @@ final case class ConsMatch[xs <: Dense, ys <: Dense, tt <: Function0, tf <: Func
 
 /*
 private[sing]
-final class _Match {
+final class Match {
      def apply[xs <: Dense, ys <: Dense, nn <: Function0, nc <: Function0, cn <: Function0, cc <: Function0](xs: xs, ys: ys, nn: nn, nc: nc, cn: cn, cc: cc): apply[xs, ys, nn, nc, cn, cc] =
         `if`(xs.isZero, `if`(ys.isZero, nn, nc), `if`(ys.isZero, cn, cc)).apply.asInstanceOf[apply[xs, ys, nn, nc, cn, cc]]
     type apply[xs <: Dense, ys <: Dense, nn <: Function0, nc <: Function0, cn <: Function0, cc <: Function0] =

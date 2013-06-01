@@ -12,7 +12,7 @@ private[sing]
 final class Const0[v <: Any](v: => v) extends Function0 {
     type self = Const0[v]
 
-    @annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
+    @Annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
     private[this] lazy val _apply: apply = v
     override  def apply: apply = _apply
     override type apply        = v

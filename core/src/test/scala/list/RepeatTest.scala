@@ -20,7 +20,7 @@ class RepeatTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial {
         type rs = list.repeat[_3]
         val rs: rs = list.repeat(_3)
-        weak.assert[rs#take[_4]#equalWith[_3 :: _3 :: _3 :: _3 :: Nil, nat.naturalOrdering]]
+        Weak.assert[rs#take[_4]#equalWith[_3 :: _3 :: _3 :: _3 :: Nil, nat.naturalOrdering]]
         assertEquals(_3 :: _3 :: _3 :: _3 :: Nil, rs.take(_4))
     }
 

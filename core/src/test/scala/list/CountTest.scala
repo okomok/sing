@@ -26,7 +26,7 @@ class CountTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _10 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _10 :: _7 :: _8 :: _9 :: Nil
         val u: xs#count[Lt8] = xs.count(Lt8())
-        weak.assertSame[_3, xs#count[Lt8]]
+        Weak.assertSame[_3, xs#count[Lt8]]
         assertEquals(_3, u)
     }
 
@@ -34,7 +34,7 @@ class CountTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _9 :: _10 :: _8 :: _9 :: Nil
         val xs: xs = _9 :: _10 :: _8 :: _9 :: Nil
         val u: xs#count[Lt8] = xs.count(Lt8())
-        weak.assertSame[_0, xs#count[Lt8]]
+        Weak.assertSame[_0, xs#count[Lt8]]
         assertEquals(_0, u)
     }
 
@@ -42,7 +42,7 @@ class CountTest extends org.scalatest.junit.JUnit3Suite {
         type xs = Nil
         val xs: xs = Nil
         val u: xs#count[Lt8] = xs.count(Lt8())
-        weak.assertSame[_0, xs#count[Lt8]]
+        Weak.assertSame[_0, xs#count[Lt8]]
         assertEquals(_0, u)
     }
 

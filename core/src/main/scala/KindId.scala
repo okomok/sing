@@ -23,7 +23,7 @@ sealed trait KindId extends Any {
 // private[sing]
 object KindId {
 
-    @annotation.visibleForMacro
+    @Annotation.visibleForMacro
     final case class From[ns <: List](override val asList: ns) extends KindId {
         type self = From[ns]
 

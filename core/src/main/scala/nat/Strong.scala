@@ -8,7 +8,7 @@ package com.github.okomok
 package sing; package nat
 
 
-abstract class Strong[n <: Nat](final override protected val delegate: n) extends Forwarder {
+abstract class Strong[n <: Nat](final override protected val delegate: n) extends NatForwarder {
     final override protected type delegate = n
 
     final override  def asNat: asNat = self

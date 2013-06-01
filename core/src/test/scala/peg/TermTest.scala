@@ -23,7 +23,7 @@ class TermTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _3 :: Nil
         type r = term[_3]#matches[xs]
         val r: r = term(_3).matches(xs)
-        weak.assert[r]
+        Weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -32,7 +32,7 @@ class TermTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _7 :: Nil
         type r = term[_3]#matches[xs]
         val r: r = term(_3).matches(xs)
-        weak.assertNot[r]
+        Weak.assertNot[r]
         assertFalse(r.unsing)
     }
 
@@ -41,7 +41,7 @@ class TermTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type r = term[_5]#matches[xs]
         val r: r = term(_5).matches(xs)
-        weak.assertNot[r]
+        Weak.assertNot[r]
         assertFalse(r.unsing)
     }
 
@@ -50,9 +50,9 @@ class TermTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _3 :: _5 :: _6 :: Nil
         type r = term[_3]#parse[xs]
         val r: r = term(_3).parse(xs)
-        weak.assert[r#successful]
-        weak.assertSame[_3, r#get]
-        weak.assertSame[_5 :: _6 :: Nil, r#next#force]
+        Weak.assert[r#successful]
+        Weak.assertSame[_3, r#get]
+        Weak.assertSame[_5 :: _6 :: Nil, r#next#force]
         assertEquals(_3, r.get)
         assertEquals(_5 :: _6 :: Nil, r.next)
     }
@@ -62,8 +62,8 @@ class TermTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _3 :: _5 :: _6 :: Nil
         type r = term[_2]#parse[xs]
         val r: r = term(_2).parse(xs)
-        weak.assertNot[r#successful]
-        weak.assertSame[_3 :: _5 :: _6 :: Nil, r#next#force]
+        Weak.assertNot[r#successful]
+        Weak.assertSame[_3 :: _5 :: _6 :: Nil, r#next#force]
         assertEquals(_3 :: _5 :: _6 :: Nil, r.next)
     }
 

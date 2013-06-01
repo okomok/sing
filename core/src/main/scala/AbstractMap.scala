@@ -5,7 +5,10 @@
 
 
 package com.github.okomok
-package sing; package map
+package sing
+
+
+import map._
 
 
 trait AbstractMap extends Map {
@@ -29,3 +32,4 @@ trait AbstractMap extends Map {
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Map]
 }
+

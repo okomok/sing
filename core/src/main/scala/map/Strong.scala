@@ -8,7 +8,7 @@ package com.github.okomok
 package sing; package map
 
 
-abstract class Strong[m <: Map](final override protected val delegate: m) extends Forwarder {
+abstract class Strong[m <: Map](final override protected val delegate: m) extends MapForwarder {
     final override protected type delegate = m
 
     final override  def asMap: asMap = self

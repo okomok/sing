@@ -120,7 +120,7 @@ final case class Succ[n <: Peano](override val decrement: n) extends AbstractPea
     override  def foldRight[z <: Any, f <: Function2](z: z, f: f): foldRight[z, f] = f.apply(self, decrement.foldRight(z, f))
     override type foldRight[z <: Any, f <: Function2]                              = f#apply[self, decrement#foldRight[z, f]]
 
-    @annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
+    @Annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
     private[this] lazy val _isEven: isEven = decrement.isEven.not
     override  def isEven: isEven = _isEven
     override type isEven         = decrement#isEven#not

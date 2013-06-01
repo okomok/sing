@@ -5,12 +5,26 @@
 
 
 package com.github.okomok
-package sing; package nat
+package sing
 
 
-object Nat extends Common with AnyKind {
+object Nat extends AnyKind {
     override lazy val kindId: kindId = KindId.From(dense.Nil :: list.Nil)
     override     type kindId         = KindId.From[dense.Nil :: list.Nil]
+
+    @Annotation.aliasOf("dense.Dense")
+     val Dense = dense.Dense
+    type Dense = dense.Dense
+
+    @Annotation.aliasOf("peano.Peano")
+     val Peano = peano.Peano
+    type Peano = peano.Peano
+
+    /**
+     * The natural ordering of Nat
+     */
+     val naturalOrdering: naturalOrdering = new NaturalOrdering
+    type naturalOrdering                  =     NaturalOrdering
 }
 
 
@@ -34,15 +48,15 @@ trait Nat extends Any {
      def asPeano: asPeano
     type asPeano <: Peano
 
-    @annotation.constantTime
+    @Annotation.constantTime
      def isZero: isZero
     type isZero <: Boolean
 
-    @annotation.constantTime
+    @Annotation.constantTime
      def increment: increment
     type increment <: Nat
 
-    @annotation.constantTime
+    @Annotation.constantTime
      def decrement: decrement
     type decrement <: Nat
 

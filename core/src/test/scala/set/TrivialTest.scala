@@ -24,15 +24,15 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type m = set.sorted[o]#add[_3]#add[_5]#add[_1]
         val m: m = set.sorted(o).add(_3).add(_5).add(_1)
 
-        weak.assertSame[nat.dense._3, m#size]
+        Weak.assertSame[nat.dense._3, m#size]
 
         type v8 = m#contains[_8]
         val v8: v8 = m.contains(_8)
-        weak.assertSame[`false`, v8]
+        Weak.assertSame[`false`, v8]
 
         type v5 = m#contains[_5]
         val v5: v5 = m.contains(_5)
-        weak.assertSame[`true`, v5]
+        Weak.assertSame[`true`, v5]
     }
 
     def testContains {
@@ -42,16 +42,16 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type m = set.sorted[o]#add[_3]#add[_5]#add[_1]
         val m: m = set.sorted(o).add(_3).add(_5).add(_1)
 
-        weak.assertSame[`false`, m#contains[_9]]
-        weak.assertSame[`true`, m#contains[_5]]
+        Weak.assertSame[`false`, m#contains[_9]]
+        Weak.assertSame[`true`, m#contains[_5]]
     }
 
     def testSorted1 {
         type m = set.sorted1[_3]#add[_5]#add[_1]
         val m: m = set.sorted1(_3).add(_5).add(_1)
 
-        weak.assertSame[`false`, m#contains[_9]]
-        weak.assertSame[`true`, m#contains[_5]]
+        Weak.assertSame[`false`, m#contains[_9]]
+        Weak.assertSame[`true`, m#contains[_5]]
     }
 
     def testUnsing {

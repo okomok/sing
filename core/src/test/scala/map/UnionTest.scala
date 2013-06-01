@@ -27,7 +27,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        weak.assertSame[`true`, map.sorted[nat.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_5, _6]#put[_0, _1]#put[_1, _2]#put[_2, _3]#equalWith[um, nat.naturalOrdering]]
+        Weak.assertSame[`true`, map.sorted[nat.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_5, _6]#put[_0, _1]#put[_1, _2]#put[_2, _3]#equalWith[um, nat.naturalOrdering]]
         assertEquals(map.sorted(nat.naturalOrdering).put(_4, _5).put(_3, _4).put(_5, _6).put(_0, _1).put(_1, _2).put(_2, _3), um)
    }
 
@@ -41,7 +41,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        weak.assertSame[map.sorted[nat.naturalOrdering], um]
+        Weak.assertSame[map.sorted[nat.naturalOrdering], um]
         assertEquals(map.sorted(nat.naturalOrdering), um)
    }
 
@@ -55,7 +55,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        weak.assertSame[`true`,  map.sorted[nat.naturalOrdering]#put[_3, _4]#put[_1, _2]#put[_2, _3]#equalWith[um, nat.naturalOrdering]]
+        Weak.assertSame[`true`,  map.sorted[nat.naturalOrdering]#put[_3, _4]#put[_1, _2]#put[_2, _3]#equalWith[um, nat.naturalOrdering]]
         assertEquals(map.sorted(nat.naturalOrdering).put(_3, _4).put(_1, _2).put(_2, _3), um)
    }
 
@@ -69,7 +69,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        weak.assertSame[`true`,  map.sorted[nat.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_5, _6]#put[_0, _1]#put[_2, _3]#equalWith[um, nat.naturalOrdering]]
+        Weak.assertSame[`true`,  map.sorted[nat.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_5, _6]#put[_0, _1]#put[_2, _3]#equalWith[um, nat.naturalOrdering]]
         assertEquals(map.sorted(nat.naturalOrdering).put(_4, _5).put(_3, _4).put(_5, _6).put(_0, _1).put(_2, _3), um)
    }
 

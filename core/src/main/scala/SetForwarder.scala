@@ -5,10 +5,13 @@
 
 
 package com.github.okomok
-package sing; package set
+package sing;
 
 
-trait Forwarder extends Set with sing.Forwarder {
+import set._
+
+
+trait SetForwarder extends Set with Forwarder {
     override protected type delegate <: Set
 
     final override  def size: size = delegate.size
@@ -50,3 +53,4 @@ trait Forwarder extends Set with sing.Forwarder {
     final override  def subsetOf[that <: Set](that: that): subsetOf[that] = delegate.subsetOf(that)
     final override type subsetOf[that <: Set]                             = delegate#subsetOf[that]
 }
+

@@ -8,9 +8,9 @@ package com.github.okomok
 package sing
 
 
-private[sing]
-case class GetNaturalOrdering[x <: Any](x: x) extends Function0 {
-    type self = GetNaturalOrdering[x]
+final case class NaturalOrderingOf[x <: Any](x: x) extends Function0 {
+    type self = NaturalOrderingOf[x]
     override  def apply: apply = x.naturalOrdering
     override type apply        = x#naturalOrdering
 }
+

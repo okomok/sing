@@ -8,14 +8,32 @@ package com.github.okomok
 package sing; package ordering
 
 
-object Ordering extends Common
+object Ordering {
+
+    val LT: LT = _Result.LT
+    val GT: GT = _Result.GT
+    val EQ: EQ = _Result.EQ
+
+    /**
+     * Always returns `EQ`.
+     */
+     val alwaysEQ = new AlwaysEQ
+    type alwaysEQ = AlwaysEQ
+
+    /*
+     * The ordering based on kindId
+
+     val kindIdOrdering: kindIdOrdering = new KindIdOrdering
+    type kindIdOrdering                 =     KindIdOrdering     */
+
+}
 
 
 trait Ordering extends Equiv {
     type self <: Ordering
 
      def compare[x <: Any, y <: Any](x: x, y: y): compare[x, y]
-    type compare[x <: Any, y <: Any] <: ordering.Result
+    type compare[x <: Any, y <: Any] <: OrderingResult
 
      def lteq[x <: Any, y <: Any](x: x, y: y): lteq[x, y]
     type lteq[x <: Any, y <: Any] <: Boolean

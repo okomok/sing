@@ -25,7 +25,7 @@ class RepeatAtMostTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = term(_1).repeat(_0, _0)
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        weak.assert[r]
+        Weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -36,11 +36,11 @@ class RepeatAtMostTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = term(_1).repeat(_0, _3)
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        weak.assert[r#successful]
+        Weak.assert[r#successful]
         assertTrue(r.successful.unsing)
-        weak.assertSame[_1 :: _1 :: _1 :: Nil, r#get#force]
+        Weak.assertSame[_1 :: _1 :: _1 :: Nil, r#get#force]
         assertEquals(_1 :: _1 :: _1 :: Nil, r.get)
-        weak.assertSame[_1 :: _3 :: Nil, r#next#force]
+        Weak.assertSame[_1 :: _3 :: Nil, r#next#force]
         assertEquals(_1 :: _3 :: Nil, r.next)
     }
 
@@ -51,11 +51,11 @@ class RepeatAtMostTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = term(_1).repeat(_0, _3)
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        weak.assert[r#successful]
+        Weak.assert[r#successful]
         assertTrue(r.successful.unsing)
-        weak.assertSame[Nil, r#get#force]
+        Weak.assertSame[Nil, r#get#force]
         assertEquals(Nil, r.get)
-        weak.assertSame[xs, r#next#force]
+        Weak.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
 

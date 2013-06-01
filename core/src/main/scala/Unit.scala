@@ -23,8 +23,3 @@ sealed abstract class Unit extends Any {
     override  def canEqual(that: scala.Any) = that.isInstanceOf[Unit]
 }
 
-
-private[sing]
-object _Unit {
-    val value = new Unit{}
-}

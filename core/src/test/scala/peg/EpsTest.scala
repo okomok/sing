@@ -23,7 +23,7 @@ class EpsTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type r = eps#matches[xs]
         val r: r = eps.matches(xs)
-        weak.assert[r]
+        Weak.assert[r]
         assertTrue(r.unsing)
     }
 
@@ -32,7 +32,7 @@ class EpsTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _7 :: Nil
         type r = eps#matches[xs]
         val r: r = eps.matches(xs)
-        weak.assertNot[r]
+        Weak.assertNot[r]
         assertFalse(r.unsing)
     }
 
@@ -41,9 +41,9 @@ class EpsTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _3 :: _5 :: _6 :: Nil
         type r = eps#parse[xs]
         val r: r = eps.parse(xs)
-        weak.assert[r#successful]
-        weak.assertSame[Nil, r#get]
-        weak.assertSame[xs, r#next#force]
+        Weak.assert[r#successful]
+        Weak.assertSame[Nil, r#get]
+        Weak.assertSame[xs, r#next#force]
         assertEquals(Nil, r.get)
         assertEquals(_3 :: _5 :: _6 :: Nil, r.next)
     }

@@ -8,7 +8,7 @@ package com.github.okomok
 package sing; package set
 
 
-abstract class Strong[s <: Set](final override protected val delegate: s) extends Forwarder {
+abstract class Strong[s <: Set](final override protected val delegate: s) extends SetForwarder {
     final override protected type delegate = s
 
     final override  def asSet: asSet = self

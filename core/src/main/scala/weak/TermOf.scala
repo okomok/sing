@@ -8,7 +8,7 @@ package com.github.okomok
 package sing; package weak
 
 
-@annotation.specializer
+@Annotation.specializer
 @scala.annotation.implicitNotFound("No implicit TermOf defined for ${x}.")
 trait TermOf[x <: Any] extends scala.Function0[x]
 
