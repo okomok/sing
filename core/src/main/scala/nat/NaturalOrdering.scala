@@ -9,7 +9,7 @@ package sing; package nat
 
 
 private[sing]
-final class NaturalOrdering extends AbstractOrdering {
+final class NaturalOrdering extends OrderingImpl {
     type self = NaturalOrdering
 
     override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asNat.equal(y.asNat)

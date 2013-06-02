@@ -14,7 +14,7 @@ import peg._
 /**
  * Helps to build a recursive grammar.
  */
-trait PegRule extends AbstractPeg {
+trait PegRule extends PegImpl {
     protected  def rule: rule
     protected type rule <: Peg
 

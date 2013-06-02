@@ -13,7 +13,7 @@ object Dot {
      def apply: apply = new Impl
     type apply        =     Impl
 
-    final class Impl extends AbstractPeg with OneWidth {
+    final class Impl extends PegImpl with OneWidth {
         type self = Impl
 
         override  def parse[xs <: List](xs: xs): parse[xs] =

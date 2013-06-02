@@ -11,7 +11,7 @@ package sing
 import list._
 
 
-sealed abstract class Nil extends AbstractList {
+sealed abstract class Nil extends ListImpl {
     type self = Nil
 
     override  def isEmpty: isEmpty = `true`

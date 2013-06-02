@@ -9,7 +9,7 @@ package sing
 
 
 private[sing]
-trait AbstractNat extends Nat {
+trait NatImpl extends Nat {
     final override  def asNat: asNat = self
     final override type asNat        = self
 

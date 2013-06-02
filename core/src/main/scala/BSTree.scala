@@ -13,7 +13,7 @@ package sing
 import bstree._
 
 
-sealed abstract class BSTree extends AbstractMap {
+sealed abstract class BSTree extends MapImpl {
     type self <: BSTree
     type unsing = scala.collection.immutable.Map[scala.Any, scala.Any]
 
@@ -38,7 +38,8 @@ sealed abstract class BSTree extends AbstractMap {
 }
 
 
-sealed abstract class AbstractBSTree extends BSTree {
+private[sing]
+sealed abstract class BSTreeImpl extends BSTree {
     final override  def asBSTree: asBSTree = self
     final override type asBSTree           = self
 
@@ -50,7 +51,7 @@ sealed abstract class AbstractBSTree extends BSTree {
 }
 
 
-final case class BSNil[o <: Ordering](override val ord: o) extends AbstractBSTree {
+final case class BSNil[o <: Ordering](override val ord: o) extends BSTreeImpl {
     type self = BSNil[o]
 
     override  def unsing: unsing = scala.collection.immutable.Map.empty
@@ -96,7 +97,7 @@ final case class BSNil[o <: Ordering](override val ord: o) extends AbstractBSTre
 
 
 final case class BSNode[k <: Any, v <: Any, l <: BSTree, r <: BSTree](
-    override val key: k, override val value: v, override val left: l, override val right: r) extends AbstractBSTree
+    override val key: k, override val value: v, override val left: l, override val right: r) extends BSTreeImpl
 {
     Predef.assert(left.ord eq right.ord)
 

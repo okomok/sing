@@ -13,7 +13,7 @@ object Take {
      def apply[xs <: List, n <: Nat](xs: xs, n: n): apply[xs, n] = Impl(xs, n)
     type apply[xs <: List, n <: Nat]                             = Impl[xs, n]
 
-    case class Impl[xs <: List, n <: Nat](xs: xs, n: n) extends AbstractList {
+    case class Impl[xs <: List, n <: Nat](xs: xs, n: n) extends ListImpl {
         type self = Impl[xs, n]
 
         private[this] lazy val ys: ys = `if`(n.isZero, const0(Nil), const0(xs)).apply.asList
@@ -36,7 +36,7 @@ object TakeWhile {
      def apply[xs <: List, f <: Function1](xs: xs, f: f): apply[xs, f] = Impl(xs, f)
     type apply[xs <: List, f <: Function1]                             = Impl[xs, f]
 
-    case class Impl[xs <: List, f <: Function1](xs: xs, f: f) extends AbstractList {
+    case class Impl[xs <: List, f <: Function1](xs: xs, f: f) extends ListImpl {
         type self = Impl[xs, f]
 
         private[this] lazy val ys: ys = `if`(xs.isEmpty, const0(xs), Else(xs, f)).apply.asList

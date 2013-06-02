@@ -71,7 +71,7 @@ sealed abstract class Option extends Any {
 
 
 private[sing]
-sealed abstract class AbstractOption extends Option {
+sealed abstract class OptionImpl extends Option {
     final override  def asOption: asOption = self
     final override type asOption           = self
 
@@ -106,7 +106,7 @@ sealed abstract class AbstractOption extends Option {
 /**
  * The sing None
  */
-sealed abstract class None extends AbstractOption {
+sealed abstract class None extends OptionImpl {
     type self = None
 
     override  def unsing: unsing = scala.None
@@ -148,7 +148,7 @@ object _None {
 /**
  * The sing Some
  */
-final case class Some[e <: Any](override val get: e) extends AbstractOption {
+final case class Some[e <: Any](override val get: e) extends OptionImpl {
     type self = Some[e]
 
     override  def unsing: unsing = scala.Some(get.unsing)

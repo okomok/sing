@@ -9,7 +9,7 @@ package sing; package peg
 
 
 private[sing]
-final class Error extends AbstractPeg with ZeroWidth {
+final class Error extends PegImpl with ZeroWidth {
     type self = Error
 
     override  def parse[xs <: List](xs: xs): parse[xs] = throw new ParseError(xs.unsing.toString)

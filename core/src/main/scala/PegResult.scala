@@ -33,7 +33,7 @@ sealed abstract class PegResult extends Any {
 
 
 private[sing]
-sealed abstract class AbstractPegResult extends PegResult {
+sealed abstract class PegImplResult extends PegResult {
     final override  def asPegResult: asPegResult = self
     final override type asPegResult              = self
 
@@ -41,7 +41,7 @@ sealed abstract class AbstractPegResult extends PegResult {
 }
 
 
-final case class PegSuccess[x <: Any, ys <: List](override val get: x, override val next: ys) extends AbstractPegResult {
+final case class PegSuccess[x <: Any, ys <: List](override val get: x, override val next: ys) extends PegImplResult {
     type self = PegSuccess[x, ys]
 
     override  def unsing: unsing = UnsingSuccess(get.unsing, next.unsing)
@@ -61,7 +61,7 @@ final case class PegSuccess[x <: Any, ys <: List](override val get: x, override 
 }
 
 
-final case class PegFailure[ys <: List](override val next: ys) extends AbstractPegResult {
+final case class PegFailure[ys <: List](override val next: ys) extends PegImplResult {
     type self = PegFailure[ys]
 
     override  def unsing: unsing = UnsingFailure(next.unsing)

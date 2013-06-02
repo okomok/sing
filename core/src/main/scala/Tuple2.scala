@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-final case class Tuple2[v1 <: Any, v2 <: Any](override val _1: v1, override val _2: v2) extends AbstractProduct2 {
+final case class Tuple2[v1 <: Any, v2 <: Any](override val _1: v1, override val _2: v2) extends Product2Impl {
     type self = Tuple2[v1, v2]
 
     override type _1 = v1

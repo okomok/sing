@@ -11,7 +11,7 @@ package sing
 import set._
 
 
-trait AbstractSet extends Set {
+trait SetImpl extends Set {
     final override  def asSet: asSet = self
     final override type asSet        = self
 
@@ -38,4 +38,3 @@ trait AbstractSet extends Set {
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Set]
 }
-

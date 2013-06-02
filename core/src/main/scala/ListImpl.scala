@@ -11,7 +11,7 @@ package sing
 import list._
 
 
-trait AbstractList extends List {
+trait ListImpl extends List {
     final override  def asList: asList = self
     final override type asList         = self
 

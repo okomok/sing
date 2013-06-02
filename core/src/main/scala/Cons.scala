@@ -11,7 +11,7 @@ package sing
 import list._
 
 
-final case class Cons[x <: Any, xs <: List](override val head: x, override val tail: xs) extends AbstractList {
+final case class Cons[x <: Any, xs <: List](override val head: x, override val tail: xs) extends ListImpl {
     type self = Cons[x, xs]
 
     override  def isEmpty: isEmpty = `false`

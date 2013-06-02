@@ -13,7 +13,7 @@ object Map {
      def apply[p <: Peg, f <: Function1](p: p, f: f): apply[p, f] = Impl(p, f)
     type apply[p <: Peg, f <: Function1]                          = Impl[p, f]
 
-    final case class Impl[p <: Peg, f <: Function1](p: p, f: f) extends AbstractPeg {
+    final case class Impl[p <: Peg, f <: Function1](p: p, f: f) extends PegImpl {
         type self = Impl[p, f]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = p.parse(xs).map(f)

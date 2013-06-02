@@ -13,7 +13,7 @@ object Append {
      def apply[xs <: List, ys <: List](xs: xs, ys: ys): apply[xs, ys] = Impl(xs, ys)
     type apply[xs <: List, ys <: List]                                = Impl[xs, ys]
 
-    case class Impl[xs <: List, ys <: List](xs: xs, ys: ys) extends AbstractList {
+    case class Impl[xs <: List, ys <: List](xs: xs, ys: ys) extends ListImpl {
         type self = Impl[xs, ys]
 
         override  def isEmpty: isEmpty = xs.isEmpty.and(ys.isEmpty)

@@ -13,7 +13,7 @@ object Plus {
      def apply[p <: Peg](p: p): apply[p] = Impl(p)
     type apply[p <: Peg]                 = Impl[p]
 
-    final case class Impl[p <: Peg](p: p) extends AbstractPeg {
+    final case class Impl[p <: Peg](p: p) extends PegImpl {
         type self = Impl[p]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs))

@@ -9,7 +9,7 @@ package sing; package peg
 
 
 private[sing]
-final class Fail extends AbstractPeg with ZeroWidth {
+final class Fail extends PegImpl with ZeroWidth {
     type self = Fail
 
     override  def parse[xs <: List](xs: xs): parse[xs] = PegFailure(xs)

@@ -11,7 +11,7 @@ package sing
 import map._
 
 
-trait AbstractMap extends Map {
+trait MapImpl extends Map {
     final override  def asMap: asMap = self
     final override type asMap        = self
 
@@ -32,4 +32,3 @@ trait AbstractMap extends Map {
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Map]
 }
-

@@ -11,7 +11,7 @@ package sing
 import peg._
 
 
-trait AbstractPeg extends Peg {
+trait PegImpl extends Peg {
     final override  def asPeg: asPeg = self
     final override type asPeg        = self
 

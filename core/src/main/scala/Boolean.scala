@@ -45,7 +45,7 @@ sealed abstract class Boolean extends makro.NewKind.apply {
 
 
 private[sing]
-sealed abstract class AbstractBoolean extends Boolean {
+sealed abstract class BooleanImpl extends Boolean {
     final override  def asBoolean: asBoolean = self
     final override type asBoolean            = self
 
@@ -62,7 +62,7 @@ sealed abstract class AbstractBoolean extends Boolean {
 /**
  * The sing true
  */
-sealed abstract class `true` extends AbstractBoolean {
+sealed abstract class `true` extends BooleanImpl {
     type self = `true`
 
     override  def unsing: unsing = true
@@ -96,7 +96,7 @@ sealed abstract class `true` extends AbstractBoolean {
 /**
  * The sing false
  */
-sealed abstract class `false` extends AbstractBoolean {
+sealed abstract class `false` extends BooleanImpl {
     type self = `false`
 
     override  def unsing: unsing = false
@@ -133,7 +133,7 @@ object _Boolean {
     val `false` = new `false`{}
 
     val NaturalOrdering = new NaturalOrdering
-    final class NaturalOrdering extends AbstractOrdering {
+    final class NaturalOrdering extends OrderingImpl {
         type self = NaturalOrdering
 
         override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asBoolean.equal(y.asBoolean)

@@ -9,7 +9,7 @@ package sing; package ordering
 
 
 private[sing]
-final class AlwaysEQ extends AbstractOrdering {
+final class AlwaysEQ extends OrderingImpl {
     type self = AlwaysEQ
     override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = `true`
     override type equiv[x <: Any, y <: Any]                          = `true`

@@ -18,7 +18,7 @@ import peano._
 object Peano extends Literal
 
 
-sealed trait Peano extends AbstractNat {
+sealed trait Peano extends NatImpl {
     type self <: Peano
 
     override type increment <: Peano
@@ -42,7 +42,7 @@ sealed trait Peano extends AbstractNat {
 
 
 private[sing]
-sealed abstract class AbstractPeano extends Peano {
+sealed abstract class PeanoImpl extends Peano {
     final override  def asDense: asDense = AsDense.apply(self)
     final override type asDense          = AsDense.apply[self]
 
@@ -81,7 +81,7 @@ sealed abstract class AbstractPeano extends Peano {
 }
 
 
-sealed trait Zero extends AbstractPeano {
+sealed trait Zero extends PeanoImpl {
     type self = Zero
 
     override  def isZero: isZero = `true`
@@ -111,7 +111,7 @@ object _Zero {
 }
 
 
-final case class Succ[n <: Peano](override val decrement: n) extends AbstractPeano {
+final case class Succ[n <: Peano](override val decrement: n) extends PeanoImpl {
     type self = Succ[n]
 
     override  def isZero: isZero = `false`

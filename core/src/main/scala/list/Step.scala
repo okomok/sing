@@ -13,7 +13,7 @@ object Step {
      def apply[xs <: List, n <: Nat](xs: xs, n: n): apply[xs, n] = Impl(xs, n)
     type apply[xs <: List, n <: Nat]                             = Impl[xs, n]
 
-    case class Impl[xs <: List, n <: Nat](xs: xs, n: n) extends AbstractList {
+    case class Impl[xs <: List, n <: Nat](xs: xs, n: n) extends ListImpl {
         type self = Impl[xs, n]
 
         override  def isEmpty: isEmpty = xs.isEmpty

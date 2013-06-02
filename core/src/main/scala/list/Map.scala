@@ -13,7 +13,7 @@ object Map {
      def apply[xs <: List, f <: Function1](xs: xs, f: f): apply[xs, f] = Impl(xs, f)
     type apply[xs <: List, f <: Function1]                             = Impl[xs, f]
 
-    case class Impl[xs <: List, f <: Function1](xs: xs, f: f) extends AbstractList {
+    case class Impl[xs <: List, f <: Function1](xs: xs, f: f) extends ListImpl {
         type self = Impl[xs, f]
 
         override  def isEmpty: isEmpty = xs.isEmpty

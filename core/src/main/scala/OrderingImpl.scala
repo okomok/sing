@@ -11,7 +11,7 @@ package sing
 import ordering._
 
 
-trait AbstractOrdering extends Ordering {
+trait OrderingImpl extends Ordering {
     final override  def asOrdering: asOrdering = self
     final override type asOrdering             = self
 

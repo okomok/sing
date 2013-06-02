@@ -18,7 +18,7 @@ object Repeat {
     type apply[p <: Peg, n <: Nat, m <: Nat] =
         `if`[n#isZero, RepeatAtMost.Make[p, m], const0[Impl[p, n, m]]]#apply#asPeg
 
-    final case class Impl[p <: Peg, n <: Nat, m <: Nat](p: p, n: n, m: m) extends AbstractPeg {
+    final case class Impl[p <: Peg, n <: Nat, m <: Nat](p: p, n: n, m: m) extends PegImpl {
         assert(n.lteq(m)) // `const0` takes a by-name argument.
 
         type self = Impl[p, n, m]
@@ -64,7 +64,7 @@ object RepeatAtMost {
     type apply[p <: Peg, n <: Nat] =
         `if`[n#isZero, const0[eps], const0[Impl[p, n]]]#apply#asPeg
 
-    final case class Impl[p <: Peg, n <: Nat](p: p, n: n) extends AbstractPeg {
+    final case class Impl[p <: Peg, n <: Nat](p: p, n: n) extends PegImpl {
         type self = Impl[p, n]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs))

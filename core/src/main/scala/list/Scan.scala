@@ -13,7 +13,7 @@ object ScanLeft {
      def apply[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f): apply[xs, z, f] = Cons(z, Impl(xs, z, f))
     type apply[xs <: List, z <: Any, f <: Function2]                                      = Cons[z, Impl[xs, z, f]]
 
-    case class Impl[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f) extends AbstractList {
+    case class Impl[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f) extends ListImpl {
         type self = Impl[xs, z, f]
 
         override  def isEmpty: isEmpty = xs.isEmpty

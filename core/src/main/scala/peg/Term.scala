@@ -13,7 +13,7 @@ object Term {
      def apply[y <: Any](y: y): apply[y] = Impl(y)
     type apply[y <: Any]                 = Impl[y]
 
-    final case class Impl[y <: Any](y: y) extends AbstractPeg with OneWidth {
+    final case class Impl[y <: Any](y: y) extends PegImpl with OneWidth {
         type self = Impl[y]
 
         override  def parse[xs <: List](xs: xs): parse[xs] =
