@@ -13,6 +13,7 @@ import scala.reflect.macros.Context
 
 
 // Must be placed in top-level for implicit lookup?
+
 trait BoxKind[A] extends AnyKind {
      val self: self = this
     type self = this.type // K.type seems broken.
@@ -20,6 +21,7 @@ trait BoxKind[A] extends AnyKind {
      def box(x: A): box = new Box[A, self](x, self)
     type box = Box[A, self]
 }
+
 
 object BoxKind {
 
@@ -29,7 +31,7 @@ object BoxKind {
         import c.universe._
 
         val fullName = weakTypeOf[A].typeSymbol.fullName.toString
-        val (vkid, tkid) = Macros.skindId(c)(fullName)
+        val (vkid, tkid) = makro.KindId(c)(fullName)
 
         val res = q"""
             new BoxKind[${weakTypeOf[A]}] {

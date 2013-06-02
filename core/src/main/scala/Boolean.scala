@@ -8,13 +8,13 @@ package com.github.okomok
 package sing
 
 
-object Boolean extends Macros.HasKindId
+object Boolean extends makro.HasKindId.apply
 
 
 /**
  * The sing Boolean
  */
-sealed abstract class Boolean extends Macros.NewKind {
+sealed abstract class Boolean extends makro.NewKind.apply {
     type self <: Boolean
     type unsing = scala.Boolean
 

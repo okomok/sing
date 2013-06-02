@@ -16,20 +16,20 @@ import junit.framework.Assert._
 
 class MacroTest extends org.scalatest.junit.JUnit3Suite {
 
-    import Macros._
+    import makro._
 
     val x = com.github.okomok.sing.DNil
 
     trait Foo
 
-    class My extends NewKind with Foo with ReferenceEquality {
+    class My extends NewKind.apply with Foo with ReferenceEquality {
         val x = 3
     }
 
-    class My2[A <: Foo] extends NewKind with Foo with ReferenceEquality {
+    class My2[A <: Foo] extends NewKind.apply with Foo with ReferenceEquality {
         val x = 3
     }
-
+/*
     class MM extends AsBoxed {
 
     }
@@ -38,12 +38,12 @@ class MacroTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     case class PP[A](override val unsing: scala.List[A]) extends AsBoxed
-
+*/
 //    sing.Weak.printe[My#typeid]
 
     def testTrivial() {
 
-    println( new My{}.kindId )
+        println( new My{}.kindId )
 
 
     }

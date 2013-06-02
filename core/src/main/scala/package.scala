@@ -9,6 +9,7 @@ package com.github.okomok
 
 import scala.annotation.elidable
 import scala.annotation.elidable.ASSERTION
+import scala.language.experimental.macros
 
 
 package object sing {
@@ -86,6 +87,11 @@ package object sing {
 
     @Annotation.equivalentTo("new Unit{}")
     val Unit: Unit = _Unit.value
+
+
+// macros
+
+    type New = macro makro.New.apply
 
 
 // assertions

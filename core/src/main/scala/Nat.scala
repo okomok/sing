@@ -27,8 +27,8 @@ object Nat extends AnyKind {
  * The sing natural number
  */
 trait Nat extends Any {
-    // You can't use Macros.NewKind:
-    //   Macros.NewKind depends on Dense, which in turn, needs Nat.
+    // You can't use makro.NewKind.apply:
+    //   makro.NewKind.apply depends on Dense, which in turn, needs Nat.
     //   Then kindId can't be defined. (AbstractMethodError)
     override lazy val kindId: kindId = KindId.From(DNil :: Nil)
     override     type kindId         = KindId.From[DNil :: Nil]

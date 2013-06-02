@@ -11,7 +11,7 @@ package sing
 import map._
 
 
-object Map extends Macros.HasKindId {
+object Map extends makro.HasKindId.apply {
 
     /**
      * Constructs an empty sorted map.
@@ -33,7 +33,7 @@ object Map extends Macros.HasKindId {
 /**
  * The sing Map
  */
-trait Map extends Macros.NewKind {
+trait Map extends makro.NewKind.apply {
     type self <: Map
     type unsing <: scala.collection.Map[scala.Any, scala.Any]
 

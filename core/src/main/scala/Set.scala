@@ -11,7 +11,7 @@ package sing
 import set._
 
 
-object Set extends Macros.HasKindId {
+object Set extends makro.HasKindId.apply {
 
     /**
      * Constructs an empty sorted set.
@@ -32,7 +32,7 @@ object Set extends Macros.HasKindId {
 /**
  * The sing Set
  */
-trait Set extends Macros.NewKind {
+trait Set extends makro.NewKind.apply {
     type self <: Set
     type unsing <: scala.collection.Set[scala.Any]
 

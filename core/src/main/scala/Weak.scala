@@ -60,7 +60,7 @@ object Weak {
     /**
      * type of an expression
      */
-    type typeOf[T](x: T) = macro Macros.weakTypeOfImpl[T]
+    type typeOf[T](x: T) = macro makro.WeakTypeOf.apply[T]
 
     /**
      * Returns corresponding runtime value.

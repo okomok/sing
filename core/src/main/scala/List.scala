@@ -11,7 +11,7 @@ package sing
 import list._
 
 
-object List extends ToSTuple with Macros.HasKindId {
+object List extends ToSTuple with makro.HasKindId.apply {
 
     @Annotation.equivalentTo("Nil")
      val empty: empty = Nil
@@ -72,7 +72,7 @@ object List extends ToSTuple with Macros.HasKindId {
 /**
 * The sing List
 */
-trait List extends Macros.NewKind {
+trait List extends makro.NewKind.apply {
     type self <: List
     type unsing <: scala.collection.immutable.Seq[scala.Any]
 

@@ -16,13 +16,12 @@ import junit.framework.Assert._
 
 class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
 
-
-    object Inc extends Macros.New with Function1 {
+    object Inc extends New with Function1 {
         override  def apply[x <: Any](x: x): apply[x] = x.asNat.increment
         override type apply[x <: Any] = x#asNat#increment
     }
 
-    object Not extends Macros.New with Function1 {
+    object Not extends New with Function1 {
         override  def apply[x <: Any](x: x): apply[x] = x.asBoolean.not
         override type apply[x <: Any] = x#asBoolean#not
     }
@@ -31,11 +30,10 @@ class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
 
     val xs = _0 :: _2 :: `true` :: _3 :: `false` :: Nil
 
-    object Ap extends Macros.New with Function1 {
+    object Ap extends New with Function1 {
         override  def apply[x <: Any](x: x): apply[x] = poly.get(x.kindId).get.asFunction1.apply(x).asInstanceOf[apply[x]]
         override type apply[x <: Any] = poly.get[x#kindId]#get#asFunction1#apply[x]
     }
-
 
     def testTrivial() {
 
