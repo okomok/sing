@@ -16,22 +16,22 @@ class ProjectEuler1Test extends org.scalatest.junit.JUnit3Suite {
   //import sing.Peano.Literal._
   import sing.Dense.Literal._
 
-  final case class isMultipleOf[n <: sing.Nat](val n: n) extends sing.Function1 {
+  final case class isMultipleOf[n <: sing.Nat](val n: n) extends sing.AsFunction1 {
     override type self = isMultipleOf[n]
     override  def apply[m <: sing.Any](m: m): apply[m] = m.asNat.rem(n).isZero
     override type apply[m <: sing.Any]                 = m#asNat#rem[n]#isZero
   }
-  final case class shouldBeSummed() extends sing.Function1 {
+  final case class shouldBeSummed() extends sing.AsFunction1 {
     override type self = shouldBeSummed
     override  def apply[m <: sing.Any](m: m): apply[m] = isMultipleOf(_5).apply(m) or isMultipleOf(_3).apply(m)
     override type apply[m <: sing.Any]                 = isMultipleOf[_5]#apply[m]#or[isMultipleOf[_3]#apply[m]]
   }
-  final case class plus() extends sing.Function2 {
+  final case class plus() extends sing.AsFunction2 {
     override type self = plus
     override  def apply[x <: sing.Any, y <: sing.Any](x: x, y: y): apply[x, y] = x.asNat.plus(y.asNat)
     override type apply[x <: sing.Any, y <: sing.Any]                          = x#asNat#plus[y#asNat]
   }
-  final case class sumOfArithmeticSeq() extends sing.Function3 {
+  final case class sumOfArithmeticSeq() extends sing.AsFunction3 {
     override type self = sumOfArithmeticSeq
     def  n[begin <: sing.Any, end <: sing.Any, step <: sing.Any](begin: begin, end: end, step: step): n[begin, end, step] =
       end.asNat.minus(begin.asNat).plus(step.asNat).decrement.quot(step.asNat).asInstanceOf[n[begin, end, step]]

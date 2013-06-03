@@ -14,8 +14,8 @@ final class Times[xs <: List, n <: Nat](xs: xs, n: n) {
      def apply = repeat(Unit).take(n).flatMap(new Const)
     type apply = repeat[Unit]#take[n]#flatMap[    Const]
 
-    class Const extends Function1 {
-        type self = Const
+    class Const extends AsFunction1 {
+        override type self = Const
         override  def apply[x <: Any](x: x): apply[x] = xs
         override type apply[x <: Any]                 = xs
     }
@@ -29,7 +29,7 @@ object Times {
     type apply[xs <: List, n <: Nat]                             = Impl[xs, n]
 
     case class Impl[xs <: List, n <: Nat](xs: xs, n: n) extends AsList {
-        type self = Impl[xs, n]
+        override type self = Impl[xs, n]
 
         override  def isEmpty: isEmpty = xs.isEmpty.or(n.isZero)
         override type isEmpty          = xs#isEmpty#or[n#isZero]

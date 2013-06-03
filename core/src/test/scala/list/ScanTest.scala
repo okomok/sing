@@ -16,7 +16,7 @@ import junit.framework.Assert._
 
 class ScanTest extends org.scalatest.junit.JUnit3Suite {
 
-    case class Div() extends Function2 {
+    case class Div() extends AsFunction2 {
         override type self = Div
         override  def apply[x <: Any, y <: Any](x: x, y: y): apply[x, y] = x.asNat quot y.asNat
         override type apply[x <: Any, y <: Any] = x#asNat#quot[y#asNat]

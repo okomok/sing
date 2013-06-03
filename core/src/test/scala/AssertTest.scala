@@ -20,8 +20,8 @@ object _Assert {
       def apply[c <: Boolean](c: c): apply[c] = `if`(c, const0(Unit), Else(c)).apply
      type apply[c <: Boolean]                 = `if`[c, const0[Unit], Else[c]]#apply
 
-     case class Else[c <: Boolean](c: c) extends Function0 {
-         type self = Else[c]
+     case class Else[c <: Boolean](c: c) extends AsFunction0 {
+         override type self = Else[c]
          override  def apply: apply = throw new AssertionError("sing.assert")
          override type apply        = _Assert.apply[c]
      }

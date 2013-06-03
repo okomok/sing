@@ -12,8 +12,8 @@ package sing
  * List of Nats
  */
 sealed trait KindId extends Any {
-    type self <: KindId
-    type unsing <: scala.collection.immutable.Seq[scala.Any]
+    override type self <: KindId
+    override type unsing <: scala.collection.immutable.Seq[scala.Any]
 
      def equal[that <: KindId](that: that): equal[that]
     type equal[that <: KindId] <: Boolean
@@ -24,8 +24,8 @@ sealed trait KindId extends Any {
 object KindId {
 
     @Annotation.visibleForMacro
-    final case class From[ns <: List](override val asList: ns) extends KindId {
-        type self = From[ns]
+    final case class From[ns <: List](override val asList: ns) extends AsAny with KindId {
+        override type self = From[ns]
 
         override  def asKindId: asKindId = self
         override type asKindId           = self

@@ -17,9 +17,6 @@ trait Any extends AnyType with scala.Equals {
     final val self: self = this.asInstanceOf[self]
     type self <: Any
 
-    final override  def is[K <: AnyKind](K: K): is[K] = kindId.equal(K.kindId)
-    final override type is[K <: AnyKind]              = kindId#equal[K#kindId]
-
      def asBoolean: asBoolean = unsupported("Any.asBoolean")
     type asBoolean <: Boolean
 
@@ -91,13 +88,6 @@ trait Any extends AnyType with scala.Equals {
      */
      def unsing: unsing = unsupported("Any.unsing")
     type unsing
-
-    override def equals(that: scala.Any) = that match {
-        case that: Any => (this eq that) || (that canEqual this) && (unsing == that.unsing)
-        case _ => false
-    }
-    override def hashCode = unsing.hashCode
-    override def toString = "sing." + unsing.toString
 
     final protected def refEquals(that: scala.Any) = super.equals(that)
     final protected def refHashCode = super.hashCode

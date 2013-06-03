@@ -14,8 +14,8 @@ import bstree._
 
 
 sealed abstract class BSTree extends Map {
-    type self <: BSTree
-    type unsing = scala.collection.immutable.Map[scala.Any, scala.Any]
+    override type self <: BSTree
+    override type unsing = scala.collection.immutable.Map[scala.Any, scala.Any]
 
     override type put[k <: Any, v <: Any] <: BSTree
     override type remove[k <: Any] <: BSTree
@@ -40,19 +40,19 @@ sealed abstract class BSTree extends Map {
 
 private[sing]
 sealed abstract class AsBSTree extends BSTree with AsMap {
-    final override  def asBSTree: asBSTree = self
-    final override type asBSTree           = self
+    override  def asBSTree: asBSTree = self
+    override type asBSTree           = self
 
-    final override  def keySet: keySet = BSUnitTree(self)
-    final override type keySet         = BSUnitTree[self]
+    override  def keySet: keySet = BSUnitTree(self)
+    override type keySet         = BSUnitTree[self]
 
-    final override  def clear: clear = BSNil(ord)
-    final override type clear        = BSNil[ord]
+    override  def clear: clear = BSNil(ord)
+    override type clear        = BSNil[ord]
 }
 
 
 final case class BSNil[o <: Ordering](override val ord: o) extends AsBSTree {
-    type self = BSNil[o]
+    override type self = BSNil[o]
 
     override  def unsing: unsing = scala.collection.immutable.Map.empty
 
@@ -101,7 +101,7 @@ final case class BSNode[k <: Any, v <: Any, l <: BSTree, r <: BSTree](
 {
     Predef.assert(left.ord eq right.ord)
 
-    type self = BSNode[k, v, l, r]
+    override type self = BSNode[k, v, l, r]
 
     override  def unsing: unsing = (left.unsing + (key.unsing -> value.unsing)) ++ right.unsing
 

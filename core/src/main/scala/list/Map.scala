@@ -14,7 +14,7 @@ object Map {
     type apply[xs <: List, f <: Function1]                             = Impl[xs, f]
 
     case class Impl[xs <: List, f <: Function1](xs: xs, f: f) extends AsList {
-        type self = Impl[xs, f]
+        override type self = Impl[xs, f]
 
         override  def isEmpty: isEmpty = xs.isEmpty
         override type isEmpty          = xs#isEmpty

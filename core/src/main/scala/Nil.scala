@@ -12,7 +12,7 @@ import list._
 
 
 sealed abstract class Nil extends AsList {
-    type self = Nil
+    override type self = Nil
 
     override  def isEmpty: isEmpty = `true`
     override type isEmpty          = `true`
@@ -23,7 +23,7 @@ sealed abstract class Nil extends AsList {
     override  def tail: tail = noSuchElement("Nil.tail")
     override type tail       = noSuchElement[_]
 
-    final def unapply(that: Nil) = true
+    def unapply(that: Nil) = true
 }
 
 

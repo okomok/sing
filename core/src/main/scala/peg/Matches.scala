@@ -18,8 +18,8 @@ object Matches {
     private[this] type _aux[r <: PegResult] =
         `if`[r#successful, Then[r], const0[`false`]]#apply#asBoolean
 
-    final case class Then[r <: PegResult](r: r) extends Function0 {
-        type self = Then[r]
+    final case class Then[r <: PegResult](r: r) extends AsFunction0 {
+        override type self = Then[r]
         override  def apply: apply = r.next.isEmpty
         override type apply        = r#next#isEmpty
     }

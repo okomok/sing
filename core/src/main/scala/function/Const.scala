@@ -9,8 +9,8 @@ package sing; package function
 
 
 private[sing]
-final class Const0[v <: Any](v: => v) extends Function0 {
-    type self = Const0[v]
+final class Const0[v <: Any](v: => v) extends AsFunction0 {
+    override type self = Const0[v]
 
     @Annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
     private[this] lazy val _apply: apply = v

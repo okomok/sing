@@ -69,7 +69,7 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
 
         val xs = Box(0) :: Box("hello") :: Box(10) :: Box(true) :: Nil
 
-        object Ap extends New with Function1 {
+        object Ap extends New with AsFunction1 {
             override  def apply[x <: Any](x: x): apply[x] = poly.get(x.kindId).get.asFunction1.apply(x).asInstanceOf[apply[x]]
             override type apply[x <: Any] = poly.get[x#kindId]#get#asFunction1#apply[x]
         }

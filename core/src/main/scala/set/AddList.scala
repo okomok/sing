@@ -14,8 +14,8 @@ object AddList {
     type apply[s <: Set, xs <: List]                             = xs#foldLeft[s, Step]#asSet
 
     val Step = new Step
-    class Step extends Function2 {
-        type self = Step
+    class Step extends AsFunction2 {
+        override type self = Step
         override  def apply[b <: Any, a <: Any](b: b, a: a): apply[b, a] = b.asSet.add(a)
         override type apply[b <: Any, a <: Any]                          = b#asSet#add[a]
     }

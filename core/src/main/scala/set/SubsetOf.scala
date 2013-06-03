@@ -15,8 +15,8 @@ object SubsetOf {
     type apply[s <: Set, z <: Set] =
         s#asList#forall[Pred[z]]
 
-    case class Pred[z <: Set](z: z) extends Function1 {
-        type self = Pred[z]
+    case class Pred[z <: Set](z: z) extends AsFunction1 {
+        override type self = Pred[z]
         override  def apply[k <: Any](k: k): apply[k] = z.contains(k)
         override type apply[k <: Any]                 = z#contains[k]
     }

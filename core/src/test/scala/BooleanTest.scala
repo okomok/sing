@@ -77,7 +77,7 @@ class BooleanTest extends org.scalatest.junit.JUnit3Suite {
         Weak.assert[incinc[_3]# equal[_5]]
     }
 
-    class Inc_Nat[e <: Peano](val e: e) extends Function0 {
+    class Inc_Nat[e <: Peano](val e: e) extends AsFunction0 {
         override type self = Inc_Nat[e]
         override def apply = e.increment
         override type apply = e#increment

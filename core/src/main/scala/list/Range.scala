@@ -14,7 +14,7 @@ object Range {
     type apply[n <: Nat, m <: Nat]                          = Impl[n, m]
 
     case class Impl[n <: Nat, m <: Nat](n: n, m: m) extends AsList {
-        type self = Impl[n, m]
+        override type self = Impl[n, m]
 
         override  def isEmpty: isEmpty = n.equal(m)
         override type isEmpty          = n#equal[m]

@@ -9,16 +9,8 @@ package sing
 
 
 trait Function0 extends Any {
-    type self <: Function0
-
-    final override  def asFunction0: asFunction0 = self
-    final override type asFunction0              = self
+    override type self <: Function0
 
      def apply: apply
     type apply <: Any
-
-    override  val unsing: unsing = () => apply.unsing
-    override type unsing         = () => apply#unsing
-
-    override def canEqual(that: scala.Any) = that.isInstanceOf[Function0]
 }

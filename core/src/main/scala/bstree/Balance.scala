@@ -39,38 +39,38 @@ object Balance {
             ]
         ]#apply
 
-    case class RotateL[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends Function0 {
-        type self = RotateL[k, v, l, r]
+    case class RotateL[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends AsFunction0 {
+        override type self = RotateL[k, v, l, r]
         override  def apply: apply = `if`(r.left.size.lt(ratio.times(r.right.size)), SingleL(k, v, l, r), DoubleL(k, v, l, r)).apply.asInstanceOf[apply]
         override type apply =        `if`[r#left#size#lt[ratio#times[r#right#size]], SingleL[k, v, l, r], DoubleL[k, v, l, r]]#apply
     }
 
-    case class RotateR[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends Function0 {
-        type self = RotateR[k, v, l, r]
+    case class RotateR[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends AsFunction0 {
+        override type self = RotateR[k, v, l, r]
         override  def apply: apply = `if`(l.right.size.lt(ratio.times(l.left.size)), SingleR(k, v, l, r), DoubleR(k, v, l, r)).apply.asInstanceOf[apply]
         override type apply =        `if`[l#right#size#lt[ratio#times[l#left#size]], SingleR[k, v, l, r], DoubleR[k, v, l, r]]#apply
     }
 
-    case class SingleL[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends Function0 {
-        type self = SingleL[k, v, l, r]
+    case class SingleL[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends AsFunction0 {
+        override type self = SingleL[k, v, l, r]
         override  def apply: apply = BSNode(r.key, r.value, BSNode(k, v, l, r.left), r.right).asInstanceOf[apply]
         override type apply =        BSNode[r#key, r#value, BSNode[k, v, l, r#left], r#right]
     }
 
-    case class SingleR[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends Function0 {
-        type self = SingleR[k, v, l, r]
+    case class SingleR[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends AsFunction0 {
+        override type self = SingleR[k, v, l, r]
         override  def apply: apply = BSNode(l.key, l.value, l.left, BSNode(k, v, l.right, r)).asInstanceOf[apply]
         override type apply =        BSNode[l#key, l#value, l#left, BSNode[k, v, l#right, r]]
     }
 
-    case class DoubleL[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends Function0 {
-        type self = DoubleL[k, v, l, r]
+    case class DoubleL[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends AsFunction0 {
+        override type self = DoubleL[k, v, l, r]
         override  def apply: apply = BSNode(r.left.key, r.left.value, BSNode(k, v, l, r.left.left), BSNode(r.key, r.value, r.left.right, r.right)).asInstanceOf[apply]
         override type apply =        BSNode[r#left#key, r#left#value, BSNode[k, v, l, r#left#left], BSNode[r#key, r#value, r#left#right, r#right]]
     }
 
-    case class DoubleR[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends Function0 {
-        type self = DoubleR[k, v, l, r]
+    case class DoubleR[k <: Any, v <: Any, l <: BSTree, r <: BSTree](k: k, v: v, l: l, r: r) extends AsFunction0 {
+        override type self = DoubleR[k, v, l, r]
         override  def apply: apply = BSNode(l.right.key, l.right.value, BSNode(l.key, l.value, l.left, l.right.left), BSNode(k, v, l.right.right, r)).asInstanceOf[apply]
         override type apply =        BSNode[l#right#key, l#right#value, BSNode[l#key, l#value, l#left, l#right#left], BSNode[k, v, l#right#right, r]]
     }

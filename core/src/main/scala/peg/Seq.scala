@@ -14,7 +14,7 @@ object Seq {
     type apply[p <: Peg, q <: Peg]                          = Impl[p, q]
 
     final case class Impl[p <: Peg, q <: Peg](p: p, q: q) extends AsPeg {
-        type self = Impl[p, q]
+        override type self = Impl[p, q]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)
         override type parse[xs <: List]                    = _aux[p#parse[xs], xs]
@@ -28,8 +28,8 @@ object Seq {
             `if`[r#successful, Then[q, r, xs], const0[r]]#apply#asPegResult
     }
 
-    final case class Then[q <: Peg, r <: PegResult, xs <: List](q: q, r: r, xs: xs) extends Function0 {
-        type self = Then[q, r, xs]
+    final case class Then[q <: Peg, r <: PegResult, xs <: List](q: q, r: r, xs: xs) extends AsFunction0 {
+        override type self = Then[q, r, xs]
 
         private[this] lazy val s: s = q.parse(r.next)
         private[this]     type s    = q#parse[r#next]
@@ -40,14 +40,14 @@ object Seq {
             `if`[s#successful, ThenThen[r, s], const0[PegFailure[xs]]]#apply#asPegResult
     }
 
-    final case class ThenThen[r <: PegResult, s <: PegResult](r: r, s: s) extends Function0 {
-        type self = ThenThen[r, s]
+    final case class ThenThen[r <: PegResult, s <: PegResult](r: r, s: s) extends AsFunction0 {
+        override type self = ThenThen[r, s]
         override  def apply: apply = PegSuccess(Pair(r.get, s.get), s.next)
         override type apply        = PegSuccess[Pair[r#get, s#get], s#next]
     }
 
-    final case class MakePair[a <: Any](a: a) extends Function1 {
-        type self = MakePair[a]
+    final case class MakePair[a <: Any](a: a) extends AsFunction1 {
+        override type self = MakePair[a]
         override  def apply[b <: Any](b: b): apply[b] = Pair(a, b)
         override type apply[b <: Any]                 = Pair[a, b]
     }

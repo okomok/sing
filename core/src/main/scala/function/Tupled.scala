@@ -11,8 +11,8 @@ package sing; package function
 private[sing]
 object Tupled2 {
 
-    final case class Impl[f <: Function2](f: f) extends Function1 {
-        type self = Impl[f]
+    final case class Impl[f <: Function2](f: f) extends AsFunction1 {
+        override type self = Impl[f]
         override  def apply[v1 <: Any](v1: v1): apply[v1] = _aux(v1.asProduct2)
         override type apply[v1 <: Any]                    = _aux[v1#asProduct2]
 
@@ -26,8 +26,8 @@ object Tupled2 {
 private[sing]
 object Tupled3 {
 
-    final case class Impl[f <: Function3](f: f) extends Function1 {
-        type self = Impl[f]
+    final case class Impl[f <: Function3](f: f) extends AsFunction1 {
+        override type self = Impl[f]
         override  def apply[v1 <: Any](v1: v1): apply[v1] = _aux(v1.asProduct3)
         override type apply[v1 <: Any]                    = _aux[v1#asProduct3]
 
@@ -41,8 +41,8 @@ object Tupled3 {
 private[sing]
 object TupledLeft3 {
 
-    final case class Impl[f <: Function3](f: f) extends Function1 {
-        type self = Impl[f]
+    final case class Impl[f <: Function3](f: f) extends AsFunction1 {
+        override type self = Impl[f]
         override  def apply[v1 <: Any](v1: v1): apply[v1] = _aux(v1.asProduct2)
         override type apply[v1 <: Any]                    = _aux[v1#asProduct2]
 

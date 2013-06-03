@@ -17,7 +17,7 @@ class FilterTest extends org.scalatest.junit.JUnit3Suite {
     import junit.framework.Assert._
     // assertFalse(scala.Nil eq Nil)
 
-    class not2 extends Function1 {
+    class not2 extends AsFunction1 {
         override type self = not2
         override  def apply[x <: Any](x: x): apply[x] = x.asNat nequal _2
         override type apply[x <: Any] = x#asNat# nequal[_2]

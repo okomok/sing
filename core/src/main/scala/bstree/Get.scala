@@ -15,20 +15,20 @@ object NodeGet {
     type apply[m <: BSTree, k <: Any] =
         m#ord#`match`[k, m#key, CaseLT[m, k], CaseGT[m, k], CaseEQ[m, k]]#asOption
 
-    case class CaseLT[m <: BSTree, k <: Any](m: m, k: k) extends Function0 {
-        type self = CaseLT[m, k]
+    case class CaseLT[m <: BSTree, k <: Any](m: m, k: k) extends AsFunction0 {
+        override type self = CaseLT[m, k]
         override  def apply: apply = m.left.get(k)
         override type apply        = m#left#get[k]
     }
 
-    case class CaseGT[m <: BSTree, k <: Any](m: m, k: k) extends Function0 {
-        type self = CaseGT[m, k]
+    case class CaseGT[m <: BSTree, k <: Any](m: m, k: k) extends AsFunction0 {
+        override type self = CaseGT[m, k]
         override  def apply: apply = m.right.get(k)
         override type apply        = m#right#get[k]
     }
 
-    case class CaseEQ[m <: BSTree, k <: Any](m: m, k: k) extends Function0 {
-        type self = CaseEQ[m, k]
+    case class CaseEQ[m <: BSTree, k <: Any](m: m, k: k) extends AsFunction0 {
+        override type self = CaseEQ[m, k]
         override  def apply: apply = Some(m.value)
         override type apply        = Some[m#value]
     }

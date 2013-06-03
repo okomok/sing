@@ -10,7 +10,7 @@ package sing; package ordering
 
 private[sing]
 final class AlwaysEQ extends AsOrdering {
-    type self = AlwaysEQ
+    override type self = AlwaysEQ
     override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = `true`
     override type equiv[x <: Any, y <: Any]                          = `true`
     override  def compare[x <: Any, y <: Any](x: x, y: y): compare[x, y] = EQ

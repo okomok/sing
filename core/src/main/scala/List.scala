@@ -66,8 +66,8 @@ object List extends ToSTuple with AsListKind {
 * The sing List
 */
 trait List extends Any {
-    type self <: List
-    type unsing <: scala.collection.immutable.Seq[scala.Any]
+    override type self <: List
+    override type unsing <: scala.collection.immutable.Seq[scala.Any]
 
     @Annotation.constantTime
      def isEmpty: isEmpty
@@ -84,7 +84,7 @@ trait List extends Any {
      def ::[e <: Any](e: e): ::[e]
     type ::[e <: Any] <: List
 
-    final def #::[A](x: A)(implicit _A: BoxKind[A]): ::[Box[A, _A.self]] = ::(Box(x)(_A))
+     def #::[A](x: A)(implicit _A: BoxKind[A]): ::[Box[A, _A.self]] = ::(Box(x)(_A))
 
     @Annotation.constantTime
      def clear: clear

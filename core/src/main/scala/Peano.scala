@@ -18,8 +18,8 @@ import peano._
 object Peano extends Literal
 
 
-sealed trait Peano extends AsNat {
-    type self <: Peano
+sealed trait Peano extends Nat {
+    override type self <: Peano
 
     override type increment <: Peano
     override type decrement <: Peano
@@ -42,47 +42,47 @@ sealed trait Peano extends AsNat {
 
 
 private[sing]
-sealed abstract class AsPeano extends Peano {
-    final override  def asDense: asDense = AsDense.apply(self)
-    final override type asDense          = AsDense.apply[self]
+sealed abstract class AsPeano extends Peano with AsNat {
+    override  def asDense: asDense = AsDense.apply(self)
+    override type asDense          = AsDense.apply[self]
 
-    final override  def asPeano: asPeano = self
-    final override type asPeano          = self
+    override  def asPeano: asPeano = self
+    override type asPeano          = self
 
-    final override  def increment: increment = Succ(self)
-    final override type increment            = Succ[self]
+    override  def increment: increment = Succ(self)
+    override type increment            = Succ[self]
 
-    final override  def plus[that <: Nat](that: that): plus[that] = Plus.apply(self, that.asPeano)
-    final override type plus[that <: Nat]                         = Plus.apply[self, that#asPeano]
+    override  def plus[that <: Nat](that: that): plus[that] = Plus.apply(self, that.asPeano)
+    override type plus[that <: Nat]                         = Plus.apply[self, that#asPeano]
 
-    final override  def minus[that <: Nat](that: that): minus[that] = Minus.apply(self, that.asPeano)
-    final override type minus[that <: Nat]                          = Minus.apply[self, that#asPeano]
+    override  def minus[that <: Nat](that: that): minus[that] = Minus.apply(self, that.asPeano)
+    override type minus[that <: Nat]                          = Minus.apply[self, that#asPeano]
 
-    final override  def times[that <: Nat](that: that): times[that] = Times.apply(self, that.asPeano)
-    final override type times[that <: Nat]                          = Times.apply[self, that#asPeano]
+    override  def times[that <: Nat](that: that): times[that] = Times.apply(self, that.asPeano)
+    override type times[that <: Nat]                          = Times.apply[self, that#asPeano]
 
-    final override  def quotRem[that <: Nat](that: that): quotRem[that] = QuotRem.apply(self, that.asPeano).asInstanceOf[quotRem[that]]
-    final override type quotRem[that <: Nat]                            = QuotRem.apply[self, that#asPeano]
+    override  def quotRem[that <: Nat](that: that): quotRem[that] = QuotRem.apply(self, that.asPeano).asInstanceOf[quotRem[that]]
+    override type quotRem[that <: Nat]                            = QuotRem.apply[self, that#asPeano]
 
-    final override  def exp[that <: Nat](that: that): exp[that] = asDense.exp(that).asPeano
-    final override type exp[that <: Nat]                        = asDense#exp[that]#asPeano
+    override  def exp[that <: Nat](that: that): exp[that] = asDense.exp(that).asPeano
+    override type exp[that <: Nat]                        = asDense#exp[that]#asPeano
 
-    final override  def lt[that <: Nat](that: that): lt[that] = that.asPeano.lteq(self).not
-    final override type lt[that <: Nat]                       = that#asPeano#lteq[self]#not
+    override  def lt[that <: Nat](that: that): lt[that] = that.asPeano.lteq(self).not
+    override type lt[that <: Nat]                       = that#asPeano#lteq[self]#not
 
-    final override  def bitAnd[that <: Nat](that: that): bitAnd[that] = asDense.bitAnd(that).asPeano
-    final override type bitAnd[that <: Nat]                           = asDense#bitAnd[that]#asPeano
+    override  def bitAnd[that <: Nat](that: that): bitAnd[that] = asDense.bitAnd(that).asPeano
+    override type bitAnd[that <: Nat]                           = asDense#bitAnd[that]#asPeano
 
-    final override  def bitOr[that <: Nat](that: that): bitOr[that] = asDense.bitOr(that).asPeano
-    final override type bitOr[that <: Nat]                          = asDense#bitOr[that]#asPeano
+    override  def bitOr[that <: Nat](that: that): bitOr[that] = asDense.bitOr(that).asPeano
+    override type bitOr[that <: Nat]                          = asDense#bitOr[that]#asPeano
 
-    final override  def isOdd: isOdd = isEven.not
-    final override type isOdd        = isEven#not
+    override  def isOdd: isOdd = isEven.not
+    override type isOdd        = isEven#not
 }
 
 
 sealed trait Zero extends AsPeano {
-    type self = Zero
+    override type self = Zero
 
     override  def isZero: isZero = `true`
     override type isZero         = `true`
@@ -112,7 +112,7 @@ object _Zero {
 
 
 final case class Succ[n <: Peano](override val decrement: n) extends AsPeano {
-    type self = Succ[n]
+    override type self = Succ[n]
 
     override  def isZero: isZero = `false`
     override type isZero         = `false`

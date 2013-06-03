@@ -15,8 +15,8 @@ object ReverseAppend {
     type apply[xs <: List, ys <: List] =
         `if`[xs#isEmpty, const0[ys], Else[xs, ys]]#apply#asList
 
-    case class Else[xs <: List, ys <: List](xs: xs, ys: ys) extends Function0 {
-        type self = Else[xs, ys]
+    case class Else[xs <: List, ys <: List](xs: xs, ys: ys) extends AsFunction0 {
+        override type self = Else[xs, ys]
         override  def apply: apply = ReverseAppend.apply(xs.tail, Cons(xs.head, ys))
         override type apply        = ReverseAppend.apply[xs#tail, Cons[xs#head, ys]]
     }

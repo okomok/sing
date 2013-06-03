@@ -15,14 +15,14 @@ object Equal {
     type apply[s <: Set, z <: Set] =
         `if`[s#size#nequal[z#size], const0[`false`], Else[s, z]]#apply#asBoolean
 
-    case class Else[s <: Set, z <: Set](s: s, z: z) extends Function0 {
-        type self = Else[s, z]
+    case class Else[s <: Set, z <: Set](s: s, z: z) extends AsFunction0 {
+        override type self = Else[s, z]
         override  def apply: apply = s.asList.forall(Pred(z))
         override type apply        = s#asList#forall[Pred[z]]
     }
 
-    case class Pred[z <: Set](z: z) extends Function1 {
-        type self = Pred[z]
+    case class Pred[z <: Set](z: z) extends AsFunction1 {
+        override type self = Pred[z]
         override  def apply[k <: Any](k: k): apply[k] = z.contains(k)
         override type apply[k <: Any]                 = z#contains[k]
     }

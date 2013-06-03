@@ -14,10 +14,10 @@ object Filter {
     type apply[xs <: List, f <: Function1]                             = Impl[xs, f]
 
     case class Impl[xs <: List, f <: Function1](xs: xs, f: f) extends AsList {
-        type self = Impl[xs, f]
+        override type self = Impl[xs, f]
 
-        private[this] lazy val ys: ys = xs.dropWhile(Function1.not(f))
-        private[this]     type ys     = xs#dropWhile[Function1.not[f]]
+        private[this] lazy val ys: ys = xs.dropWhile(f.not)
+        private[this]     type ys     = xs#dropWhile[f#not]
 
         override  def isEmpty: isEmpty = ys.isEmpty.asInstanceOf[isEmpty]
         override type isEmpty          = ys#isEmpty

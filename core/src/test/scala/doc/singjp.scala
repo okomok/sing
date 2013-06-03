@@ -47,8 +47,8 @@ class FibonacciTest1 {
 
     type fibonacci[n <: sing.Nat] = sing.`if`[n#lt[_2], sing.const0[n], FibElse[n]]#apply#asNat
 
-    trait FibElse[n <: sing.Nat] extends sing.Function0 {
-        type self = FibElse[n]
+    trait FibElse[n <: sing.Nat] extends sing.AsFunction0 {
+        override type self = FibElse[n]
         override type apply = fibonacci[n#decrement]#plus[fibonacci[n#decrement#decrement]]
     }
 
@@ -60,8 +60,8 @@ class FibonacciTest2 {
 
     type fibonacci[n <: sing.Nat] = sing.`if`[n#lt[_2], sing.const0[n], FibElse[n]]#apply#asNat
 
-    trait FibElse[n <: sing.Nat] extends sing.Function0 {
-        type self = FibElse[n]
+    trait FibElse[n <: sing.Nat] extends sing.AsFunction0 {
+        override type self = FibElse[n]
         override type apply = fibonacci[n#minus[_1]]#plus[fibonacci[n#decrement#decrement]]
     }
 
@@ -78,8 +78,8 @@ class ImplementationProblemTest {
     class Outer[m <: sing.Nat](m: m) {
         type apply[n <: sing.Nat] = Nothing
 
-        abstract class Inner[n <: sing.Nat](n: n) extends sing.Function0 {
-            type self = Inner[n]
+        abstract class Inner[n <: sing.Nat](n: n) extends sing.AsFunction0 {
+            override type self = Inner[n]
             override type apply = Nothing
         }
     }
@@ -92,7 +92,7 @@ class ListTest extends org.scalatest.junit.JUnit3Suite {
 
     import sing.Peano.Literal._
 
-    object add2 extends sing.Function1 {
+    object add2 extends sing.AsFunction1 {
         override type self = add2.type
         override  def apply[x <: sing.Any](x: x): apply[x] = x.asNat plus _2
         override type apply[x <: sing.Any] = x#asNat#plus[_2]

@@ -11,30 +11,26 @@ package sing
 import function._
 
 
-trait Function3 extends Any with ReferenceEquality {
-    type self <: Function3
+trait Function3 extends Any with RefEquals {
+    override type self <: Function3
 
-    final override  def asFunction3: asFunction3 = self
-    final override type asFunction3              = self
+    override  def asFunction3: asFunction3 = self
+    override type asFunction3              = self
 
      def apply[v1 <: Any, v2 <: Any, v3 <: Any](v1: v1, v2: v2, v3: v3): apply[v1, v2, v3]
     type apply[v1 <: Any, v2 <: Any, v3 <: Any] <: Any
 
-    @deprecated("use Function3.curried instead", "0.1.1")
-    final  def curried: curried = Curried3.Impl(self)
-    final type curried          = Curried3.Impl[self]
+     def curried: curried
+    type curried <: Function1
 
-    @deprecated("use Function3.tupled instead", "0.1.1")
-    final  def tupled: tupled = Tupled3.Impl(self)
-    final type tupled         = Tupled3.Impl[self]
+     def tupled: tupled
+    type tupled <: Function1
 
-    @deprecated("use Function3.tupledLeft instead", "0.1.1")
-    final  def tupledLeft: tupledLeft = TupledLeft3.Impl(self)
-    final type tupledLeft             = TupledLeft3.Impl[self]
+     def tupledLeft: tupledLeft
+    type tupledLeft <: Function1
 
-    @deprecated("use Function3.not instead", "0.1.1")
-    final  def not: not = Not3.Impl(self)
-    final type not      = Not3.Impl[self]
+     def not: not
+    type not <: Function3
 }
 
 

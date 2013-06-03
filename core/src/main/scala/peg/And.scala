@@ -14,7 +14,7 @@ object And {
     type apply[p <: Peg]                 = Impl[p]
 
     final case class Impl[p <: Peg](p: p) extends AsPeg with ZeroWidth {
-        type self = Impl[p]
+        override type self = Impl[p]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)
         override type parse[xs <: List]                    = _aux[p#parse[xs], xs]
@@ -25,8 +25,8 @@ object And {
             `if`[r#successful, Then[r, xs], const0[r]]#apply#asPegResult
     }
 
-    final case class Then[r <: PegResult, xs <: List](r: r, xs: xs) extends Function0 {
-        type self = Then[r, xs]
+    final case class Then[r <: PegResult, xs <: List](r: r, xs: xs) extends AsFunction0 {
+        override type self = Then[r, xs]
         override  def apply: apply = PegSuccess(r.get, xs)
         override type apply        = PegSuccess[r#get, xs]
     }

@@ -12,7 +12,7 @@ package sing; package list
  * Marker trait for random-access list
  */
 trait RandomAccess extends List {
-    type self <: RandomAccess
+    override type self <: RandomAccess
 
     @Annotation.constantTime
     override  def length: length

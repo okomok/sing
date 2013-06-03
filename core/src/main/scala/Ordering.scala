@@ -29,7 +29,7 @@ object Ordering extends AsOrderingKind {
 
 
 trait Ordering extends Equiv {
-    type self <: Ordering
+    override type self <: Ordering
 
      def compare[x <: Any, y <: Any](x: x, y: y): compare[x, y]
     type compare[x <: Any, y <: Any] <: OrderingResult

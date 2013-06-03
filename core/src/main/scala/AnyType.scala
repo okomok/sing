@@ -23,4 +23,3 @@ trait AnyType extends AnyKind {
     type as[K <: AnyKind] <: K
 
 }
-

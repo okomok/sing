@@ -9,9 +9,9 @@ package sing
 
 
 trait AsBooleanKind extends AnyKind {
-    final override lazy val kindId: kindId = KindId.From(DNil :: DNil :: Nil)
-    final override     type kindId         = KindId.From[DNil :: DNil :: Nil]
+    override lazy val kindId: kindId = KindId.From(DNil :: DNil :: Nil)
+    override     type kindId         = KindId.From[DNil :: DNil :: Nil]
 
-    final override lazy val naturalOrdering: naturalOrdering = new BooleanNaturalOrdering
-    final override     type naturalOrdering                  =     BooleanNaturalOrdering
+    override lazy val naturalOrdering: naturalOrdering = new BooleanNaturalOrdering
+    override     type naturalOrdering                  =     BooleanNaturalOrdering
 }

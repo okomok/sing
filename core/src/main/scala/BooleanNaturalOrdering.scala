@@ -10,7 +10,7 @@ package sing
 
 private[sing]
 final class BooleanNaturalOrdering extends AsOrdering {
-    type self = BooleanNaturalOrdering
+    override type self = BooleanNaturalOrdering
 
     override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asBoolean.equal(y.asBoolean)
     override type equiv[x <: Any, y <: Any]                          = x#asBoolean#equal[y#asBoolean]

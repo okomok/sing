@@ -11,24 +11,24 @@ package sing
 import map._
 
 
-trait AsMap extends Map with AsMapKind {
-    final override  def asMap: asMap = self
-    final override type asMap        = self
+trait AsMap extends Map with AsAny with UnsingEquals with AsMapKind {
+    override  def asMap: asMap = self
+    override type asMap        = self
 
-    final override  def putList[xs <: List](xs: xs): putList[xs] = PutList.apply(self, xs)
-    final override type putList[xs <: List]                      = PutList.apply[self, xs]
+    override  def putList[xs <: List](xs: xs): putList[xs] = PutList.apply(self, xs)
+    override type putList[xs <: List]                      = PutList.apply[self, xs]
 
-    final override  def contains[k <: Any](k: k): contains[k] = get(k).isEmpty.not
-    final override type contains[k <: Any]                    = get[k]#isEmpty#not
+    override  def contains[k <: Any](k: k): contains[k] = get(k).isEmpty.not
+    override type contains[k <: Any]                    = get[k]#isEmpty#not
 
-    final override  def equal[that <: Map](that: that): equal[that] = Equal.apply(self, that, None)
-    final override type equal[that <: Map]                          = Equal.apply[self, that, None]
+    override  def equal[that <: Map](that: that): equal[that] = Equal.apply(self, that, None)
+    override type equal[that <: Map]                          = Equal.apply[self, that, None]
 
-    final override  def equalWith[that <: Map, ve <: Equiv](that: that, ve: ve): equalWith[that, ve] = Equal.apply(self, that, Some(ve))
-    final override type equalWith[that <: Map, ve <: Equiv]                                          = Equal.apply[self, that, Some[ve]]
+    override  def equalWith[that <: Map, ve <: Equiv](that: that, ve: ve): equalWith[that, ve] = Equal.apply(self, that, Some(ve))
+    override type equalWith[that <: Map, ve <: Equiv]                                          = Equal.apply[self, that, Some[ve]]
 
-    final override  def union[that <: Map](that: that): union[that] = that.putList(asList)
-    final override type union[that <: Map]                          = that#putList[asList]
+    override  def union[that <: Map](that: that): union[that] = that.putList(asList)
+    override type union[that <: Map]                          = that#putList[asList]
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Map]
 }

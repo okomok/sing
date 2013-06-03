@@ -15,8 +15,8 @@ object HasTwoOrMore {
     type apply[xs <: List] =
         `if`[xs#isEmpty, const0[`false`], Else[xs]]#apply#asBoolean
 
-    case class Else[xs <: List](xs: xs) extends Function0 {
-        type self = Else[xs]
+    case class Else[xs <: List](xs: xs) extends AsFunction0 {
+        override type self = Else[xs]
         override  def apply: apply = `if`(xs.tail.isEmpty, const0(`false`), const0(`true`)).apply
         override type apply        = `if`[xs#tail#isEmpty, const0[`false`], const0[`true`]]#apply
     }

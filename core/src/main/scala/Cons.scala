@@ -12,7 +12,7 @@ import list._
 
 
 final case class Cons[x <: Any, xs <: List](override val head: x, override val tail: xs) extends AsList {
-    type self = Cons[x, xs]
+    override type self = Cons[x, xs]
 
     override  def isEmpty: isEmpty = `false`
     override type isEmpty          = `false`

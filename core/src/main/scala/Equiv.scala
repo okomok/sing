@@ -11,11 +11,11 @@ package sing
 object Equiv
 
 
-trait Equiv extends Any with ReferenceEquality {
-    type self <: Equiv
+trait Equiv extends Any with RefEquals {
+    override type self <: Equiv
 
-    final override  def asEquiv: asEquiv = self
-    final override type asEquiv          = self
+    override  def asEquiv: asEquiv = self
+    override type asEquiv          = self
 
      def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y]
     type equiv[x <: Any, y <: Any] <: Boolean

@@ -14,7 +14,7 @@ object Or {
     type apply[p <: Peg, q <: Peg]                          = Impl[p, q]
 
     final case class Impl[p <: Peg, q <: Peg](p: p, q: q) extends AsPeg {
-        type self = Impl[p, q]
+        override type self = Impl[p, q]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)
         override type parse[xs <: List]                    = _aux[p#parse[xs], xs]
@@ -33,27 +33,27 @@ object Or {
             `if`[r#successful, const0[r], Else[q, xs]]#apply#asPegResult
     }
 
-    final case class Else[q <: Peg, xs <: List](q: q, xs: xs) extends Function0 {
-        type self = Else[q, xs]
+    final case class Else[q <: Peg, xs <: List](q: q, xs: xs) extends AsFunction0 {
+        override type self = Else[q, xs]
         override  def apply: apply = q.parse(xs)
         override type apply        = q#parse[xs]
     }
 /*
-    final case class Then[r <: PegResult](r: r) extends Function0 {
-        type self = Then[r]
+    final case class Then[r <: PegResult](r: r) extends AsFunction0 {
+        override type self = Then[r]
         override  def apply: apply = PegSuccess(Left(r.get), r.next)
         override type apply        = PegSuccess[Left[r#get], r#next]
     }
 
-    final case class Else[q <: Peg, xs <: List](q: q, xs: xs) extends Function0 {
-        type self = Else[q, xs]
+    final case class Else[q <: Peg, xs <: List](q: q, xs: xs) extends AsFunction0 {
+        override type self = Else[q, xs]
         override  def apply: apply = q.parse(xs).map(MakeRight).asInstanceOf[apply]
         override type apply        = q#parse[xs]#map[MakeRight]
     }
 
     val MakeRight = new MakeRight
-    final class MakeRight extends Function1 {
-        type self = MakeRight
+    final class MakeRight extends AsFunction1 {
+        override type self = MakeRight
         override  def apply[b <: Any](b: b): apply[b] = Right(b)
         override type apply[b <: Any]                 = Right[b]
     }

@@ -16,7 +16,7 @@ import junit.framework.Assert._
 
 class PartitionTest extends org.scalatest.junit.JUnit3Suite {
 
-    case class Lt8() extends Function1 {
+    case class Lt8() extends AsFunction1 {
         override type self = Lt8
         override  def apply[x <: Any](x: x): apply[x] = x.asNat lt _8
         override type apply[x <: Any] = x#asNat#lt[_8]

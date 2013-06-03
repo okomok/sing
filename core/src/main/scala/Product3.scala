@@ -9,7 +9,7 @@ package sing
 
 
 trait Product3 extends Product {
-    type self <: Product3
+    override type self <: Product3
 
      def _1: _1
     type _1 <: Any

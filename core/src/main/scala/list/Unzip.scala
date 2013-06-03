@@ -16,7 +16,7 @@ object Unzip {
 
 
 final case class Unzip1[xs <: List](xs: xs) extends AsList {
-    type self = Unzip1[xs]
+    override type self = Unzip1[xs]
 
     override  def isEmpty: isEmpty = xs.isEmpty
     override type isEmpty          = xs#isEmpty
@@ -29,7 +29,7 @@ final case class Unzip1[xs <: List](xs: xs) extends AsList {
 }
 
 final case class Unzip2[xs <: List](xs: xs) extends AsList {
-    type self = Unzip2[xs]
+    override type self = Unzip2[xs]
 
     override  def isEmpty: isEmpty = xs.isEmpty
     override type isEmpty          = xs#isEmpty

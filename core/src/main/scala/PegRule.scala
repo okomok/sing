@@ -21,9 +21,9 @@ trait PegRule extends AsPeg {
     private[this] lazy val p: p = rule.asPeg
     private[this]     type p    = rule#asPeg
 
-    final override  def parse[xs <: List](xs: xs): parse[xs] = p.parse(xs)
-    final override type parse[xs <: List]                    = p#parse[xs]
+    override  def parse[xs <: List](xs: xs): parse[xs] = p.parse(xs)
+    override type parse[xs <: List]                    = p#parse[xs]
 
-    final override  def width: width = p.width
-    final override type width        = p#width
+    override  def width: width = p.width
+    override type width        = p#width
 }

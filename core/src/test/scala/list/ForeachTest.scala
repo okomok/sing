@@ -21,7 +21,7 @@ class ForeachTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _Box(3) :: _Box("hello") :: _Box('a') :: Nil
 
         val r = new java.util.ArrayList[String]
-        class AddString extends Function1 {
+        class AddString extends AsFunction1 {
             override type self = AddString
             override  def apply[x <: Any](x: x) = { r.add(x.toString); Unit }
             override type apply[x <: Any] = Unit
@@ -36,7 +36,7 @@ class ForeachTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
 
         val r = new java.util.ArrayList[String]
-        class AddString extends Function1 {
+        class AddString extends AsFunction1 {
             override type self = AddString
             override  def apply[x <: Any](x: x) = { r.add(x.toString); Unit }
             override type apply[x <: Any] = Unit

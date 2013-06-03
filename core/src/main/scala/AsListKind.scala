@@ -16,6 +16,6 @@ trait AsListKind extends makro.AsKind.apply {
      * Makes a lexicographical Ordering from element natural ordering.
      */
     // `lazy` because `None` is initialized later in `package sing`.
-    final override lazy val naturalOrdering: naturalOrdering = LexicographicalOrdering.apply(None)
-    final override     type naturalOrdering                  = LexicographicalOrdering.apply[None]
+    override lazy val naturalOrdering: naturalOrdering = LexicographicalOrdering.apply(None)
+    override     type naturalOrdering                  = LexicographicalOrdering.apply[None]
 }

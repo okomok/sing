@@ -14,7 +14,7 @@ object Zip {
     type apply[xs <: List, ys <: List]                                = Impl[xs, ys]
 
     case class Impl[xs <: List, ys <: List](xs: xs, ys: ys) extends AsList {
-        type self = Impl[xs, ys]
+        override type self = Impl[xs, ys]
 
         override  def isEmpty: isEmpty = xs.isEmpty.or(ys.isEmpty)
         override type isEmpty          = xs#isEmpty#or[ys#isEmpty]
@@ -33,7 +33,7 @@ object ZipBy {
     type apply[xs <: List, ys <: List, f <: Function2]                                         = Impl[xs, ys, f]
 
     case class Impl[xs <: List, ys <: List, f <: Function2](xs: xs, ys: ys, f: f) extends AsList {
-        type self = Impl[xs, ys, f]
+        override type self = Impl[xs, ys, f]
 
         override  def isEmpty: isEmpty = xs.isEmpty.or(ys.isEmpty)
         override type isEmpty          = xs#isEmpty#or[ys#isEmpty]

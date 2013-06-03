@@ -12,8 +12,8 @@ import ordering._
 
 
 sealed abstract class OrderingResult extends Any {
-    type self <: OrderingResult
-    type unsing = scala.Int
+    override type self <: OrderingResult
+    override type unsing = scala.Int
 
      def equal[that <: OrderingResult](that: that): equal[that]
     type equal[that <: OrderingResult] <: Boolean
@@ -36,24 +36,24 @@ sealed abstract class OrderingResult extends Any {
 
 
 private[sing]
-sealed abstract class AsOrderingResult extends OrderingResult {
-    final override  def asOrderingResult: asOrderingResult = self
-    final override type asOrderingResult                   = self
+sealed abstract class AsOrderingResult extends OrderingResult with AsAny {
+    override  def asOrderingResult: asOrderingResult = self
+    override type asOrderingResult                   = self
 
-    final override  def nequal[that <: OrderingResult](that: that): nequal[that] = equal(that).not
-    final override type nequal[that <: OrderingResult]                           = equal[that]#not
+    override  def nequal[that <: OrderingResult](that: that): nequal[that] = equal(that).not
+    override type nequal[that <: OrderingResult]                           = equal[that]#not
 
-    final override  def isLTEQ: isLTEQ = isLT.or(isEQ)
-    final override type isLTEQ         = isLT#or[isEQ]
-    final override  def isGTEQ: isGTEQ = isGT.or(isEQ)
-    final override type isGTEQ         = isGT#or[isEQ]
+    override  def isLTEQ: isLTEQ = isLT.or(isEQ)
+    override type isLTEQ         = isLT#or[isEQ]
+    override  def isGTEQ: isGTEQ = isGT.or(isEQ)
+    override type isGTEQ         = isGT#or[isEQ]
 
-    final override def canEqual(that: scala.Any) = that.isInstanceOf[OrderingResult]
+    override def canEqual(that: scala.Any) = that.isInstanceOf[OrderingResult]
 }
 
 
 sealed abstract class LT extends AsOrderingResult {
-    type self = LT
+    override type self = LT
 
     override  def unsing: unsing = -1
 
@@ -69,7 +69,7 @@ sealed abstract class LT extends AsOrderingResult {
 }
 
 sealed abstract class GT extends AsOrderingResult {
-    type self = GT
+    override type self = GT
 
     override  def unsing: unsing = 1
 
@@ -85,7 +85,7 @@ sealed abstract class GT extends AsOrderingResult {
 }
 
 sealed abstract class EQ extends AsOrderingResult {
-    type self = EQ
+    override type self = EQ
 
     override  def unsing: unsing = 0
 

@@ -15,15 +15,15 @@ object Equal {
     type apply[xs <: Dense, ys <: Dense] =
         Match[xs, ys, const0[`true`], const0[`false`], const0[`false`], CaseCC[xs, ys]]#apply#asBoolean
 
-    case class CaseCC[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
-        type self = CaseCC[xs, ys]
+    case class CaseCC[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {
+        override type self = CaseCC[xs, ys]
         override  def apply: apply = `if`(xs.head.nequal(ys.head), const0(`false`), Else(xs, ys)).apply.asInstanceOf[apply]
         override type apply        = `if`[xs#head#nequal[ys#head], const0[`false`], Else[xs, ys]]#apply
     }
 
     // for short-circuit.
-    case class Else[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
-        type self = Else[xs, ys]
+    case class Else[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {
+        override type self = Else[xs, ys]
         override  def apply: apply = xs.tail.equal(ys.tail).asInstanceOf[apply]
         override type apply        = xs#tail#equal[ys#tail]
     }
@@ -39,14 +39,14 @@ object Lt {
         Match[xs, ys, const0[`false`], const0[`true`], const0[`false`],
             DConsMatch[xs, ys, CaseXXorTF[xs, ys], CaseXXorTF[xs, ys], CaseFT[xs, ys], CaseXXorTF[xs, ys]]]#apply#asBoolean
 
-    case class CaseXXorTF[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
-        type self = CaseXXorTF[xs, ys]
+    case class CaseXXorTF[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {
+        override type self = CaseXXorTF[xs, ys]
         override  def apply: apply = xs.tail.lt(ys.tail).asInstanceOf[apply]
         override type apply        = xs#tail#lt[ys#tail]
     }
 
-    case class CaseFT[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends Function0 {
-        type self = CaseFT[xs, ys]
+    case class CaseFT[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {
+        override type self = CaseFT[xs, ys]
         override  def apply: apply = ys.tail.lt(xs.tail).not.asInstanceOf[apply]
         override type apply        = ys#tail#lt[xs#tail]#not
     }

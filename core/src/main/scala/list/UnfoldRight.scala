@@ -14,7 +14,7 @@ object UnfoldRight {
     type apply[z <: Any, f <: Function1]                          = Impl[z, f]
 
     case class Impl[z <: Any, f <: Function1](z: z, f: f) extends AsList {
-        type self = Impl[z, f]
+        override type self = Impl[z, f]
 
         private[this] lazy val acc: acc = f.apply(z).asOption
         private[this]     type acc      = f#apply[z]#asOption

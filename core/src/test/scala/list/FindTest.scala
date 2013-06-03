@@ -16,7 +16,7 @@ import junit.framework.Assert._
 
 class FindTest extends org.scalatest.junit.JUnit3Suite {
 
-    case class Gt3() extends Function1 {
+    case class Gt3() extends AsFunction1 {
         override type self = Gt3
         override  def apply[x <: Any](x: x): apply[x] = x.asNat gt _3
         override type apply[x <: Any] = x#asNat#gt[_3]

@@ -14,7 +14,7 @@ object Star {
     type apply[p <: Peg]                 = Impl[p]
 
     final case class Impl[p <: Peg](p: p) extends AsPeg {
-        type self = Impl[p]
+        override type self = Impl[p]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs))
         override type parse[xs <: List]                    = _aux[p#parse[xs]]
@@ -25,8 +25,8 @@ object Star {
             `if`[r#successful, Then[p, r], const0[PegSuccess[Nil, r#next]]]#apply#asPegResult
     }
 
-    final case class Then[p <: Peg, r <: PegResult](p: p, r: r) extends Function0 {
-        type self = Then[p, r]
+    final case class Then[p <: Peg, r <: PegResult](p: p, r: r) extends AsFunction0 {
+        override type self = Then[p, r]
         override  def apply: apply = Star.apply(p).parse(r.next).map(MakeCons(r.get)).asInstanceOf[apply]
         override type apply        = Star.apply[p]#parse[r#next]#map[MakeCons[r#get]]
     }

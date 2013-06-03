@@ -10,7 +10,7 @@ package sing; package peg
 
 private[sing]
 final class Fail extends AsPeg with ZeroWidth {
-    type self = Fail
+    override type self = Fail
 
     override  def parse[xs <: List](xs: xs): parse[xs] = PegFailure(xs)
     override type parse[xs <: List]                    = PegFailure[xs]

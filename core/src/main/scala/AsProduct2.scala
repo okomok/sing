@@ -9,13 +9,13 @@ package sing
 
 
 trait AsProduct2 extends Product2 with AsProduct {
-    final override  def asProduct2: asProduct2 = self
-    final override type asProduct2             = self
+    override  def asProduct2: asProduct2 = self
+    override type asProduct2             = self
 
-    final override  def arity: arity = Peano._2
-    final override type arity        = Peano._2
+    override  def arity: arity = Peano._2
+    override type arity        = Peano._2
 
-    final override  def productElement[n <: Nat](n: n): productElement[n] =
+    override  def productElement[n <: Nat](n: n): productElement[n] =
         `if`(n.equal(Peano._0),
             const0(_1),
             `if`(n.equal(Peano._1),
@@ -24,7 +24,7 @@ trait AsProduct2 extends Product2 with AsProduct {
             )
         ).apply.asInstanceOf[productElement[n]]
 
-    final override type productElement[n <: Nat] =
+    override type productElement[n <: Nat] =
         `if`[n#equal[Peano._0],
             const0[_1],
             `if`[n#equal[Peano._1],
@@ -33,11 +33,11 @@ trait AsProduct2 extends Product2 with AsProduct {
             ]
         ]#apply
 
-    final override  def asList: asList = _1 :: _2 :: Nil
-    final override type asList         = _1 :: _2 :: Nil
+    override  def asList: asList = _1 :: _2 :: Nil
+    override type asList         = _1 :: _2 :: Nil
 
-    final override  def naturalOrdering: naturalOrdering = List.naturalOrdering
-    final override type naturalOrdering                  = List.naturalOrdering
+    override  def naturalOrdering: naturalOrdering = List.naturalOrdering
+    override type naturalOrdering                  = List.naturalOrdering
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Product2]
 }

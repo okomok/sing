@@ -14,15 +14,15 @@ import sing.Dense.Literal._
 class FizzBuzz2Test extends org.scalatest.junit.JUnit3Suite {
 
     object Fizz extends sing.Singular {
-        type self = Fizz.type
+        override type self = Fizz.type
         override def toString = "Fizz"
     }
     object Buzz extends sing.Singular {
-        type self = Buzz.type
+        override type self = Buzz.type
         override def toString = "Buzz"
     }
     object FizzBuzz extends sing.Singular {
-        type self = FizzBuzz.type
+        override type self = FizzBuzz.type
         override def toString = "FizzBuzz"
     }
 
@@ -36,7 +36,7 @@ class FizzBuzz2Test extends org.scalatest.junit.JUnit3Suite {
         override def apply = FizzBuzz
     }
 
-    trait fizzbuzz extends sing.Function1 {
+    trait fizzbuzz extends sing.AsFunction1 {
         override type self = fizzbuzz
         override type apply[x <: sing.Any] =
             sing.`if`[x#asNat#rem[_15]#equal[_0],

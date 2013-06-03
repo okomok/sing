@@ -14,7 +14,7 @@ object LexicographicalOrdering {
     type apply[eo <: Option]                    = Impl[eo]
 
     case class Impl[eo <: Option](eo: eo) extends AsOrdering {
-        type self = Impl[eo]
+        override type self = Impl[eo]
 
         override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = Equal.apply(x.asList, y.asList, eo)
         override type equiv[x <: Any, y <: Any]                          = Equal.apply[x#asList, y#asList, eo]
@@ -35,8 +35,8 @@ object LexicographicalOrdering {
             ]#apply#asOrderingResult
     }
 
-    case class Else[xs <: List, ys <: List, eo <: Option](xs: xs, ys: ys, eo: eo) extends Function0 {
-        type self = Else[xs, ys, eo]
+    case class Else[xs <: List, ys <: List, eo <: Option](xs: xs, ys: ys, eo: eo) extends AsFunction0 {
+        override type self = Else[xs, ys, eo]
         private[this] lazy val _eo: _eo = eo.getOrNaturalOrdering(xs.head)
         private[this]     type _eo      = eo#getOrNaturalOrdering[xs#head]
         override  def apply: apply =
@@ -45,8 +45,8 @@ object LexicographicalOrdering {
             _eo#`match`[xs#head, ys#head, const0[LT], const0[GT], CaseEQ[xs, ys, eo]]#asOrderingResult
     }
 
-    case class CaseEQ[xs <: List, ys <: List, eo <: Option](xs: xs, ys: ys, eo: eo) extends Function0 {
-        type self = CaseEQ[xs, ys, eo]
+    case class CaseEQ[xs <: List, ys <: List, eo <: Option](xs: xs, ys: ys, eo: eo) extends AsFunction0 {
+        override type self = CaseEQ[xs, ys, eo]
         override  def apply: apply = Impl(eo).compare(xs.tail, ys.tail).asInstanceOf[apply]
         override type apply        = Impl[eo]#compare[xs#tail, ys#tail]
     }

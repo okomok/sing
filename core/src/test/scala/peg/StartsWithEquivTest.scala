@@ -18,7 +18,7 @@ import junit.framework.Assert._
 class StartsWithEquivTest extends org.scalatest.junit.JUnit3Suite {
 
     class Plus1Equiv extends Equiv {
-        type self = Plus1Equiv
+        override type self = Plus1Equiv
         override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asNat.increment.equal(y.asNat)
         override type equiv[x <: Any, y <: Any]                          = x#asNat#increment#equal[y#asNat]
     }

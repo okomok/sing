@@ -15,8 +15,8 @@ object Sort {
     type apply[xs <: List, o <: Option] =
         `if`[HasTwoOrMore.apply[xs], Then[xs, o], const0[xs]]#apply#asList
 
-    case class Then[xs <: List, o <: Option](xs: xs, o: o) extends Function0 {
-        type self = Then[xs, o]
+    case class Then[xs <: List, o <: Option](xs: xs, o: o) extends AsFunction0 {
+        override type self = Then[xs, o]
         private[this] lazy val r: r = xs.splitAt(xs.length.quot(Peano._2)) // TODO: remove `length`.
         private[this]     type r    = xs#splitAt[xs#length#quot[Peano._2]]
         override  def apply: apply = Merge.apply(Sort.apply(r._1.asList, o), Sort.apply(r._2.asList, o), o).asInstanceOf[apply]
@@ -32,22 +32,22 @@ object Merge {
     type apply[xs <: List, ys <: List, o <: Option] =
         `if`[xs#isEmpty, const0[ys], `if`[ys#isEmpty, const0[xs], Else[xs, ys, o]]]#apply#asList
 
-    case class Else[xs <: List, ys <: List, o <: Option](xs: xs, ys: ys, o: o) extends Function0 {
-        type self = Else[xs, ys, o]
+    case class Else[xs <: List, ys <: List, o <: Option](xs: xs, ys: ys, o: o) extends AsFunction0 {
+        override type self = Else[xs, ys, o]
         private[this] lazy val _o: _o = o.getOrNaturalOrdering(xs.head)
         private[this]     type _o     = o#getOrNaturalOrdering[xs#head]
         override  def apply: apply = `if`(_o.lteq(xs.head, ys.head), ElseThen(xs, ys, o), ElseElse(xs, ys, o)).apply.asInstanceOf[apply]
         override type apply        = `if`[_o#lteq[xs#head, ys#head], ElseThen[xs, ys, o], ElseElse[xs, ys, o]]#apply
     }
 
-    case class ElseThen[xs <: List, ys <: List, o <: Option](xs: xs, ys: ys, o: o) extends Function0 {
-        type self = ElseThen[xs, ys, o]
+    case class ElseThen[xs <: List, ys <: List, o <: Option](xs: xs, ys: ys, o: o) extends AsFunction0 {
+        override type self = ElseThen[xs, ys, o]
         override  def apply: apply = Cons(xs.head, Merge.apply(xs.tail, ys, o)).asInstanceOf[apply]
         override type apply        = Cons[xs#head, Merge.apply[xs#tail, ys, o]]
     }
 
-    case class ElseElse[xs <: List, ys <: List, o <: Option](xs: xs, ys: ys, o: o) extends Function0 {
-        type self = ElseElse[xs, ys, o]
+    case class ElseElse[xs <: List, ys <: List, o <: Option](xs: xs, ys: ys, o: o) extends AsFunction0 {
+        override type self = ElseElse[xs, ys, o]
         override  def apply: apply = Cons(ys.head, Merge.apply(xs, ys.tail, o)).asInstanceOf[apply]
         override type apply        = Cons[ys#head, Merge.apply[xs, ys#tail, o]]
     }

@@ -26,8 +26,8 @@ object Option {
  * The sing Option
  */
 sealed abstract class Option extends Any {
-    type self <: Option
-    type unsing <: scala.Option[_]
+    override type self <: Option
+    override type unsing <: scala.Option[_]
 
      def isEmpty: isEmpty
     type isEmpty <: Boolean
@@ -71,35 +71,35 @@ sealed abstract class Option extends Any {
 
 
 private[sing]
-sealed abstract class AsOption extends Option {
-    final override  def asOption: asOption = self
-    final override type asOption           = self
+sealed abstract class AsOption extends Option with AsAny {
+    override  def asOption: asOption = self
+    override type asOption           = self
 
-    final override  def nonEmpty: nonEmpty = isEmpty.not
-    final override type nonEmpty           = isEmpty#not
+    override  def nonEmpty: nonEmpty = isEmpty.not
+    override type nonEmpty           = isEmpty#not
 
-    final override  def getOrNaturalEquiv[x <: Any](x: x): getOrNaturalEquiv[x] =
+    override  def getOrNaturalEquiv[x <: Any](x: x): getOrNaturalEquiv[x] =
         getOrElse(NaturalOrderingOf(x)).asEquiv
-    final override type getOrNaturalEquiv[x <: Any] =
+    override type getOrNaturalEquiv[x <: Any] =
         getOrElse[NaturalOrderingOf[x]]#asEquiv
 
-    final override  def getOrNaturalOrdering[x <: Any](x: x): getOrNaturalOrdering[x] =
+    override  def getOrNaturalOrdering[x <: Any](x: x): getOrNaturalOrdering[x] =
         getOrElse(NaturalOrderingOf(x)).asOrdering
-    final override type getOrNaturalOrdering[x <: Any] =
+    override type getOrNaturalOrdering[x <: Any] =
         getOrElse[NaturalOrderingOf[x]]#asOrdering
 
-    final override  def isDefined: isDefined = isEmpty.not
-    final override type isDefined            = isEmpty#not
+    override  def isDefined: isDefined = isEmpty.not
+    override type isDefined            = isEmpty#not
 
-    final override type foreach[f <: Function1] = Unit
+    override type foreach[f <: Function1] = Unit
 
-    final override  def orElse[f <: Function0](f: f): orElse[f] = `if`(isEmpty, f, const0(self)).apply.asOption
-    final override type orElse[f <: Function0]                  = `if`[isEmpty, f, const0[self]]#apply#asOption
+    override  def orElse[f <: Function0](f: f): orElse[f] = `if`(isEmpty, f, const0(self)).apply.asOption
+    override type orElse[f <: Function0]                  = `if`[isEmpty, f, const0[self]]#apply#asOption
 
-    final override  def naturalOrdering: naturalOrdering = List.naturalOrdering
-    final override type naturalOrdering                  = List.naturalOrdering
+    override  def naturalOrdering: naturalOrdering = List.naturalOrdering
+    override type naturalOrdering                  = List.naturalOrdering
 
-    final override  def canEqual(that: scala.Any) = that.isInstanceOf[Option]
+    override  def canEqual(that: scala.Any) = that.isInstanceOf[Option]
 }
 
 
@@ -107,7 +107,7 @@ sealed abstract class AsOption extends Option {
  * The sing None
  */
 sealed abstract class None extends AsOption {
-    type self = None
+    override type self = None
 
     override  def unsing: unsing = scala.None
     override type unsing         = scala.None.type
@@ -149,7 +149,7 @@ object _None {
  * The sing Some
  */
 final case class Some[e <: Any](override val get: e) extends AsOption {
-    type self = Some[e]
+    override type self = Some[e]
 
     override  def unsing: unsing = scala.Some(get.unsing)
     override type unsing         = scala.Some[get#unsing]

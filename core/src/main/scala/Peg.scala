@@ -51,8 +51,8 @@ object Peg extends AsPegKind {
 }
 
 
-trait Peg extends Any with ReferenceEquality {
-    type self <: Peg
+trait Peg extends Any {
+    override type self <: Peg
 
     /**
      * The parse method

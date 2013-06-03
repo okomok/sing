@@ -14,7 +14,7 @@ object Take {
     type apply[xs <: List, n <: Nat]                             = Impl[xs, n]
 
     case class Impl[xs <: List, n <: Nat](xs: xs, n: n) extends AsList {
-        type self = Impl[xs, n]
+        override type self = Impl[xs, n]
 
         private[this] lazy val ys: ys = `if`(n.isZero, const0(Nil), const0(xs)).apply.asList
         private[this]     type ys     = `if`[n#isZero, const0[Nil], const0[xs]]#apply#asList
@@ -37,7 +37,7 @@ object TakeWhile {
     type apply[xs <: List, f <: Function1]                             = Impl[xs, f]
 
     case class Impl[xs <: List, f <: Function1](xs: xs, f: f) extends AsList {
-        type self = Impl[xs, f]
+        override type self = Impl[xs, f]
 
         private[this] lazy val ys: ys = `if`(xs.isEmpty, const0(xs), Else(xs, f)).apply.asList
         private[this]     type ys     = `if`[xs#isEmpty, const0[xs], Else[xs, f]]#apply#asList
@@ -52,8 +52,8 @@ object TakeWhile {
         override type tail       = Impl[ys#tail, f]
     }
 
-    case class Else[xs <: List, f <: Function1](xs: xs, f: f) extends Function0 {
-        type self = Else[xs, f]
+    case class Else[xs <: List, f <: Function1](xs: xs, f: f) extends AsFunction0 {
+        override type self = Else[xs, f]
         override  def apply: apply = `if`(f.apply(xs.head).asBoolean, const0(xs), const0(Nil)).apply.asInstanceOf[apply]
         override type apply        = `if`[f#apply[xs#head]#asBoolean, const0[xs], const0[Nil]]#apply
     }

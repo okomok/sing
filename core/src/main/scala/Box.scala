@@ -13,8 +13,8 @@ import scala.language.existentials
 
 // Box type is equivalent to its kindId in type-level world.
 // You need a strong type for correctly defined `self`.
-final class Box[A, _A <: BoxKind[A]](override val unsing: A, _A: _A) extends Any with ValueEquality {
-    type self = Box[A, _A]
+final class Box[A, _A <: BoxKind[A]](override val unsing: A, _A: _A) extends AsAny with UnsingEquals {
+    override type self = Box[A, _A]
 
     override type unsing = A
 

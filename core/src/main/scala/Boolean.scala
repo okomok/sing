@@ -15,8 +15,8 @@ object Boolean extends AsBooleanKind
  * The sing Boolean
  */
 sealed abstract class Boolean extends Any {
-    type self <: Boolean
-    type unsing = scala.Boolean
+    override type self <: Boolean
+    override type unsing = scala.Boolean
 
      def not: not
     type not <: Boolean
@@ -45,14 +45,14 @@ sealed abstract class Boolean extends Any {
 
 
 private[sing]
-sealed abstract class AsBoolean extends Boolean with AsBooleanKind {
-    final override  def asBoolean: asBoolean = self
-    final override type asBoolean            = self
+sealed abstract class AsBoolean extends Boolean with AsAny with UnsingEquals with AsBooleanKind {
+    override  def asBoolean: asBoolean = self
+    override type asBoolean            = self
 
-    final override  def nequal[that <: Boolean](that: that): nequal[that] = equal(that).not
-    final override type nequal[that <: Boolean]                           = equal[that]#not
+    override  def nequal[that <: Boolean](that: that): nequal[that] = equal(that).not
+    override type nequal[that <: Boolean]                           = equal[that]#not
 
-    final override  def canEqual(that: scala.Any) = that.isInstanceOf[Boolean]
+    override  def canEqual(that: scala.Any) = that.isInstanceOf[Boolean]
 }
 
 
@@ -60,7 +60,7 @@ sealed abstract class AsBoolean extends Boolean with AsBooleanKind {
  * The sing true
  */
 sealed abstract class `true` extends AsBoolean {
-    type self = `true`
+    override type self = `true`
 
     override  def unsing: unsing = true
 
@@ -94,7 +94,7 @@ sealed abstract class `true` extends AsBoolean {
  * The sing false
  */
 sealed abstract class `false` extends AsBoolean {
-    type self = `false`
+    override type self = `false`
 
     override  def unsing: unsing = false
 

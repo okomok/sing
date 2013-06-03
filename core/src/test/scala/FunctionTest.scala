@@ -15,15 +15,15 @@ import junit.framework.Assert._
 
 class FunctionTest extends org.scalatest.junit.JUnit3Suite {
 
-    final case class Plus() extends Function2 {
-        type self = Plus
+    final case class Plus() extends AsFunction2 {
+        override type self = Plus
         override  def apply[n <: Any, m <: Any](n: n, m: m): apply[n, m] = n.asNat plus m.asNat
         override type apply[n <: Any, m <: Any] = n#asNat# plus [m#asNat]
     }
 
     def testCurried {
-        type c = Function2.curried[Plus]
-        val c: c = Function2.curried(Plus())
+        type c = Plus#curried
+        val c: c = Plus().curried
 
         type a = c#apply[_3]
         val a: a = c.apply(_3)
@@ -38,8 +38,8 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testTupled {
-        type c = Function2.tupled[Plus]
-        val c: c = Function2.tupled(Plus())
+        type c = Plus#tupled
+        val c: c = Plus().tupled
 
         type k = c#apply[Tuple2[_3, _4]]
         val k : k = c.apply(Tuple2(_3, _4))
@@ -49,21 +49,21 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
         ()
     }
 
-    final case class Plus2() extends Function1 {
-        type self = Plus2
+    final case class Plus2() extends AsFunction1 {
+        override type self = Plus2
         override  def apply[n <: Any](n: n): apply[n] = n.asNat plus _2
         override type apply[n <: Any] = n#asNat# plus [_2]
     }
 
-    final case class Minus3() extends Function1 {
-        type self = Minus3
+    final case class Minus3() extends AsFunction1 {
+        override type self = Minus3
         override  def apply[n <: Any](n: n): apply[n] = n.asNat minus _3
         override type apply[n <: Any] = n#asNat# minus [_3]
     }
 
     def testCompose {
-        type c = Function1.compose[Plus2, Minus3]
-        val c: c = Function1.compose(Plus2(), Minus3())
+        type c = Plus2#compose[Minus3]
+        val c: c = Plus2().compose(Minus3())
         val r: c#apply[_5] = c.apply(_5)
         okomok.sing.assert(r equal _4)
         val k: _4 = r
@@ -71,9 +71,9 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testAndThen {
-        val k: _3 = Function1.andThen(Minus3(), Plus2())(_4)
+        val k: _3 = Minus3().andThen(Plus2())(_4)
         try {
-            Function1.andThen(Minus3(), Plus2()).apply(_2)
+            Minus3().andThen(Plus2()).apply(_2)
             fail("never come here")
         } catch {
             case _: UnsupportedOperationException =>
@@ -82,8 +82,8 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
 
-    final case class PlusTimes() extends Function3 {
-        type self = PlusTimes
+    final case class PlusTimes() extends AsFunction3 {
+        override type self = PlusTimes
         override  def apply[n <: Any, m <: Any, u <: Any](n: n, m: m, u: u): apply[n, m, u] =
             n.asNat.plus(m.asNat).times(u.asNat).asInstanceOf[apply[n, m, u]]
         override type apply[n <: Any, m <: Any, u <: Any] =

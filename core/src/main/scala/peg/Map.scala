@@ -14,7 +14,7 @@ object Map {
     type apply[p <: Peg, f <: Function1]                          = Impl[p, f]
 
     final case class Impl[p <: Peg, f <: Function1](p: p, f: f) extends AsPeg {
-        type self = Impl[p, f]
+        override type self = Impl[p, f]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = p.parse(xs).map(f)
         override type parse[xs <: List]                    = p#parse[xs]#map[f]

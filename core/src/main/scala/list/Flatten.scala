@@ -14,7 +14,7 @@ object Flatten {
     type apply[xs <: List]                    = Impl[xs]
 
     case class Impl[xs <: List](xs: xs) extends AsList {
-        type self = Impl[xs]
+        override type self = Impl[xs]
 
         private[this] lazy val ys: ys = xs.dropWhile(IsEmpty)
         private[this]     type ys     = xs#dropWhile[IsEmpty]
@@ -34,8 +34,8 @@ object Flatten {
     }
 
     val IsEmpty = new IsEmpty
-    class IsEmpty extends Function1 {
-        type self = IsEmpty
+    class IsEmpty extends AsFunction1 {
+        override type self = IsEmpty
         override  def apply[xs <: Any](xs: xs): apply[xs] = xs.asList.isEmpty
         override type apply[xs <: Any]                    = xs#asList#isEmpty
     }

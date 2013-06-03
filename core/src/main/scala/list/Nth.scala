@@ -15,8 +15,8 @@ object Nth {
     type apply[xs <: List, n <: Nat] =
         `if`[n#isZero, const0[xs#head], Else[xs, n]]#apply
 
-    case class Else[xs <: List, n <: Nat](xs: xs, n: n) extends Function0 {
-        type self = Else[xs, n]
+    case class Else[xs <: List, n <: Nat](xs: xs, n: n) extends AsFunction0 {
+        override type self = Else[xs, n]
         override  def apply: apply = Nth.apply(xs.tail, n.decrement).asInstanceOf[apply]
         override type apply        = Nth.apply[xs#tail, n#decrement]
     }

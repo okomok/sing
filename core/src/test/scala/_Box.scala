@@ -14,9 +14,9 @@ import com.github.okomok.sing._
 /**
  * Boxed non-sing type
  */
-final case class _Box[A](override val unsing: A) extends Any {
+final case class _Box[A](override val unsing: A) extends AsAny with UnsingEquals {
     Predef.assert(!unsing.isInstanceOf[Any], "unneeded boxing")
-    type self = _Box[A]
+    override type self = _Box[A]
     override type unsing = A
 }
 

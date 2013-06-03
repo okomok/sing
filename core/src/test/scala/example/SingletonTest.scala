@@ -12,8 +12,8 @@ package com.github.okomoktest; package singtest; package example
 
     class Singletonest extends org.scalatest.junit.JUnit3Suite {
         // Define 0-ary dualmethod `not2`.
-        final class not2 extends sing.Function1 { // No meta-generics. `Function1` isn't parameterized.
-            type self = not2 // `self` is the sing version of `this` reference. Manual setup is needed.
+        final class not2 extends sing.AsFunction1 { // No meta-generics. `Function1` isn't parameterized.
+            override type self = not2 // `self` is the sing version of `this` reference. Manual setup is needed.
             // Again no meta-generics. Downcast is needed as you did in 90s.
             override  def apply[x <: sing.Any](x: x): apply[x] = x.asNat.equal(_2).not
             override type apply[x <: sing.Any]                 = x#asNat#equal[_2]#not

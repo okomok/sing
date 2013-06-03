@@ -18,8 +18,8 @@ object Either extends AsEitherKind
  * The sing Either
  */
 sealed abstract class Either extends Any {
-    type self <: Either
-    type unsing <: scala.Either[_, _]
+    override type self <: Either
+    override type unsing <: scala.Either[_, _]
 
      def get: get
     type get <: Any
@@ -42,14 +42,14 @@ sealed abstract class Either extends Any {
      def isRight: isRight
     type isRight <: Boolean
 
-    final override def canEqual(that: scala.Any) = that.isInstanceOf[Either]
+    override def canEqual(that: scala.Any) = that.isInstanceOf[Either]
 }
 
 
 private[sing]
-sealed abstract class AsEither extends Either with AsEitherKind {
-    final override  def asEither: asEither = self
-    final override type asEither           = self
+sealed abstract class AsEither extends Either with AsAny with UnsingEquals with AsEitherKind {
+    override  def asEither: asEither = self
+    override type asEither           = self
 }
 
 
@@ -57,7 +57,7 @@ sealed abstract class AsEither extends Either with AsEitherKind {
  * The sing Left
  */
 final case class Left[e <: Any](override val get: e) extends AsEither {
-    type self = Left[e]
+    override type self = Left[e]
 
     override  def unsing: unsing = scala.Left(get.unsing)
     override type unsing         = scala.Left[get#unsing, _]
@@ -88,7 +88,7 @@ final case class Left[e <: Any](override val get: e) extends AsEither {
  * The sing Right
  */
 final case class Right[e <: Any](override val get: e) extends AsEither {
-    type self = Right[e]
+    override type self = Right[e]
 
     override  def unsing: unsing = scala.Right(get.unsing)
     override type unsing         = scala.Right[_, get#unsing]

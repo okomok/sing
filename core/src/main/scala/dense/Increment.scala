@@ -16,15 +16,15 @@ object DConsIncrement {
         `if`[x, Then[x, xs], Else[x, xs]]#apply#asNat#asDense
 
     // (`true` :: xs).increment
-    case class Then[x <: Boolean, xs <: Dense](x: x, xs: xs) extends Function0 {
-        type self = Then[x, xs]
+    case class Then[x <: Boolean, xs <: Dense](x: x, xs: xs) extends AsFunction0 {
+        override type self = Then[x, xs]
         override  def apply: apply = DCons(`false`, xs.increment)
         override type apply        = DCons[`false`, xs#increment]
     }
 
     // (`false` :: xs).increment
-    case class Else[x <: Boolean, xs <: Dense](x: x, xs: xs) extends Function0 {
-        type self = Else[x, xs]
+    case class Else[x <: Boolean, xs <: Dense](x: x, xs: xs) extends AsFunction0 {
+        override type self = Else[x, xs]
         override  def apply: apply = DCons(`true`, xs)
         override type apply        = DCons[`true`, xs]
     }

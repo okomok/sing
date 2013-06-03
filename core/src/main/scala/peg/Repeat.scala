@@ -21,7 +21,7 @@ object Repeat {
     final case class Impl[p <: Peg, n <: Nat, m <: Nat](p: p, n: n, m: m) extends AsPeg {
         assert(n.lteq(m)) // `const0` takes a by-name argument.
 
-        type self = Impl[p, n, m]
+        override type self = Impl[p, n, m]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)
         override type parse[xs <: List]                    = _aux[p#parse[xs], xs]
@@ -32,16 +32,16 @@ object Repeat {
             `if`[r#successful, Then[p, r, n, m, xs], const0[r]]#apply#asPegResult
     }
 
-    final case class Then[p <: Peg, r <: PegResult, n <: Nat, m <: Nat, xs <: List](p: p, r: r, n: n, m: m, xs: xs) extends Function0 {
-        type self = Then[p, r, n, m, xs]
+    final case class Then[p <: Peg, r <: PegResult, n <: Nat, m <: Nat, xs <: List](p: p, r: r, n: n, m: m, xs: xs) extends AsFunction0 {
+        override type self = Then[p, r, n, m, xs]
         private[this] lazy val s: s = Repeat.apply(p, n.decrement, m.decrement).parse(r.next).asInstanceOf[s]
         private[this]     type s    = Repeat.apply[p, n#decrement, m#decrement]#parse[r#next]
         override  def apply: apply = `if`(s.successful, ThenThen(r, s), const0(PegFailure(xs))).apply
         override type apply        = `if`[s#successful, ThenThen[r, s], const0[PegFailure[xs]]]#apply
     }
 
-    final case class ThenThen[r <: PegResult, s <: PegResult](r: r, s: s) extends Function0 {
-        type self = ThenThen[r, s]
+    final case class ThenThen[r <: PegResult, s <: PegResult](r: r, s: s) extends AsFunction0 {
+        override type self = ThenThen[r, s]
         override  def apply: apply = PegSuccess(r.get :: s.get.asList, s.next)
         override type apply        = PegSuccess[r#get :: s#get#asList, s#next]
     }
@@ -49,8 +49,8 @@ object Repeat {
     private[this]  def safeDec[n <: Nat](n: n): safeDec[n] = `if`(n.isZero, const0(n), Dec(n)).apply.asNat
     private[this] type safeDec[n <: Nat]                   = `if`[n#isZero, const0[n], Dec[n]]#apply#asNat
 
-    final case class Dec[n <: Nat](n: n) extends Function0 {
-        type self = Dec[n]
+    final case class Dec[n <: Nat](n: n) extends AsFunction0 {
+        override type self = Dec[n]
         override  def apply: apply = n.decrement
         override type apply        = n#decrement
     }
@@ -65,7 +65,7 @@ object RepeatAtMost {
         `if`[n#isZero, const0[eps], const0[Impl[p, n]]]#apply#asPeg
 
     final case class Impl[p <: Peg, n <: Nat](p: p, n: n) extends AsPeg {
-        type self = Impl[p, n]
+        override type self = Impl[p, n]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs))
         override type parse[xs <: List]                    = _aux[p#parse[xs]]
@@ -76,14 +76,14 @@ object RepeatAtMost {
             `if`[r#successful, Then[p, r, n], const0[PegSuccess[Nil, r#next]]]#apply#asPegResult
     }
 
-    final case class Then[p <: Peg, r <: PegResult, n <: Nat](p: p, r: r, n: n) extends Function0 {
-        type self = Then[p, r, n]
+    final case class Then[p <: Peg, r <: PegResult, n <: Nat](p: p, r: r, n: n) extends AsFunction0 {
+        override type self = Then[p, r, n]
         override  def apply: apply = RepeatAtMost.apply(p, n.decrement).parse(r.next).map(MakeCons(r.get)).asInstanceOf[apply]
         override type apply        = RepeatAtMost.apply[p, n#decrement]#parse[r#next]#map[MakeCons[r#get]]
     }
 
-    final case class Make[p <: Peg, n <: Nat](p: p, n: n) extends Function0 {
-        type self = Make[p, n]
+    final case class Make[p <: Peg, n <: Nat](p: p, n: n) extends AsFunction0 {
+        override type self = Make[p, n]
         override  def apply: apply = RepeatAtMost.apply(p, n)
         override type apply        = RepeatAtMost.apply[p, n]
     }

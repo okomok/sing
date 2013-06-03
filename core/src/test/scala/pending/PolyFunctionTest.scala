@@ -17,12 +17,12 @@ import junit.framework.Assert._
 
 class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
 
-    object Inc extends New with Function1 {
+    object Inc extends New with AsFunction1 {
         override  def apply[x <: Any](x: x): apply[x] = x.asNat.increment
         override type apply[x <: Any] = x#asNat#increment
     }
 
-    object Not extends New with Function1 {
+    object Not extends New with AsFunction1 {
         override  def apply[x <: Any](x: x): apply[x] = x.asBoolean.not
         override type apply[x <: Any] = x#asBoolean#not
     }
@@ -31,7 +31,7 @@ class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
 
     val xs = _0 :: _2 :: `true` :: _3 :: `false` :: Nil
 
-    object Ap extends New with Function1 {
+    object Ap extends New with AsFunction1 {
         override  def apply[x <: Any](x: x): apply[x] = poly.get(x.kindId).get.asFunction1.apply(x).asInstanceOf[apply[x]]
         override type apply[x <: Any] = poly.get[x#kindId]#get#asFunction1#apply[x]
     }
@@ -41,8 +41,9 @@ class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
         `true`.kindId
         Peano._3.kindId
         Dense._3.kindId
-        println(Nil.kindId)
+        Nil.kindId
         (`true` :: `false` :: Nil).kindId
+        xs.kindId
 
 
         val res: _1 :: _3 :: `false` :: _4 :: `true` :: Nil = xs.map(Ap).force

@@ -22,11 +22,11 @@ class MacroTest extends org.scalatest.junit.JUnit3Suite {
 
     trait Foo
 
-    class My extends NewKind.apply with Foo with ReferenceEquality {
+    class My extends NewKind.apply with Foo with RefEquals {
         val x = 3
     }
 
-    class My2[A <: Foo] extends NewKind.apply with Foo with ReferenceEquality {
+    class My2[A <: Foo] extends NewKind.apply with Foo with RefEquals {
         val x = 3
     }
 /*

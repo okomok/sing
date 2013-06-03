@@ -131,7 +131,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
 
-    case class Plus1() extends Function1 {
+    case class Plus1() extends AsFunction1 {
         override type self = Plus1
         override def apply[n <: Any](n: n): apply[n] = n.asNat.increment
         override type apply[n <: Any] = n#asNat#increment
@@ -154,7 +154,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
 
-    case class Plus1Get() extends Function1 {
+    case class Plus1Get() extends AsFunction1 {
         override type self = Plus1Get
         override def apply[n <: Any](n: n): apply[n] = Some(n.asNat.increment)
         override type apply[n <: Any] = Some[n#asNat#increment]
@@ -177,7 +177,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
 
-    case class Is2() extends Function1 {
+    case class Is2() extends AsFunction1 {
         override type self = Is2
         override def apply[n <: Any](n: n): apply[n] = n.asNat equal _2
         override type apply[n <: Any] = n#asNat# equal[_2]
@@ -233,7 +233,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
 
-    case class AddTo(result: java.util.ArrayList[Int]) extends Function1 {
+    case class AddTo(result: java.util.ArrayList[Int]) extends AsFunction1 {
         override type self = AddTo
         override def apply[n <: Any](n: n): apply[n] = { result.add(n.asNat.unsing); Unit }
         override type apply[n <: Any] = Unit
@@ -261,7 +261,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
 
-    case class Some4() extends Function0 {
+    case class Some4() extends AsFunction0 {
         override type self = Some4
         override def apply: apply = Some(_4)
         override type apply = Some[_4]

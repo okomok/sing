@@ -14,7 +14,7 @@ object Dot {
     type apply        =     Impl
 
     final class Impl extends AsPeg with OneWidth {
-        type self = Impl
+        override type self = Impl
 
         override  def parse[xs <: List](xs: xs): parse[xs] =
             `if`(xs.isEmpty, const0(PegFailure(xs)), Else(xs)).apply.asPegResult//.asInstanceOf[parse[xs]]
@@ -22,8 +22,8 @@ object Dot {
             `if`[xs#isEmpty, const0[PegFailure[xs]], Else[xs]]#apply#asPegResult
     }
 
-    final case class Else[xs <: List](xs: xs) extends Function0 {
-        type self = Else[xs]
+    final case class Else[xs <: List](xs: xs) extends AsFunction0 {
+        override type self = Else[xs]
         override  def apply: apply = PegSuccess(xs.head, xs.tail)
         override type apply        = PegSuccess[xs#head, xs#tail]
     }

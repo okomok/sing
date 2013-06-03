@@ -33,8 +33,8 @@ object Set extends AsSetKind {
  * The sing Set
  */
 trait Set extends Any {
-    type self <: Set
-    type unsing <: scala.collection.Set[scala.Any]
+    override type self <: Set
+    override type unsing <: scala.collection.Set[scala.Any]
 
      def size: size
     type size <: Nat

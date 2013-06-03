@@ -10,7 +10,7 @@ package sing; package peg
 
 private[sing]
 final class Error extends AsPeg with ZeroWidth {
-    type self = Error
+    override type self = Error
 
     override  def parse[xs <: List](xs: xs): parse[xs] = throw new ParseError(xs.unsing.toString)
     override type parse[xs <: List]                    = Nothing

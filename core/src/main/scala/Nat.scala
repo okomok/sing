@@ -15,8 +15,8 @@ object Nat extends AsNatKind
  * The sing natural number
  */
 trait Nat extends Any {
-    type self <: Nat
-    type unsing = scala.Int
+    override type self <: Nat
+    override type unsing = scala.Int
 
      def asDense: asDense
     type asDense <: Dense

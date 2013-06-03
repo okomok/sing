@@ -21,7 +21,7 @@ class RuleTest extends org.scalatest.junit.JUnit3Suite {
 
     val MyRule = new MyRule
     final class MyRule extends PegRule {
-        type self = MyRule
+        override type self = MyRule
         override  def rule: rule = term(_1).seq(self.opt).seq(term(_2))
         override type rule       = term[_1]#seq[self#opt]#seq[term[_2]]
     }
@@ -66,21 +66,21 @@ object ArithmeticRules {
 
     val group = new group
     final class group extends Rule {
-        type self = group
+        override type self = group
         override  def rule: rule = term(`(`).seq(expr).seq(`)`)
         override type rule       = term[`(`]#seq[expr]#seq[`)`]
     }
 
     val factor = new factor
     final class factor extends Rule {
-        type self = factor
+        override type self = factor
         override  def rule: rule = integer.or(group)
         override type rule       = integer#or[group]
     }
 
     val factor = new factor
     final class factor extends Rule {
-        type self = factor
+        override type self = factor
         override  def rule: rule = integer.or(group)
         override type rule       = integer#or[group]
     }

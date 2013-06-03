@@ -21,7 +21,7 @@ import scala.language.existentials
 class LiftTest extends org.scalatest.junit.JUnit3Suite {
 
     // Define sing `Function2`.
-    object Apply extends Function2 {
+    object Apply extends AsFunction2 {
         override type self = Apply.type
         override  def apply[f <: Any, x <: Any](f: f, x: x): apply[f, x] = f.asFunction1.apply(x)
         override type apply[f <: Any, x <: Any]                          = f#asFunction1#apply[x]

@@ -15,8 +15,8 @@ object Plus {
     type apply[x <: Peano, y <: Peano]                          = y#foldRight[x, Step]#asNat#asPeano
 
     val Step = new Step
-    class Step extends Function2 {
-        type self = Step
+    class Step extends AsFunction2 {
+        override type self = Step
         override  def apply[a <: Any, b <: Any](a: a, b: b): apply[a, b] = b.asNat.asPeano.increment
         override type apply[a <: Any, b <: Any]                          = b#asNat#asPeano#increment
     }

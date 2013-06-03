@@ -9,8 +9,8 @@ package sing; package function
 
 
 private[sing]
-final class Throw0(x: Throwable) extends Function0 {
-    type self = Throw0
+final class Throw0(x: Throwable) extends AsFunction0 {
+    override type self = Throw0
     override  def apply: apply = throw x
     override type apply        = Nothing
 }

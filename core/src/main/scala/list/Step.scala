@@ -14,7 +14,7 @@ object Step {
     type apply[xs <: List, n <: Nat]                             = Impl[xs, n]
 
     case class Impl[xs <: List, n <: Nat](xs: xs, n: n) extends AsList {
-        type self = Impl[xs, n]
+        override type self = Impl[xs, n]
 
         override  def isEmpty: isEmpty = xs.isEmpty
         override type isEmpty          = xs#isEmpty

@@ -23,8 +23,8 @@ object Dense extends Literal {
 }
 
 
-sealed abstract class Dense extends AsNat {
-    type self <: Dense
+sealed abstract class Dense extends Nat {
+    override type self <: Dense
 
      def head: head
     type head <: Boolean
@@ -62,42 +62,42 @@ sealed abstract class Dense extends AsNat {
 
 
 private[sing]
-sealed abstract class AsDense extends Dense {
-    final override  def asDense: asDense = self
-    final override type asDense          = self
+sealed abstract class AsDense extends Dense with AsNat {
+    override  def asDense: asDense = self
+    override type asDense          = self
 
     @Annotation.equivalentTo("DCons(e. self)")
-    final override  def ::[e <: Boolean](e: e): ::[e] = DCons(e, self)
-    final override type ::[e <: Boolean]              = DCons[e, self]
+    override  def ::[e <: Boolean](e: e): ::[e] = DCons(e, self)
+    override type ::[e <: Boolean]              = DCons[e, self]
 
-    final override  def plus[that <: Nat](that: that): plus[that] = Plus.apply(self, that.asDense)
-    final override type plus[that <: Nat]                         = Plus.apply[self, that#asDense]
+    override  def plus[that <: Nat](that: that): plus[that] = Plus.apply(self, that.asDense)
+    override type plus[that <: Nat]                         = Plus.apply[self, that#asDense]
 
-    final override  def minus[that <: Nat](that: that): minus[that] = Minus.apply(self, that.asDense)
-    final override type minus[that <: Nat]                          = Minus.apply[self, that#asDense]
+    override  def minus[that <: Nat](that: that): minus[that] = Minus.apply(self, that.asDense)
+    override type minus[that <: Nat]                          = Minus.apply[self, that#asDense]
 
-    final override  def quotRem[that <: Nat](that: that): quotRem[that] = QuotRem.apply(self, that.asDense)
-    final override type quotRem[that <: Nat]                            = QuotRem.apply[self, that#asDense]
+    override  def quotRem[that <: Nat](that: that): quotRem[that] = QuotRem.apply(self, that.asDense)
+    override type quotRem[that <: Nat]                            = QuotRem.apply[self, that#asDense]
 
-    final override  def equal[that <: Nat](that: that): equal[that] = Equal.apply(self, that.asDense)
-    final override type equal[that <: Nat]                          = Equal.apply[self, that#asDense]
+    override  def equal[that <: Nat](that: that): equal[that] = Equal.apply(self, that.asDense)
+    override type equal[that <: Nat]                          = Equal.apply[self, that#asDense]
 
-    final override  def lt[that <: Nat](that: that): lt[that] = Lt.apply(self, that.asDense)
-    final override type lt[that <: Nat]                       = Lt.apply[self, that#asDense]
+    override  def lt[that <: Nat](that: that): lt[that] = Lt.apply(self, that.asDense)
+    override type lt[that <: Nat]                       = Lt.apply[self, that#asDense]
 
-    final override  def lteq[that <: Nat](that: that): lteq[that] = that.asDense.lt(self).not
-    final override type lteq[that <: Nat]                         = that#asDense#lt[self]#not
+    override  def lteq[that <: Nat](that: that): lteq[that] = that.asDense.lt(self).not
+    override type lteq[that <: Nat]                         = that#asDense#lt[self]#not
 
-    final override  def bitAnd[that <: Nat](that: that): bitAnd[that] = BitAnd.apply(self, that.asDense)
-    final override type bitAnd[that <: Nat]                           = BitAnd.apply[self, that#asDense]
+    override  def bitAnd[that <: Nat](that: that): bitAnd[that] = BitAnd.apply(self, that.asDense)
+    override type bitAnd[that <: Nat]                           = BitAnd.apply[self, that#asDense]
 
-    final override  def bitOr[that <: Nat](that: that): bitOr[that] = BitOr.apply(self, that.asDense)
-    final override type bitOr[that <: Nat]                          = BitOr.apply[self, that#asDense]
+    override  def bitOr[that <: Nat](that: that): bitOr[that] = BitOr.apply(self, that.asDense)
+    override type bitOr[that <: Nat]                          = BitOr.apply[self, that#asDense]
 }
 
 
 sealed class DNil extends AsDense {
-    type self = DNil
+    override type self = DNil
 
     override  def asPeano: asPeano = Zero
     override type asPeano          = Zero
@@ -150,7 +150,7 @@ object _DNil {
 final case class DCons[x <: Boolean, xs <: Dense](override val head: x, override val tail: xs) extends AsDense {
     assert(head.or(tail.isZero.not))
 
-    type self = DCons[x, xs]
+    override type self = DCons[x, xs]
 
     override  def asPeano: asPeano = Succ(decrement.asPeano)
     override type asPeano          = Succ[decrement#asPeano]

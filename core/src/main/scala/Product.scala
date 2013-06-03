@@ -9,7 +9,7 @@ package sing
 
 
 trait Product extends Any {
-    type self <: Product
+    override type self <: Product
 
      def arity: arity
     type arity <: Nat

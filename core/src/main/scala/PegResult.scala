@@ -12,8 +12,8 @@ import peg._
 
 
 sealed abstract class PegResult extends Any {
-    type self <: PegResult
-    type unsing <: UnsingResult[_]
+    override type self <: PegResult
+    override type unsing <: UnsingResult[_]
 
      def get: get
     type get <: Any
@@ -33,16 +33,16 @@ sealed abstract class PegResult extends Any {
 
 
 private[sing]
-sealed abstract class AsPegResult extends PegResult {
-    final override  def asPegResult: asPegResult = self
-    final override type asPegResult              = self
+sealed abstract class AsPegResult extends PegResult with AsAny {
+    override  def asPegResult: asPegResult = self
+    override type asPegResult              = self
 
-    final override  def canEqual(that: scala.Any) = that.isInstanceOf[PegResult]
+    override  def canEqual(that: scala.Any) = that.isInstanceOf[PegResult]
 }
 
 
 final case class PegSuccess[x <: Any, ys <: List](override val get: x, override val next: ys) extends AsPegResult {
-    type self = PegSuccess[x, ys]
+    override type self = PegSuccess[x, ys]
 
     override  def unsing: unsing = UnsingSuccess(get.unsing, next.unsing)
     override type unsing         = UnsingSuccess[get#unsing]
@@ -62,7 +62,7 @@ final case class PegSuccess[x <: Any, ys <: List](override val get: x, override 
 
 
 final case class PegFailure[ys <: List](override val next: ys) extends AsPegResult {
-    type self = PegFailure[ys]
+    override type self = PegFailure[ys]
 
     override  def unsing: unsing = UnsingFailure(next.unsing)
     override type unsing         = UnsingFailure

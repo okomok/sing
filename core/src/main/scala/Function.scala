@@ -40,4 +40,3 @@ object Function {
     def lift3[T1, T2, T3, R](f: (T1, T2, T3) => R)(implicit _R: BoxKind[R]): Lift3[T1, T2, T3, R, _R.self] = new Lift3[T1, T2, T3, R, _R.self](f, _R)
 
 }
-

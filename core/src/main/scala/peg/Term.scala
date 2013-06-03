@@ -14,7 +14,7 @@ object Term {
     type apply[y <: Any]                 = Impl[y]
 
     final case class Impl[y <: Any](y: y) extends AsPeg with OneWidth {
-        type self = Impl[y]
+        override type self = Impl[y]
 
         override  def parse[xs <: List](xs: xs): parse[xs] =
             `if`(xs.isEmpty, const0(PegFailure(xs)), Else(y, xs)).apply.asPegResult//.asInstanceOf[parse[xs]]
@@ -22,8 +22,8 @@ object Term {
             `if`[xs#isEmpty, const0[PegFailure[xs]], Else[y, xs]]#apply#asPegResult
     }
 
-    final case class Else[y <: Any, xs <: List](y: y, xs: xs) extends Function0 {
-        type self = Else[y, xs]
+    final case class Else[y <: Any, xs <: List](y: y, xs: xs) extends AsFunction0 {
+        override type self = Else[y, xs]
         private[this] lazy val x: x = xs.head
         private[this]     type x    = xs#head
         override  def apply: apply =

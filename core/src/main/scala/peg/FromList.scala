@@ -14,7 +14,7 @@ object FromList {
     type apply[ys <: List]                    = Impl[ys]
 
     final case class Impl[ys <: List](ys: ys) extends AsPeg {
-        type self = Impl[ys]
+        override type self = Impl[ys]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(StartsWith.apply(xs, ys, None), xs)
         override type parse[xs <: List]                    = _aux[StartsWith.apply[xs, ys, None], xs]
@@ -28,8 +28,8 @@ object FromList {
         override type width        = ys#length
     }
 
-    final case class Else[r <: Option](r: r) extends Function0 {
-        type self = Else[r]
+    final case class Else[r <: Option](r: r) extends AsFunction0 {
+        override type self = Else[r]
         private[this] lazy val p: p = r.get.asProduct2
         private[this]     type p    = r#get#asProduct2
         override  def apply: apply = PegSuccess(p._1, p._2.asList)

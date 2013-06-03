@@ -18,8 +18,8 @@ object QuotRem {
     type apply[x <: Dense, y <: Dense] =
         `if`[y#size#lt[x#size], Then[x, y], Else[x, y]]#apply#asProduct2
 
-    case class Then[x <: Dense, y <: Dense](x: x, y: y) extends Function0 {
-        type self = Then[x, y]
+    case class Then[x <: Dense, y <: Dense](x: x, y: y) extends AsFunction0 {
+        override type self = Then[x, y]
 
         lazy val count2: count2 = x.size.minus(y.size)
             type count2         = x#size#minus[y#size]
@@ -45,8 +45,8 @@ object QuotRem {
             `if`[canMinus2#lteq[x], Next[x, y, quot2, canMinus2], Next[x, y, quot1, canMinus1]]#apply
     }
 
-    case class Next[x <: Dense, y <: Dense, quot <: Dense, canMinus <: Dense](x: x, y: y, quot: quot, canMinus: canMinus) extends Function0 {
-        type self = Next[x, y, quot, canMinus]
+    case class Next[x <: Dense, y <: Dense, quot <: Dense, canMinus <: Dense](x: x, y: y, quot: quot, canMinus: canMinus) extends AsFunction0 {
+        override type self = Next[x, y, quot, canMinus]
 
         lazy val r: r = x.minus(canMinus).quotRem(y)
             type r    = x#minus[canMinus]#quotRem[y]
@@ -55,14 +55,14 @@ object QuotRem {
         override type apply        = Tuple2[quot#plus[r#_1#asNat], r#_2]
     }
 
-    case class Else[x <: Dense, y <: Dense](x: x, y: y) extends Function0 {
-        type self = Else[x, y]
+    case class Else[x <: Dense, y <: Dense](x: x, y: y) extends AsFunction0 {
+        override type self = Else[x, y]
         override  def apply: apply = `if`(x.lt(y), const0(Tuple2(DNil, x)), ElseElse(x, y)).apply
         override type apply        = `if`[x#lt[y], const0[Tuple2[DNil, x]], ElseElse[x, y]]#apply
     }
 
-    case class ElseElse[x <: Dense, y <: Dense](x: x, y: y) extends Function0 {
-        type self = ElseElse[x, y]
+    case class ElseElse[x <: Dense, y <: Dense](x: x, y: y) extends AsFunction0 {
+        override type self = ElseElse[x, y]
         override  def apply: apply = Tuple2(_1, x.minus(y))
         override type apply        = Tuple2[_1, x#minus[y]]
     }
@@ -75,8 +75,8 @@ object DConsShiftLeftBy {
     type apply[x <: Dense, n <: Peano]                          = n#foldRight[x, Step]#asNat#asDense
 
     val Step = new Step
-    class Step extends Function2 {
-        type self = Step
+    class Step extends AsFunction2 {
+        override type self = Step
         override  def apply[a <: Any, b <: Any](a: a, b: b): apply[a, b] = DCons(`false`, b.asNat.asDense)
         override type apply[a <: Any, b <: Any]                          = DCons[`false`, b#asNat#asDense]
     }

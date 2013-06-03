@@ -15,8 +15,8 @@ object SuccEq {
     type apply[x <: Peano, y <: Peano] =
         `if`[y#isZero, const0[`false`], Else[x, y]]#apply#asBoolean
 
-    case class Else[x <: Peano, y <: Peano](x: x, y: y) extends Function0 {
-         type self = Else[x, y]
+    case class Else[x <: Peano, y <: Peano](x: x, y: y) extends AsFunction0 {
+         override type self = Else[x, y]
          override  def apply: apply = x.decrement.equal(y.decrement)
          override type apply        = x#decrement#equal[y#decrement]
      }
@@ -29,8 +29,8 @@ object SuccLtEq {
     type apply[x <: Peano, y <: Peano] =
         `if`[y#isZero, const0[`false`], Else[x, y]]#apply#asBoolean
 
-    case class Else[x <: Peano, y <: Peano](x: x, y: y) extends Function0 {
-         type self = Else[x, y]
+    case class Else[x <: Peano, y <: Peano](x: x, y: y) extends AsFunction0 {
+         override type self = Else[x, y]
          override  def apply: apply = x.decrement.lteq(y.decrement)
          override type apply        = x#decrement#lteq[y#decrement]
      }

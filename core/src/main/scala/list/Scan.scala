@@ -14,7 +14,7 @@ object ScanLeft {
     type apply[xs <: List, z <: Any, f <: Function2]                                      = Cons[z, Impl[xs, z, f]]
 
     case class Impl[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f) extends AsList {
-        type self = Impl[xs, z, f]
+        override type self = Impl[xs, z, f]
 
         override  def isEmpty: isEmpty = xs.isEmpty
         override type isEmpty          = xs#isEmpty
@@ -37,8 +37,8 @@ object ScanRight {
     type apply[xs <: List, z <: Any, f <: Function2] =
         `if`[xs#isEmpty, const0[Cons[z, Nil]], Else[xs, z, f]]#apply#asList
 
-    case class Else[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f) extends Function0 {
-        type self = Else[xs, z, f]
+    case class Else[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f) extends AsFunction0 {
+        override type self = Else[xs, z, f]
         private[this] lazy val ys: ys = ScanRight.apply(xs.tail, z, f)
         private[this]     type ys     = ScanRight.apply[xs#tail, z, f]
         override  def apply: apply = Cons(f.apply(xs.head, ys.head), ys)

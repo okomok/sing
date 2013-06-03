@@ -14,7 +14,7 @@ package com.github.okomoktest; package singtest; package example
         trait Buzz extends sing.Any
         trait FizzBuzz extends sing.Any
 
-        trait doFizzBuzz extends sing.Function1 {
+        trait doFizzBuzz extends sing.AsFunction1 {
             override type self = doFizzBuzz
             override type apply[x <: sing.Any] =
                 sing.`if`[x#asNat#rem[_15]#equal[_0],

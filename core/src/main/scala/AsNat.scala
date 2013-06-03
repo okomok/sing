@@ -8,24 +8,24 @@ package com.github.okomok
 package sing
 
 
-trait AsNat extends Nat with AsNatKind {
-    final override  def asNat: asNat = self
-    final override type asNat        = self
+trait AsNat extends Nat with AsAny with UnsingEquals with AsNatKind {
+    override  def asNat: asNat = self
+    override type asNat        = self
 
-    final override  def nequal[that <: Nat](that: that): nequal[that] = equal(that).not
-    final override type nequal[that <: Nat]                           = equal[that]#not
+    override  def nequal[that <: Nat](that: that): nequal[that] = equal(that).not
+    override type nequal[that <: Nat]                           = equal[that]#not
 
-    final override  def quot[that <: Nat](that: that): quot[that] = quotRem(that)._1.asNat
-    final override type quot[that <: Nat]                         = quotRem[that]#_1#asNat
+    override  def quot[that <: Nat](that: that): quot[that] = quotRem(that)._1.asNat
+    override type quot[that <: Nat]                         = quotRem[that]#_1#asNat
 
-    final override  def rem[that <: Nat](that: that): rem[that] = quotRem(that)._2.asNat
-    final override type rem[that <: Nat]                        = quotRem[that]#_2#asNat
+    override  def rem[that <: Nat](that: that): rem[that] = quotRem(that)._2.asNat
+    override type rem[that <: Nat]                        = quotRem[that]#_2#asNat
 
-    final override  def gt[that <: Nat](that: that): gt[that] = that.lt(self)
-    final override type gt[that <: Nat]                       = that#lt[self]
+    override  def gt[that <: Nat](that: that): gt[that] = that.lt(self)
+    override type gt[that <: Nat]                       = that#lt[self]
 
-    final override  def gteq[that <: Nat](that: that): gteq[that] = that.lteq(self)
-    final override type gteq[that <: Nat]                         = that#lteq[self]
+    override  def gteq[that <: Nat](that: that): gteq[that] = that.lteq(self)
+    override type gteq[that <: Nat]                         = that#lteq[self]
 
-    final override  def canEqual(that: scala.Any) = that.isInstanceOf[Nat]
+    override  def canEqual(that: scala.Any) = that.isInstanceOf[Nat]
 }

@@ -14,7 +14,7 @@ object Append {
     type apply[xs <: List, ys <: List]                                = Impl[xs, ys]
 
     case class Impl[xs <: List, ys <: List](xs: xs, ys: ys) extends AsList {
-        type self = Impl[xs, ys]
+        override type self = Impl[xs, ys]
 
         override  def isEmpty: isEmpty = xs.isEmpty.and(ys.isEmpty)
         override type isEmpty          = xs#isEmpty#and[ys#isEmpty]
@@ -26,26 +26,26 @@ object Append {
         override type tail       = `if`[xs#isEmpty, NextThen[xs, ys], NextElse[xs, ys]]#apply#asList
     }
 
-    case class DerefThen[xs <: List, ys <: List](xs: xs, ys: ys) extends Function0 {
-        type self = DerefThen[xs, ys]
+    case class DerefThen[xs <: List, ys <: List](xs: xs, ys: ys) extends AsFunction0 {
+        override type self = DerefThen[xs, ys]
         override  def apply: apply = ys.head
         override type apply        = ys#head
     }
 
-    case class DerefElse[xs <: List, ys <: List](xs: xs, ys: ys) extends Function0 {
-        type self = DerefElse[xs, ys]
+    case class DerefElse[xs <: List, ys <: List](xs: xs, ys: ys) extends AsFunction0 {
+        override type self = DerefElse[xs, ys]
         override  def apply: apply = xs.head
         override type apply        = xs#head
     }
 
-    case class NextThen[xs <: List, ys <: List](xs: xs, ys: ys) extends Function0 {
-        type self = NextThen[xs, ys]
+    case class NextThen[xs <: List, ys <: List](xs: xs, ys: ys) extends AsFunction0 {
+        override type self = NextThen[xs, ys]
         override  def apply: apply = Append.apply(xs, ys.tail)
         override type apply        = Append.apply[xs, ys#tail]
     }
 
-    case class NextElse[xs <: List, ys <: List](xs: xs, ys: ys) extends Function0 {
-        type self = NextElse[xs, ys]
+    case class NextElse[xs <: List, ys <: List](xs: xs, ys: ys) extends AsFunction0 {
+        override type self = NextElse[xs, ys]
         override  def apply: apply = Append.apply(xs.tail, ys)
         override type apply        = Append.apply[xs#tail, ys]
     }
