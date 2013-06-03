@@ -5,12 +5,12 @@
 
 
 package com.github.okomok
-package sing; package nat
+package sing
 
 
 private[sing]
-final class NaturalOrdering extends OrderingImpl {
-    type self = NaturalOrdering
+final class NatNaturalOrdering extends AsOrdering {
+    type self = NatNaturalOrdering
 
     override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asNat.equal(y.asNat)
     override type equiv[x <: Any, y <: Any]                          = x#asNat#equal[y#asNat]

@@ -11,7 +11,7 @@ package sing
 import map._
 
 
-trait MapImpl extends Map {
+trait AsMap extends Map with AsMapKind {
     final override  def asMap: asMap = self
     final override type asMap        = self
 

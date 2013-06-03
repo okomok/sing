@@ -11,7 +11,7 @@ package sing
 import peg._
 
 
-object Peg {
+object Peg extends AsPegKind {
 
     /**
      * Epsilon, the empty string

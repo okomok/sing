@@ -11,7 +11,7 @@ package sing
 import list._
 
 
-object List extends ToSTuple with makro.HasKindId.apply {
+object List extends ToSTuple with AsListKind {
 
     @Annotation.equivalentTo("Nil")
      val empty: empty = Nil
@@ -40,13 +40,6 @@ object List extends ToSTuple with makro.HasKindId.apply {
     type force2[t <: Product2]                  = Tuple2[t#_1#asList#force, t#_2#asList#force]
 
     /**
-     * Makes a lexicographical Ordering from element natural ordering.
-     */
-    // `lazy` because `None` is initialized later in `package sing`.
-    lazy val naturalOrdering: naturalOrdering = LexicographicalOrdering.apply(None)
-        type naturalOrdering                  = LexicographicalOrdering.apply[None]
-
-    /**
      * Makes a lexicographical Ordering from element Ordering.
      */
      def lexicographicalOrdering[eo <: Ordering](eo: eo): lexicographicalOrdering[eo] = LexicographicalOrdering.apply(Some(eo))
@@ -72,7 +65,7 @@ object List extends ToSTuple with makro.HasKindId.apply {
 /**
 * The sing List
 */
-trait List extends makro.NewKind.apply {
+trait List extends Any {
     type self <: List
     type unsing <: scala.collection.immutable.Seq[scala.Any]
 

@@ -87,12 +87,6 @@ trait Any extends AnyType with scala.Equals {
     type asKindId <: KindId
 
     /**
-     * Returns the natural ordering.
-     */
-     def naturalOrdering: naturalOrdering = unsupported("Any.naturalOrdering")
-    type naturalOrdering <: Ordering
-
-    /**
      * Escapes from the sing world.
      */
      def unsing: unsing = unsupported("Any.unsing")
@@ -108,17 +102,5 @@ trait Any extends AnyType with scala.Equals {
     final protected def refEquals(that: scala.Any) = super.equals(that)
     final protected def refHashCode = super.hashCode
     final protected def refToString = super.toString
-
-    /**
-     * Trivial helper to throw UnsupportedOperationException
-     */
-    protected  def unsupported(what: Predef.String): unsupported[_] = throw new UnsupportedOperationException("sing." + what)
-    protected type unsupported[_] = Nothing
-
-    /**
-     * Trivial helper to throw NoSuchElementException
-     */
-    protected  def noSuchElement(what: Predef.String): noSuchElement[_] = throw new NoSuchElementException("sing." + what)
-    protected type noSuchElement[_] = Nothing
 
 }

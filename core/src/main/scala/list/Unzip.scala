@@ -15,7 +15,7 @@ object Unzip {
 }
 
 
-final case class Unzip1[xs <: List](xs: xs) extends ListImpl {
+final case class Unzip1[xs <: List](xs: xs) extends AsList {
     type self = Unzip1[xs]
 
     override  def isEmpty: isEmpty = xs.isEmpty
@@ -28,7 +28,7 @@ final case class Unzip1[xs <: List](xs: xs) extends ListImpl {
     override type tail       = Unzip1[xs#tail]
 }
 
-final case class Unzip2[xs <: List](xs: xs) extends ListImpl {
+final case class Unzip2[xs <: List](xs: xs) extends AsList {
     type self = Unzip2[xs]
 
     override  def isEmpty: isEmpty = xs.isEmpty

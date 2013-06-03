@@ -11,7 +11,7 @@ package sing
 import set._
 
 
-trait SetImpl extends Set {
+trait AsSet extends Set with AsSetKind {
     final override  def asSet: asSet = self
     final override type asSet        = self
 

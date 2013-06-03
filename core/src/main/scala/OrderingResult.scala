@@ -36,7 +36,7 @@ sealed abstract class OrderingResult extends Any {
 
 
 private[sing]
-sealed abstract class OrderingResultImpl extends OrderingResult {
+sealed abstract class AsOrderingResult extends OrderingResult {
     final override  def asOrderingResult: asOrderingResult = self
     final override type asOrderingResult                   = self
 
@@ -52,7 +52,7 @@ sealed abstract class OrderingResultImpl extends OrderingResult {
 }
 
 
-sealed abstract class LT extends OrderingResultImpl {
+sealed abstract class LT extends AsOrderingResult {
     type self = LT
 
     override  def unsing: unsing = -1
@@ -68,7 +68,7 @@ sealed abstract class LT extends OrderingResultImpl {
     override type isEQ       = `false`
 }
 
-sealed abstract class GT extends OrderingResultImpl {
+sealed abstract class GT extends AsOrderingResult {
     type self = GT
 
     override  def unsing: unsing = 1
@@ -84,7 +84,7 @@ sealed abstract class GT extends OrderingResultImpl {
     override type isEQ       = `false`
 }
 
-sealed abstract class EQ extends OrderingResultImpl {
+sealed abstract class EQ extends AsOrderingResult {
     type self = EQ
 
     override  def unsing: unsing = 0

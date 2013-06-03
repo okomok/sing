@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-final case class Tuple3[v1 <: Any, v2 <: Any, v3 <: Any](override val _1: v1, override val _2: v2, override val _3: v3) extends Product3Impl {
+final case class Tuple3[v1 <: Any, v2 <: Any, v3 <: Any](override val _1: v1, override val _2: v2, override val _3: v3) extends AsProduct3 {
     type self = Tuple3[v1, v2, v3]
 
     override type _1 = v1

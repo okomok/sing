@@ -13,7 +13,7 @@ object Range {
      def apply[n <: Nat, m <: Nat](n: n, m: m): apply[n, m] = Impl(n, m)
     type apply[n <: Nat, m <: Nat]                          = Impl[n, m]
 
-    case class Impl[n <: Nat, m <: Nat](n: n, m: m) extends ListImpl {
+    case class Impl[n <: Nat, m <: Nat](n: n, m: m) extends AsList {
         type self = Impl[n, m]
 
         override  def isEmpty: isEmpty = n.equal(m)

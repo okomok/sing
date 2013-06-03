@@ -17,16 +17,19 @@ import scala.reflect.macros.Context
 object KindId {
 
     def apply(c: Context)(fullName: String): (c.Tree, c.Tree) = {
-        val _ids = fullName.split("\\.").
-            reverse. // for a faster search
-            toList.
-            filterNot(s => s == "type")
-
-        val ids = _ids.take(2) // because scalac is too slow
-
+        val ids = idList(fullName)
         val v = vFrom(c)( vListFrom(c)( ids.map { id => vNatFrom(c)(Bits(id)) } ) )
         val t = tFrom(c)( tListFrom(c)( ids.map { id => tNatFrom(c)(Bits(id)) } ) )
         (v, t)
+    }
+
+    def idList(fullName: String): List[String] = {
+        fullName.split("\\.").
+            reverse. // for a faster search
+            toList.
+            filterNot(s => s == "type").
+            map(s => s.take(6)).
+            take(2) // because scalac is too slow
     }
 
     // KindId construction from Nat List

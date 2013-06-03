@@ -9,7 +9,7 @@ package sing
 
 
 private[sing]
-final case class BSUnitTree[impl <: BSTree](impl: impl) extends SetImpl {
+final case class BSUnitTree[impl <: BSTree](impl: impl) extends AsSet {
     type self = BSUnitTree[impl]
 
     override  def unsing: unsing = impl.unsing.keySet

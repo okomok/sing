@@ -8,13 +8,13 @@ package com.github.okomok
 package sing
 
 
-object Boolean extends makro.HasKindId.apply
+object Boolean extends AsBooleanKind
 
 
 /**
  * The sing Boolean
  */
-sealed abstract class Boolean extends makro.NewKind.apply {
+sealed abstract class Boolean extends Any {
     type self <: Boolean
     type unsing = scala.Boolean
 
@@ -45,15 +45,12 @@ sealed abstract class Boolean extends makro.NewKind.apply {
 
 
 private[sing]
-sealed abstract class BooleanImpl extends Boolean {
+sealed abstract class AsBoolean extends Boolean with AsBooleanKind {
     final override  def asBoolean: asBoolean = self
     final override type asBoolean            = self
 
     final override  def nequal[that <: Boolean](that: that): nequal[that] = equal(that).not
     final override type nequal[that <: Boolean]                           = equal[that]#not
-
-    final override  def naturalOrdering: naturalOrdering = _Boolean.NaturalOrdering
-    final override type naturalOrdering                  = _Boolean.NaturalOrdering
 
     final override  def canEqual(that: scala.Any) = that.isInstanceOf[Boolean]
 }
@@ -62,7 +59,7 @@ sealed abstract class BooleanImpl extends Boolean {
 /**
  * The sing true
  */
-sealed abstract class `true` extends BooleanImpl {
+sealed abstract class `true` extends AsBoolean {
     type self = `true`
 
     override  def unsing: unsing = true
@@ -80,7 +77,7 @@ sealed abstract class `true` extends BooleanImpl {
     override type or[that <: Boolean]                       = `true`
 
     override  def `if`[_then <: Function0, _else <: Function0](_then: _then, _else: _else): `if`[_then, _else] = _then
-    override type `if`[_then <: Function0, _else <: Function0]                                              = _then
+    override type `if`[_then <: Function0, _else <: Function0]                                                 = _then
 
     override  def asNat: asNat = Peano._1
     override type asNat        = Peano._1
@@ -96,7 +93,7 @@ sealed abstract class `true` extends BooleanImpl {
 /**
  * The sing false
  */
-sealed abstract class `false` extends BooleanImpl {
+sealed abstract class `false` extends AsBoolean {
     type self = `false`
 
     override  def unsing: unsing = false
@@ -131,32 +128,4 @@ private[sing]
 object _Boolean {
     val `true` = new `true`{}
     val `false` = new `false`{}
-
-    val NaturalOrdering = new NaturalOrdering
-    final class NaturalOrdering extends OrderingImpl {
-        type self = NaturalOrdering
-
-        override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asBoolean.equal(y.asBoolean)
-        override type equiv[x <: Any, y <: Any]                          = x#asBoolean#equal[y#asBoolean]
-
-        override  def compare[x <: Any, y <: Any](x: x, y: y): compare[x, y] = _compare(x.asBoolean, y.asBoolean)
-        override type compare[x <: Any, y <: Any]                            = _compare[x#asBoolean, y#asBoolean]
-
-        private[this]  def _compare[x <: Boolean, y <: Boolean](x: x, y: y): _compare[x, y] =
-            `if`(x.not.and(y),
-                const0(LT),
-                `if`(x.and(y.not),
-                    const0(GT),
-                    const0(EQ)
-                )
-            ).apply.asOrderingResult.asInstanceOf[_compare[x, y]]
-        private[this] type _compare[x <: Boolean, y <: Boolean] =
-            `if`[x#not#and[y],
-                const0[LT],
-                `if`[x#and[y#not],
-                    const0[GT],
-                    const0[EQ]
-                ]
-            ]#apply#asOrderingResult
-    }
 }

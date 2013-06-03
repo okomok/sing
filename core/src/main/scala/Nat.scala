@@ -8,32 +8,13 @@ package com.github.okomok
 package sing
 
 
-import nat._
-
-
-object Nat extends AnyKind {
-    override lazy val kindId: kindId = KindId.From(DNil :: Nil)
-    override     type kindId         = KindId.From[DNil :: Nil]
-
-    /**
-     * The natural ordering of Nat
-     */
-     val naturalOrdering: naturalOrdering = new NaturalOrdering
-    type naturalOrdering                  =     NaturalOrdering
-}
+object Nat extends AsNatKind
 
 
 /**
  * The sing natural number
  */
 trait Nat extends Any {
-    // You can't use makro.NewKind.apply:
-    //   makro.NewKind.apply depends on Dense, which in turn, needs Nat.
-    //   Then kindId can't be defined. (AbstractMethodError)
-    override lazy val kindId: kindId = KindId.From(DNil :: Nil)
-    override     type kindId         = KindId.From[DNil :: Nil]
-
-
     type self <: Nat
     type unsing = scala.Int
 

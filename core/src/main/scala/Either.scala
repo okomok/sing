@@ -8,18 +8,18 @@ package com.github.okomok
 package sing
 
 
-object Either extends makro.HasKindId.apply
+sealed trait AsEitherKind extends makro.AsKind.apply
+
+
+object Either extends AsEitherKind
 
 
 /**
  * The sing Either
  */
-sealed abstract class Either extends makro.NewKind.apply {
+sealed abstract class Either extends Any {
     type self <: Either
     type unsing <: scala.Either[_, _]
-
-    final override  def asEither: asEither = self
-    final override type asEither           = self
 
      def get: get
     type get <: Any
@@ -46,10 +46,17 @@ sealed abstract class Either extends makro.NewKind.apply {
 }
 
 
+private[sing]
+sealed abstract class AsEither extends Either with AsEitherKind {
+    final override  def asEither: asEither = self
+    final override type asEither           = self
+}
+
+
 /**
  * The sing Left
  */
-final case class Left[e <: Any](override val get: e) extends Either {
+final case class Left[e <: Any](override val get: e) extends AsEither {
     type self = Left[e]
 
     override  def unsing: unsing = scala.Left(get.unsing)
@@ -80,7 +87,7 @@ final case class Left[e <: Any](override val get: e) extends Either {
 /**
  * The sing Right
  */
-final case class Right[e <: Any](override val get: e) extends Either {
+final case class Right[e <: Any](override val get: e) extends AsEither {
     type self = Right[e]
 
     override  def unsing: unsing = scala.Right(get.unsing)

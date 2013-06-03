@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-trait Product1Impl extends Product1 with ProductImpl {
+trait AsProduct1 extends Product1 with AsProduct {
     final override  def asProduct1: asProduct1 = self
     final override type asProduct1             = self
 

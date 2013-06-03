@@ -13,7 +13,7 @@ object LexicographicalOrdering {
      def apply[eo <: Option](eo: eo): apply[eo] = Impl(eo)
     type apply[eo <: Option]                    = Impl[eo]
 
-    case class Impl[eo <: Option](eo: eo) extends OrderingImpl {
+    case class Impl[eo <: Option](eo: eo) extends AsOrdering {
         type self = Impl[eo]
 
         override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = Equal.apply(x.asList, y.asList, eo)

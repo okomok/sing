@@ -13,7 +13,7 @@ object Seq {
      def apply[p <: Peg, q <: Peg](p: p, q: q): apply[p, q] = Impl(p, q)
     type apply[p <: Peg, q <: Peg]                          = Impl[p, q]
 
-    final case class Impl[p <: Peg, q <: Peg](p: p, q: q) extends PegImpl {
+    final case class Impl[p <: Peg, q <: Peg](p: p, q: q) extends AsPeg {
         type self = Impl[p, q]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)

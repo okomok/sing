@@ -11,7 +11,10 @@ package sing
 import peg._
 
 
-trait PegImpl extends Peg {
+trait AsPegKind extends makro.AsKind.apply
+
+
+trait AsPeg extends Peg with AsPegKind {
     final override  def asPeg: asPeg = self
     final override type asPeg        = self
 

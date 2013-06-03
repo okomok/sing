@@ -21,7 +21,8 @@ object build extends Build {
         resolvers += Resolver.sonatypeRepo("snapshots"),
 
         parallelExecution := false,
-        publishArtifact in packageDoc := false
+        publishArtifact in packageDoc := false,
+        offline := true
     )
 
     lazy val root = Project(

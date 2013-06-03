@@ -23,7 +23,7 @@ object Dense extends Literal {
 }
 
 
-sealed abstract class Dense extends NatImpl {
+sealed abstract class Dense extends AsNat {
     type self <: Dense
 
      def head: head
@@ -62,7 +62,7 @@ sealed abstract class Dense extends NatImpl {
 
 
 private[sing]
-sealed abstract class DenseImpl extends Dense {
+sealed abstract class AsDense extends Dense {
     final override  def asDense: asDense = self
     final override type asDense          = self
 
@@ -96,7 +96,7 @@ sealed abstract class DenseImpl extends Dense {
 }
 
 
-sealed class DNil extends DenseImpl {
+sealed class DNil extends AsDense {
     type self = DNil
 
     override  def asPeano: asPeano = Zero
@@ -147,7 +147,7 @@ object _DNil {
 }
 
 
-final case class DCons[x <: Boolean, xs <: Dense](override val head: x, override val tail: xs) extends DenseImpl {
+final case class DCons[x <: Boolean, xs <: Dense](override val head: x, override val tail: xs) extends AsDense {
     assert(head.or(tail.isZero.not))
 
     type self = DCons[x, xs]

@@ -14,6 +14,7 @@ import sing.Peano.Literal._
 import junit.framework.Assert._
 
 
+
 class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
 
     object Inc extends New with Function1 {
@@ -40,7 +41,7 @@ class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
         `true`.kindId
         Peano._3.kindId
         Dense._3.kindId
-        Nil.kindId
+        println(Nil.kindId)
         (`true` :: `false` :: Nil).kindId
 
 
@@ -55,5 +56,4 @@ class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
 }
-
 

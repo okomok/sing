@@ -13,7 +13,7 @@ object Not {
      def apply[p <: Peg](p: p): apply[p] = Impl(p)
     type apply[p <: Peg]                 = Impl[p]
 
-    final case class Impl[p <: Peg](p: p) extends PegImpl with ZeroWidth {
+    final case class Impl[p <: Peg](p: p) extends AsPeg with ZeroWidth {
         type self = Impl[p]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(p.parse(xs), xs)

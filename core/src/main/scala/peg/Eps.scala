@@ -9,7 +9,7 @@ package sing; package peg
 
 
 private[sing]
-final class Eps extends PegImpl with ZeroWidth {
+final class Eps extends AsPeg with ZeroWidth {
     type self = Eps
 
     override  def parse[xs <: List](xs: xs): parse[xs] = PegSuccess(Nil, xs)

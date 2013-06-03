@@ -22,7 +22,7 @@ object New_ {
         import c.universe._
 
         val name = weakTypeOf[T].typeSymbol.name.toString
-        val implName = TypeName(name + "Impl")
+        val implName = TypeName("As" + name)
 
         val singlib: c.Tree = q"com.github.okomok.sing"
 

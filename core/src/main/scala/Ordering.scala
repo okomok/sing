@@ -11,7 +11,7 @@ package sing
 import ordering._
 
 
-object Ordering {
+object Ordering extends AsOrderingKind {
 
     /**
      * Always returns `EQ`.

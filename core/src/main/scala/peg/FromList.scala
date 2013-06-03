@@ -13,7 +13,7 @@ object FromList {
      def apply[ys <: List](ys: ys): apply[ys] = Impl(ys)
     type apply[ys <: List]                    = Impl[ys]
 
-    final case class Impl[ys <: List](ys: ys) extends PegImpl {
+    final case class Impl[ys <: List](ys: ys) extends AsPeg {
         type self = Impl[ys]
 
         override  def parse[xs <: List](xs: xs): parse[xs] = _aux(StartsWith.apply(xs, ys, None), xs)

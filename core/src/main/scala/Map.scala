@@ -11,7 +11,7 @@ package sing
 import map._
 
 
-object Map extends makro.HasKindId.apply {
+object Map extends AsMapKind {
 
     /**
      * Constructs an empty sorted map.
@@ -25,15 +25,13 @@ object Map extends makro.HasKindId.apply {
      */
      def sorted1[k <: Any, v <: Any](k: k, v: v): sorted1[k, v] = sorted(k.naturalOrdering).put(k, v).asInstanceOf[sorted1[k, v]]
     type sorted1[k <: Any, v <: Any]                            = sorted[k#naturalOrdering]#put[k, v]
-//    final def sorted1[k <: Any, v](k: k, v: v, o: util.Overload = ()): sorted1[k, Box[v]] = sorted1(k, Box(v))
-
 }
 
 
 /**
  * The sing Map
  */
-trait Map extends makro.NewKind.apply {
+trait Map extends Any {
     type self <: Map
     type unsing <: scala.collection.Map[scala.Any, scala.Any]
 

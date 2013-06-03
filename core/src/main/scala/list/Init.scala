@@ -13,7 +13,7 @@ object Init {
      def apply[xs <: List](xs: xs): apply[xs] = Impl(xs)
     type apply[xs <: List]                    = Impl[xs]
 
-    case class Impl[xs <: List](xs: xs) extends ListImpl {
+    case class Impl[xs <: List](xs: xs) extends AsList {
         type self = Impl[xs]
 
         private[this] lazy val ys: ys = `if`(xs.tail.isEmpty, const0(Nil), const0(xs)).apply.asList

@@ -11,7 +11,7 @@ package sing
 import list._
 
 
-trait ListImpl extends List {
+trait AsList extends List with AsListKind {
     final override  def asList: asList = self
     final override type asList         = self
 
@@ -148,9 +148,6 @@ trait ListImpl extends List {
 
     final override  def times[n <: Nat](n: n): times[n] = Times.apply(self, n)
     final override type times[n <: Nat]                 = Times.apply[self, n]
-
-    final override  def naturalOrdering: naturalOrdering = List.naturalOrdering
-    final override type naturalOrdering                  = List.naturalOrdering
 
     override  def canEqual(that: scala.Any) = that.isInstanceOf[List]
 }
