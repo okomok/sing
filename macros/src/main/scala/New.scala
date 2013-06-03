@@ -16,14 +16,17 @@ import scala.reflect.macros.Context
 
 object New {
 
-    type apply = macro apply
+    type apply[T] = macro apply[T]
 
-    def apply(c: Context): c.Tree = {
+    def apply[T: c.WeakTypeTag](c: Context): c.Tree = {
         import c.universe._
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
-        val zuper: c.Tree = tq"$singlib.Any"
+        val name = weakTypeOf[T].typeSymbol.name.toString
+        val implName = TypeName("As" + name)
 
+        val singlib: c.Tree = q"com.github.okomok.sing"
+
+        val zuper: c.Tree = tq"$singlib.$implName"
         val selfdef: c.Tree = q"override type self = ${TypeOfSelf(c)}"
 
         Mixin(c)(zuper, List(selfdef))

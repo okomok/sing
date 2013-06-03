@@ -91,7 +91,7 @@ package object sing {
 
 // macros
 
-    type New = macro makro.New.apply
+    type New[T] = macro makro.New.apply[T]
 
 
 // assertions

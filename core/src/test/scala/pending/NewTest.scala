@@ -20,7 +20,7 @@ class NewTest extends org.scalatest.junit.JUnit3Suite {
 
     type K = List
 
-    trait Foo extends makro.New_.apply[K]
+    trait Foo extends makro.New.apply[K]
 
     def testTrivial() {
         ()
