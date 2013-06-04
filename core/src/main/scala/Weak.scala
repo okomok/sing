@@ -53,19 +53,9 @@ object Weak {
     def assertConforms[a <: b, b]: scala.Unit = ()
 
     /**
-     * TODO: type assertion for terms
+     * type assertion for terms
      */
-    def assertTypeOf[T](x: ({type id = T})#id): scala.Unit = ()
-
-    /**
-     * type of an expression
-     */
-    type typeOf[T](x: T) = macro makro.WeakTypeOf.apply[T]
-
-    /**
-     * Returns corresponding runtime value.
-     */
-    def termOf[x <: Any](implicit i: TermOf[x]): x = i.apply
+    def assertTypeOf[x <: Any](y: Any)(implicit i: x =:= y.self): scala.Unit = ()
 
     /**
      * Prints a type-name as a compile-error.

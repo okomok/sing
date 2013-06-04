@@ -21,11 +21,10 @@ object Self {
     def apply(c: Context): c.Tree = {
         import c.universe._
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
-        val zuper: c.Tree = tq"$singlib.Any"
+        val selfdef: c.Tree = q"type self = ${TypeOfSelf(c)}"
 
-        val selfdef: c.Tree = q"override type self = ${TypeOfSelf(c)}"
+        val Template(parents, self, body) = c.enclosingTemplate
 
-        Mixin(c)(zuper, List(selfdef))
+        Template(Sings.removeMacro(c)(parents), self, selfdef :: body)
     }
 }

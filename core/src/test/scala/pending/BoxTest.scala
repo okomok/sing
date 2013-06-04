@@ -28,7 +28,7 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
         val bi = Box(mmm)
         val k = Box.kindOf[MMM]
         val id = Box.kindIdOf[MMM]
-        type id = Weak.typeOf(id)
+        type id = typeOf(id)
 
         Weak.assertSame[bi.kindId, k.kindId]
         Weak.assertSame[k.kindId, id.self] // id.type fails.

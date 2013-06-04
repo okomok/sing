@@ -62,15 +62,15 @@ class ProjectEuler1Test extends org.scalatest.junit.JUnit3Suite {
 
     // too slow
     //type ans = sing.List.range[_1, _N]#filter[shouldBeSummed]#reduceLeft[plus]
-    //println(sing.Weak.termOf[ans])
+    //println(sing.termOf[ans])
 
     // type level (compile time)
     type sumOfm3 = sumOfArithmeticSeq#apply[_3, _N, _3]
     type sumOfm5 = sumOfArithmeticSeq#apply[_5, _N, _5]
     type sumOfm15= sumOfArithmeticSeq#apply[_15, _N, _15]
     type ans2 = sumOfm3#plus[sumOfm5]#minus[sumOfm15]
-    //println(sing.Weak.termOf[ans2])
-    expectResult(233168)(sing.Weak.termOf[ans2].unsing)
+    //println(sing.termOf[ans2])
+    expectResult(233168)(sing.termOf[ans2].unsing)
 
     // run time
     val _N = _10 times _10 times _10
