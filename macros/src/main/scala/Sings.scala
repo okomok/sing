@@ -25,119 +25,58 @@ object Sings {
         import c.universe._
 
         val singlib: c.Tree = q"com.github.okomok.sing"
-
-        val Template(parents, _, oldbody) = c.enclosingTemplate
-        val body = singize(c)(oldbody)
-
-        Template(removeMacro(c)(parents), emptyValDef, body)
+        val Template(parents, self, body) = c.enclosingTemplate
+        val res = Template(RemoveMacroApplication(c)(parents), self, body ++ termMethodize(c)(body))
+        // println(res)
+        res
     }
 
-    def removeMacro(c: Context)(parents: List[c.Tree]): List[c.Tree] = {
-        parents.filter { x =>
-            !x.equalsStructure(c.macroApplication)
-        }
-    }
-
-    private def singize(c: Context)(body: List[c.Tree]) : List[c.Tree] = {
+    private def termMethodize(c: Context)(body: List[c.Tree]): List[c.Tree] = {
         import c.universe._
 
-        body.flatMap { t =>
-            if (isSingmethodAnnotated(c)(t)) {
-                val (te, ty) = singDef(c)(t)
-                List(te, ty)
-            } else {
-                List(t)
-            }
-        }
-    }
-
-    // How to do it precisely?
-    private def isSingmethodAnnotation(c: Context)(an: c.Tree): Boolean = {
-        import c.universe._
-
-        an match {
-            case Apply(Select(New(Ident(TypeName(tn))), _), _) => {
-                tn.reverse.take(10).reverse == "singmethod"
-            }
-            case _ => false
-        }
-    }
-
-    private def isSingmethodAnnotated(c: Context)(t: c.Tree): Boolean = {
-        import c.universe._
-
-        t match {
-            case DefDef(mods, _, _, _, _, _) =>
-                mods.annotations.find { (an: c.Tree) =>
-                    isSingmethodAnnotation(c)(an)
+        object WithSingmethodAnnotation {
+            def unapply(annotations: List[c.Tree]): Boolean = {
+                annotations.find {
+                    ann => IsSingmethodAnnotation(c)(ann)
                 }.isDefined
-            case _ => false
+            }
+        }
+
+        body.collect {
+            case TypeDef(mods @ Modifiers(_, _, WithSingmethodAnnotation()), name, tparams, rhs) => {
+                val vparams = tparams.map {
+                    case TypeDef(mods, name, tpt, rhs) => {
+                        ValDef(mods, name.toTermName, Ident(name), rhs)
+                    }
+                }
+
+                val targs = tparams.map { case TypeDef(_, name, _, _) =>
+                    Ident(name)
+                }
+
+                val term = toTerm(c)(rhs)
+                if (tparams.isEmpty) {
+                    val lazymods = AddLazyFlag(c)(mods)
+                    q"$lazymods val ${name.toTermName}: $name = $term" // easily memoized
+                } else {
+                    q"$mods def $name[..$tparams](..$vparams): $name[..$targs] = $term"
+                }
+            }
+
+            // todo..
         }
     }
 
-    private def removeSingmethodAnnotation(c: Context)(mods: c.universe.Modifiers): c.universe.Modifiers = {
+    private def toTerm(c: Context)(rhs: c.Tree): c.Tree = {
         import c.universe._
 
-        val Modifiers(flags, privateWithin, annotations) = mods
-
-        val ans = annotations.filter { an =>
-            !isSingmethodAnnotation(c)(an)
-        }
-
-        Modifiers(flags, privateWithin, ans)
-    }
-
-    private def singDef(c: Context)(dd: c.Tree): (c.Tree, c.Tree) = {
-        import c.universe._
-
-        val DefDef(oldmods, name, _, oldvparams :: _, _, rhs) =  dd
-
-        val vparams = oldvparams.map { case ValDef(mods, name, tpt, rhs) =>
-            ValDef(mods, name, Ident(name.toTypeName), rhs)
-        }
-
-        val tparams = oldvparams.map { case ValDef(mods, name, tpt, rhs) =>
-            TypeDef(mods, name.toTypeName, Nil, TypeBoundsTree(EmptyTree, tpt))
-        }
-
-        val targs = oldvparams.map { case ValDef(mods, name, tpt, rhs) =>
-            Ident(name.toTypeName)
-        }
-
-        val typ = toType(c)(rhs)
-        val term = toTerm(c)(typ) // to strip TypeApply
-
-        val mods = removeSingmethodAnnotation(c)(oldmods)
-
-        val termmethod = q"$mods def $name[..$tparams](..$vparams): ${name.toTypeName}[..$targs] = $term"
-        val typemethod = q"type ${name.toTypeName}[..$tparams] = $typ"
-
-        (termmethod, typemethod)
-    }
-
-    private def toType(c: Context)(term: c.Tree): c.Tree = {
-        import c.universe._
-
-        term match {
-            case Ident(x) => {
-                Ident(x.toTypeName)
+        rhs match {
+            case EmptyTree => {
+                EmptyTree
             }
-            case Apply(f, args) => {
-                AppliedTypeTree(toType(c)(f), args.map{ a => toType(c)(a) })
+            case TypeBoundsTree(lo, hi) => { // abstract types
+                EmptyTree
             }
-            case TypeApply(f, _) => {
-                toType(c)(f)
-            }
-            case Select(x, m) => {
-                SelectFromTypeTree(toType(c)(x), m.toTypeName)
-            }
-        }
-    }
-
-    private def toTerm(c: Context)(term: c.Tree): c.Tree = {
-        import c.universe._
-
-        term match {
             case Ident(x) => {
                 Ident(x.toTermName)
             }
@@ -147,7 +86,9 @@ object Sings {
             case SelectFromTypeTree(x, m) => {
                 Select(toTerm(c)(x), m.toTermName)
             }
+            case Select(x, m) => {
+                Select(x, m.toTermName)
+            }
         }
     }
-
 }

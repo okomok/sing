@@ -24,7 +24,6 @@ object Self {
         val selfdef: c.Tree = q"type self = ${TypeOfSelf(c)}"
 
         val Template(parents, self, body) = c.enclosingTemplate
-
-        Template(Sings.removeMacro(c)(parents), self, selfdef :: body)
+        Template(RemoveMacroApplication(c)(parents), self, selfdef :: body)
     }
 }
