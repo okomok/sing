@@ -30,7 +30,7 @@ class AbstractFactoryTest extends org.scalatest.junit.JUnit3Suite {
     def createFactory[n <: Nat](n: n) = {
         val option = factoryMap.get(n)
         option.get.unsing
-}
+    }
 
     def testTrivial {
         // Concrete types are preserved.
@@ -47,13 +47,16 @@ class AbstractFactoryTest extends org.scalatest.junit.JUnit3Suite {
 
 Append this in your project definition:
 
-    val sing = "com.github.okomok" % "sing_2.9.0" % "0.1.0"
-    val okomokReleases = "okomok releases" at "http://okomok.github.com/maven-repo/releases"
+```scala
+val sing = "com.github.okomok" % "sing_2.9.0" % "0.1.0"
+val okomokReleases = "okomok releases" at "http://okomok.github.com/maven-repo/releases"
+```
 
 Append this to `compileOptions`:
 
-    ++ compileOptions("-Yrecursion", "50")
-
+```scala
+++ compileOptions("-Yrecursion", "50")
+```
 
 
 
