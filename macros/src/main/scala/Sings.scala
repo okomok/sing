@@ -88,7 +88,7 @@ object Sings {
         object WithSingmethodAnnotation {
             def unapply(annotations: List[c.Tree]): Boolean = {
                 annotations.find {
-                    ann => IsSingmethodAnnotation(c)(ann)
+                    an => IsSingmethodAnnotation(c)(an)
                 }.isDefined
             }
         }

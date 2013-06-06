@@ -11,17 +11,21 @@ package sing.makro
 import scala.reflect.macros.Context
 
 
-// How to do it precisely?
 object IsSingmethodAnnotation {
 
     def apply(c: Context)(an: c.Tree): Boolean = {
         import c.universe._
 
+        val fn = c.typeCheck(an).symbol.fullName
+        fn == "com.github.okomok.sing.singmethod.<init>"
+/*
         an match {
-            case Apply(Select(New(Ident(TypeName(tn))), _), _) => {
+            case Apply(Select(New(id), _), _) => {
                 tn.reverse.take(10).reverse == "singmethod"
             }
             case _ => false
         }
+
+*/
     }
 }

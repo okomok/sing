@@ -32,6 +32,8 @@ class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
     @singmethod
     type id[x] = PPP.id[x]
 
+    type singmethodAlias = singmethod
+
     trait AbsFun extends AsFunction1 with makro.Sings.apply {
         @singmethod @deprecated("hello", "1.0")
         type foo[n <: Nat, m <: Boolean] <: Nat
@@ -51,7 +53,7 @@ class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
 
         def foobar() = Unit
 
-        @singmethod
+        @singmethodAlias
         override type v = _3
     }
 
