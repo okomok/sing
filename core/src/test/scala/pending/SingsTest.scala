@@ -64,6 +64,11 @@ class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
         override type apply[n <: Any] = K.k.apply[n]
     }
 
+    @singmethod
+    class foo[m <: Nat] extends AsFunction1 with makro.Sings.apply {
+        @singmethod
+        override type apply[n <: Any] = n#asNat#plus[m]
+    }
 
     object CallFromPackage extends AsFunction1 with makro.Sings.apply {
         @singmethod
@@ -82,6 +87,9 @@ class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
 
         val m: _3 :: Nil = CallFromPackage(_3)
 
+        val q: foo[_3]#apply[_2] = foo(_3)(_2)
+        val z: _5 = q
+
         ()
     }
 
@@ -93,3 +101,4 @@ class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
     }
 */
 }
+
