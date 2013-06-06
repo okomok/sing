@@ -139,9 +139,6 @@ object Sings {
                     """
                 }
 
-                println(show(typemethod))
-                println(show(termmethod))
-
                 List(typemethod, termmethod)
             }
 
