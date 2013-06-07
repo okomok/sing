@@ -8,9 +8,6 @@ package com.github.okomok
 package sing.makro
 
 
-// Special thanks to: https://github.com/leonardschneider/macrogen
-
-
 import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
@@ -24,7 +21,7 @@ object Sings {
 
         val singlib: c.Tree = q"com.github.okomok.sing"
         val Template(parents, self, body) = c.enclosingTemplate
-        val res = Template(RemoveMacroApplication(c)(parents), self, singize(c)(body))
+        val res = Template(RemoveMacro(c)(parents), self, singize(c)(body))
         //println(res)
         res
     }
@@ -52,32 +49,6 @@ object Sings {
 
         tparams.map { case TypeDef(_, name, _, _) =>
             Ident(name.toTermName)
-        }
-    }
-
-    private def constructorParamMods(c: Context): c.Modifiers = {
-        import c.universe._
-
-        val ClassDef(_, _, _, Template(_, _, body)) = q"class Foo(i : Int)"
-
-        body.collect{ case ValDef(mods, TermName("i"), _, _) =>
-            mods
-        }.head
-    }
-
-    private def makeConstructor(c: Context)(sparams: List[c.universe.ValDef]): List[c.Tree] = {
-        import c.universe._
-        val ClassDef(_, _, _, Template(_, _, body)) = q"class X(..$sparams)"
-        List(body.last)
-    }
-
-    private def removeNullaryConstructor(c: Context)(from: List[c.Tree]) = {
-        import c.universe._
-
-        val ClassDef(_, _, _, Template(_, _, body)) = q"class i"
-
-        from.filter { t =>
-            !t.equalsStructure(body.head)
         }
     }
 
@@ -117,10 +88,10 @@ object Sings {
                     t
                 } else {
                     val sparamsbody = sparams.map { case ValDef(mods, name, tpt, rhs) =>
-                        ValDef(constructorParamMods(c), name, tpt, rhs)
+                        ValDef(ConstructorParamMods(c), name, tpt, rhs)
                     }
                     // val ClassDef(_, _, _, Template(_, _, sparamsbody)) = q"class $name(..$sparams)"
-                    ClassDef(mods, name, tparams, Template(parents, self, sparamsbody ++ makeConstructor(c)(sparams) ++ removeNullaryConstructor(c)(body)))
+                    ClassDef(mods, name, tparams, Template(parents, self, sparamsbody ++ List(ConstructorTree(c)(sparams)) ++ RemoveDefaultConstructor(c)(body)))
                 }
 
                 val termmethod = if (tparams.isEmpty) {

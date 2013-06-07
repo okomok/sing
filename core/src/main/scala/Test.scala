@@ -117,6 +117,7 @@ object Test {
      */
     def expectError(x: _) = macro expectError_impl
 
+    // Thanks to: https://gist.github.com/travisbrown/5066283
     def expectError_impl(c: Context)(x: c.Tree): c.Expr[scala.Unit] = {
         import c.universe._
 

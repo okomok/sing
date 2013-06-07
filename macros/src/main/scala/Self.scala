@@ -3,8 +3,6 @@
 // Copyright Shunsuke Sogame 2008-2013.
 // Distributed under the New BSD license.
 
-// See: https://github.com/leonardschneider/macrogen
-
 
 package com.github.okomok
 package sing.makro
@@ -24,6 +22,6 @@ object Self {
         val selfdef: c.Tree = q"type self = ${TypeOfSelf.impl(c)}"
 
         val Template(parents, self, body) = c.enclosingTemplate
-        Template(RemoveMacroApplication(c)(parents), self, selfdef :: body)
+        Template(RemoveMacro(c)(parents), self, selfdef :: body)
     }
 }

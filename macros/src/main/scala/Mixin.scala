@@ -18,13 +18,7 @@ object Mixin {
     def apply(c: Context)(zuper: c.Tree, body: List[c.Tree]): c.Tree = {
         import c.universe._
 
-        val Template(parents, _, oldbody) = c.enclosingTemplate
-        Template(replace(c)(parents, zuper), emptyValDef, oldbody ++ body)
-    }
-
-    def replace(c: Context)(parents: List[c.Tree], zuper: c.Tree): List[c.Tree] = {
-        parents.map { x =>
-            if (x.equalsStructure(c.macroApplication)) zuper else x
-        }
+        val Template(parents, self, oldbody) = c.enclosingTemplate
+        Template(ReplaceMacro(c)(parents, zuper), self, oldbody ++ body)
     }
 }
