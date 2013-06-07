@@ -13,7 +13,7 @@ import junit.framework.Assert._
 //import nat.Operator._
 
 
-class TermOfTest extends org.scalatest.junit.JUnit3Suite {
+class _TermOfTest extends org.scalatest.junit.JUnit3Suite {
 
      def testBoolean {
         type r = `true`
@@ -44,7 +44,7 @@ class TermOfTest extends org.scalatest.junit.JUnit3Suite {
 }
 
 
-class TermOfNatPeanoTest extends org.scalatest.junit.JUnit3Suite {
+class _TermOfNatPeanoTest extends org.scalatest.junit.JUnit3Suite {
 
     import Peano.Literal._
 
@@ -70,7 +70,7 @@ class TermOfNatPeanoTest extends org.scalatest.junit.JUnit3Suite {
 }
 
 
-class TermOfNatDenseTest extends org.scalatest.junit.JUnit3Suite {
+class _TermOfNatDenseTest extends org.scalatest.junit.JUnit3Suite {
 
     import Dense.Literal._
 

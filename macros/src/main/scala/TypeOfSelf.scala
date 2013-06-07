@@ -19,9 +19,9 @@ import scala.reflect.macros.Context
 
 object TypeOfSelf {
 
-    type apply = macro apply
+    type apply = macro impl
 
-    def apply(c: Context): c.Tree = {
+    def impl(c: Context): c.Tree = {
         import c.universe._
 
         c.enclosingImpl match {

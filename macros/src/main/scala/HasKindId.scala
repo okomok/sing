@@ -16,15 +16,15 @@ import scala.reflect.macros.Context
 
 object HasKindId {
 
-    type apply = macro apply
+    type apply = macro impl
 
-    def apply(c: Context): c.Tree = {
+    def impl(c: Context): c.Tree = {
         import c.universe._
         val singlib: c.Tree = q"com.github.okomok.sing"
-        impl(c)(tq"$singlib.AnyKind")
+        _impl(c)(tq"$singlib.AnyKind")
     }
 
-    def impl(c: Context)(zuper: c.Tree): c.Tree = {
+    def _impl(c: Context)(zuper: c.Tree): c.Tree = {
         import c.universe._
 
         val fullName = c.enclosingImpl.symbol.fullName.toString

@@ -23,15 +23,28 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial() {
 
         AssertError {
+            // good error
             woo
         }
 
-        Weak.assertTypeOf[_1](_1)
-
         AssertError {
-            Weak.assertTypeOf[Nat](_1)
+            // good error
+            AssertError {
+                // bad success
+                1
+            }
         }
 
+        AssertError {
+            // good error
+            AssertError {
+                // bad success
+                AssertError {
+                    // good error
+                    wow
+                }
+            }
+        }
     }
 }
 

@@ -22,9 +22,10 @@ object AssertError {
     def impl(c: Context)(x: c.Tree): c.Expr[Unit] = {
         import c.universe._
 
-        c.typeCheck(x, silent = true) match {
-            case EmptyTree => reify(())
-            case _ => c.abort(c.enclosingPosition, show(x) + " compiles unexpectedly.")
+        if (c.typeCheck(x, silent = true) != EmptyTree) {
+            c.error(c.enclosingPosition, show(x) + " compiles unexpectedly.")
         }
+
+        reify(())
     }
 }

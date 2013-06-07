@@ -10,11 +10,6 @@ package sing
 
 import scala.annotation.elidable
 import scala.annotation.elidable.ALL
-import scala.language.experimental.macros
-import scala.reflect.macros.Macro
-
-
-import weak._
 
 
 object Weak {
@@ -28,7 +23,7 @@ object Weak {
     /**
      * type assertion
      */
-    // @elidable(ALL) crashes compiler.
+    @elidable(ALL)
     def assert[a >: `true` <: `true`]: scala.Unit = () // `case class` doesn't work well.
 
     /**
@@ -40,28 +35,20 @@ object Weak {
     /**
      * negative type assertion
      */
+    @elidable(ALL)
     def assertNot[a >: `false` <: `false`]: scala.Unit = ()
 
     /**
      * type assertion of identity equality
      */
+    @elidable(ALL)
     def assertSame[a >: b <: b, b]: scala.Unit = ()
 
     /**
      * type assertion if <code>a</code> is lower than <code>b</code>.
      */
+    @elidable(ALL)
     def assertConforms[a <: b, b]: scala.Unit = ()
-
-    /**
-     * type assertion for terms
-     */
-    def assertTypeOf[x <: Any](y: Any)(implicit i: x =:= y.self): scala.Unit = ()
-
-    /**
-     * Prints a type-name as a compile-error.
-     * (type-alias isn't expanded.)
-     */
-    def printe[T](implicit i: Printe[T]): scala.Unit = ()
 
 }
 

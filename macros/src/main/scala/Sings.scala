@@ -17,9 +17,9 @@ import scala.reflect.macros.Context
 
 object Sings {
 
-    type apply = macro apply
+    type apply = macro impl
 
-    def apply(c: Context): c.Tree = {
+    def impl(c: Context): c.Tree = {
         import c.universe._
 
         val singlib: c.Tree = q"com.github.okomok.sing"
@@ -124,7 +124,7 @@ object Sings {
                 }
 
                 val termmethod = if (tparams.isEmpty) {
-                    val obj = TermName("TermOf" + name.toString)
+                    val obj = TermName("_TermOf" + name.toString)
                     q"""
                         object $obj {
                             val term: $name = new $name

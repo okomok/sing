@@ -19,9 +19,9 @@ import scala.reflect.macros.Context
 
 object WeakTypeOf {
 
-    type apply[T](x: T) = macro apply[T]
+    type apply[T](x: T) = macro impl[T]
 
-    def apply[T: c.WeakTypeTag](c: Context)(x: c.Expr[T]): c.Tree = {
+    def impl[T: c.WeakTypeTag](c: Context)(x: c.Expr[T]): c.Tree = {
         import c.universe._
         tq"${weakTypeOf[T]}"
     }

@@ -92,17 +92,12 @@ package object sing {
 // misc
 
     @Annotation.equivalentTo("AsT with Self")
-    type New[T] = macro makro.New.apply[T]
+    type New[T] = macro makro.New.impl[T]
 
     /**
      * Type of a term
      */
-    type typeOf[x <: Any](x: x) = macro makro.WeakTypeOf.apply[x]
-
-    /**
-     * Term of a type
-     */
-    def termOf[x <: Any](implicit i: TermOf[x]): x = i.apply
+    type typeOf[x <: Any](x: x) = macro makro.WeakTypeOf.impl[x]
 
 
 // assertions

@@ -16,12 +16,12 @@ import scala.reflect.macros.Context
 
 object Self {
 
-    type apply = macro apply
+    type apply = macro impl
 
-    def apply(c: Context): c.Tree = {
+    def impl(c: Context): c.Tree = {
         import c.universe._
 
-        val selfdef: c.Tree = q"type self = ${TypeOfSelf(c)}"
+        val selfdef: c.Tree = q"type self = ${TypeOfSelf.impl(c)}"
 
         val Template(parents, self, body) = c.enclosingTemplate
         Template(RemoveMacroApplication(c)(parents), self, selfdef :: body)

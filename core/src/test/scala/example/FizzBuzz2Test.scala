@@ -26,13 +26,13 @@ class FizzBuzz2Test extends org.scalatest.junit.JUnit3Suite {
         override def toString = "FizzBuzz"
     }
 
-    implicit object TermOfFizz extends sing.TermOf[Fizz.type] {
+    implicit object _TermOfFizz extends sing._TermOf[Fizz.type] {
         override def apply = Fizz
     }
-    implicit object TermOfBuzz extends sing.TermOf[Buzz.type] {
+    implicit object _TermOfBuzz extends sing._TermOf[Buzz.type] {
         override def apply = Buzz
     }
-    implicit object TermOfFizzBuzz extends sing.TermOf[FizzBuzz.type] {
+    implicit object _TermOfFizzBuzz extends sing._TermOf[FizzBuzz.type] {
         override def apply = FizzBuzz
     }
 
