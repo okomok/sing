@@ -29,14 +29,16 @@ package com.github.okomoktest; package singtest; package example
 
     object WinFactory {
         def createButton = new WinButton
+        val ID = _0
     }
     object OSXFactory {
         def createButton = new OSXButton
+        val ID = _1
     }
 
     class AbstractFactoryTest extends org.scalatest.junit.JUnit3Suite {
         // Needs explicit boxing to make a sing object from a non-sing one.
-        val factoryMap = Map.sorted1(_0, Box(WinFactory)).put(_1, Box(OSXFactory))
+        val factoryMap = Map.sorted1(WinFactory.ID, Box(WinFactory)).put(OSXFactory.ID, Box(OSXFactory))
 
         def createFactory[n <: Nat](n: n) = {
             val option = factoryMap.get(n)
@@ -45,7 +47,7 @@ package com.github.okomoktest; package singtest; package example
 
         def testTrivial {
             // Concrete types are preserved.
-            val factory = createFactory(_0)
+            val factory = createFactory(WinFactory.ID)
             val button = factory.createButton
             expectResult("I'm a WinButton")(button.paint)
         }
