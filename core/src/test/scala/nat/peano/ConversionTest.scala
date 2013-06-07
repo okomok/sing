@@ -17,10 +17,10 @@ class ConversionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testToDense {
         import junit.framework.Assert._
-        Weak.assertSame[Dense._0, Peano._0#asNat#asDense]
-        Weak.assertSame[Dense._1, Peano._1#asNat#asDense]
-        Weak.assertSame[Dense._6, Peano._6#asNat#asDense]
-        Weak.assertSame[Dense._5, Peano._2#plus[Peano._3]#asNat#asDense]
+        Test.assertSame[Dense._0, Peano._0#asNat#asDense]
+        Test.assertSame[Dense._1, Peano._1#asNat#asDense]
+        Test.assertSame[Dense._6, Peano._6#asNat#asDense]
+        Test.assertSame[Dense._5, Peano._2#plus[Peano._3]#asNat#asDense]
 
         type x = Peano._5
          val x: x = Peano._5

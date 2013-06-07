@@ -10,7 +10,7 @@ package com.github.okomoktest; package singtest
 import com.github.okomok
 
 import okomok.sing._
-import okomok.sing.Weak._
+import okomok.sing.Test._
 import okomok.sing.Peano
 import okomok.sing.Peano.Literal._
 // import junit.framework.Assert._

@@ -29,13 +29,13 @@ class BooleanTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testTrivial {
-        Weak.assertSame[scala.Boolean, `true`#unsing]
-        Weak.assertSame[`true`, `true`]
-     //   Weak.assert[`false` === if_Boolean[`true`, `false`, `true`]]
-     //   Weak.assert[`false` === if_Boolean[`false`, `true`, `false`]]
+        Test.assertSame[scala.Boolean, `true`#unsing]
+        Test.assertSame[`true`, `true`]
+     //   Test.assertTrue[`false` === if_Boolean[`true`, `false`, `true`]]
+     //   Test.assertTrue[`false` === if_Boolean[`false`, `true`, `false`]]
 
-    //    Weak.assertSame[`false`, if_Boolean[`true`, `false`, `true`]]
-    //    Weak.assertSame[`false`, if_Boolean[`false`, `true`, `false`]]
+    //    Test.assertSame[`false`, if_Boolean[`true`, `false`, `true`]]
+    //    Test.assertSame[`false`, if_Boolean[`false`, `true`, `false`]]
     }
 
     def testDuality {
@@ -45,36 +45,36 @@ class BooleanTest extends org.scalatest.junit.JUnit3Suite {
         okomok.sing.assert(x equal `false`)
     }
 
-    Weak.assert[`true`]
-    Weak.assertNot[`false`]
+    Test.assertTrue[`true`]
+    Test.assertFalse[`false`]
 
-    Weak.assert[`true`# equal [`true`]]
-    Weak.assert[`false`# equal [`false`]]
-    Weak.assert[`true`# nequal [`false`]]
-    Weak.assert[`false`# nequal [`true`]]
+    Test.assertTrue[`true`# equal [`true`]]
+    Test.assertTrue[`false`# equal [`false`]]
+    Test.assertTrue[`true`# nequal [`false`]]
+    Test.assertTrue[`false`# nequal [`true`]]
 
     type myNot[b <: Boolean] = b#not
-    Weak.assert[myNot[`true`]# nequal [`true`]]
-    Weak.assert[myNot[`false`]# nequal [`false`]]
-    Weak.assert[myNot[`true`]# equal [`false`]]
-    Weak.assert[myNot[`false`]# equal [`true`]]
+    Test.assertTrue[myNot[`true`]# nequal [`true`]]
+    Test.assertTrue[myNot[`false`]# nequal [`false`]]
+    Test.assertTrue[myNot[`true`]# equal [`false`]]
+    Test.assertTrue[myNot[`false`]# equal [`true`]]
 
     /*
     trait testOperator {
-        Weak.assert[`true` && `true`]
-        Weak.assert[(`false` && `true`)#not]
-        Weak.assert[`false` || `true`]
-        Weak.assert[`true` || `false`]
+        Test.assertTrue[`true` && `true`]
+        Test.assertTrue[(`false` && `true`)#not]
+        Test.assertTrue[`false` || `true`]
+        Test.assertTrue[`true` || `false`]
     }
     */
 
     trait testPropagation {
         type incinc[n <: Peano] = `if`[n# equal[_3], Inc_Nat[n], const0[n]]#apply#asNat#increment#decrement#increment
-        Weak.assertConforms[incinc[_2], Peano]
+        Test.assertConforms[incinc[_2], Peano]
 
-        Weak.assert[`if`[_2# equal[_3], Inc_Nat[_2], const0[_2]]#apply#increment# equal[_3]]
-        Weak.assert[incinc[_2]# equal[_3]]
-        Weak.assert[incinc[_3]# equal[_5]]
+        Test.assertTrue[`if`[_2# equal[_3], Inc_Nat[_2], const0[_2]]#apply#increment# equal[_3]]
+        Test.assertTrue[incinc[_2]# equal[_3]]
+        Test.assertTrue[incinc[_3]# equal[_5]]
     }
 
     class Inc_Nat[e <: Peano](val e: e) extends AsFunction0 {

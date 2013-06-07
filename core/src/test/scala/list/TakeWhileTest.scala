@@ -29,7 +29,7 @@ class TakeWhileTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val u: xs#takeWhile[Lt8] = xs.takeWhile(Lt8())
-        Weak.assertSame[_5 :: _6 :: _7 :: Nil, xs#takeWhile[Lt8]#force]
+        Test.assertSame[_5 :: _6 :: _7 :: Nil, xs#takeWhile[Lt8]#force]
         assertEquals(_5 :: _6 :: _7 :: Nil, u)
     }
 
@@ -37,7 +37,7 @@ class TakeWhileTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _9 :: _5 :: _6 :: _7 :: _1 :: _9 :: Nil
         val xs: xs = _9 :: _5 :: _6 :: _7 :: _1 :: _9 :: Nil
         val u: xs#takeWhile[Lt8] = xs.takeWhile(Lt8())
-        Weak.assertSame[Nil, xs#takeWhile[Lt8]#force]
+        Test.assertSame[Nil, xs#takeWhile[Lt8]#force]
         assertEquals(Nil, u)
     }
 
@@ -45,7 +45,7 @@ class TakeWhileTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _4 :: _5 :: _6 :: _7 :: Nil
         val xs: xs = _4 :: _5 :: _6 :: _7 :: Nil
         val u: xs#takeWhile[Lt8] = xs.takeWhile(Lt8())
-        Weak.assertSame[_4 :: _5 :: _6 :: _7 :: Nil, xs#takeWhile[Lt8]#force]
+        Test.assertSame[_4 :: _5 :: _6 :: _7 :: Nil, xs#takeWhile[Lt8]#force]
         assertEquals(_4 :: _5 :: _6 :: _7 :: Nil, u)
     }
 
@@ -53,7 +53,7 @@ class TakeWhileTest extends org.scalatest.junit.JUnit3Suite {
         type xs = Nil
         val xs: xs = Nil
         val u: xs#takeWhile[Lt8] = xs.takeWhile(Lt8())
-        Weak.assertSame[Nil, xs#takeWhile[Lt8]#force]
+        Test.assertSame[Nil, xs#takeWhile[Lt8]#force]
         assertEquals(Nil, u)
     }
 

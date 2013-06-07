@@ -120,7 +120,7 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object TrivialTezt {
-    import Weak.{ assert, assertSame }
+    import Test.{assertTrue, assertSame}
 
     trait testAt {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: Nil
@@ -133,8 +133,8 @@ object TrivialTezt {
 
     trait testSize {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: Nil
-        assert[lst#length# equal[_4]]
-        assert[Nil#length# equal[_0]]
+        assertTrue[lst#length# equal[_4]]
+        assertTrue[Nil#length# equal[_0]]
     }
 
     trait testIsEmpty {

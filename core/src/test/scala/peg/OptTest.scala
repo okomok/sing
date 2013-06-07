@@ -25,7 +25,7 @@ class OptTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).opt
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        Weak.assert[r]
+        Test.assertTrue[r]
         assertTrue(r.unsing)
     }
 
@@ -36,7 +36,7 @@ class OptTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).opt
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        Weak.assert[r]
+        Test.assertTrue[r]
         assertTrue(r.unsing)
     }
 
@@ -47,11 +47,11 @@ class OptTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).opt
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        Weak.assert[r#successful]
+        Test.assertTrue[r#successful]
         assertTrue(r.successful.unsing)
-        Weak.assertSame[None, r#get]
+        Test.assertSame[None, r#get]
         assertEquals(None, r.get)
-        Weak.assertSame[xs, r#next]
+        Test.assertSame[xs, r#next]
         assertEquals(xs, r.next)
     }
 
@@ -62,11 +62,11 @@ class OptTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).opt
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        Weak.assert[r#successful]
+        Test.assertTrue[r#successful]
         assertTrue(r.successful.unsing)
-        Weak.assertSame[Some[_3 :: _5 :: _9 :: Nil], r#get]
+        Test.assertSame[Some[_3 :: _5 :: _9 :: Nil], r#get]
         assertEquals(Some(_3 :: _5 :: _9 :: Nil), r.get)
-        Weak.assertSame[_10 :: _11 :: Nil, r#next]
+        Test.assertSame[_10 :: _11 :: Nil, r#next]
         assertEquals(_10 :: _11 :: Nil, r.next)
     }
 

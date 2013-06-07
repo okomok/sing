@@ -41,7 +41,7 @@ class TakeTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object TakeTezt {
-    import Weak.{ assert, assertSame }
+    import Test.assertSame
 
     trait testTrivial {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil

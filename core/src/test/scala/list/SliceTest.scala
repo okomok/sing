@@ -67,7 +67,7 @@ class SliceTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object SliceTezt {
-    import Weak.{ assert, assertSame }
+    import Test.assertSame
 
     trait testSlice {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil

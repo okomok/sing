@@ -17,9 +17,9 @@ class ConversionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testToPeano {
         import junit.framework.Assert._
-        Weak.assertSame[Peano._0, Dense._0#asNat#asPeano]
-        Weak.assertSame[Peano._6, Dense._6#asNat#asPeano]
-        Weak.assertSame[Peano._5, Dense._2#plus[Dense._3]#asNat#asPeano]
+        Test.assertSame[Peano._0, Dense._0#asNat#asPeano]
+        Test.assertSame[Peano._6, Dense._6#asNat#asPeano]
+        Test.assertSame[Peano._5, Dense._2#plus[Dense._3]#asNat#asPeano]
 
         type x = Dense._5
          val x: x = Dense._5

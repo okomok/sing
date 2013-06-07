@@ -25,7 +25,7 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil)
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        Weak.assert[r]
+        Test.assertTrue[r]
         assertTrue(r.unsing)
     }
 
@@ -36,11 +36,11 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil)
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        Weak.assert[r#successful]
+        Test.assertTrue[r#successful]
         assertTrue(r.successful.unsing)
-        Weak.assertSame[_3 :: _5 :: _9 :: Nil, r#get#force]
+        Test.assertSame[_3 :: _5 :: _9 :: Nil, r#get#force]
         assertEquals(_3 :: _5 :: _9 :: Nil, r.get)
-        Weak.assertSame[_1 :: _4 :: Nil, r#next#force]
+        Test.assertSame[_1 :: _4 :: Nil, r#next#force]
         assertEquals(_1 :: _4 :: Nil, r.next)
     }
 
@@ -51,9 +51,9 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _2 :: Nil)
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        Weak.assertNot[r#successful]
+        Test.assertFalse[r#successful]
         assertFalse(r.successful.unsing)
-        Weak.assertSame[xs, r#next#force]
+        Test.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
 
@@ -64,7 +64,7 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(Nil)
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        Weak.assert[r]
+        Test.assertTrue[r]
         assertTrue(r.unsing)
     }
 
@@ -75,11 +75,11 @@ class FromListTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(Nil)
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        Weak.assert[r#successful]
+        Test.assertTrue[r#successful]
         assertTrue(r.successful.unsing)
-        Weak.assertSame[Nil, r#get#force]
+        Test.assertSame[Nil, r#get#force]
         assertEquals(Nil, r.get)
-        Weak.assertSame[xs, r#next#force]
+        Test.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
 }

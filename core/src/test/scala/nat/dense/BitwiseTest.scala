@@ -10,7 +10,7 @@ package singtest; package nattest; package densetest
 
 import com.github.okomok
 
-import okomok.sing.Weak
+import okomok.sing.Test
 import okomok.sing.Dense._
 import junit.framework.Assert._
 
@@ -18,14 +18,14 @@ import junit.framework.Assert._
 class BitwiseTest extends org.scalatest.junit.JUnit3Suite {
 
     def testAnd {
-        Weak.assertSame[_0, _0#bitAnd[_0]]
-        Weak.assertSame[_1, _1#bitAnd[_1]]
-        Weak.assertSame[_0, _2#bitAnd[_5]]
-        Weak.assertSame[_0, _8#bitAnd[_4]]
-        Weak.assertSame[_5, _7#bitAnd[_5]]
-        Weak.assertSame[_0, _5#bitAnd[_0]]
-        Weak.assertSame[_3, _7#bitAnd[_3]]
-        Weak.assertSame[_2, _2#bitAnd[_7]]
+        Test.assertSame[_0, _0#bitAnd[_0]]
+        Test.assertSame[_1, _1#bitAnd[_1]]
+        Test.assertSame[_0, _2#bitAnd[_5]]
+        Test.assertSame[_0, _8#bitAnd[_4]]
+        Test.assertSame[_5, _7#bitAnd[_5]]
+        Test.assertSame[_0, _5#bitAnd[_0]]
+        Test.assertSame[_3, _7#bitAnd[_3]]
+        Test.assertSame[_2, _2#bitAnd[_7]]
 
         assertEquals(0 & 0, (_0 bitAnd _0).unsing)
         assertEquals(1 & 1, (_1 bitAnd _1).unsing)
@@ -38,14 +38,14 @@ class BitwiseTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testOr {
-        Weak.assertSame[_0, _0#bitOr[_0]]
-        Weak.assertSame[_1, _1#bitOr[_1]]
-        Weak.assertSame[_7, _2#bitOr[_5]]
-        Weak.assertSame[_12, _8#bitOr[_4]]
-        Weak.assertSame[_7, _7#bitOr[_5]]
-        Weak.assertSame[_5, _5#bitOr[_0]]
-        Weak.assertSame[_7, _7#bitOr[_3]]
-        Weak.assertSame[_7, _2#bitOr[_7]]
+        Test.assertSame[_0, _0#bitOr[_0]]
+        Test.assertSame[_1, _1#bitOr[_1]]
+        Test.assertSame[_7, _2#bitOr[_5]]
+        Test.assertSame[_12, _8#bitOr[_4]]
+        Test.assertSame[_7, _7#bitOr[_5]]
+        Test.assertSame[_5, _5#bitOr[_0]]
+        Test.assertSame[_7, _7#bitOr[_3]]
+        Test.assertSame[_7, _2#bitOr[_7]]
 
         assertEquals(0 | 0, (_0 bitOr _0).unsing)
         assertEquals(1 | 1, (_1 bitOr _1).unsing)

@@ -28,9 +28,9 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = Map.sorted[Nat.naturalOrdering]#put[_8, _9]#putList[xs2]
         val m2: m2 = Map.sorted(Nat.naturalOrdering).put(_8, _9).putList(xs2)
 
-        Weak.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
-        Weak.assertSame[`true`, m#equalWith[m2, Nat.naturalOrdering]]
-        Weak.assertSame[`true`, m2#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`true`, m#equalWith[m2, Nat.naturalOrdering]]
+        Test.assertSame[`true`, m2#equalWith[m, Nat.naturalOrdering]]
         assertEquals(`true`, m.equalWith(m2, Nat.naturalOrdering))
     }
 
@@ -45,9 +45,9 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = Map.sorted[Nat.naturalOrdering]#put[_8, _9]#putList[xs2]
         val m2: m2 = Map.sorted(Nat.naturalOrdering).put(_8, _9).putList(xs2)
 
-        Weak.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
-        Weak.assertSame[`false`, m#equalWith[m2, Nat.naturalOrdering]]
-        Weak.assertSame[`false`, m2#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`false`, m#equalWith[m2, Nat.naturalOrdering]]
+        Test.assertSame[`false`, m2#equalWith[m, Nat.naturalOrdering]]
         assertEquals(`false`, m.equalWith(m2, Nat.naturalOrdering))
     }
 
@@ -62,9 +62,9 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = Map.sorted[Nat.naturalOrdering]#put[_8, _9]#putList[xs2]
         val m2: m2 = Map.sorted(Nat.naturalOrdering).put(_8, _9).putList(xs2)
 
-        Weak.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
-        Weak.assertSame[`false`, m#equalWith[m2, Nat.naturalOrdering]]
-        Weak.assertSame[`false`, m2#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`false`, m#equalWith[m2, Nat.naturalOrdering]]
+        Test.assertSame[`false`, m2#equalWith[m, Nat.naturalOrdering]]
         assertEquals(`false`, m.equalWith(m2, Nat.naturalOrdering))
     }
 
@@ -79,9 +79,9 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = Map.sorted[Nat.naturalOrdering]#put[_8, _9]#putList[xs2]
         val m2: m2 = Map.sorted(Nat.naturalOrdering).put(_8, _9).putList(xs2)
 
-        Weak.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
-        Weak.assertSame[`false`, m#equalWith[m2, Nat.naturalOrdering]]
-        Weak.assertSame[`false`, m2#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`false`, m#equalWith[m2, Nat.naturalOrdering]]
+        Test.assertSame[`false`, m2#equalWith[m, Nat.naturalOrdering]]
         assertEquals(`false`, m.equalWith(m2, Nat.naturalOrdering))
     }
 
@@ -91,9 +91,9 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = Map.sorted[Nat.naturalOrdering]
         val m2: m2 = Map.sorted(Nat.naturalOrdering)
 
-        Weak.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
-        Weak.assertSame[`true`, m#equalWith[m2, Nat.naturalOrdering]]
-        Weak.assertSame[`true`, m2#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`true`, m#equalWith[m, Nat.naturalOrdering]]
+        Test.assertSame[`true`, m#equalWith[m2, Nat.naturalOrdering]]
+        Test.assertSame[`true`, m2#equalWith[m, Nat.naturalOrdering]]
         assertEquals(`true`, m.equalWith(m2, Nat.naturalOrdering))
    }
 

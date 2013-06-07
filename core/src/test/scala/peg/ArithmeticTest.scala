@@ -156,16 +156,16 @@ class ArithmeticTest extends org.scalatest.junit.JUnit3Suite {
         final class myList extends list.Strong(_3 :: Ch.+ /*:: _2 :: Ch.-*/ :: _1 :: Nil) { type self = myList }
         val myList = new myList
         //println(Arithmetic.expr.parse(myList))
-       Weak.assert(Arithmetic.expr.matches(myList))
+       Test.assertTrue(Arithmetic.expr.matches(myList))
 */
-    //   Weak.assert(Arithmetic.expr.matches(_3 :: Ch.+ :: _2 :: Ch.- :: _1 :: Nil))
+    //   Test.assertTrue(Arithmetic.expr.matches(_3 :: Ch.+ :: _2 :: Ch.- :: _1 :: Nil))
 
-   //    Weak.assert(Arithmetic.expr.matches(_3 :: Ch.+ :: _2 :: Nil))
+   //    Test.assertTrue(Arithmetic.expr.matches(_3 :: Ch.+ :: _2 :: Nil))
 
 
 
 //       println(ArithmeticC(Arithmetic.number).parse(_3 :: Ch.+ :: _2 :: Ch.- :: _1 :: Nil))
-//       Weak.assert(Arithmetic.expr.matches(_2 :: Ch.+ :: Ch.`(` :: _3 :: Ch.+ :: _1 :: Ch.`)` :: Nil))
+//       Test.assertTrue(Arithmetic.expr.matches(_2 :: Ch.+ :: Ch.`(` :: _3 :: Ch.+ :: _1 :: Ch.`)` :: Nil))
         ()
     }
 

@@ -21,7 +21,7 @@ class SortTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _9 :: _2 :: _6 :: _10 :: _7 :: _9 :: _8 :: Nil
         type u = xs#sortWith[Nat.naturalOrdering]
         val u: u = xs.sortWith(Nat.naturalOrdering)
-        Weak.assertSame[_2 :: _6 :: _7 :: _8 :: _9 :: _9 :: _10 :: Nil, u#force]
+        Test.assertSame[_2 :: _6 :: _7 :: _8 :: _9 :: _9 :: _10 :: Nil, u#force]
         assertEquals(_2 :: _6 :: _7 :: _8 :: _9 :: _9 :: _10 :: Nil, u)
     }
 
@@ -30,7 +30,7 @@ class SortTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _3 :: Nil
         type u = xs#sortWith[Nat.naturalOrdering]
         val u: u = xs.sortWith(Nat.naturalOrdering)
-        Weak.assertSame[_3 :: Nil, u#force]
+        Test.assertSame[_3 :: Nil, u#force]
         assertEquals(_3 :: Nil, u)
     }
 
@@ -39,7 +39,7 @@ class SortTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _4 :: _3 :: Nil
         type u = xs#sortWith[Nat.naturalOrdering]
         val u: u = xs.sortWith(Nat.naturalOrdering)
-        Weak.assertSame[_3 :: _4 :: Nil, u#force]
+        Test.assertSame[_3 :: _4 :: Nil, u#force]
         assertEquals(_3 :: _4 :: Nil, u)
     }
 
@@ -48,7 +48,7 @@ class SortTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type u = xs#sortWith[Nat.naturalOrdering]
         val u: u = xs.sortWith(Nat.naturalOrdering)
-        Weak.assertSame[Nil, u#force]
+        Test.assertSame[Nil, u#force]
         assertEquals(Nil, u)
     }
 

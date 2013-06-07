@@ -25,9 +25,9 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).seq(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        Weak.assertNot[r#successful]
+        Test.assertFalse[r#successful]
         assertFalse(r.successful.unsing)
-        Weak.assertSame[xs, r#next#force]
+        Test.assertSame[xs, r#next#force]
         assertEquals(xs, r.next)
     }
 
@@ -38,9 +38,9 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).seq(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        Weak.assertNot[r#successful]
+        Test.assertFalse[r#successful]
         assertFalse(r.successful.unsing)
-        Weak.assertSame[xs, r#next]
+        Test.assertSame[xs, r#next]
         assertEquals(xs, r.next)
     }
 
@@ -51,7 +51,7 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).seq(fromList(_4 :: _2 :: Nil))
         type r = p#matches[xs]
         val r: r = p.matches(xs)
-        Weak.assert[r]
+        Test.assertTrue[r]
         assertTrue(r.unsing)
     }
 
@@ -62,15 +62,15 @@ class SeqTest extends org.scalatest.junit.JUnit3Suite {
         val p: p = fromList(_3 :: _5 :: _9 :: Nil).seq(fromList(_4 :: _2 :: Nil))
         type r = p#parse[xs]
         val r: r = p.parse(xs)
-        Weak.assert[r#successful]
+        Test.assertTrue[r#successful]
         assertTrue(r.successful.unsing)
         type e = r#get#asProduct2
         val e: e = r.get.asProduct2
-        Weak.assertSame[_3 :: _5 :: _9 :: Nil, e#_1]
+        Test.assertSame[_3 :: _5 :: _9 :: Nil, e#_1]
         assertEquals(_3 :: _5 :: _9 :: Nil, e._1)
-        Weak.assertSame[_4 :: _2 :: Nil, e#_2]
+        Test.assertSame[_4 :: _2 :: Nil, e#_2]
         assertEquals(_4 :: _2 :: Nil, e._2)
-        Weak.assertSame[_1 :: _5 :: Nil, r#next]
+        Test.assertSame[_1 :: _5 :: Nil, r#next]
         assertEquals(_1 :: _5 :: Nil, r.next)
     }
 
