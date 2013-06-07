@@ -10,9 +10,6 @@ package pending
 
 import com.github.okomok.sing
 import sing._
-import sing.makro._
-import junit.framework.Assert._
-import sing.Dense.Literal._
 
 
 import scala.language.existentials
@@ -22,24 +19,24 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial() {
 
-        AssertError {
+        assertError {
             // good error
             woo
         }
 
-        AssertError {
+        assertError {
             // good error
-            AssertError {
+            assertError {
                 // bad success
                 1
             }
         }
 
-        AssertError {
+        assertError {
             // good error
-            AssertError {
+            assertError {
                 // bad success
-                AssertError {
+                assertError {
                     // good error
                     wow
                 }

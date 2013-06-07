@@ -43,7 +43,7 @@ class MacroTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial() {
 
-        println( new My{}.kindId )
+        //println( new My{}.kindId )
 
 
     }

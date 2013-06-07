@@ -10,7 +10,7 @@ package sing
 
 object termOf {
     /**
-     * Term of a type
+     * The term of a type
      */
     def apply[x <: Any](implicit ev: _TermOf[x]): x = ev.apply
 }
@@ -36,32 +36,32 @@ object _TermOf {
 
 // List
 
-    implicit val _listNil = new _TermOf[Nil] {
+    implicit val _Nil = new _TermOf[Nil] {
         override def apply: Nil = Nil
     }
-    implicit def _listCons[x <: Any, xs <: List](implicit _termOfX: _TermOf[x], _termOfXs: _TermOf[xs]) = new _TermOf[Cons[x, xs]] {
-        override def apply: Cons[x, xs] = new Cons(_termOfX.apply, _termOfXs.apply)
+    implicit def _Cons[x <: Any, xs <: List](implicit _x: _TermOf[x], _xs: _TermOf[xs]) = new _TermOf[Cons[x, xs]] {
+        override def apply: Cons[x, xs] = new Cons(_x.apply, _xs.apply)
     }
 
 
 // Dense (contributed by @akihiro4chawon)
 
-    implicit val _natDenseZero = new _TermOf[DNil] {
+    implicit val _DNil = new _TermOf[DNil] {
         override def apply: DNil = DNil
     }
 
-    implicit def _natDenseCons[x <: Boolean, xs <: Dense](implicit _termOfX: _TermOf[x], _termOfXs: _TermOf[xs]) = new _TermOf[DCons[x, xs]] {
-        override def apply: DCons[x, xs] = DCons(_termOfX.apply, _termOfXs.apply)
+    implicit def _DCons[x <: Boolean, xs <: Dense](implicit _x: _TermOf[x], _xs: _TermOf[xs]) = new _TermOf[DCons[x, xs]] {
+        override def apply: DCons[x, xs] = DCons(_x.apply, _xs.apply)
     }
 
 
 // Peano
 
-    implicit val _natPeanoZero = new _TermOf[Zero] {
+    implicit val _Zero = new _TermOf[Zero] {
         override def apply: Zero = Zero
     }
-    implicit def _natPeanoSucc[n <: Peano](implicit _termOf: _TermOf[n]) = new _TermOf[Succ[n]] {
-        override def apply: Succ[n] = Succ(_termOf.apply)
+    implicit def _Succ[n <: Peano](implicit _n: _TermOf[n]) = new _TermOf[Succ[n]] {
+        override def apply: Succ[n] = Succ(_n.apply)
     }
 
 
