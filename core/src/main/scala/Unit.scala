@@ -25,6 +25,6 @@ sealed abstract class Unit extends Any {
 
 
 private[sing]
-object _Unit {
-    val value: Unit = new Unit{}
+object _TermOfUnit {
+    val apply: Unit = new Unit{}
 }

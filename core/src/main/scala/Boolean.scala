@@ -89,6 +89,11 @@ sealed abstract class `true` extends AsBoolean {
     override private[sing] type isFalse          = `false`
 }
 
+private[sing]
+object _TermOfTrue {
+    val apply: `true` = new `true`{}
+}
+
 
 /**
  * The sing false
@@ -123,9 +128,7 @@ sealed abstract class `false` extends AsBoolean {
     override private[sing] type isFalse          = `true`
 }
 
-
 private[sing]
-object _Boolean {
-    val `true` = new `true`{}
-    val `false` = new `false`{}
+object _TermOfFalse {
+    val apply: `false` = new `false`{}
 }

@@ -142,8 +142,8 @@ sealed class DNil extends AsDense {
 }
 
 private[sing]
-object _DNil {
-    val value: DNil = new DNil{}
+object _TermOfDNil {
+    val apply: DNil = new DNil
 }
 
 

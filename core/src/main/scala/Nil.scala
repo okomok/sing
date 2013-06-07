@@ -28,7 +28,7 @@ sealed abstract class Nil extends AsList {
 
 
 private[sing]
-object _Nil {
-    val value: Nil = new Nil{}
+object _TermOfNil {
+    val apply: Nil = new Nil{}
 }
 

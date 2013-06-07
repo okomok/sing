@@ -68,6 +68,12 @@ sealed abstract class LT extends AsOrderingResult {
     override type isEQ       = `false`
 }
 
+private[sing]
+object _TermOfLT {
+    val apply: LT = new LT{}
+}
+
+
 sealed abstract class GT extends AsOrderingResult {
     override type self = GT
 
@@ -83,6 +89,12 @@ sealed abstract class GT extends AsOrderingResult {
     override  def isEQ: isEQ = `false`
     override type isEQ       = `false`
 }
+
+private[sing]
+object _TermOfGT{
+    val apply: GT = new GT{}
+}
+
 
 sealed abstract class EQ extends AsOrderingResult {
     override type self = EQ
@@ -100,11 +112,7 @@ sealed abstract class EQ extends AsOrderingResult {
     override type isEQ       = `true`
 }
 
-
 private[sing]
-object _OrderingResult {
-    val LT: LT = new LT{}
-    val GT: GT = new GT{}
-    val EQ: EQ = new EQ{}
+object _TermOfEQ {
+    val apply: EQ = new EQ{}
 }
-

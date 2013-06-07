@@ -140,8 +140,8 @@ sealed abstract class None extends AsOption {
 }
 
 private[sing]
-object _None {
-    val value: None = new None{}
+object _TermOfNone {
+    val apply: None = new None{}
 }
 
 

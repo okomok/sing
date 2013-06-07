@@ -8,14 +8,6 @@ package com.github.okomok
 package sing
 
 
-object termOf {
-    /**
-     * The term of a type
-     */
-    def apply[x <: Any](implicit ev: _TermOf[x]): x = ev.apply
-}
-
-
 @Annotation.specializer
 @scala.annotation.implicitNotFound("No implicit _TermOf defined for ${x}.")
 trait _TermOf[x <: Any] extends scala.Function0[x]

@@ -98,7 +98,7 @@ object Sings {
                     val obj = TermName("_TermOf" + name.toString)
                     q"""
                         object $obj {
-                            val term: $name = new $name
+                            val apply: $name = new $name
                        }
                     """
                 } else {

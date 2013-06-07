@@ -59,16 +59,16 @@ final case class BSNil[o <: Ordering](override val ord: o) extends AsBSTree {
     override  def size: size = Dense._0
     override type size       = Dense._0
 
-    override  def key: key = unsupported("map.bstree.BSNil.key")
+    override  def key: key = unsupported("BSNil.key")
     override type key      = unsupported[_]
 
-    override  def value: value = unsupported("map.bstree.BSNil.value")
+    override  def value: value = unsupported("BSNil.value")
     override type value        = unsupported[_]
 
-    override  def left: left = unsupported("map.bstree.BSNil.left")
+    override  def left: left = unsupported("BSNil.left")
     override type left       = unsupported[_]
 
-    override  def right: right = unsupported("map.bstree.BSNil.right")
+    override  def right: right = unsupported("BSNil.right")
     override type right        = unsupported[_]
 
     override type ord = o

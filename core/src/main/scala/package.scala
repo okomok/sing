@@ -17,11 +17,8 @@ package object sing {
 
 // Boolean
 
-    @Annotation.equivalentTo("new `true`{}")
-     val `true` = _Boolean.`true`
-
-    @Annotation.equivalentTo("new `false`{}")
-     val `false` = _Boolean.`false`
+     val `true`: `true` = _TermOfTrue.apply
+     val `false`: `false` = _TermOfFalse.apply
 
     @Annotation.equivalentTo("c.`if`(_then, _else)")
      def `if`[c <: Boolean, _then <: Function0, _else <: Function0](c: c, _then: _then, _else: _else): `if`[c, _then, _else] = c.`if`(_then, _else)
@@ -41,8 +38,7 @@ package object sing {
 
 // List
 
-    @Annotation.equivalentTo("new Nil{}")
-    val Nil: Nil = _Nil.value
+    val Nil: Nil = _TermOfNil.apply
 
     @Annotation.aliasOf("Cons")
     val :: = Cons
@@ -53,27 +49,24 @@ package object sing {
 
 // Dense
 
-    @Annotation.equivalentTo("new DNil{}")
-    val DNil: DNil = _DNil.value
+    val DNil: DNil = _TermOfDNil.apply
 
 
 // Peano
 
-    @Annotation.equivalentTo("new Zero{}")
-    val Zero: Zero = _Zero.value
+    val Zero: Zero = _TermOfZero.apply
 
 
 // Option
 
-    @Annotation.equivalentTo("new None{}")
-    val None: None = _None.value
+    val None: None = _TermOfNone.apply
 
 
 // Ordering
 
-    val LT: LT = _OrderingResult.LT
-    val GT: GT = _OrderingResult.GT
-    val EQ: EQ = _OrderingResult.EQ
+    val LT: LT = _TermOfLT.apply
+    val GT: GT = _TermOfGT.apply
+    val EQ: EQ = _TermOfEQ.apply
 
 
 // Product
@@ -86,7 +79,7 @@ package object sing {
 // Unit
 
     @Annotation.equivalentTo("new Unit{}")
-    val Unit: Unit = _Unit.value
+    val Unit: Unit = _TermOfUnit.apply
 
 
 // misc
@@ -95,9 +88,14 @@ package object sing {
     type New[T] = macro makro.New.impl[T]
 
     /**
-     * Type of a term
+     * The type of a term
      */
     type typeOf[x <: Any](x: x) = macro makro.WeakTypeOf.impl[x]
+
+    /**
+     * The term of a type
+     */
+    def termOf[x <: Any](implicit _x: _TermOf[x]): x = _x.apply
 
 
 // assertions

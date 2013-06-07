@@ -106,8 +106,8 @@ sealed trait Zero extends AsPeano {
 }
 
 private[sing]
-object _Zero {
-    val value: Zero = new Zero{}
+object _TermOfZero {
+    val apply: Zero = new Zero{}
 }
 
 
