@@ -151,4 +151,3 @@ trait AsList extends List with AsAny with UnsingEquals with AsListKind {
 
     override  def canEqual(that: scala.Any) = that.isInstanceOf[List]
 }
-
