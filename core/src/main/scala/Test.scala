@@ -41,7 +41,7 @@ object Test {
      * Asserts that a condition is true.
      */
     @elidable(ALL)
-     def assertTrue[x >: `true` <: `true`](implicit x: x = unused[x]): assertTrue[`true`] = ()
+     def assertTrue[x >: `true` <: `true`](implicit x: x = unused[x]): assertTrue[`true`] = () // implicit for `assertTrue[x]` to be well-formed.
     type assertTrue[x >: `true` <: `true`]                                                = scala.Unit
 
 
@@ -86,7 +86,7 @@ object Test {
         tq"scala.Unit"
     }
 
-    def _assertNotNothing_impl[x](c: Context)(xt: c.WeakTypeTag[x]) {
+    private def _assertNotNothing_impl[x](c: Context)(xt: c.WeakTypeTag[x]) {
         import c.universe._
         if (weakTypeOf(xt) =:= weakTypeOf[Nothing]) {
             c.error(c.enclosingPosition, show(weakTypeOf[x]) + " is Nothing unexpectedly.")
@@ -127,7 +127,7 @@ object Test {
         tq"scala.Unit"
     }
 
-    def _assertNotSame_impl[x, y](c: Context)(xt: c.WeakTypeTag[x], yt: c.WeakTypeTag[y]) {
+    private def _assertNotSame_impl[x, y](c: Context)(xt: c.WeakTypeTag[x], yt: c.WeakTypeTag[y]) {
         import c.universe._
         if (weakTypeOf(xt) =:= weakTypeOf(yt)) {
             c.error(c.enclosingPosition, show(weakTypeOf(xt)) + " is the same type as " + show(weakTypeOf(yt)) + " unexpectedly.")
@@ -168,7 +168,7 @@ object Test {
         tq"scala.Unit"
     }
 
-    def _assertNotConforms_impl[x, y](c: Context)(xt: c.WeakTypeTag[x], yt: c.WeakTypeTag[y]) {
+    private def _assertNotConforms_impl[x, y](c: Context)(xt: c.WeakTypeTag[x], yt: c.WeakTypeTag[y]) {
         import c.universe._
         if (weakTypeOf(xt) <:< weakTypeOf(yt)) {
             c.error(c.enclosingPosition, show(weakTypeOf[x]) + " conforms to " + show(weakTypeOf[y]) + " unexpectedly.")
@@ -194,7 +194,7 @@ object Test {
         tq"scala.Unit"
     }
 
-    def _error_impl(c: Context) {
+    private def _error_impl(c: Context) {
         import c.universe._
         c.error(c.enclosingPosition, "compile-error expectedly.")
     }
@@ -234,7 +234,7 @@ object Test {
         tq"scala.Unit"
     }
 
-    def _echo_impl[x](c: Context)(xt: c.WeakTypeTag[x]) {
+    private def _echo_impl[x](c: Context)(xt: c.WeakTypeTag[x]) {
         import c.universe._
         c.echo(c.enclosingPosition, weakTypeOf(xt).normalize.toString)
     }
