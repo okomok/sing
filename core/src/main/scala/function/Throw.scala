@@ -12,5 +12,5 @@ private[sing]
 final class Throw0(x: Throwable) extends AsFunction0 {
     override type self = Throw0
     override  def apply: apply = throw x
-    override type apply        = Nothing
+    override type apply        <: Nothing
 }

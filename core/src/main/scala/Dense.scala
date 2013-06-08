@@ -104,10 +104,10 @@ sealed class DNil extends AsDense {
 
     override  def unsing: unsing = 0
 
-    override  def head: head = noSuchElement("Dense.DNil.head")
+    override  def head: head = noSuchElement("DNil.head")
     override type head       = noSuchElement[_]
 
-    override  def tail: tail = noSuchElement("Dense.DNil.tail")
+    override  def tail: tail = noSuchElement("DNil.tail")
     override type tail       = noSuchElement[_]
 
     override  def size: size = Zero
@@ -119,7 +119,7 @@ sealed class DNil extends AsDense {
     override  def increment: increment = DCons(`true`, self)
     override type increment            = DCons[`true`, self]
 
-    override  def decrement: decrement = unsupported("Dense.DNil.decrement")
+    override  def decrement: decrement = unsupported("DNil.decrement")
     override type decrement            = unsupported[_]
 
     override  def times[that <: Nat](that: that): times[that] = self

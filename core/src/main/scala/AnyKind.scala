@@ -29,11 +29,11 @@ trait AnyKind {
      * Trivial helper to throw UnsupportedOperationException
      */
     protected  def unsupported(what: Predef.String): unsupported[_] = throw new UnsupportedOperationException("sing." + what)
-    protected type unsupported[_] = Nothing
+    protected type unsupported[_] <: Nothing
 
     /**
      * Trivial helper to throw NoSuchElementException
      */
     protected  def noSuchElement(what: Predef.String): noSuchElement[_] = throw new NoSuchElementException("sing." + what)
-    protected type noSuchElement[_] = Nothing
+    protected type noSuchElement[_] <: Nothing
 }
