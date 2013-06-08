@@ -16,20 +16,20 @@ trait AnyKind {
     /**
      * ID number
      */
-     def kindId: kindId = ???
+     def kindId: kindId = unsupported("AnyKind.kindId")
     type kindId <: KindId
 
     /**
      * Returns the natural ordering.
      */
-     def naturalOrdering: naturalOrdering = unsupported("Any.naturalOrdering")
+     def naturalOrdering: naturalOrdering = unsupported("AnyKind.naturalOrdering")
     type naturalOrdering <: Ordering
 
     /**
      * Trivial helper to throw UnsupportedOperationException
      */
     protected  def unsupported(what: Predef.String): unsupported[_] = throw new UnsupportedOperationException("sing." + what)
-    protected type unsupported[_] <: Nothing
+    protected type unsupported[_] <: Nothing // keep it abstract.
 
     /**
      * Trivial helper to throw NoSuchElementException

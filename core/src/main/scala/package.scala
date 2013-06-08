@@ -15,6 +15,9 @@ import scala.language.experimental.macros
 package object sing {
 
 
+    type `null` = scala.Nothing
+
+
 // Boolean
 
      val `true`: `true` = _TermOfTrue.apply
@@ -22,7 +25,7 @@ package object sing {
 
     @Annotation.equivalentTo("c.`if`(_then, _else)")
      def `if`[c <: Boolean, _then <: Function0, _else <: Function0](c: c, _then: _then, _else: _else): `if`[c, _then, _else] = c.`if`(_then, _else)
-    type `if`[c <: Boolean, _then <: Function0, _else <: Function0]                                                       = c#`if`[_then, _else]
+    type `if`[c <: Boolean, _then <: Function0, _else <: Function0]                                                          = c#`if`[_then, _else]
 
 
 // Function
@@ -96,6 +99,12 @@ package object sing {
      * The term of a type
      */
     def termOf[x <: Any](implicit _x: _TermOf[x]): x = _x.apply
+
+    /**
+     * Checks a type concrete, compile-error otherwise.
+     */
+     def check[x](x: x) = macro makro.Check.term_impl[x]
+    type check[x]       = macro makro.Check.type_impl[x]
 
 
 // assertions

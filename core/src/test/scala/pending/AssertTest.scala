@@ -82,20 +82,21 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
             assertNotSame[i, Int]
         }
 
-        def foo[x <: Any](x: x)/*: foo[x]*/ = x.asNat.plus(Dense._2)
+        def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
         type foo[x <: Any] = x#asNat#plus[Dense._2]
 
         expectError {
-            makro_.Check {
-                foo(Nil)
-            }
+            check(foo(Nil))
         }
 
-        type t = makro_.CheckType.apply[foo[Nil]]
+        expectError {
+            unused[ check[foo[Nil]] ]
+        }
 
-        val ret = makro_.CheckTerm(foo(Nil))
+        expectError {
+            check(None.get)
+        }
         ()
     }
 }
-
 

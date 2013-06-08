@@ -5,40 +5,28 @@
 
 
 package com.github.okomok
-package sing.makro_
+package sing.makro
 
 
 import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
-object CheckType {
+object Check {
 
-    type apply[T] = macro impl[T]
+    def apply[x](x: x) = macro term_impl[x]
 
-    def impl[T: c.WeakTypeTag](c: Context): c.Tree = {
+    def term_impl[x: c.WeakTypeTag](c: Context)(x: c.Expr[x]): c.Expr[x] = {
         import c.universe._
-
-        val t = weakTypeOf[T]
-        if (t.typeSymbol.asType.isAbstractType) {
-            c.error(c.enclosingPosition, show(t) + " is abstract.")
-        }
-        tq"$t"
-    }
-}
-
-
-object CheckTerm {
-
-    def apply[T](x: T) = macro impl[T]
-
-    def impl[T: c.WeakTypeTag](c: Context)(x: c.Expr[T]): c.Expr[T] = {
-        import c.universe._
-
-        val t = weakTypeOf[T]
-        if (t.typeSymbol.asType.isAbstractType) {
-            c.error(c.enclosingPosition, show(t) + " is abstract.")
-        }
+        AssertConcrete(c)
         x
+    }
+
+    type apply[x] = macro type_impl[x]
+
+    def type_impl[x: c.WeakTypeTag](c: Context): c.Tree = {
+        import c.universe._
+        AssertConcrete(c)
+        tq"${weakTypeOf[x]}"
     }
 }

@@ -13,7 +13,7 @@ final class Error extends AsPeg with ZeroWidth {
     override type self = Error
 
     override  def parse[xs <: List](xs: xs): parse[xs] = throw new ParseError(xs.unsing.toString)
-//    override type parse[xs <: List]                    = Nothing
+    override type parse[xs <: List] <: Nothing
 }
 
 final case class ParseError(input: String) extends java.lang.Error
