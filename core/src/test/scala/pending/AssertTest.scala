@@ -93,9 +93,36 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
             unused[ check[foo[Nil]] ]
         }
 
+        val x: x = check(Some(Dense._2).get)
+        type x   = check[Some[Dense._2]#get]
+
+        expectError {
+            assertSame(Dense._3, x)
+        }
+        expectError {
+            assertSame[Dense._3, x]
+        }
+
+/*
+        expectError {
+            unused[ assertSame[Char, Int] ] // hmm compiles... macro version is better?
+        }
+*/
+        expectError {
+            unused[ assertNotConforms[Int, Int] ]
+        }
+
+        expectError {
+            unused[error]
+        }
+
+        assertSame(Dense._2, x)
+        assertSame[Dense._2, x]
+
         expectError {
             check(None.get)
         }
+
         ()
     }
 }
