@@ -69,14 +69,16 @@ object Sings {
                 val sparams = singparams(c)(tparams)
                 val targs = typeargs(c)(tparams)
                 val term = toTerm(c)(rhs)
+
+                val type_ = if (targs.isEmpty) tq"$name" else tq"$name[..$targs]"
+                // Scalac needs asInstanceOf for complicated expressions.
+                val term_ = if (term.isEmpty) term else q"$term.asInstanceOf[$type_]"
+
                 val termmethod = if (tparams.isEmpty) {
                     val lazymods = AddLazyFlag(c)(mods)
-                    q"$lazymods val ${name.toTermName}: $name = $term" // memoized to follow the typemethod behavior.
+                    q"$lazymods val ${name.toTermName}: $type_ = $term_" // memoized to follow the typemethod behavior.
                 } else {
-                    val tp = tq"$name[..$targs]"
-                    // Scalac needs asInstanceOf for complicated expressions.
-                    val term_ = if (term.isEmpty) term else q"$term.asInstanceOf[$tp]"
-                    q"$mods def $name[..$tparams](..$sparams): $tp = $term_"
+                    q"$mods def $name[..$tparams](..$sparams): $type_ = $term_"
                 }
 
                 List(t, termmethod)
