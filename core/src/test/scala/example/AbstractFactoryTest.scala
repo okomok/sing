@@ -38,7 +38,7 @@ package com.github.okomoktest; package singtest; package example
 
     class AbstractFactoryTest extends org.scalatest.junit.JUnit3Suite {
         // Needs explicit boxing to make a sing object from a non-sing one.
-        val factoryMap = Map.sorted1(WinFactory.ID, Box(WinFactory)).put(OSXFactory.ID, Box(OSXFactory))
+        val factoryMap = SortedMap.put(WinFactory.ID, Box(WinFactory)).put(OSXFactory.ID, Box(OSXFactory))
 
         def createFactory[n <: Nat](n: n) = {
             val option = factoryMap.get(n)

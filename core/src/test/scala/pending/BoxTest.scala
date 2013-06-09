@@ -63,7 +63,7 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
         object c
         val cKind = Box.kindOf[c.type]
 
-        val poly = Map.sorted1(IntKind.kindId, Function.lift1((x: Int) => x + 1)).
+        val poly = SortedMap.put(IntKind.kindId, Function.lift1((x: Int) => x + 1)).
             put(StringKind.kindId, Function.lift1((x: String) => x.reverse)).
             put(BooleanKind.kindId, Function.lift1((x: scala.Boolean) => c))
 

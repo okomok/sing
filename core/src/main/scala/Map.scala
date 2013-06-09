@@ -8,24 +8,7 @@ package com.github.okomok
 package sing
 
 
-import map._
-
-
-object Map extends AsMapKind {
-
-    /**
-     * Constructs an empty sorted map.
-     */
-     def sorted[o <: Ordering](o: o): sorted[o] = BSNil(o)
-    type sorted[o <: Ordering]                  = BSNil[o]
-
-
-    /**
-     * Constructs a one-entry sorted map.
-     */
-     def sorted1[k <: Any, v <: Any](k: k, v: v): sorted1[k, v] = sorted(k.naturalOrdering).put(k, v).asInstanceOf[sorted1[k, v]]
-    type sorted1[k <: Any, v <: Any]                            = sorted[k#naturalOrdering]#put[k, v]
-}
+object Map extends AsMapKind
 
 
 /**

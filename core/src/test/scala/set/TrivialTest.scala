@@ -21,8 +21,8 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type o = Nat.naturalOrdering
         val o: o = Nat.naturalOrdering
 
-        type m = Set.sorted[o]#add[_3]#add[_5]#add[_1]
-        val m: m = Set.sorted(o).add(_3).add(_5).add(_1)
+        type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
+        val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)
 
         Test.assertSame[Dense._3, m#size]
 
@@ -39,16 +39,16 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type o = Nat.naturalOrdering
         val o: o = Nat.naturalOrdering
 
-        type m = Set.sorted[o]#add[_3]#add[_5]#add[_1]
-        val m: m = Set.sorted(o).add(_3).add(_5).add(_1)
+        type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
+        val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)
 
         Test.assertSame[`false`, m#contains[_9]]
         Test.assertSame[`true`, m#contains[_5]]
     }
 
     def testSorted1 {
-        type m = Set.sorted1[_3]#add[_5]#add[_1]
-        val m: m = Set.sorted1(_3).add(_5).add(_1)
+        type m = SortedSet.add[_3]#add[_5]#add[_1]
+        val m: m = SortedSet.add(_3).add(_5).add(_1)
 
         Test.assertSame[`false`, m#contains[_9]]
         Test.assertSame[`true`, m#contains[_5]]
@@ -58,8 +58,8 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type o = Nat.naturalOrdering
         val o: o = Nat.naturalOrdering
 
-        type m = Set.sorted[o]#add[_3]#add[_5]#add[_1]
-        val m: m = Set.sorted(o).add(_3).add(_5).add(_1)
+        type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
+        val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)
 
         assertEquals(Predef.Set(1, 3, 5), m.unsing)
     }

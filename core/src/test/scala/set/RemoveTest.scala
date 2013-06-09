@@ -21,8 +21,8 @@ class RemoveTest extends org.scalatest.junit.JUnit3Suite {
         type o = Nat.naturalOrdering
         val o: o = Nat.naturalOrdering
 
-        type m = Set.sorted[o]#add[_3]#add[_5]#add[_1]
-        val m: m = Set.sorted(o).add(_3).add(_5).add(_1)
+        type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
+        val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)
 
         type rm = m#remove[_5]
         val rm: rm = m.remove(_5)

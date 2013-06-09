@@ -8,25 +8,7 @@ package com.github.okomok
 package sing
 
 
-import set._
-
-
-object Set extends AsSetKind {
-
-    /**
-     * Constructs an empty sorted set.
-     */
-     def sorted[o <: Ordering](o: o): sorted[o] = BSUnitTree(BSNil(o))
-    type sorted[o <: Ordering]                  = BSUnitTree[BSNil[o]]
-
-
-    /**
-     * Constructs a one-entry sorted set.
-     */
-     def sorted1[k <: Any](k: k): sorted1[k] = sorted(k.naturalOrdering).add(k).asInstanceOf[sorted1[k]]
-    type sorted1[k <: Any]                   = sorted[k#naturalOrdering]#add[k]
-
-}
+object Set extends AsSetKind
 
 
 /**

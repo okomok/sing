@@ -18,8 +18,8 @@ import junit.framework.Assert._
 class ClearTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-        type m1    = Set.sorted[Nat.naturalOrdering]#add[_4]#add[_3]#add[_1]#add[_2]#add[_5]#add[_0]
-        val m1: m1 = Set.sorted(Nat.naturalOrdering).add(_4).add(_3).add(_1).add(_2).add(_5).add(_0)
+        type m1    = SortedSet.empty[Nat.naturalOrdering]#add[_4]#add[_3]#add[_1]#add[_2]#add[_5]#add[_0]
+        val m1: m1 = SortedSet.empty(Nat.naturalOrdering).add(_4).add(_3).add(_1).add(_2).add(_5).add(_0)
 
         type n = m1#clear
         val n: n = m1.clear

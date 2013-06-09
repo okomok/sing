@@ -27,7 +27,7 @@ class PolyFunctionTest extends org.scalatest.junit.JUnit3Suite {
         override type apply[x <: Any] = x#asBoolean#not
     }
 
-    val poly = Map.sorted1(Nat.kindId, Inc).put(Boolean.kindId, Not)
+    val poly = SortedMap.put(Nat.kindId, Inc).put(Boolean.kindId, Not)
 
     val xs = _0 :: _2 :: `true` :: _3 :: `false` :: Nil
 

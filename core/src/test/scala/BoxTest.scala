@@ -52,7 +52,7 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
     }
     def testMap {
         import Dense.Literal._
-        val m = Map.sorted1(_3, 3).put(_2, 2).put(_4, 4)
+        val m = SortedMap.put(_3, 3).put(_2, 2).put(_4, 4)
         val v: Box[Int] = m.get(_2).get
         val i: Int = v
         assertEquals(2, i)
@@ -63,7 +63,7 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
         class Wow {
             def foo = ()
         }
-        val m = Map.sorted1(_3, 3).put(_2, new Wow).put(_4, 4)
+        val m = SortedMap.put(_3, 3).put(_2, new Wow).put(_4, 4)
         val v: Box[Wow] = m.get(_2).get
         m.get(_2).get.foo
     }
