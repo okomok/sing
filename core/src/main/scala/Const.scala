@@ -5,12 +5,11 @@
 
 
 package com.github.okomok
-package sing; package function
+package sing
 
 
-private[sing]
-final class Const0[v <: Any](v: => v) extends AsFunction0 {
-    override type self = Const0[v]
+final case class Const[v <: Any](v: v) extends AsFunction0 {
+    override type self = Const[v]
 
     @Annotation.compilerWorkaround("2.9.0") // crashes in `override lazy val`.
     private[this] lazy val _apply: apply = v

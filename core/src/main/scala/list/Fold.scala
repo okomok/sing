@@ -11,9 +11,9 @@ package sing; package list
 private[sing]
 object FoldLeft {
      def apply[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f): apply[xs, z, f] =
-        `if`(xs.isEmpty, const0(z), Else(xs, z, f)).apply
+        `if`(xs.isEmpty, Const(z), Else(xs, z, f)).apply
     type apply[xs <: List, z <: Any, f <: Function2] =
-        `if`[xs#isEmpty, const0[z], Else[xs, z, f]]#apply
+        `if`[xs#isEmpty, Const[z], Else[xs, z, f]]#apply
 
     case class Else[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f) extends AsFunction0 {
         override type self = Else[xs, z, f]
@@ -26,9 +26,9 @@ object FoldLeft {
 private[sing]
 object FoldRight {
      def apply[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f): apply[xs, z, f] =
-        `if`(xs.isEmpty, const0(z), Else(xs, z, f)).apply
+        `if`(xs.isEmpty, Const(z), Else(xs, z, f)).apply
     type apply[xs <: List, z <: Any, f <: Function2] =
-        `if`[xs#isEmpty, const0[z], Else[xs, z, f]]#apply
+        `if`[xs#isEmpty, Const[z], Else[xs, z, f]]#apply
 
     case class Else[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f) extends AsFunction0 {
         override type self = Else[xs, z, f]

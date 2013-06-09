@@ -11,9 +11,9 @@ package sing; package set
 private[sing]
 object Equal {
      def apply[s <: Set, z <: Set](s: s, z: z): apply[s, z] =
-        `if`(s.size.nequal(z.size), const0(`false`), Else(s, z)).apply.asBoolean.asInstanceOf[apply[s, z]]
+        `if`(s.size.nequal(z.size), Const(`false`), Else(s, z)).apply.asBoolean.asInstanceOf[apply[s, z]]
     type apply[s <: Set, z <: Set] =
-        `if`[s#size#nequal[z#size], const0[`false`], Else[s, z]]#apply#asBoolean
+        `if`[s#size#nequal[z#size], Const[`false`], Else[s, z]]#apply#asBoolean
 
     case class Else[s <: Set, z <: Set](s: s, z: z) extends AsFunction0 {
         override type self = Else[s, z]

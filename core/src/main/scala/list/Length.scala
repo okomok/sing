@@ -12,8 +12,8 @@ import Dense._0
 
 private[sing]
 object Length {
-     def apply[xs <: List](xs: xs): apply[xs] = `if`(xs.isEmpty, const0(_0), Else(xs)).apply.asNat
-    type apply[xs <: List]                    = `if`[xs#isEmpty, const0[_0], Else[xs]]#apply#asNat
+     def apply[xs <: List](xs: xs): apply[xs] = `if`(xs.isEmpty, Const(_0), Else(xs)).apply.asNat
+    type apply[xs <: List]                    = `if`[xs#isEmpty, Const[_0], Else[xs]]#apply#asNat
 
     case class Else[xs <: List](xs: xs) extends AsFunction0 {
         override type self = Else[xs]

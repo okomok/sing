@@ -20,18 +20,18 @@ final class BooleanNaturalOrdering extends AsOrdering {
 
     private[this]  def _compare[x <: Boolean, y <: Boolean](x: x, y: y): _compare[x, y] =
         `if`(x.not.and(y),
-            const0(LT),
+            Const(LT),
             `if`(x.and(y.not),
-                const0(GT),
-                const0(EQ)
+                Const(GT),
+                Const(EQ)
             )
         ).apply.asOrderingResult.asInstanceOf[_compare[x, y]]
     private[this] type _compare[x <: Boolean, y <: Boolean] =
         `if`[x#not#and[y],
-            const0[LT],
+            Const[LT],
             `if`[x#and[y#not],
-                const0[GT],
-                const0[EQ]
+                Const[GT],
+                Const[EQ]
             ]
         ]#apply#asOrderingResult
 }

@@ -20,9 +20,9 @@ object FromList {
         override type parse[xs <: List]                    = _aux[StartsWith.apply[xs, ys, None], xs]
 
         private[this]  def _aux[r <: Option, xs <: List](r: r, xs: xs): _aux[r, xs] =
-            `if`(r.isEmpty, const0(PegFailure(xs)), Else(r)).apply.asPegResult.asInstanceOf[_aux[r, xs]]
+            `if`(r.isEmpty, Const(PegFailure(xs)), Else(r)).apply.asPegResult.asInstanceOf[_aux[r, xs]]
         private[this] type _aux[r <: Option, xs <: List] =
-            `if`[r#isEmpty, const0[PegFailure[xs]], Else[r]]#apply#asPegResult
+            `if`[r#isEmpty, Const[PegFailure[xs]], Else[r]]#apply#asPegResult
 
         override  def width: width = ys.length
         override type width        = ys#length

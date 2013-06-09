@@ -125,8 +125,8 @@ sealed class DNil extends AsDense {
     override  def times[that <: Nat](that: that): times[that] = self
     override type times[that <: Nat]                          = self
 
-    override  def exp[that <: Nat](that: that): exp[that] = `if`(that.isZero, const0(Dense._1), const0(self)).apply.asNat.asDense
-    override type exp[that <: Nat]                        = `if`[that#isZero, const0[Dense._1], const0[self]]#apply#asNat#asDense
+    override  def exp[that <: Nat](that: that): exp[that] = `if`(that.isZero, Const(Dense._1), Const(self)).apply.asNat.asDense
+    override type exp[that <: Nat]                        = `if`[that#isZero, Const[Dense._1], Const[self]]#apply#asNat#asDense
 
     override  def shiftLeft: shiftLeft = self
     override type shiftLeft            = self

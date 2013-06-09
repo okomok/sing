@@ -11,9 +11,9 @@ package sing; package map
 private[sing]
 object Equal {
      def apply[m <: Map, w <: Map, ve <: Option](m: m, w: w, ve: ve): apply[m, w, ve] =
-        `if`(m.size.nequal(w.size), const0(`false`), Else(m, w, ve)).apply.asBoolean.asInstanceOf[apply[m, w, ve]]
+        `if`(m.size.nequal(w.size), Const(`false`), Else(m, w, ve)).apply.asBoolean.asInstanceOf[apply[m, w, ve]]
     type apply[m <: Map, w <: Map, ve <: Option] =
-        `if`[m#size#nequal[w#size], const0[`false`], Else[m, w, ve]]#apply#asBoolean
+        `if`[m#size#nequal[w#size], Const[`false`], Else[m, w, ve]]#apply#asBoolean
 
     case class Else[m <: Map, w <: Map, ve <: Option](m: m, w: w, ve: ve) extends AsFunction0 {
         override type self = Else[m, w, ve]
@@ -31,8 +31,8 @@ object Equal {
 
     case class PredApply[ov <: Option, v <: Any, ve <: Option](ov: ov, v: v, ve: ve) extends AsFunction0 {
         override type self = PredApply[ov, v, ve]
-        override  def apply: apply = `if`(ov.isEmpty, const0(`false`), PredApplyElse(ov, v, ve)).apply
-        override type apply        = `if`[ov#isEmpty, const0[`false`], PredApplyElse[ov, v, ve]]#apply
+        override  def apply: apply = `if`(ov.isEmpty, Const(`false`), PredApplyElse(ov, v, ve)).apply
+        override type apply        = `if`[ov#isEmpty, Const[`false`], PredApplyElse[ov, v, ve]]#apply
     }
 
     case class PredApplyElse[ov <: Option, v <: Any, ve <: Option](ov: ov, v: v, ve: ve) extends AsFunction0 {

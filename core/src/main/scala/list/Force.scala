@@ -10,8 +10,8 @@ package sing; package list
 
 private[sing]
 object Force {
-     def apply[xs <: List](xs: xs): apply[xs] = `if`(xs.isEmpty, const0(Nil), Else(xs)).apply.asList
-    type apply[xs <: List]                    = `if`[xs#isEmpty, const0[Nil], Else[xs]]#apply#asList
+     def apply[xs <: List](xs: xs): apply[xs] = `if`(xs.isEmpty, Const(Nil), Else(xs)).apply.asList
+    type apply[xs <: List]                    = `if`[xs#isEmpty, Const[Nil], Else[xs]]#apply#asList
 
     case class Else[xs <: List](xs: xs) extends AsFunction0 {
         override type self = Else[xs]

@@ -40,12 +40,12 @@ class FizzBuzz2Test extends org.scalatest.junit.JUnit3Suite {
         override type self = fizzbuzz
         override type apply[x <: sing.Any] =
             sing.`if`[x#asNat#rem[_15]#equal[_0],
-                sing.const0[FizzBuzz.type],
+                sing.Const[FizzBuzz.type],
                 sing.`if`[x#asNat#rem[_3]#equal[_0],
-                    sing.const0[Fizz.type],
+                    sing.Const[Fizz.type],
                     sing.`if`[x#asNat#rem[_5]#equal[_0],
-                        sing.const0[Buzz.type],
-                        sing.const0[x]
+                        sing.Const[Buzz.type],
+                        sing.Const[x]
                     ]
                 ]
             ]#apply

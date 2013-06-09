@@ -57,8 +57,8 @@ object QuotRem {
 
     case class Else[x <: Dense, y <: Dense](x: x, y: y) extends AsFunction0 {
         override type self = Else[x, y]
-        override  def apply: apply = `if`(x.lt(y), const0(Tuple2(DNil, x)), ElseElse(x, y)).apply
-        override type apply        = `if`[x#lt[y], const0[Tuple2[DNil, x]], ElseElse[x, y]]#apply
+        override  def apply: apply = `if`(x.lt(y), Const(Tuple2(DNil, x)), ElseElse(x, y)).apply
+        override type apply        = `if`[x#lt[y], Const[Tuple2[DNil, x]], ElseElse[x, y]]#apply
     }
 
     case class ElseElse[x <: Dense, y <: Dense](x: x, y: y) extends AsFunction0 {

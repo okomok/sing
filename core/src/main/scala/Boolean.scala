@@ -116,7 +116,7 @@ sealed abstract class `false` extends AsBoolean {
     override type or[that <: Boolean]                       = that
 
     override  def `if`[_then <: Function0, _else <: Function0](_then: _then, _else: _else): `if`[_then, _else] = _else
-    override type `if`[_then <: Function0, _else <: Function0]                                              = _else
+    override type `if`[_then <: Function0, _else <: Function0]                                                 = _else
 
     override  def asNat: asNat = Peano._0
     override type asNat        = Peano._0

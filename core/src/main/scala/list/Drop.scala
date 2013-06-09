@@ -11,9 +11,9 @@ package sing; package list
 private[sing]
 object Drop {
      def apply[xs <: List, n <: Nat](xs: xs, n: n) =
-        `if`(xs.isEmpty.or(n.isZero), const0(xs), Else(xs, n)).apply.asList.asInstanceOf[apply[xs, n]]
+        `if`(xs.isEmpty.or(n.isZero), Const(xs), Else(xs, n)).apply.asList.asInstanceOf[apply[xs, n]]
     type apply[xs <: List, n <: Nat] =
-        `if`[xs#isEmpty#or[n#isZero], const0[xs], Else[xs, n]]#apply#asList
+        `if`[xs#isEmpty#or[n#isZero], Const[xs], Else[xs, n]]#apply#asList
 
     case class Else[xs <: List, n <: Nat](xs: xs, n: n) extends AsFunction0 {
         override type self = Else[xs, n]
@@ -26,14 +26,14 @@ object Drop {
 private[sing]
 object DropWhile {
      def apply[xs <: List, f <: Function1](xs: xs, f: f): apply[xs, f] =
-        `if`(xs.isEmpty, const0(xs), Else(xs, f)).apply.asList
+        `if`(xs.isEmpty, Const(xs), Else(xs, f)).apply.asList
     type apply[xs <: List, f <: Function1] =
-        `if`[xs#isEmpty, const0[xs], Else[xs, f]]#apply#asList
+        `if`[xs#isEmpty, Const[xs], Else[xs, f]]#apply#asList
 
     case class Else[xs <: List, f <: Function1](xs: xs, f: f) extends AsFunction0 {
         override type self = Else[xs, f]
-        override  def apply: apply = `if`(f.apply(xs.head).asBoolean, ElseThen(xs, f), const0(xs)).apply.asInstanceOf[apply]
-        override type apply        = `if`[f#apply[xs#head]#asBoolean, ElseThen[xs, f], const0[xs]]#apply
+        override  def apply: apply = `if`(f.apply(xs.head).asBoolean, ElseThen(xs, f), Const(xs)).apply.asInstanceOf[apply]
+        override type apply        = `if`[f#apply[xs#head]#asBoolean, ElseThen[xs, f], Const[xs]]#apply
     }
 
     case class ElseThen[xs <: List, f <: Function1](xs: xs, f: f) extends AsFunction0 {

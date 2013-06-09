@@ -12,9 +12,9 @@ private[sing]
 object Minus {
      def apply[xs <: Dense, ys <: Dense](xs: xs, ys: ys): apply[xs, ys] =
         Match(xs, ys,
-            const0(DNil),
-            throw0(new UnsupportedOperationException("sing.Dense.DNil.subtract positive")),
-            const0(xs),
+            Const(DNil),
+            Throw(new UnsupportedOperationException("sing.Dense.DNil.subtract positive")),
+            Const(xs),
             DConsMatch(xs, ys,
                 CaseXX(xs, ys),
                 CaseTF(xs, ys),
@@ -25,9 +25,9 @@ object Minus {
 
     type apply[xs <: Dense, ys <: Dense] =
         Match[xs, ys,
-            const0[DNil],
-            throw0[_],
-            const0[xs],
+            Const[DNil],
+            Throw,
+            Const[xs],
             DConsMatch[xs, ys,
                 CaseXX[xs, ys],
                 CaseTF[xs, ys],

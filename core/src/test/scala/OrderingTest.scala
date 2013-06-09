@@ -55,8 +55,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type o = Nat.naturalOrdering
         val o: o = Nat.naturalOrdering
 
-        type r = o#`match`[_5, _6, const0[_0], const0[_1], const0[_2]]
-        val r: r = o.`match`(_5, _6, const0(_0), const0(_1), const0(_2))
+        type r = o#`match`[_5, _6, Const[_0], Const[_1], Const[_2]]
+        val r: r = o.`match`(_5, _6, Const(_0), Const(_1), Const(_2))
         Test.assertSame[_0, r]
         assertEquals(_0, r)
     }
@@ -65,8 +65,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type o = Nat.naturalOrdering
         val o: o = Nat.naturalOrdering
 
-        type r = o#`match`[_7, _6, const0[_0], const0[_1], const0[_2]]
-        val r: r = o.`match`(_7, _6, const0(_0), const0(_1), const0(_2))
+        type r = o#`match`[_7, _6, Const[_0], Const[_1], Const[_2]]
+        val r: r = o.`match`(_7, _6, Const(_0), Const(_1), Const(_2))
         Test.assertSame[_1, r]
         assertEquals(_1, r)
     }
@@ -75,8 +75,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type o = Nat.naturalOrdering
         val o: o = Nat.naturalOrdering
 
-        type r = o#`match`[_7, _7, const0[_0], const0[_1], const0[_2]]
-        val r: r = o.`match`(_7, _7, const0(_0), const0(_1), const0(_2))
+        type r = o#`match`[_7, _7, Const[_0], Const[_1], Const[_2]]
+        val r: r = o.`match`(_7, _7, Const(_0), Const(_1), Const(_2))
         Test.assertSame[_2, r]
         assertEquals(_2, r)
     }

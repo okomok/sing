@@ -17,18 +17,18 @@ final class NatNaturalOrdering extends AsOrdering {
 
     override  def compare[x <: Any, y <: Any](x: x, y: y): compare[x, y] =
         `if`(x.asNat.lt(y.asNat),
-            const0(LT),
+            Const(LT),
             `if`(x.asNat.gt(y.asNat),
-                const0(GT),
-                const0(EQ)
+                Const(GT),
+                Const(EQ)
             )
         ).apply.asOrderingResult.asInstanceOf[compare[x, y]]
     override type compare[x <: Any, y <: Any] =
         `if`[x#asNat#lt[y#asNat],
-            const0[LT],
+            Const[LT],
             `if`[x#asNat#gt[y#asNat],
-                const0[GT],
-                const0[EQ]
+                Const[GT],
+                Const[EQ]
             ]
         ]#apply#asOrderingResult
 }

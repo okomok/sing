@@ -14,24 +14,6 @@ import function._
 object Function {
 
     /**
-     * The unary constant function
-     */
-     def const0[v <: Any](v: => v): const0[v] = new Const0(v)
-    type const0[v <: Any]                     =     Const0[v]
-
-    /**
-     * The identity function
-     */
-     val identity: identity = new Identity
-    type identity           =     Identity
-
-    /**
-     * An unary function to throw an exception
-     */
-     def throw0(x: Throwable) = new Throw0(x)
-    type throw0[_]            =     Throw0
-
-    /**
      * Lifts scala.Functions
      */
     def lift0[R](f: () => R)(implicit _R: BoxKind[R]): Lift0[R, _R.self] = new Lift0[R, _R.self](f, _R)

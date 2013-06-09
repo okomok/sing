@@ -23,14 +23,14 @@ object Or {
         private[this]     type pw     = p#width
 
         override  def width: width =
-            `if`(pw.equal(q.width), const0(pw), throw0(new UnsupportedOperationException("sing.peg.or.width"))).apply.asNat.asInstanceOf[width]
+            `if`(pw.equal(q.width), Const(pw), Throw(new UnsupportedOperationException("sing.peg.or.width"))).apply.asNat.asInstanceOf[width]
         override type width =
-            `if`[pw#equal[q#width], const0[pw], throw0[_]]#apply#asNat
+            `if`[pw#equal[q#width], Const[pw], Throw]#apply#asNat
 
         private[this]  def _aux[r <: PegResult, xs <: List](r: r, xs: xs): _aux[r, xs] =
-            `if`(r.successful, const0(r), Else(q, xs)).apply.asPegResult
+            `if`(r.successful, Const(r), Else(q, xs)).apply.asPegResult
         private[this] type _aux[r <: PegResult, xs <: List] =
-            `if`[r#successful, const0[r], Else[q, xs]]#apply#asPegResult
+            `if`[r#successful, Const[r], Else[q, xs]]#apply#asPegResult
     }
 
     final case class Else[q <: Peg, xs <: List](q: q, xs: xs) extends AsFunction0 {

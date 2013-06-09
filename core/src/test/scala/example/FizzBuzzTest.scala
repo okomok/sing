@@ -18,12 +18,12 @@ package com.github.okomoktest; package singtest; package example
             override type self = doFizzBuzz
             override type apply[x <: sing.Any] =
                 sing.`if`[x#asNat#rem[_15]#equal[_0],
-                    sing.const0[FizzBuzz],
+                    sing.Const[FizzBuzz],
                     sing.`if`[x#asNat#rem[_3]#equal[_0],
-                        sing.const0[Fizz],
+                        sing.Const[Fizz],
                         sing.`if`[x#asNat#rem[_5]#equal[_0],
-                            sing.const0[Buzz],
-                            sing.const0[x]
+                            sing.Const[Buzz],
+                            sing.Const[x]
                         ]
                     ]
                 ]#apply

@@ -11,9 +11,9 @@ package sing; package list
 private[sing]
 object Sort {
      def apply[xs <: List, o <: Option](xs: xs, o: o): apply[xs, o] =
-        `if`(HasTwoOrMore.apply(xs), Then(xs, o), const0(xs)).apply.asList.asInstanceOf[apply[xs, o]]
+        `if`(HasTwoOrMore.apply(xs), Then(xs, o), Const(xs)).apply.asList.asInstanceOf[apply[xs, o]]
     type apply[xs <: List, o <: Option] =
-        `if`[HasTwoOrMore.apply[xs], Then[xs, o], const0[xs]]#apply#asList
+        `if`[HasTwoOrMore.apply[xs], Then[xs, o], Const[xs]]#apply#asList
 
     case class Then[xs <: List, o <: Option](xs: xs, o: o) extends AsFunction0 {
         override type self = Then[xs, o]
@@ -28,9 +28,9 @@ object Sort {
 private[sing]
 object Merge {
      def apply[xs <: List, ys <: List, o <: Option](xs: xs, ys: ys, o: o): apply[xs, ys, o] =
-        `if`(xs.isEmpty, const0(ys), `if`(ys.isEmpty, const0(xs), Else(xs, ys, o))).apply.asList.asInstanceOf[apply[xs, ys, o]]
+        `if`(xs.isEmpty, Const(ys), `if`(ys.isEmpty, Const(xs), Else(xs, ys, o))).apply.asList.asInstanceOf[apply[xs, ys, o]]
     type apply[xs <: List, ys <: List, o <: Option] =
-        `if`[xs#isEmpty, const0[ys], `if`[ys#isEmpty, const0[xs], Else[xs, ys, o]]]#apply#asList
+        `if`[xs#isEmpty, Const[ys], `if`[ys#isEmpty, Const[xs], Else[xs, ys, o]]]#apply#asList
 
     case class Else[xs <: List, ys <: List, o <: Option](xs: xs, ys: ys, o: o) extends AsFunction0 {
         override type self = Else[xs, ys, o]

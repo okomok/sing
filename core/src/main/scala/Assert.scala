@@ -10,8 +10,8 @@ package sing
 
 private[sing]
 object Assert {
-      def apply[c <: Boolean](c: c): apply[c] = `if`(c, const0(Unit), Else(c)).apply
-     type apply[c <: Boolean]                 = `if`[c, const0[Unit], Else[c]]#apply
+      def apply[c <: Boolean](c: c): apply[c] = `if`(c, Const(Unit), Else(c)).apply
+     type apply[c <: Boolean]                 = `if`[c, Const[Unit], Else[c]]#apply
 
      case class Else[c <: Boolean](c: c) extends AsFunction0 {
          override type self = Else[c]

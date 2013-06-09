@@ -11,9 +11,9 @@ package sing; package bstree
 private[sing]
 object Glue {
      def apply[l <: BSTree, r <: BSTree](l: l, r: r): apply[l, r] =
-        `if`(l.isEmpty, const0(r), `if`(r.isEmpty, const0(l), Else(l, r))).apply.asMap.asBSTree.asInstanceOf[apply[l, r]]
+        `if`(l.isEmpty, Const(r), `if`(r.isEmpty, Const(l), Else(l, r))).apply.asMap.asBSTree.asInstanceOf[apply[l, r]]
     type apply[l <: BSTree, r <: BSTree] =
-        `if`[l#isEmpty, const0[r], `if`[r#isEmpty, const0[l], Else[l, r]]]#apply#asMap#asBSTree
+        `if`[l#isEmpty, Const[r], `if`[r#isEmpty, Const[l], Else[l, r]]]#apply#asMap#asBSTree
 
     case class Else[l <: BSTree, r <: BSTree](l: l, r: r) extends AsFunction0 {
         override type self = Else[l, r]

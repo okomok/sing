@@ -10,8 +10,8 @@ package sing; package list
 
 private[sing]
 object Last {
-     def apply[xs <: List](xs: xs) = `if`(xs.tail.isEmpty, const0(xs.head), Else(xs)).apply.asInstanceOf[apply[xs]]
-    type apply[xs <: List]         = `if`[xs#tail#isEmpty, const0[xs#head], Else[xs]]#apply
+     def apply[xs <: List](xs: xs) = `if`(xs.tail.isEmpty, Const(xs.head), Else(xs)).apply.asInstanceOf[apply[xs]]
+    type apply[xs <: List]         = `if`[xs#tail#isEmpty, Const[xs#head], Else[xs]]#apply
 
     case class Else[xs <: List](xs: xs) extends AsFunction0 {
         override type self = Else[xs]

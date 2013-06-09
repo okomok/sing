@@ -16,8 +16,8 @@ object Init {
     case class Impl[xs <: List](xs: xs) extends AsList {
         override type self = Impl[xs]
 
-        private[this] lazy val ys: ys = `if`(xs.tail.isEmpty, const0(Nil), const0(xs)).apply.asList
-        private[this]     type ys     = `if`[xs#tail#isEmpty, const0[Nil], const0[xs]]#apply#asList
+        private[this] lazy val ys: ys = `if`(xs.tail.isEmpty, Const(Nil), Const(xs)).apply.asList
+        private[this]     type ys     = `if`[xs#tail#isEmpty, Const[Nil], Const[xs]]#apply#asList
 
         override  def isEmpty: isEmpty = ys.isEmpty
         override type isEmpty          = ys#isEmpty

@@ -23,9 +23,9 @@ object Seq {
         override type width        = p#width#plus[q#width]
 
         private[this]  def _aux[r <: PegResult, xs <: List](r: r, xs: xs): _aux[r, xs] =
-            `if`(r.successful, Then(q, r, xs), const0(r)).apply.asPegResult
+            `if`(r.successful, Then(q, r, xs), Const(r)).apply.asPegResult
         private[this] type _aux[r <: PegResult, xs <: List] =
-            `if`[r#successful, Then[q, r, xs], const0[r]]#apply#asPegResult
+            `if`[r#successful, Then[q, r, xs], Const[r]]#apply#asPegResult
     }
 
     final case class Then[q <: Peg, r <: PegResult, xs <: List](q: q, r: r, xs: xs) extends AsFunction0 {
@@ -35,9 +35,9 @@ object Seq {
         private[this]     type s    = q#parse[r#next]
 
         override  def apply: apply =
-            `if`(s.successful, ThenThen(r, s), const0(PegFailure(xs))).apply.asPegResult
+            `if`(s.successful, ThenThen(r, s), Const(PegFailure(xs))).apply.asPegResult
         override type apply =
-            `if`[s#successful, ThenThen[r, s], const0[PegFailure[xs]]]#apply#asPegResult
+            `if`[s#successful, ThenThen[r, s], Const[PegFailure[xs]]]#apply#asPegResult
     }
 
     final case class ThenThen[r <: PegResult, s <: PegResult](r: r, s: s) extends AsFunction0 {

@@ -45,7 +45,7 @@ class FibonacciTest1 {
 
     import sing.Peano.Literal._
 
-    type fibonacci[n <: sing.Nat] = sing.`if`[n#lt[_2], sing.const0[n], FibElse[n]]#apply#asNat
+    type fibonacci[n <: sing.Nat] = sing.`if`[n#lt[_2], sing.Const[n], FibElse[n]]#apply#asNat
 
     trait FibElse[n <: sing.Nat] extends sing.AsFunction0 {
         override type self = FibElse[n]
@@ -58,7 +58,7 @@ class FibonacciTest2 {
 
     import sing.Peano.Literal._
 
-    type fibonacci[n <: sing.Nat] = sing.`if`[n#lt[_2], sing.const0[n], FibElse[n]]#apply#asNat
+    type fibonacci[n <: sing.Nat] = sing.`if`[n#lt[_2], sing.Const[n], FibElse[n]]#apply#asNat
 
     trait FibElse[n <: sing.Nat] extends sing.AsFunction0 {
         override type self = FibElse[n]

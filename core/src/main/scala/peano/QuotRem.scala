@@ -11,9 +11,9 @@ package sing; package peano
 private[sing]
 object QuotRem {
      def apply[x <: Nat, y <: Nat](x: x, y: y): apply[x, y] =
-        `if`(x.lt(y), const0(Tuple2(Zero, x)), Else(x, y)).apply.asProduct2
+        `if`(x.lt(y), Const(Tuple2(Zero, x)), Else(x, y)).apply.asProduct2
     type apply[x <: Nat, y <: Nat] =
-        `if`[x#lt[y], const0[Tuple2[Zero, x]], Else[x, y]]#apply#asProduct2
+        `if`[x#lt[y], Const[Tuple2[Zero, x]], Else[x, y]]#apply#asProduct2
 
     case class Else[x <: Nat, y <: Nat](x: x, y: y) extends AsFunction0 {
         override type self = Else[x, y]

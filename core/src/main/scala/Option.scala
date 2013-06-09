@@ -93,8 +93,8 @@ sealed abstract class AsOption extends Option with AsAny {
 
     override type foreach[f <: Function1] = Unit
 
-    override  def orElse[f <: Function0](f: f): orElse[f] = `if`(isEmpty, f, const0(self)).apply.asOption
-    override type orElse[f <: Function0]                  = `if`[isEmpty, f, const0[self]]#apply#asOption
+    override  def orElse[f <: Function0](f: f): orElse[f] = `if`(isEmpty, f, Const(self)).apply.asOption
+    override type orElse[f <: Function0]                  = `if`[isEmpty, f, Const[self]]#apply#asOption
 
     override  def naturalOrdering: naturalOrdering = List.naturalOrdering
     override type naturalOrdering                  = List.naturalOrdering
@@ -168,8 +168,8 @@ final case class Some[e <: Any](override val get: e) extends AsOption {
     override  def flatMap[f <: Function1](f: f): flatMap[f] = f.apply(get).asOption
     override type flatMap[f <: Function1]                   = f#apply[get]#asOption
 
-    override  def filter[f <: Function1](f: f): filter[f] = `if`(f.apply(get).asBoolean, const0(self), const0(None)).apply.asOption
-    override type filter[f <: Function1]                  = `if`[f#apply[get]#asBoolean, const0[self], const0[None]]#apply#asOption
+    override  def filter[f <: Function1](f: f): filter[f] = `if`(f.apply(get).asBoolean, Const(self), Const(None)).apply.asOption
+    override type filter[f <: Function1]                  = `if`[f#apply[get]#asBoolean, Const[self], Const[None]]#apply#asOption
 
     override  def exists[f <: Function1](f: f): exists[f] = f.apply(get).asBoolean
     override type exists[f <: Function1]                  = f#apply[get]#asBoolean

@@ -11,10 +11,10 @@ package sing; package dense
 private[sing]
 object Plus {
      def apply[xs <: Dense, ys <: Dense](xs: xs, ys: ys): apply[xs, ys] =
-        Match(xs, ys, const0(DNil), const0(ys), const0(xs),
+        Match(xs, ys, Const(DNil), Const(ys), Const(xs),
             DConsMatch(xs, ys, CaseTT(xs, ys), CaseXF(xs, ys), CaseFX(xs, ys), CaseXF(xs, ys))).apply.asNat.asDense.asInstanceOf[apply[xs, ys]]
     type apply[xs <: Dense, ys <: Dense] =
-        Match[xs, ys, const0[DNil], const0[ys], const0[xs],
+        Match[xs, ys, Const[DNil], Const[ys], Const[xs],
             DConsMatch[xs, ys, CaseTT[xs, ys], CaseXF[xs, ys], CaseFX[xs, ys], CaseXF[xs, ys]]]#apply#asNat#asDense
 
     case class CaseTT[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {

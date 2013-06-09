@@ -30,8 +30,8 @@ object List extends ToSTuple with AsListKind {
      def unfoldRight[z <: Any, f <: Function1](z: z, f: f): unfoldRight[z, f] = UnfoldRight.apply(z, f)
     type unfoldRight[z <: Any, f <: Function1]                                = UnfoldRight.apply[z, f]
 
-     def repeat[z <: Any](z: z): repeat[z] = iterate(z, Function.identity)
-    type repeat[z <: Any]                  = iterate[z, Function.identity]
+     def repeat[z <: Any](z: z): repeat[z] = iterate(z, Identity)
+    type repeat[z <: Any]                  = iterate[z, Identity]
 
     /**
      * Forces tuple elements.

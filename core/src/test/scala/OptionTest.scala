@@ -119,13 +119,13 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testGetOrElse {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.assertSame[_3, s#getOrElse[const0[_8]]]
-        val r: s#getOrElse[const0[_8]] = s.getOrElse(const0(_8))
+        Test.assertSame[_3, s#getOrElse[Const[_8]]]
+        val r: s#getOrElse[Const[_8]] = s.getOrElse(Const(_8))
         val k: _3 = r
 
         type n = None
         val n: n = None
-        val q: n#getOrElse[const0[_8]] = n.getOrElse(const0(_8))
+        val q: n#getOrElse[Const[_8]] = n.getOrElse(Const(_8))
         val p: _8 = q
         ()
     }

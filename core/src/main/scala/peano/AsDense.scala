@@ -13,8 +13,8 @@ import Peano._2
 
 private[sing]
 object AsDense {
-     def apply[x <: Peano](x: x): apply[x] = `if`(x.isZero, const0(DNil), Else(x)).apply.asNat.asDense
-    type apply[x <: Peano]                 = `if`[x#isZero, const0[DNil], Else[x]]#apply#asNat#asDense
+     def apply[x <: Peano](x: x): apply[x] = `if`(x.isZero, Const(DNil), Else(x)).apply.asNat.asDense
+    type apply[x <: Peano]                 = `if`[x#isZero, Const[DNil], Else[x]]#apply#asNat#asDense
 
     case class Else[x <: Peano](x: x) extends AsFunction0 {
          override type self = Else[x]
@@ -26,8 +26,8 @@ object AsDense {
 
 private[sing]
 object Div2 {
-     def apply[x <: Peano](x: x): apply[x] = `if`(x.lt(_2), const0(Zero), Else(x)).apply.asNat.asPeano
-    type apply[x <: Peano]                 = `if`[x#lt[_2], const0[Zero], Else[x]]#apply#asNat#asPeano
+     def apply[x <: Peano](x: x): apply[x] = `if`(x.lt(_2), Const(Zero), Else(x)).apply.asNat.asPeano
+    type apply[x <: Peano]                 = `if`[x#lt[_2], Const[Zero], Else[x]]#apply#asNat#asPeano
 
     case class Else[x <: Peano](x: x) extends AsFunction0 {
         override type self = Else[x]

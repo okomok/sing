@@ -15,7 +15,7 @@ import scala.language.experimental.macros
 package object sing {
 
 
-    type `null` = scala.Nothing
+    import Annotation._
 
 
 // Boolean
@@ -23,30 +23,24 @@ package object sing {
      val `true`: `true` = _TermOfTrue.apply
      val `false`: `false` = _TermOfFalse.apply
 
-    @Annotation.equivalentTo("c.`if`(_then, _else)")
+    @equivalentTo("c.`if`(_then, _else)")
      def `if`[c <: Boolean, _then <: Function0, _else <: Function0](c: c, _then: _then, _else: _else): `if`[c, _then, _else] = c.`if`(_then, _else)
     type `if`[c <: Boolean, _then <: Function0, _else <: Function0]                                                          = c#`if`[_then, _else]
 
 
 // Function
 
-    @Annotation.aliasOf("Function.const0")
-     def const0[v <: Any](v: => v): const0[v] = Function.const0(v)
-    type const0[v <: Any]                     = Function.const0[v]
-
-    @Annotation.aliasOf("Function.throw0")
-     def throw0(x: Throwable) = Function.throw0(x)
-    type throw0[_]            = Function.throw0[_]
+    val Identity: Identity = _TermOfIdentity.apply
 
 
 // List
 
     val Nil: Nil = _TermOfNil.apply
 
-    @Annotation.aliasOf("Cons")
+    @aliasOf("Cons")
     val :: = Cons
 
-    @Annotation.equivalentTo("x# ::[xs]")
+    @equivalentTo("x# ::[xs]")
     type ::[x <: Any, xs <: List] = xs# ::[x]
 
 
@@ -74,21 +68,20 @@ package object sing {
 
 // Product
 
-    @Annotation.aliasOf("Tuple2")
+    @aliasOf("Tuple2")
      val Pair = Tuple2
     type Pair[v1 <: Any, v2 <: Any] = Tuple2[v1, v2]
 
 
 // Unit
 
-    @Annotation.equivalentTo("new Unit{}")
+    @equivalentTo("new Unit{}")
     val Unit: Unit = _TermOfUnit.apply
 
 
 // misc
 
-    @Annotation.equivalentTo("AsT with Self")
-    type New[T] = macro makro.New.impl[T]
+    type `null` = scala.Nothing
 
     /**
      * The type of a term
@@ -111,6 +104,9 @@ package object sing {
      def check[x](x: x) = macro makro.Check.term_impl[x]
     type check[x]       = macro makro.Check.type_impl[x]
 
+    @equivalentTo("AsT with Self")
+    type New[T] = macro makro.New.impl[T]
+
 
 // assertions
 
@@ -122,7 +118,7 @@ package object sing {
     type assert[c <: Boolean]                  = Assert.apply[c]
 
     @elidable(ASSERTION)
-    @Annotation.equivalentTo("assert(c.not)")
+    @equivalentTo("assert(c.not)")
      def assertNot[c <: Boolean](c: c): assertNot[c] = assert(c.not)
     type assertNot[c <: Boolean]                     = assert[c#not]
 

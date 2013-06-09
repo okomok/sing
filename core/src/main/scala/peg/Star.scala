@@ -20,9 +20,9 @@ object Star {
         override type parse[xs <: List]                    = _aux[p#parse[xs]]
 
         private[this]  def _aux[r <: PegResult](r: r): _aux[r] =
-            `if`(r.successful, Then(p, r), const0(PegSuccess(Nil, r.next))).apply.asPegResult.asInstanceOf[_aux[r]]
+            `if`(r.successful, Then(p, r), Const(PegSuccess(Nil, r.next))).apply.asPegResult.asInstanceOf[_aux[r]]
         private[this] type _aux[r <: PegResult] =
-            `if`[r#successful, Then[p, r], const0[PegSuccess[Nil, r#next]]]#apply#asPegResult
+            `if`[r#successful, Then[p, r], Const[PegSuccess[Nil, r#next]]]#apply#asPegResult
     }
 
     final case class Then[p <: Peg, r <: PegResult](p: p, r: r) extends AsFunction0 {

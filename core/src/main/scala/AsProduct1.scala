@@ -17,14 +17,14 @@ trait AsProduct1 extends Product1 with AsProduct {
 
     override  def productElement[n <: Nat](n: n): productElement[n] =
         `if`(n.equal(Peano._0),
-            const0(_1),
-            throw0(new IndexOutOfBoundsException(n.toString))
+            Const(_1),
+            Throw(new IndexOutOfBoundsException(n.toString))
         ).apply
 
     override type productElement[n <: Nat] =
         `if`[n#equal[Peano._0],
-            const0[_1],
-            throw0[_]
+            Const[_1],
+            Throw
         ]#apply
 
     override  def asList: asList = _1 :: Nil

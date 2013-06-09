@@ -11,14 +11,14 @@ package sing; package dense
 private[sing]
 object Equal {
      def apply[xs <: Dense, ys <: Dense](xs: xs, ys: ys): apply[xs, ys] =
-        Match(xs, ys, const0(`true`), const0(`false`), const0(`false`), CaseCC(xs, ys)).apply.asBoolean
+        Match(xs, ys, Const(`true`), Const(`false`), Const(`false`), CaseCC(xs, ys)).apply.asBoolean
     type apply[xs <: Dense, ys <: Dense] =
-        Match[xs, ys, const0[`true`], const0[`false`], const0[`false`], CaseCC[xs, ys]]#apply#asBoolean
+        Match[xs, ys, Const[`true`], Const[`false`], Const[`false`], CaseCC[xs, ys]]#apply#asBoolean
 
     case class CaseCC[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {
         override type self = CaseCC[xs, ys]
-        override  def apply: apply = `if`(xs.head.nequal(ys.head), const0(`false`), Else(xs, ys)).apply.asInstanceOf[apply]
-        override type apply        = `if`[xs#head#nequal[ys#head], const0[`false`], Else[xs, ys]]#apply
+        override  def apply: apply = `if`(xs.head.nequal(ys.head), Const(`false`), Else(xs, ys)).apply.asInstanceOf[apply]
+        override type apply        = `if`[xs#head#nequal[ys#head], Const[`false`], Else[xs, ys]]#apply
     }
 
     // for short-circuit.
@@ -33,10 +33,10 @@ object Equal {
 private[sing]
 object Lt {
      def apply[xs <: Dense, ys <: Dense](xs: xs, ys: ys): apply[xs, ys] =
-        Match(xs, ys, const0(`false`), const0(`true`), const0(`false`),
+        Match(xs, ys, Const(`false`), Const(`true`), Const(`false`),
             DConsMatch(xs, ys, CaseXXorTF(xs, ys), CaseXXorTF(xs, ys), CaseFT(xs, ys), CaseXXorTF(xs, ys))).apply.asBoolean.asInstanceOf[apply[xs, ys]]
     type apply[xs <: Dense, ys <: Dense] =
-        Match[xs, ys, const0[`false`], const0[`true`], const0[`false`],
+        Match[xs, ys, Const[`false`], Const[`true`], Const[`false`],
             DConsMatch[xs, ys, CaseXXorTF[xs, ys], CaseXXorTF[xs, ys], CaseFT[xs, ys], CaseXXorTF[xs, ys]]]#apply#asBoolean
 
     case class CaseXXorTF[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {

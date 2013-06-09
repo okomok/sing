@@ -24,14 +24,14 @@ object LexicographicalOrdering {
 
         private[this]  def _compare[xs <: List, ys <: List](xs: xs, ys: ys): _compare[xs, ys] =
             `if`(xs.isEmpty,
-                `if`(ys.isEmpty, const0(EQ), const0(LT)),
-                `if`(ys.isEmpty, const0(GT), Else(xs, ys, eo))
+                `if`(ys.isEmpty, Const(EQ), Const(LT)),
+                `if`(ys.isEmpty, Const(GT), Else(xs, ys, eo))
             ).apply.asOrderingResult.asInstanceOf[_compare[xs, ys]]
 
         private[this] type _compare[xs <: List, ys <: List] =
             `if`[xs#isEmpty,
-                `if`[ys#isEmpty, const0[EQ], const0[LT]],
-                `if`[ys#isEmpty, const0[GT], Else[xs, ys, eo]]
+                `if`[ys#isEmpty, Const[EQ], Const[LT]],
+                `if`[ys#isEmpty, Const[GT], Else[xs, ys, eo]]
             ]#apply#asOrderingResult
     }
 
@@ -40,9 +40,9 @@ object LexicographicalOrdering {
         private[this] lazy val _eo: _eo = eo.getOrNaturalOrdering(xs.head)
         private[this]     type _eo      = eo#getOrNaturalOrdering[xs#head]
         override  def apply: apply =
-            _eo.`match`(xs.head, ys.head, const0(LT), const0(GT), CaseEQ(xs, ys, eo)).asOrderingResult.asInstanceOf[apply]
+            _eo.`match`(xs.head, ys.head, Const(LT), Const(GT), CaseEQ(xs, ys, eo)).asOrderingResult.asInstanceOf[apply]
         override type apply =
-            _eo#`match`[xs#head, ys#head, const0[LT], const0[GT], CaseEQ[xs, ys, eo]]#asOrderingResult
+            _eo#`match`[xs#head, ys#head, Const[LT], Const[GT], CaseEQ[xs, ys, eo]]#asOrderingResult
     }
 
     case class CaseEQ[xs <: List, ys <: List, eo <: Option](xs: xs, ys: ys, eo: eo) extends AsFunction0 {

@@ -11,9 +11,9 @@ package sing; package dense
 private[sing]
 object DConsDecrement {
      def apply[x <: Boolean, xs <: Dense](x: x, xs: xs): apply[x, xs] =
-        `if`(xs.isZero, const0(xs), `if`(x, Then(x, xs), Else(x, xs))).apply.asNat.asDense.asInstanceOf[apply[x, xs]]
+        `if`(xs.isZero, Const(xs), `if`(x, Then(x, xs), Else(x, xs))).apply.asNat.asDense.asInstanceOf[apply[x, xs]]
     type apply[x <: Boolean, xs <: Dense] =
-        `if`[xs#isZero, const0[xs], `if`[x, Then[x, xs], Else[x, xs]]]#apply#asNat#asDense
+        `if`[xs#isZero, Const[xs], `if`[x, Then[x, xs], Else[x, xs]]]#apply#asNat#asDense
 
     // (`true` :: xs).decrement
     case class Then[x <: Boolean, xs <: Dense](x: x, xs: xs) extends AsFunction0 {
