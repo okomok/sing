@@ -21,13 +21,7 @@ object Test {
 
 
     /**
-     * Puts a type into term expressions, etc...
-     */
-    def unused[x] = null.asInstanceOf[x]
-
-
-    /**
-     * Ignores an expression.
+     * Ignores an expression, or places a type in term expressions.
      */
     @elidable(ALL)
      def ignore[x](x: x): ignore[x] = ()

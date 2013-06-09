@@ -93,12 +93,17 @@ package object sing {
     /**
      * The type of a term
      */
-    type typeOf[x <: Any](x: x) = macro makro.WeakTypeOf.impl[x]
+    type typeOf[x](x: x) = macro makro.WeakTypeOf.impl[x]
 
     /**
      * The term of a type
      */
     def termOf[x <: Any](implicit _x: _TermOf[x]): x = _x.apply
+
+    /**
+     * A sort of `declval` in C++
+     */
+    def unused[x] = null.asInstanceOf[x]
 
     /**
      * Checks a type concrete, compile-error otherwise.

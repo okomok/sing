@@ -25,9 +25,9 @@ trait BoxKind[A] extends AnyKind {
 
 object BoxKind {
 
-    implicit def _ofScalaAny[A]: BoxKind[A] = macro _ofScalaAnyImpl[A]
+    implicit def apply[A]: BoxKind[A] = macro impl[A]
 
-    def _ofScalaAnyImpl[A: c.WeakTypeTag](c: Context): c.Expr[BoxKind[A]] = {
+    def impl[A: c.WeakTypeTag](c: Context): c.Expr[BoxKind[A]] = {
         import c.universe._
 
         val fullName = weakTypeOf[A].typeSymbol.fullName.toString

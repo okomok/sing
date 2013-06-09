@@ -103,17 +103,23 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
             assertSame[Dense._3, x]
         }
 
-/*
+
         expectError {
-            unused[ assertSame[Char, Int] ] // hmm compiles... macro version is better?
+            ignore[ assertSame[Char, Int] ]
         }
-*/
+
+
         expectError {
-            unused[ assertNotConforms[Int, Int] ]
+            // unused[ assertSame[Char, Int] ] // compiles, funny.
+            wow
         }
 
         expectError {
-            unused[error]
+            ignore[ assertNotConforms[Int, Int] ]
+        }
+
+        expectError {
+            ignore[error]
         }
 
         assertSame(Dense._2, x)

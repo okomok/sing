@@ -14,15 +14,14 @@ import scala.reflect.macros.Context
 
 object Check {
 
-    def apply[x](x: x) = macro term_impl[x]
+     def apply[x](x: x) = macro term_impl[x]
+    type apply[x]       = macro type_impl[x]
 
     def term_impl[x: c.WeakTypeTag](c: Context)(x: c.Expr[x]): c.Expr[x] = {
         import c.universe._
         AssertConcrete(c)
         x
     }
-
-    type apply[x] = macro type_impl[x]
 
     def type_impl[x: c.WeakTypeTag](c: Context): c.Tree = {
         import c.universe._
