@@ -31,13 +31,6 @@ object ListSet {
         override  def apply[x <: Any](x: x): apply[x] = r.related(k, x)
         override type apply[x <: Any]                 = r#related[k, x]
     }
-
-    private[sing]
-    final case class NotRelated[r <: Relation, k <: Any](r: r, k: k) extends AsFunction1 {
-        override type self = NotRelated[r, k]
-        override  def apply[x <: Any](x: x): apply[x] = r.related(k, x).not
-        override type apply[x <: Any]                 = r#related[k, x]#not
-    }
 }
 
 
@@ -59,8 +52,8 @@ final case class ListSet[r <: Relation, ks <: List](r: r, override val asList: k
     override  def add[k <: Any](k: k): add[k] = ListSet(r, Cons(k, asList))
     override type add[k <: Any]               = ListSet[r, Cons[k, asList]]
 
-    override  def remove[k <: Any](k: k): remove[k] = ListSet(r, asList.filter(NotRelated(r, k)))
-    override type remove[k <: Any]                  = ListSet[r, asList#filter[NotRelated[r, k]]]
+    override  def remove[k <: Any](k: k): remove[k] = ListSet(r, asList.filter(Related(r, k).not))
+    override type remove[k <: Any]                  = ListSet[r, asList#filter[Related[r, k]#not]]
 
     override  def contains[k <: Any](k: k): contains[k] = asList.find(Related(r, k)).nonEmpty
     override type contains[k <: Any]                    = asList#find[Related[r, k]]#nonEmpty

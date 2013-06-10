@@ -36,13 +36,6 @@ object ListMap {
     }
 
     private[sing]
-    final case class NotRelated[r <: Relation, k <: Any](r: r, k: k) extends AsFunction1 {
-        override type self = NotRelated[r, k]
-        override  def apply[x <: Any](x: x): apply[x] = r.related(k, x.asProduct2._1).not.asInstanceOf[apply[x]]
-        override type apply[x <: Any]                 = r#related[k, x#asProduct2#_1]#not
-    }
-
-    private[sing]
     final class Get1 extends AsFunction1 {
         override type self = Get1
         override  def apply[x <: Any](x: x): apply[x] = x.asProduct2._1
@@ -59,18 +52,6 @@ object ListMap {
     }
     private[sing]
     lazy val Get2: Get2 = new Get2
-
-    private[sing]
-    object OptionMap {
-         def apply[kv <: Option](kv: kv): apply[kv] = `if`(kv.isEmpty, Const(None), Else(kv)).apply.asOption
-        type apply[kv <: Option]                    = `if`[kv#isEmpty, Const[None], Else[kv]]#apply#asOption
-
-        case class Else[kv <: Option](kv: kv) extends AsFunction0 {
-            override type self = Else[kv]
-            override  def apply: apply = Some(kv.get.asProduct2._2)
-            override type apply        = Some[kv#get#asProduct2#_2]
-        }
-    }
 }
 
 
@@ -89,14 +70,14 @@ final case class ListMap[r <: Relation, kvs <: List](r: r, override val asList: 
     override  def clear: clear = ListMap(r, Nil)
     override type clear        = ListMap[r, Nil]
 
-    override  def get[k <: Any](k: k): get[k] = OptionMap.apply(asList.find(Related(r, k)))
-    override type get[k <: Any]               = OptionMap.apply[asList#find[Related[r, k]]]
+    override  def get[k <: Any](k: k): get[k] = asList.find(Related(r, k)).map(Get2)
+    override type get[k <: Any]               = asList#find[Related[r, k]]#map[Get2]
 
     override  def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = ListMap(r, Cons(Tuple2(k, v), asList))
     override type put[k <: Any, v <: Any]                        = ListMap[r, Cons[Tuple2[k, v], asList]]
 
-    override  def remove[k <: Any](k: k): remove[k] = ListMap(r, asList.filter(NotRelated(r, k)))
-    override type remove[k <: Any]                  = ListMap[r, asList#filter[NotRelated[r, k]]]
+    override  def remove[k <: Any](k: k): remove[k] = ListMap(r, asList.filter(Related(r, k).not))
+    override type remove[k <: Any]                  = ListMap[r, asList#filter[Related[r, k]#not]]
 
     override  def keySet: keySet = ListSet(r, keyList)
     override type keySet         = ListSet[r, keyList]
