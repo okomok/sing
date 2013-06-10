@@ -51,18 +51,14 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         assertEquals(`true`, m.equal(m2))
     }
 
-    def testUnique {
+    def testNotUnique {
         type m   = ListSet.add[_4]#add[_3]#add[_1]#add[_2]#add[_5]#add[_0]
         val m: m = ListSet.add(_4).add(_3).add(_1).add(_2).add(_5).add(_0)
 
         type m2   = m.add[_1]
         val m2: m2 = m.add(_1)
 
-        Test.assertSame[`true`, m#equal[m]]
-        Test.assertSame[`true`, m#equal[m2]]
-        Test.assertSame[`true`, m2#equal[m]]
-        Test.assertSame[`true`, m#size#equal[m2#size]]
-        assertEquals(`true`, m.equal(m2))
+        Test.assertSame[`true`, m#size#increment#equal[m2#size]]
     }
 
     def testAdd {
@@ -100,7 +96,7 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type m = ListSet.add[_3]#add[_5]#add[_1]
         val m: m = ListSet.add(_3).add(_5).add(_1)
 
-        assertEquals(scala.collection.immutable.ListSet(3, 5, 1), m.unsing)
+        assertEquals(scala.List(1, 5, 3), m.asList.unsing)
     }
 
 }

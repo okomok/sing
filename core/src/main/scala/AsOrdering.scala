@@ -11,7 +11,7 @@ package sing
 import ordering._
 
 
-trait AsOrdering extends Ordering with AsAny with UnsingEquals with AsOrderingKind {
+trait AsOrdering extends Ordering with AsEquiv with AsOrderingKind {
     override  def asOrdering: asOrdering = self
     override type asOrdering             = self
 

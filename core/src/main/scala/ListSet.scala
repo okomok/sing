@@ -16,8 +16,8 @@ object ListSet {
     /**
      * Constructs an empty list-map.
      */
-     def empty[eq <: Equiv](eq: eq): empty[eq] = ListSet(eq, Nil)
-    type empty[eq <: Equiv]                    = ListSet[eq, Nil]
+     def empty[r <: Relation](r: r): empty[r] = ListSet(r, Nil)
+    type empty[r <: Relation]                 = ListSet[r, Nil]
 
     /**
      * Constructs a one-entry list-map.
@@ -26,27 +26,24 @@ object ListSet {
     type add[k <: Any]               = empty[k#naturalOrdering]#add[k]
 
     private[sing]
-    final case class EquivTo[eq <: Equiv, k <: Any](eq: eq, k: k) extends AsFunction1 {
-        override type self = EquivTo[eq, k]
-        override  def apply[x <: Any](x: x): apply[x] = eq.equiv(x, k)
-        override type apply[x <: Any]                 = eq#equiv[x, k]
+    final case class Related[r <: Relation, k <: Any](r: r, k: k) extends AsFunction1 {
+        override type self = Related[r, k]
+        override  def apply[x <: Any](x: x): apply[x] = r.related(k, x)
+        override type apply[x <: Any]                 = r#related[k, x]
     }
 
     private[sing]
-    final case class NotEquivTo[eq <: Equiv, k <: Any](eq: eq, k: k) extends AsFunction1 {
-        override type self = NotEquivTo[eq, k]
-        override  def apply[x <: Any](x: x): apply[x] = eq.equiv(x, k).not
-        override type apply[x <: Any]                 = eq#equiv[x, k]#not
+    final case class NotRelated[r <: Relation, k <: Any](r: r, k: k) extends AsFunction1 {
+        override type self = NotRelated[r, k]
+        override  def apply[x <: Any](x: x): apply[x] = r.related(k, x).not
+        override type apply[x <: Any]                 = r#related[k, x]#not
     }
 }
 
 
 private[sing]
-final case class ListSet[eq <: Equiv, ks <: List](eq: eq, override val asList: ks) extends AsSet {
-    override type self = ListSet[eq, ks]
-
-    override  def unsing: unsing = scala.collection.immutable.ListSet.empty ++ asList.unsing
-    override type unsing         = scala.collection.immutable.ListSet[scala.Any]
+final case class ListSet[r <: Relation, ks <: List](r: r, override val asList: ks) extends AsSet {
+    override type self = ListSet[r, ks]
 
     override type asList = ks
 
@@ -56,15 +53,15 @@ final case class ListSet[eq <: Equiv, ks <: List](eq: eq, override val asList: k
     override  def isEmpty: isEmpty = asList.isEmpty
     override type isEmpty          = asList#isEmpty
 
-    override  def clear: clear = ListSet(eq, Nil)
-    override type clear        = ListSet[eq, Nil]
+    override  def clear: clear = ListSet(r, Nil)
+    override type clear        = ListSet[r, Nil]
 
-    override  def add[k <: Any](k: k): add[k] = ListSet(eq, k :: remove(k).asList)
-    override type add[k <: Any]               = ListSet[eq, k :: remove[k]#asList]
+    override  def add[k <: Any](k: k): add[k] = ListSet(r, Cons(k, asList))
+    override type add[k <: Any]               = ListSet[r, Cons[k, asList]]
 
-    override  def remove[k <: Any](k: k): remove[k] = ListSet(eq, asList.filter(NotEquivTo(eq, k)))
-    override type remove[k <: Any]                  = ListSet[eq, asList#filter[NotEquivTo[eq, k]]]
+    override  def remove[k <: Any](k: k): remove[k] = ListSet(r, asList.filter(NotRelated(r, k)))
+    override type remove[k <: Any]                  = ListSet[r, asList#filter[NotRelated[r, k]]]
 
-    override  def contains[k <: Any](k: k): contains[k] = asList.find(EquivTo(eq, k)).nonEmpty
-    override type contains[k <: Any]                    = asList#find[EquivTo[eq, k]]#nonEmpty
+    override  def contains[k <: Any](k: k): contains[k] = asList.find(Related(r, k)).nonEmpty
+    override type contains[k <: Any]                    = asList#find[Related[r, k]]#nonEmpty
 }

@@ -50,6 +50,9 @@ trait Any extends AnyType with scala.Equals {
      def asOption: asOption = unsupported("Any.asOption")
     type asOption <: Option
 
+     def asRelation: asRelation = unsupported("Any.asRelation")
+    type asRelation <: Relation
+
      def asEquiv: asEquiv = unsupported("Any.asEquiv")
     type asEquiv <: Equiv
 

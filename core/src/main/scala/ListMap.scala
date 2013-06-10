@@ -11,13 +11,16 @@ package sing
 import ListMap._
 
 
+/**
+ * In sing, this is a multimap.
+ */
 object ListMap {
 
     /**
      * Constructs an empty list-map.
      */
-     def empty[eq <: Equiv](eq: eq): empty[eq] = ListMap(eq, Nil)
-    type empty[eq <: Equiv]                    = ListMap[eq, Nil]
+     def empty[r <: Relation](r: r): empty[r] = ListMap(r, Nil)
+    type empty[r <: Relation]                 = ListMap[r, Nil]
 
     /**
      * Constructs a one-entry list-map.
@@ -26,17 +29,17 @@ object ListMap {
     type put[k <: Any, v <: Any]                        = empty[k#naturalOrdering]#put[k, v]
 
     private[sing]
-    final case class EquivTo[eq <: Equiv, k <: Any](eq: eq, k: k) extends AsFunction1 {
-        override type self = EquivTo[eq, k]
-        override  def apply[x <: Any](x: x): apply[x] = eq.equiv(x.asProduct2._1, k)
-        override type apply[x <: Any]                 = eq#equiv[x#asProduct2#_1, k]
+    final case class Related[r <: Relation, k <: Any](r: r, k: k) extends AsFunction1 {
+        override type self = Related[r, k]
+        override  def apply[x <: Any](x: x): apply[x] = r.related(k, x.asProduct2._1)
+        override type apply[x <: Any]                 = r#related[k, x#asProduct2#_1]
     }
 
     private[sing]
-    final case class NotEquivTo[eq <: Equiv, k <: Any](eq: eq, k: k) extends AsFunction1 {
-        override type self = NotEquivTo[eq, k]
-        override  def apply[x <: Any](x: x): apply[x] = eq.equiv(x.asProduct2._1, k).not.asInstanceOf[apply[x]]
-        override type apply[x <: Any]                 = eq#equiv[x#asProduct2#_1, k]#not
+    final case class NotRelated[r <: Relation, k <: Any](r: r, k: k) extends AsFunction1 {
+        override type self = NotRelated[r, k]
+        override  def apply[x <: Any](x: x): apply[x] = r.related(k, x.asProduct2._1).not.asInstanceOf[apply[x]]
+        override type apply[x <: Any]                 = r#related[k, x#asProduct2#_1]#not
     }
 
     private[sing]
@@ -72,11 +75,8 @@ object ListMap {
 
 
 private[sing]
-final case class ListMap[eq <: Equiv, kvs <: List](eq: eq, override val asList: kvs) extends AsMap {
-    override type self = ListMap[eq, kvs]
-
-    override  def unsing: unsing = scala.collection.immutable.ListMap.empty ++ asList.unsing.map(kv => kv.asInstanceOf[scala.Tuple2[scala.Any, scala.Any]])
-    override type unsing         = scala.collection.immutable.ListMap[scala.Any, scala.Any]
+final case class ListMap[r <: Relation, kvs <: List](r: r, override val asList: kvs) extends AsMap {
+    override type self = ListMap[r, kvs]
 
     override type asList = kvs
 
@@ -86,20 +86,20 @@ final case class ListMap[eq <: Equiv, kvs <: List](eq: eq, override val asList: 
     override  def isEmpty: isEmpty = asList.isEmpty
     override type isEmpty          = asList#isEmpty
 
-    override  def clear: clear = ListMap(eq, Nil)
-    override type clear        = ListMap[eq, Nil]
+    override  def clear: clear = ListMap(r, Nil)
+    override type clear        = ListMap[r, Nil]
 
-    override  def get[k <: Any](k: k): get[k] = OptionMap.apply(asList.find(EquivTo(eq, k)))
-    override type get[k <: Any]               = OptionMap.apply[asList#find[EquivTo[eq, k]]]
+    override  def get[k <: Any](k: k): get[k] = OptionMap.apply(asList.find(Related(r, k)))
+    override type get[k <: Any]               = OptionMap.apply[asList#find[Related[r, k]]]
 
-    override  def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = ListMap(eq, Tuple2(k, v) :: remove(k).asList)
-    override type put[k <: Any, v <: Any]                        = ListMap[eq, Tuple2[k, v] :: remove[k]#asList]
+    override  def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = ListMap(r, Cons(Tuple2(k, v), asList))
+    override type put[k <: Any, v <: Any]                        = ListMap[r, Cons[Tuple2[k, v], asList]]
 
-    override  def remove[k <: Any](k: k): remove[k] = ListMap(eq, asList.filter(NotEquivTo(eq, k)))
-    override type remove[k <: Any]                  = ListMap[eq, asList#filter[NotEquivTo[eq, k]]]
+    override  def remove[k <: Any](k: k): remove[k] = ListMap(r, asList.filter(NotRelated(r, k)))
+    override type remove[k <: Any]                  = ListMap[r, asList#filter[NotRelated[r, k]]]
 
-    override  def keySet: keySet = ListSet(eq, keyList)
-    override type keySet         = ListSet[eq, keyList]
+    override  def keySet: keySet = ListSet(r, keyList)
+    override type keySet         = ListSet[r, keyList]
 
     override  def keyList: keyList = asList.map(Get1)
     override type keyList          = asList#map[Get1]
