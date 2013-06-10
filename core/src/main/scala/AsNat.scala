@@ -12,9 +12,6 @@ trait AsNat extends Nat with AsAny with UnsingEquals with AsNatKind {
     override  def asNat: asNat = self
     override type asNat        = self
 
-    override  def nequal[that <: Nat](that: that): nequal[that] = equal(that).not
-    override type nequal[that <: Nat]                           = equal[that]#not
-
     override  def quot[that <: Nat](that: that): quot[that] = quotRem(that)._1.asNat
     override type quot[that <: Nat]                         = quotRem[that]#_1#asNat
 

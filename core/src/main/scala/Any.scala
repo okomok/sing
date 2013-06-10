@@ -86,6 +86,12 @@ trait Any extends AnyType with scala.Equals {
      def asKindId: asKindId = unsupported("Any.asKindId")
     type asKindId <: KindId
 
+     def equal[that <: Any](that: that): equal[that] = unsupported("Any.equal")
+    type equal[that <: Any] <: Boolean
+
+     def nequal[that <: Any](that: that): nequal[that] = unsupported("Any.nequal")
+    type nequal[that <: Any] <: Boolean
+
     /**
      * Escapes from the sing world.
      */

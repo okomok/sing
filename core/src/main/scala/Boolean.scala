@@ -21,12 +21,6 @@ sealed abstract class Boolean extends Any {
      def not: not
     type not <: Boolean
 
-     def equal[that <: Boolean](that: that): equal[that]
-    type equal[that <: Boolean] <: Boolean
-
-     def nequal[that <: Boolean](that: that): nequal[that]
-    type nequal[that <: Boolean] <: Boolean
-
      def and[that <: Boolean](that: that): and[that]
     type and[that <: Boolean] <: Boolean
 
@@ -49,9 +43,6 @@ sealed abstract class AsBoolean extends Boolean with AsAny with UnsingEquals wit
     override  def asBoolean: asBoolean = self
     override type asBoolean            = self
 
-    override  def nequal[that <: Boolean](that: that): nequal[that] = equal(that).not
-    override type nequal[that <: Boolean]                           = equal[that]#not
-
     override  def canEqual(that: scala.Any) = that.isInstanceOf[Boolean]
 }
 
@@ -67,8 +58,8 @@ sealed abstract class `true` extends AsBoolean {
     override  def not: not = `false`
     override type not      = `false`
 
-    override  def equal[that <: Boolean](that: that): equal[that] = that.isTrue
-    override type equal[that <: Boolean]                          = that#isTrue
+    override  def equal[that <: Any](that: that): equal[that] = that.asBoolean.isTrue
+    override type equal[that <: Any]                          = that#asBoolean#isTrue
 
     override  def and[that <: Boolean](that: that): and[that] = that
     override type and[that <: Boolean]                        = that
@@ -106,8 +97,8 @@ sealed abstract class `false` extends AsBoolean {
     override  def not: not = `true`
     override type not      = `true`
 
-    override  def equal[that <: Boolean](that: that): equal[that] = that.isFalse
-    override type equal[that <: Boolean]                          = that#isFalse
+    override  def equal[that <: Any](that: that): equal[that] = that.asBoolean.isFalse
+    override type equal[that <: Any]                          = that#asBoolean#isFalse
 
     override  def and[that <: Boolean](that: that): and[that] = `false`
     override type and[that <: Boolean]                        = `false`

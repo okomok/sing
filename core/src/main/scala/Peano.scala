@@ -90,8 +90,8 @@ sealed trait Zero extends AsPeano {
     override  def decrement: decrement = unsupported("Zero.decrement")
     override type decrement            = unsupported[_]
 
-    override  def equal[that <: Nat](that: that): equal[that] = that.isZero
-    override type equal[that <: Nat]                          = that#isZero
+    override  def equal[that <: Any](that: that): equal[that] = that.asNat.isZero
+    override type equal[that <: Any]                          = that#asNat#isZero
 
     override  def lteq[that <: Nat](that: that): lteq[that] = `true`
     override type lteq[that <: Nat]                         = `true`
@@ -119,8 +119,8 @@ final case class Succ[n <: Peano](override val decrement: n) extends AsPeano {
 
     override type decrement = n
 
-    override  def equal[that <: Nat](that: that): equal[that] = SuccEq.apply(self, that.asPeano)
-    override type equal[that <: Nat]                          = SuccEq.apply[self, that#asPeano]
+    override  def equal[that <: Any](that: that): equal[that] = SuccEq.apply(self, that.asNat.asPeano)
+    override type equal[that <: Any]                          = SuccEq.apply[self, that#asNat#asPeano]
 
     override  def lteq[that <: Nat](that: that): lteq[that] = SuccLtEq.apply(self, that.asPeano)
     override type lteq[that <: Nat]                         = SuccLtEq.apply[self, that#asPeano]

@@ -79,8 +79,8 @@ sealed abstract class AsDense extends Dense with AsNat {
     override  def quotRem[that <: Nat](that: that): quotRem[that] = QuotRem.apply(self, that.asDense)
     override type quotRem[that <: Nat]                            = QuotRem.apply[self, that#asDense]
 
-    override  def equal[that <: Nat](that: that): equal[that] = Equal.apply(self, that.asDense)
-    override type equal[that <: Nat]                          = Equal.apply[self, that#asDense]
+    override  def equal[that <: Any](that: that): equal[that] = Equal.apply(self, that.asNat.asDense)
+    override type equal[that <: Any]                          = Equal.apply[self, that#asNat#asDense]
 
     override  def lt[that <: Nat](that: that): lt[that] = Lt.apply(self, that.asDense)
     override type lt[that <: Nat]                       = Lt.apply[self, that#asDense]

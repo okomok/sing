@@ -11,7 +11,7 @@ package sing
 import function._
 
 
-trait AsFunction1 extends Function1 with AsAny with RefEquals {
+trait AsFunction1 extends Function1 with AsRelation with RefEquals {
     override  def asFunction1: asFunction1 = self
     override type asFunction1              = self
 
@@ -23,4 +23,7 @@ trait AsFunction1 extends Function1 with AsAny with RefEquals {
 
     override  def not: not = Not1.Impl(self)
     override type not      = Not1.Impl[self]
+
+    override  def related[x <: Any, y <: Any](x: x, y: y): related[x, y] = y.equal(apply(x))
+    override type related[x <: Any, y <: Any]                            = y#equal[apply[x]]
 }

@@ -51,12 +51,6 @@ trait Nat extends Any {
      def exp[that <: Nat](that: that): exp[that]
     type exp[that <: Nat] <: Nat
 
-     def equal[that <: Nat](that: that): equal[that]
-    type equal[that <: Nat] <: Boolean
-
-     def nequal[that <: Nat](that: that): nequal[that]
-    type nequal[that <: Nat] <: Boolean
-
      def lteq[that <: Nat](that: that): lteq[that]
     type lteq[that <: Nat] <: Boolean
 

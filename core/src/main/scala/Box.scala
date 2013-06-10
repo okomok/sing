@@ -30,8 +30,8 @@ final class Box[A, _A <: BoxKind[A]](override val unsing: A, _A: _A) extends AsA
     override  def naturalOrdering: naturalOrdering = asKindId.naturalOrdering
     override type naturalOrdering                  = asKindId#naturalOrdering
 
-     def equal[that <: Any](that: that): equal[that] = naturalOrdering.equiv(asKindId, that.asKindId)
-    type equal[that <: Any]                          = naturalOrdering#equiv[asKindId, that#asKindId]
+    override  def equal[that <: Any](that: that): equal[that] = naturalOrdering.equiv(asKindId, that.asKindId)
+    override type equal[that <: Any]                          = naturalOrdering#equiv[asKindId, that#asKindId]
 
     override  def canEqual(that: scala.Any) = that.isInstanceOf[Box[_, _]]
 }

@@ -122,8 +122,8 @@ trait AsList extends List with AsAny with UnsingEquals with AsListKind {
     override  def splitAt[n <: Nat](n: n): splitAt[n] = Tuple2(take(n), drop(n))
     override type splitAt[n <: Nat]                   = Tuple2[take[n], drop[n]]
 
-    override  def equal[that <: List](that: that): equal[that] = Equal.apply(self, that, None)
-    override type equal[that <: List]                          = Equal.apply[self, that, None]
+    override  def equal[that <: Any](that: that): equal[that] = Equal.apply(self, that.asList, None)
+    override type equal[that <: Any]                          = Equal.apply[self, that#asList, None]
 
     override  def equalWith[that <: List, e <: Equiv](that: that, e: e): equalWith[that, e] = Equal.apply(self, that, Some(e))
     override type equalWith[that <: List, e <: Equiv]                                       = Equal.apply[self, that, Some[e]]

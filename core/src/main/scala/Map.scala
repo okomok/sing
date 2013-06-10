@@ -54,9 +54,6 @@ trait Map extends Any {
      def valueList: valueList
     type valueList <: List
 
-     def equal[that <: Map](that: that): equal[that]
-    type equal[that <: Map] <: Boolean
-
      def equalWith[that <: Map, ve <: Equiv](that: that, ve: ve): equalWith[that, ve]
     type equalWith[that <: Map, ve <: Equiv] <: Boolean
 

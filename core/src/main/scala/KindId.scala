@@ -14,9 +14,6 @@ package sing
 sealed trait KindId extends Any {
     override type self <: KindId
     override type unsing <: scala.collection.immutable.Seq[scala.Any]
-
-     def equal[that <: KindId](that: that): equal[that]
-    type equal[that <: KindId] <: Boolean
 }
 
 
@@ -35,8 +32,8 @@ object KindId {
         override  def naturalOrdering: naturalOrdering = asList.naturalOrdering
         override type naturalOrdering                  = asList#naturalOrdering
 
-        override  def equal[that <: KindId](that: that): equal[that] = naturalOrdering.equiv(asList, that.asList)
-        override type equal[that <: KindId]                          = naturalOrdering#equiv[asList, that#asList]
+        override  def equal[that <: Any](that: that): equal[that] = naturalOrdering.equiv(asList, that.asList)
+        override type equal[that <: Any]                          = naturalOrdering#equiv[asList, that#asList]
 
         override  def unsing: unsing = asList.unsing
         override type unsing         = asList#unsing

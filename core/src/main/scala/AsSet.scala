@@ -21,8 +21,8 @@ trait AsSet extends Set with AsAny with UnsingEquals with AsSetKind {
     override  def removeList[xs <: List](xs: xs): removeList[xs] = RemoveList.apply(self, xs)
     override type removeList[xs <: List]                         = RemoveList.apply[self, xs]
 
-    override  def equal[that <: Set](that: that): equal[that] = Equal.apply(self, that)
-    override type equal[that <: Set]                          = Equal.apply[self, that]
+    override  def equal[that <: Any](that: that): equal[that] = Equal.apply(self, that.asSet)
+    override type equal[that <: Any]                          = Equal.apply[self, that#asSet]
 
     override  def intersect[that <: Set](that: that): intersect[that] = Intersect.apply(self, that)
     override type intersect[that <: Set]                              = Intersect.apply[self, that]

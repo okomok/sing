@@ -42,9 +42,6 @@ trait Set extends Any {
      def contains[k <: Any](k: k): contains[k]
     type contains[k <: Any] <: Boolean
 
-     def equal[that <: Set](that: that): equal[that]
-    type equal[that <: Set] <: Boolean
-
      def intersect[that <: Set](that: that): intersect[that]
     type intersect[that <: Set] <: Set
 
