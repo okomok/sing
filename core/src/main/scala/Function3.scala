@@ -11,7 +11,7 @@ package sing
 import function._
 
 
-trait Function3 extends Any with RefEquals {
+trait Function3 extends Any {
     override type self <: Function3
 
     override  def asFunction3: asFunction3 = self

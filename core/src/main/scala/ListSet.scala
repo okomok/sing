@@ -8,9 +8,6 @@ package com.github.okomok
 package sing
 
 
-import ListSet._
-
-
 object ListSet {
 
     /**
@@ -36,6 +33,8 @@ object ListSet {
 
 private[sing]
 final case class ListSet[r <: Relation, ks <: List](r: r, override val asList: ks) extends AsSet {
+    import ListSet._
+
     override type self = ListSet[r, ks]
 
     override type asList = ks

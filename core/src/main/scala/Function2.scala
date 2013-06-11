@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-trait Function2 extends Any with RefEquals {
+trait Function2 extends Any {
     override type self <: Function2
 
      def apply[v1 <: Any, v2 <: Any](v1: v1, v2: v2): apply[v1, v2]

@@ -11,7 +11,7 @@ package sing
 import map._
 
 
-trait AsMap extends Map with AsAny with UnsingEquals with AsMapKind {
+trait AsMap extends Map with AsPartialFunction with UnsingEquals with AsMapKind {
     override  def asMap: asMap = self
     override type asMap        = self
 
@@ -31,4 +31,11 @@ trait AsMap extends Map with AsAny with UnsingEquals with AsMapKind {
     override type union[that <: Map]                          = that#putList[asList]
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Map]
+
+// as PartialFunction
+    override  def isDefinedAt[x <: Any](x: x): isDefinedAt[x] = contains(x)
+    override type isDefinedAt[x <: Any]                       = contains[x]
+
+    override  def apply[x <: Any](x: x): apply[x] = get(x).get
+    override type apply[x <: Any]                 = get[x]#get
 }

@@ -14,7 +14,7 @@ object Map extends AsMapKind
 /**
  * The sing Map
  */
-trait Map extends Any {
+trait Map extends PartialFunction {
     override type self <: Map
     override type unsing <: scala.collection.Map[scala.Any, scala.Any]
 

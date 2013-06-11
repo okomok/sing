@@ -8,9 +8,6 @@ package com.github.okomok
 package sing
 
 
-import ListMap._
-
-
 /**
  * In sing, this is a multimap.
  */
@@ -57,6 +54,8 @@ object ListMap {
 
 private[sing]
 final case class ListMap[r <: Relation, kvs <: List](r: r, override val asList: kvs) extends AsMap {
+    import ListMap._
+
     override type self = ListMap[r, kvs]
 
     override type asList = kvs

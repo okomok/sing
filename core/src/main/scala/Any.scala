@@ -35,6 +35,9 @@ trait Any extends AnyType with scala.Equals {
      def asFunction3: asFunction3 = unsupported("Any.asFunction3")
     type asFunction3 <: Function3
 
+     def asPartialFunction: asPartialFunction = unsupported("Any.asPartialFunction")
+    type asPartialFunction <: PartialFunction
+
      def asList: asList = unsupported("Any.asList")
     type asList <: List
 
