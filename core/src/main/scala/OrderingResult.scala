@@ -8,9 +8,6 @@ package com.github.okomok
 package sing
 
 
-import ordering._
-
-
 sealed abstract class OrderingResult extends Any {
     override type self <: OrderingResult
     override type unsing = scala.Int

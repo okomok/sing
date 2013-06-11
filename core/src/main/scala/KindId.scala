@@ -38,6 +38,4 @@ object KindId {
         override  def unsing: unsing = asList.unsing
         override type unsing         = asList#unsing
     }
-
 }
-

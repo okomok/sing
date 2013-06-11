@@ -8,26 +8,6 @@ package com.github.okomok
 package sing
 
 
-import ordering._
-
-
-object Ordering extends AsOrderingKind {
-
-    /**
-     * Always returns `EQ`.
-     */
-     val alwaysEQ: alwaysEQ = new AlwaysEQ
-    type alwaysEQ           = AlwaysEQ
-
-    /*
-     * The ordering based on kindId
-
-     val kindIdOrdering: kindIdOrdering = new KindIdOrdering
-    type kindIdOrdering                 =     KindIdOrdering     */
-
-}
-
-
 trait Ordering extends Equiv {
     override type self <: Ordering
 

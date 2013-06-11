@@ -17,8 +17,8 @@ sealed abstract class Unit extends Any {
     override  def asUnit: asUnit = self
     override type asUnit         = self
 
-    override  def naturalOrdering: naturalOrdering = Ordering.alwaysEQ
-    override type naturalOrdering                  = Ordering.alwaysEQ
+    override  def naturalOrdering: naturalOrdering = AlwaysEQ
+    override type naturalOrdering                  = AlwaysEQ
 
     override  def canEqual(that: scala.Any) = that.isInstanceOf[Unit]
 }

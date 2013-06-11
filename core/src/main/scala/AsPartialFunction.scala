@@ -8,11 +8,8 @@ package com.github.okomok
 package sing
 
 
-trait AsPartialFunction extends PartialFunction with AsFunction1 {
+trait AsPartialFunction extends PartialFunction with AsRelation with RefEquals {
     import AsPartialFunction._
-
-    override  def asFunction1: asFunction1 = self
-    override type asFunction1              = self
 
     override  def asPartialFunction: asPartialFunction = self
     override type asPartialFunction                    = self
@@ -23,14 +20,29 @@ trait AsPartialFunction extends PartialFunction with AsFunction1 {
     override  def lift: lift = Lift(self)
     override type lift       = Lift[self]
 
-    override  def applyOrElse[x <: Any, d <: Function1](x: x, d: d): applyOrElse[x, d] = `if`(isDefinedAt(x), Const(self), Const(d)).apply.asFunction1.apply(x)//.asInstanceOf[applyOrElse[x, d]]
+    override  def applyOrElse[x <: Any, d <: Function1](x: x, d: d): applyOrElse[x, d] = `if`(isDefinedAt(x), Const(self), Const(d)).apply.asFunction1.apply(x)
     override type applyOrElse[x <: Any, d <: Function1]                                = `if`[isDefinedAt[x], Const[self], Const[d]]#apply#asFunction1#apply[x]
+
+// as Function1
+    override  def asFunction1: asFunction1 = self
+    override type asFunction1              = self
+
+    override  def compose[that <: Function1](that: that): compose[that] = AsFunction1.Compose(self, that)
+    override type compose[that <: Function1]                            = AsFunction1.Compose[self, that]
+
+    override  def andThen[that <: Function1](that: that): andThen[that] = AndThen(self, that)
+    override type andThen[that <: Function1]                            = AndThen[self, that]
+
+    override  def not: not = Not(self)
+    override type not      = Not[self]
+
+    override  def related[x <: Any, y <: Any](x: x, y: y): related[x, y] = y.equal(apply(x))
+    override type related[x <: Any, y <: Any]                            = y#equal[apply[x]]
 }
 
 
 private[sing]
 object AsPartialFunction {
-
     final case class OrElse[f1 <: PartialFunction, f2 <: PartialFunction](f1: f1, f2: f2) extends AsPartialFunction {
         override type self = OrElse[f1, f2]
         override  def isDefinedAt[x <: Any](x: x): isDefinedAt[x] = f1.isDefinedAt(x).or(f2.isDefinedAt(x))
@@ -51,11 +63,19 @@ object AsPartialFunction {
         override type apply        = Some[pf#apply[x]]
     }
 
-    final case class AndThen[pf <: PartialFunction, k <: Function1](pf: pf, k: k) extends AsPartialFunction {
-        override type self = AndThen[pf, k]
+    final case class AndThen[pf <: PartialFunction, that <: Function1](pf: pf, that: that) extends AsPartialFunction {
+        override type self = AndThen[pf, that]
         override  def isDefinedAt[x <: Any](x: x): isDefinedAt[x] = pf.isDefinedAt(x)
         override type isDefinedAt[x <: Any]                       = pf#isDefinedAt[x]
-        override  def apply[x <: Any](x: x): apply[x] = k.apply(pf.apply(x))
-        override type apply[x <: Any]                 = k#apply[pf#apply[x]]
+        override  def apply[x <: Any](x: x): apply[x] = that.apply(pf.apply(x))
+        override type apply[x <: Any]                 = that#apply[pf#apply[x]]
+    }
+
+    final case class Not[pf <: PartialFunction](pf: pf) extends AsPartialFunction {
+        override type self = Not[pf]
+        override  def isDefinedAt[x <: Any](x: x): isDefinedAt[x] = pf.isDefinedAt(x)
+        override type isDefinedAt[x <: Any]                       = pf#isDefinedAt[x]
+        override  def apply[x <: Any](x: x): apply[x] = pf.apply(x).asBoolean.not
+        override type apply[x <: Any]                 = pf#apply[x]#asBoolean#not
     }
 }

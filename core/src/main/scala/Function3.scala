@@ -8,9 +8,6 @@ package com.github.okomok
 package sing
 
 
-import function._
-
-
 trait Function3 extends Any {
     override type self <: Function3
 
@@ -31,21 +28,4 @@ trait Function3 extends Any {
 
      def not: not
     type not <: Function3
-}
-
-
-object Function3 {
-
-     def curried[self <: Function3](self: self): curried[self] = Curried3.Impl(self)
-    type curried[self <: Function3]                           = Curried3.Impl[self]
-
-     def tupled[self <: Function3](self: self): tupled[self] = Tupled3.Impl(self)
-    type tupled[self <: Function3]                           = Tupled3.Impl[self]
-
-     def tupledLeft[self <: Function3](self: self): tupledLeft[self] = TupledLeft3.Impl(self)
-    type tupledLeft[self <: Function3]                               = TupledLeft3.Impl[self]
-
-     def not[self <: Function3](self: self): not[self] = Not3.Impl(self)
-    type not[self <: Function3]                        = Not3.Impl[self]
-
 }

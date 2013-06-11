@@ -91,8 +91,8 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testCurried3 {
-        type c = Function3.curried[PlusTimes]
-        val c: c = Function3.curried(PlusTimes())
+        type c = PlusTimes#curried
+        val c: c = PlusTimes().curried
 
         type a = c#apply[_2]
         val a: a = c.apply(_2)
@@ -107,14 +107,14 @@ class FunctionTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testTupled3 {
-        type c = Function3.tupled[PlusTimes]
-        val c: c = Function3.tupled(PlusTimes())
+        type c = PlusTimes#tupled
+        val c: c = PlusTimes().tupled
         Test.assertTrue(c(Tuple3(_2, _1, _3)) equal _9)
     }
 
     def testTupledLeft3 {
-        type c = Function3.tupledLeft[PlusTimes]
-        val c: c = Function3.tupledLeft(PlusTimes())
+        type c = PlusTimes#tupledLeft
+        val c: c = PlusTimes().tupledLeft
         Test.assertTrue(c(Pair(Pair(_2, _1), _3)) equal _9)
     }
 

@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-trait Equiv extends Relation with RefEquals {
+trait Equiv extends Relation {
     override type self <: Equiv
 
      def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y]

@@ -65,6 +65,8 @@ package object sing {
     val GT: GT = _TermOfGT.apply
     val EQ: EQ = _TermOfEQ.apply
 
+    val AlwaysEQ: AlwaysEQ = _TermOfAlwaysEQ.apply
+
 
 // Product
 

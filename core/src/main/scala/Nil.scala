@@ -8,9 +8,6 @@ package com.github.okomok
 package sing
 
 
-import list._
-
-
 sealed abstract class Nil extends AsList {
     override type self = Nil
 
@@ -31,4 +28,3 @@ private[sing]
 object _TermOfNil {
     val apply: Nil = new Nil{}
 }
-

@@ -8,9 +8,6 @@ package com.github.okomok
 package sing
 
 
-import list._
-
-
 final case class Cons[x <: Any, xs <: List](override val head: x, override val tail: xs) extends AsList {
     override type self = Cons[x, xs]
 
@@ -20,4 +17,3 @@ final case class Cons[x <: Any, xs <: List](override val head: x, override val t
     override type head = x
     override type tail = xs
 }
-

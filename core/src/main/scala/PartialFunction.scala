@@ -35,4 +35,7 @@ trait PartialFunction extends Function1 {
 
      def applyOrElse[x <: Any, d <: Function1](x: x, d: d): applyOrElse[x, d]
     type applyOrElse[x <: Any, d <: Function1] <: Any
+
+    override type andThen[that <: Function1] <: PartialFunction
+    override type not <: PartialFunction
 }
