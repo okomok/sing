@@ -8,4 +8,4 @@ package com.github.okomok
 package sing
 
 
-trait AsOrderingKind extends makro.AsKind.apply
+trait AsOrderingKind

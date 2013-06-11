@@ -11,4 +11,4 @@ package sing
 import set._
 
 
-trait AsSetKind extends makro.AsKind.apply
+trait AsSetKind

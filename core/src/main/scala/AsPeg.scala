@@ -11,7 +11,7 @@ package sing
 import peg._
 
 
-trait AsPegKind extends makro.AsKind.apply
+trait AsPegKind
 
 
 trait AsPeg extends Peg with AsAny with RefEquals with AsPegKind {

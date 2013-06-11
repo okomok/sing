@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-sealed trait AsEitherKind extends makro.AsKind.apply
+sealed trait AsEitherKind
 
 
 object Either extends AsEitherKind

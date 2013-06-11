@@ -20,6 +20,9 @@ trait Any extends AnyType with scala.Equals {
      def asBoolean: asBoolean = unsupported("Any.asBoolean")
     type asBoolean <: Boolean
 
+     def asBoxed: asBoxed = unsupported("Any.asBoxed")
+    type asBoxed <: Boxed
+
      def asEither: asEither = unsupported("Any.asBoolean")
     type asEither <: Either
 

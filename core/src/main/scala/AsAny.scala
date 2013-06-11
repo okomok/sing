@@ -8,9 +8,9 @@ package com.github.okomok
 package sing
 
 
-trait AsAny extends Any {
-    override  def is[K <: AnyKind](K: K): is[K] = kindId.equal(K.kindId)
-    override type is[K <: AnyKind]              = kindId#equal[K#kindId]
+trait AsAny extends Any with AsAnyKind {
+    override  def is[K <: AnyKind](K: K): is[K] = conformsTo(K)
+    override type is[K <: AnyKind]              = conformsTo[K]
 
     override  def nequal[that <: Any](that: that): nequal[that] = equal(that).not
     override type nequal[that <: Any]                           = equal[that]#not

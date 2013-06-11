@@ -11,4 +11,4 @@ package sing
 import map._
 
 
-trait AsMapKind extends makro.AsKind.apply
+trait AsMapKind extends AsAnyKind

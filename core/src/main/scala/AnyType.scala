@@ -13,7 +13,7 @@ trait AnyType extends AnyKind {
     /**
      * Likely to work.
      */
-     def is[K <: AnyKind](K: K): is[K] = ???
+     def is[K <: AnyKind](K: K): is[K] = unsupported("AnyType.is")
     type is[K <: AnyKind] <: Boolean
 
     /**
@@ -21,5 +21,4 @@ trait AnyType extends AnyKind {
      */
      def as[K <: AnyKind](K: K): as[K] = ???
     type as[K <: AnyKind] <: K
-
 }

@@ -12,7 +12,7 @@ object Tuple {
     /**
      * Lifts scala.Tuples.
      */
-    def lift1[T1](t: scala.Tuple1[T1])(implicit _T1: BoxKind[T1]): Tuple1[Box[T1, _T1.self]] = Tuple1(Box(t._1)(_T1))
-    def lift2[T1, T2](t: scala.Tuple2[T1, T2])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2]): Tuple2[Box[T1, _T1.self], Box[T2, _T2.self]] = Tuple2(Box(t._1)(_T1), Box(t._2)(_T2))
-    def lift3[T1, T2, T3](t: scala.Tuple3[T1, T2, T3])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3]): Tuple3[Box[T1, _T1.self], Box[T2, _T2.self], Box[T3, _T3.self]] = Tuple3(Box(t._1)(_T1), Box(t._2)(_T2), Box(t._3)(_T3))
+    def lift1[T1](t: scala.Tuple1[T1])(implicit _T1: Boxer[T1]): Tuple1[_T1.box] = Tuple1(_T1.box(t._1))
+    def lift2[T1, T2](t: scala.Tuple2[T1, T2])(implicit _T1: Boxer[T1], _T2: Boxer[T2]): Tuple2[_T1.box, _T2.box] = Tuple2(_T1.box(t._1), _T2.box(t._2))
+    def lift3[T1, T2, T3](t: scala.Tuple3[T1, T2, T3])(implicit _T1: Boxer[T1], _T2: Boxer[T2], _T3: Boxer[T3]): Tuple3[_T1.box, _T2.box, _T3.box] = Tuple3(_T1.box(t._1), _T2.box(t._2), _T3.box(t._3))
 }

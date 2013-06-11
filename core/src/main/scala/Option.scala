@@ -14,10 +14,10 @@ object Option {
      * Lifts scala.Options.
      */
     def lift(x: scala.None.type): None = liftNone(x)
-    def lift[A](x: scala.Some[A])(implicit _A: BoxKind[A]): Some[Box[A, _A.self]] = liftSome(x)(_A)
+    def lift[A](x: scala.Some[A])(implicit _A: Boxer[A]): Some[_A.box] = liftSome(x)(_A)
 
     def liftNone(x: scala.None.type): None = None
-    def liftSome[A](x: scala.Some[A])(implicit _A: BoxKind[A]): Some[Box[A, _A.self]] = Some(Box(x.get)(_A))
+    def liftSome[A](x: scala.Some[A])(implicit _A: Boxer[A]): Some[_A.box] = Some(_A.box(x.get))
 
 }
 

@@ -15,14 +15,14 @@ object Function {
     /**
      * Lifts scala.Functions
      */
-    def lift0[R](f: () => R)(implicit _R: BoxKind[R]): Lift0[R, _R.self] = new Lift0[R, _R.self](f, _R)
-    def lift1[T1, R](f: T1 => R)(implicit _R: BoxKind[R]): Lift1[T1, R, _R.self] = new Lift1[T1, R, _R.self](f, _R)
-    def lift2[T1, T2, R](f: (T1, T2) => R)(implicit _R: BoxKind[R]): Lift2[T1, T2, R, _R.self] = new Lift2[T1, T2, R, _R.self](f, _R)
-    def lift3[T1, T2, T3, R](f: (T1, T2, T3) => R)(implicit _R: BoxKind[R]): Lift3[T1, T2, T3, R, _R.self] = new Lift3[T1, T2, T3, R, _R.self](f, _R)
+    def lift0[R](f: () => R)(implicit _R: Boxer[R]): Lift0[R, _R.self] = new Lift0[R, _R.self](f, _R)
+    def lift1[T1, R](f: T1 => R)(implicit _R: Boxer[R]): Lift1[T1, R, _R.self] = new Lift1[T1, R, _R.self](f, _R)
+    def lift2[T1, T2, R](f: (T1, T2) => R)(implicit _R: Boxer[R]): Lift2[T1, T2, R, _R.self] = new Lift2[T1, T2, R, _R.self](f, _R)
+    def lift3[T1, T2, T3, R](f: (T1, T2, T3) => R)(implicit _R: Boxer[R]): Lift3[T1, T2, T3, R, _R.self] = new Lift3[T1, T2, T3, R, _R.self](f, _R)
 
 
     private[sing]
-    final class Lift0[R, _R <: BoxKind[R]](override val unsing: () => R, _R: _R) extends AsFunction0 {
+    final class Lift0[R, _R <: Boxer[R]](override val unsing: () => R, _R: _R) extends AsFunction0 {
         override type self = Lift0[R, _R]
         override type unsing = () => R
 
@@ -33,7 +33,7 @@ object Function {
     }
 
     private[sing]
-    final class Lift1[T1, R, _R <: BoxKind[R]](override val unsing: T1 => R, _R: _R) extends AsFunction1 {
+    final class Lift1[T1, R, _R <: Boxer[R]](override val unsing: T1 => R, _R: _R) extends AsFunction1 {
         override type self = Lift1[T1, R, _R]
         override type unsing = T1 => R
 
@@ -44,7 +44,7 @@ object Function {
     }
 
     private[sing]
-    final class Lift2[T1, T2, R, _R <: BoxKind[R]](override val unsing: (T1, T2) => R, _R: _R) extends AsFunction2  {
+    final class Lift2[T1, T2, R, _R <: Boxer[R]](override val unsing: (T1, T2) => R, _R: _R) extends AsFunction2  {
         override type self = Lift2[T1, T2, R, _R]
         override type unsing = (T1, T2) => R
 
@@ -55,7 +55,7 @@ object Function {
     }
 
     private[sing]
-    final class Lift3[T1, T2, T3, R, _R <: BoxKind[R]](override val unsing: (T1, T2, T3) => R, _R: _R) extends AsFunction3 {
+    final class Lift3[T1, T2, T3, R, _R <: Boxer[R]](override val unsing: (T1, T2, T3) => R, _R: _R) extends AsFunction3 {
         override type self = Lift3[T1, T2, T3, R, _R]
         override type unsing = (T1, T2, T3) => R
 

@@ -20,6 +20,12 @@ trait AnyKind {
     type kindId <: KindId
 
     /**
+     * Checks the kind-conformance.
+     */
+     def conformsTo[that <: AnyKind](that: that): conformsTo[that] = unsupported("AnyKind.conformsTo")
+    type conformsTo[that <: AnyKind] <: Boolean
+
+    /**
      * Returns the natural ordering.
      */
      def naturalOrdering: naturalOrdering = unsupported("AnyKind.naturalOrdering")

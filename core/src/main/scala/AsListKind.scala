@@ -11,7 +11,7 @@ package sing
 import list._
 
 
-trait AsListKind extends makro.AsKind.apply {
+trait AsListKind extends AsAnyKind {
     /**
      * Makes a lexicographical Ordering from element natural ordering.
      */

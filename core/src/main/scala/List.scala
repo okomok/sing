@@ -48,17 +48,17 @@ object List extends ToSTuple with AsListKind {
     /**
      * Lifts `scala.TupleN` to sing one.
      */
-    def fromSTuple[T1](from: scala.Tuple1[T1])(implicit _T1: BoxKind[T1]): Box[T1, _T1.self] :: Nil = Box(from._1)(_T1) :: Nil
-    def fromSTuple[T1, T2](from: scala.Tuple2[T1, T2])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Nil
-    def fromSTuple[T1, T2, T3](from: scala.Tuple3[T1, T2, T3])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Nil
-    def fromSTuple[T1, T2, T3, T4](from: scala.Tuple4[T1, T2, T3, T4])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3], _T4: BoxKind[T4]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Box[T4, _T4.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Box(from._4)(_T4) :: Nil
-    def fromSTuple[T1, T2, T3, T4, T5](from: scala.Tuple5[T1, T2, T3, T4, T5])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3], _T4: BoxKind[T4], _T5: BoxKind[T5]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Box[T4, _T4.self] :: Box[T5, _T5.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Box(from._4)(_T4) :: Box(from._5)(_T5) :: Nil
+    def fromSTuple[T1](from: scala.Tuple1[T1])(implicit _T1: Boxer[T1]): _T1.box :: Nil = _T1.box(from._1) :: Nil
+    def fromSTuple[T1, T2](from: scala.Tuple2[T1, T2])(implicit _T1: Boxer[T1], _T2: Boxer[T2]): _T1.box :: _T2.box :: Nil = _T1.box(from._1) :: _T2.box(from._2) :: Nil
+    def fromSTuple[T1, T2, T3](from: scala.Tuple3[T1, T2, T3])(implicit _T1: Boxer[T1], _T2: Boxer[T2], _T3: Boxer[T3]): _T1.box :: _T2.box :: _T3.box :: Nil = _T1.box(from._1) :: _T2.box(from._2) :: _T3.box(from._3) :: Nil
+    def fromSTuple[T1, T2, T3, T4](from: scala.Tuple4[T1, T2, T3, T4])(implicit _T1: Boxer[T1], _T2: Boxer[T2], _T3: Boxer[T3], _T4: Boxer[T4]): _T1.box :: _T2.box :: _T3.box :: _T4.box :: Nil = _T1.box(from._1) :: _T2.box(from._2) :: _T3.box(from._3) :: _T4.box(from._4) :: Nil
+    def fromSTuple[T1, T2, T3, T4, T5](from: scala.Tuple5[T1, T2, T3, T4, T5])(implicit _T1: Boxer[T1], _T2: Boxer[T2], _T3: Boxer[T3], _T4: Boxer[T4], _T5: Boxer[T5]): _T1.box :: _T2.box :: _T3.box :: _T4.box :: _T5.box :: Nil = _T1.box(from._1) :: _T2.box(from._2) :: _T3.box(from._3) :: _T4.box(from._4) :: _T5.box(from._5) :: Nil
 
-    def fromSTuple1[T1](from: scala.Tuple1[T1])(implicit _T1: BoxKind[T1]): Box[T1, _T1.self] :: Nil = Box(from._1)(_T1) :: Nil
-    def fromSTuple2[T1, T2](from: scala.Tuple2[T1, T2])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Nil
-    def fromSTuple3[T1, T2, T3](from: scala.Tuple3[T1, T2, T3])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Nil
-    def fromSTuple4[T1, T2, T3, T4](from: scala.Tuple4[T1, T2, T3, T4])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3], _T4: BoxKind[T4]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Box[T4, _T4.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Box(from._4)(_T4) :: Nil
-    def fromSTuple5[T1, T2, T3, T4, T5](from: scala.Tuple5[T1, T2, T3, T4, T5])(implicit _T1: BoxKind[T1], _T2: BoxKind[T2], _T3: BoxKind[T3], _T4: BoxKind[T4], _T5: BoxKind[T5]): Box[T1, _T1.self] :: Box[T2, _T2.self] :: Box[T3, _T3.self] :: Box[T4, _T4.self] :: Box[T5, _T5.self] :: Nil = Box(from._1)(_T1) :: Box(from._2)(_T2) :: Box(from._3)(_T3) :: Box(from._4)(_T4) :: Box(from._5)(_T5) :: Nil
+    def fromSTuple1[T1](from: scala.Tuple1[T1])(implicit _T1: Boxer[T1]): _T1.box :: Nil = _T1.box(from._1) :: Nil
+    def fromSTuple2[T1, T2](from: scala.Tuple2[T1, T2])(implicit _T1: Boxer[T1], _T2: Boxer[T2]): _T1.box :: _T2.box :: Nil = _T1.box(from._1) :: _T2.box(from._2) :: Nil
+    def fromSTuple3[T1, T2, T3](from: scala.Tuple3[T1, T2, T3])(implicit _T1: Boxer[T1], _T2: Boxer[T2], _T3: Boxer[T3]): _T1.box :: _T2.box :: _T3.box :: Nil = _T1.box(from._1) :: _T2.box(from._2) :: _T3.box(from._3) :: Nil
+    def fromSTuple4[T1, T2, T3, T4](from: scala.Tuple4[T1, T2, T3, T4])(implicit _T1: Boxer[T1], _T2: Boxer[T2], _T3: Boxer[T3], _T4: Boxer[T4]): _T1.box :: _T2.box :: _T3.box :: _T4.box :: Nil = _T1.box(from._1) :: _T2.box(from._2) :: _T3.box(from._3) :: _T4.box(from._4) :: Nil
+    def fromSTuple5[T1, T2, T3, T4, T5](from: scala.Tuple5[T1, T2, T3, T4, T5])(implicit _T1: Boxer[T1], _T2: Boxer[T2], _T3: Boxer[T3], _T4: Boxer[T4], _T5: Boxer[T5]): _T1.box :: _T2.box :: _T3.box :: _T4.box :: _T5.box :: Nil = _T1.box(from._1) :: _T2.box(from._2) :: _T3.box(from._3) :: _T4.box(from._4) :: _T5.box(from._5) :: Nil
 }
 
 
@@ -84,7 +84,7 @@ trait List extends Any {
      def ::[e <: Any](e: e): ::[e]
     type ::[e <: Any] <: List
 
-     def #::[A](x: A)(implicit _A: BoxKind[A]): ::[Box[A, _A.self]] = ::(Box(x)(_A))
+     def #::[A](x: A)(implicit _A: Boxer[A]): ::[_A.box] = ::(_A.box(x))
 
     @Annotation.constantTime
      def clear: clear

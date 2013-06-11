@@ -12,8 +12,8 @@ trait AsNatKind extends AnyKind {
     // You can't use macros
     //   whic, depend on Dense, which in turn, needs Nat.
     //   Then kindId can't be defined. (AbstractMethodError)
-    override lazy val kindId: kindId = KindId.From(DNil :: Nil)
-    override     type kindId         = KindId.From[DNil :: Nil]
+    override lazy val kindId: kindId = ???
+    override     type kindId         = Nothing
 
     override lazy val naturalOrdering: naturalOrdering = new NatNaturalOrdering
     override     type naturalOrdering                  =     NatNaturalOrdering

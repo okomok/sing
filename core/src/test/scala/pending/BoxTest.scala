@@ -26,14 +26,11 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
         val mmm = new MMM
 
         val bi = Box(mmm)
-        val k = Box.kindOf[MMM]
-        val id = Box.kindIdOf[MMM]
-        type id = typeOf(id)
+        val k = Box.empty[MMM]
+        type bi = typeOf(bi)
+        type k = typeOf(k)
 
-        Test.assertSame[bi.kindId, k.kindId]
-        Test.assertSame[k.kindId, id.self] // id.type fails.
-        Test.assertSame[k.kindId, id]
-        Test.assertSame[id.self, bi.kindId]
+        Test.assertSame[`true`, bi#equal[k]]
 
         ()
     }
@@ -56,22 +53,22 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
 
     def testPoly {
 
-        val IntKind = Box.kindOf[Int]
-        val StringKind = Box.kindOf[String]
-        val BooleanKind = Box.kindOf[scala.Boolean]
+        val IntBox = Box.empty[Int]
+        val StringBox = Box.empty[String]
+        val BooleanBox = Box.empty[scala.Boolean]
 
         object c
-        val cKind = Box.kindOf[c.type]
+        val cBox = Box.empty[c.type]
 
-        val poly = SortedMap.put(IntKind.kindId, Function.lift1((x: Int) => x + 1)).
-            put(StringKind.kindId, Function.lift1((x: String) => x.reverse)).
-            put(BooleanKind.kindId, Function.lift1((x: scala.Boolean) => c))
+        val poly = SortedMap.put(IntBox, Function.lift1((x: Int) => x + 1)).
+            put(StringBox, Function.lift1((x: String) => x.reverse)).
+            put(BooleanBox, Function.lift1((x: scala.Boolean) => c))
 
         val xs = Box(0) :: Box("hello") :: Box(10) :: Box(true) :: Nil
 
         object Ap extends New[Function1] {
-            override  def apply[x <: Any](x: x): apply[x] = poly.get(x.kindId).get.asFunction1.apply(x).asInstanceOf[apply[x]]
-            override type apply[x <: Any] = poly.get[x#kindId]#get#asFunction1#apply[x]
+            override  def apply[x <: Any](x: x): apply[x] = poly.get(x).get.asFunction1.apply(x).asInstanceOf[apply[x]]
+            override type apply[x <: Any]                 = poly.get[x]#get#asFunction1#apply[x]
         }
 
         val res = xs.map(Ap).force
