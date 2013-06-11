@@ -38,8 +38,8 @@ object Minus {
 
     case class CaseXX[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {
         override type self = CaseXX[xs, ys]
-        override  def apply: apply = DConsFalse.apply(xs.tail.minus(ys.tail)).asInstanceOf[apply]
-        override type apply        = DConsFalse.apply[xs#tail#minus[ys#tail]]
+        override  def apply: apply = xs.tail.minus(ys.tail).shiftLeft.asInstanceOf[apply]
+        override type apply        = xs#tail#minus[ys#tail]#shiftLeft
     }
 
     case class CaseTF[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {

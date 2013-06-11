@@ -27,8 +27,8 @@ object BitAnd {
 
     case class Else[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {
         override type self = Else[xs, ys]
-        override  def apply: apply = DConsFalse.apply(xs.tail.bitAnd(ys.tail)).asInstanceOf[apply]
-        override type apply        = DConsFalse.apply[xs#tail#bitAnd[ys#tail]]
+        override  def apply: apply = xs.tail.bitAnd(ys.tail).shiftLeft.asInstanceOf[apply]
+        override type apply        = xs#tail#bitAnd[ys#tail]#shiftLeft
     }
 }
 

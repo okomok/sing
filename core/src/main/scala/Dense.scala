@@ -178,8 +178,8 @@ final case class DCons[x <: Boolean, xs <: Dense](override val head: x, override
     override  def exp[that <: Nat](that: that): exp[that] = DConsExp.apply(self, that)
     override type exp[that <: Nat]                        = DConsExp.apply[self, that]
 
-    override  def shiftLeft: shiftLeft = DConsFalse.apply(self)
-    override type shiftLeft            = DConsFalse.apply[self]
+    override  def shiftLeft: shiftLeft = DCons(`false`, self)
+    override type shiftLeft            = DCons[`false`, self]
 
     override  def shiftRight: shiftRight = tail
     override type shiftRight             = tail
