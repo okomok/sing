@@ -12,6 +12,7 @@ import scala.language.existentials
 
 
 object Function {
+
     /**
      * Lifts scala.Functions
      */
@@ -26,10 +27,8 @@ object Function {
         override type self = Lift0[R, _R]
         override type unsing = () => R
 
-        override  def apply: apply = _R.box(unsing())
-        override type apply        = _R#box
-
-        override  def canEqual(that: scala.Any) = that.isInstanceOf[Lift0[_, _]]
+        override lazy val apply: apply = _R.box(unsing())
+        override     type apply        = _R#box
     }
 
     private[sing]
@@ -39,8 +38,6 @@ object Function {
 
         override  def apply[v1 <: Any](v1: v1): apply[v1] = _R.box(unsing(v1.unsing.asInstanceOf[T1]))
         override type apply[v1 <: Any]                    = _R#box
-
-        override  def canEqual(that: scala.Any) = that.isInstanceOf[Lift1[_, _, _]]
     }
 
     private[sing]
@@ -50,8 +47,6 @@ object Function {
 
         override  def apply[v1 <: Any, v2 <: Any](v1: v1, v2: v2): apply[v1, v2] = _R.box(unsing(v1.unsing.asInstanceOf[T1], v2.unsing.asInstanceOf[T2]))
         override type apply[v1 <: Any, v2 <: Any]                                = _R#box
-
-        override  def canEqual(that: scala.Any) = that.isInstanceOf[Lift2[_, _, _, _]]
     }
 
     private[sing]
@@ -61,7 +56,5 @@ object Function {
 
         override  def apply[v1 <: Any, v2 <: Any, v3 <: Any](v1: v1, v2: v2, v3: v3): apply[v1, v2, v3] = _R.box(unsing(v1.unsing.asInstanceOf[T1], v2.unsing.asInstanceOf[T2], v3.unsing.asInstanceOf[T3]))
         override type apply[v1 <: Any, v2 <: Any, v3 <: Any]                                            = _R#box
-
-        override  def canEqual(that: scala.Any) = that.isInstanceOf[Lift3[_, _, _, _, _]]
     }
 }

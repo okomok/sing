@@ -42,8 +42,5 @@ trait AsProduct3 extends Product3 with AsProduct {
     override  def asList: asList = _1 :: _2 :: _3 :: Nil
     override type asList         = _1 :: _2 :: _3 :: Nil
 
-    override  def naturalOrdering: naturalOrdering = List.naturalOrdering
-    override type naturalOrdering                  = List.naturalOrdering
-
     override def canEqual(that: scala.Any) = that.isInstanceOf[Product3]
 }

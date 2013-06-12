@@ -149,5 +149,5 @@ trait AsList extends List with AsAny with UnsingEquals with AsListKind {
     override  def times[n <: Nat](n: n): times[n] = Times.apply(self, n)
     override type times[n <: Nat]                 = Times.apply[self, n]
 
-    override  def canEqual(that: scala.Any) = that.isInstanceOf[List]
+    override def canEqual(that: scala.Any) = that.isInstanceOf[List]
 }

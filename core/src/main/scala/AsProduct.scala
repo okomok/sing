@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-trait AsProduct extends Product with AsAny with UnsingEquals {
+trait AsProduct extends Product with AsAny with UnsingEquals with ListLike {
     override  def asProduct: asProduct = self
     override type asProduct            = self
 

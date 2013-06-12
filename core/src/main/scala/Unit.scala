@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-sealed abstract class Unit extends Any {
+sealed abstract class Unit extends AsAny {
     override type self = Unit
 
     override  def unsing: unsing = ()
@@ -16,6 +16,9 @@ sealed abstract class Unit extends Any {
 
     override  def asUnit: asUnit = self
     override type asUnit         = self
+
+    override  def equal[that <: Any](that: that): equal[that] = `true`
+    override type equal[that <: Any]                          = `true`
 
     override  def naturalOrdering: naturalOrdering = AlwaysEQ
     override type naturalOrdering                  = AlwaysEQ

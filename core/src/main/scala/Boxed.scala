@@ -25,20 +25,14 @@ trait Boxed extends Any {
 
 
 private[sing]
-sealed abstract class AsBoxed extends Boxed with AsAny with UnsingEquals {
+sealed abstract class AsBoxed extends Boxed with AsAny with UnsingEquals with ListLike {
     override  def asBoxed: asBoxed = self
     override type asBoxed          = self
 
     override  def asList: asList = boxId
     override type asList         = boxId
 
-    override  def naturalOrdering: naturalOrdering = boxId.naturalOrdering
-    override type naturalOrdering                  = boxId#naturalOrdering
-
-    override  def equal[that <: Any](that: that): equal[that] = boxId.equal(that.asBoxed.boxId)
-    override type equal[that <: Any]                          = boxId#equal[that#asBoxed#boxId]
-
-    override  def canEqual(that: scala.Any) = that.isInstanceOf[AsBoxed]
+    override  def canEqual(that: scala.Any) = that.isInstanceOf[Boxed]
 }
 
 

@@ -71,7 +71,7 @@ sealed abstract class Option extends Any {
 
 
 private[sing]
-sealed abstract class AsOption extends Option with AsAny {
+sealed abstract class AsOption extends Option with AsAny with ListLike {
     override  def asOption: asOption = self
     override type asOption           = self
 
@@ -96,11 +96,12 @@ sealed abstract class AsOption extends Option with AsAny {
     override  def orElse[f <: Function0](f: f): orElse[f] = `if`(isEmpty, f, Const(self)).apply.asOption
     override type orElse[f <: Function0]                  = `if`[isEmpty, f, Const[self]]#apply#asOption
 
-    override  def naturalOrdering: naturalOrdering = List.naturalOrdering
-    override type naturalOrdering                  = List.naturalOrdering
-
-    override  def canEqual(that: scala.Any) = that.isInstanceOf[Option]
+    override def canEqual(that: scala.Any) = that.isInstanceOf[Option]
 }
+
+
+private[sing]
+object AsOption
 
 
 /**
@@ -137,6 +138,7 @@ sealed abstract class None extends AsOption {
 
     override  def asList: asList = Nil
     override type asList         = Nil
+
 }
 
 private[sing]
@@ -149,6 +151,8 @@ object _TermOfNone {
  * The sing Some
  */
 final case class Some[e <: Any](override val get: e) extends AsOption {
+    import AsOption._
+
     override type self = Some[e]
 
     override  def unsing: unsing = scala.Some(get.unsing)

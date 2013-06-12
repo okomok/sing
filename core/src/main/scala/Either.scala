@@ -41,15 +41,15 @@ sealed abstract class Either extends Any {
 
      def isRight: isRight
     type isRight <: Boolean
-
-    override def canEqual(that: scala.Any) = that.isInstanceOf[Either]
 }
 
 
 private[sing]
-sealed abstract class AsEither extends Either with AsAny with UnsingEquals with AsEitherKind {
+sealed abstract class AsEither extends Either with AsAny with UnsingEquals with AsEitherKind with ListLike {
     override  def asEither: asEither = self
     override type asEither           = self
+
+    override def canEqual(that: scala.Any) = that.isInstanceOf[Either]
 }
 
 
@@ -81,6 +81,9 @@ final case class Left[e <: Any](override val get: e) extends AsEither {
 
     override  def isRight: isRight = `false`
     override type isRight          = `false`
+
+    override  def asList: asList = `false` :: get :: Nil
+    override type asList         = `false` :: get :: Nil
 }
 
 
@@ -96,7 +99,7 @@ final case class Right[e <: Any](override val get: e) extends AsEither {
     override type get = e
 
     override  def fold[f <: Function1, g <: Function1](f: f, g: g): fold[f, g] = g.apply(get)
-    override type fold[f <: Function1, g <: Function1]                        = g#apply[get]
+    override type fold[f <: Function1, g <: Function1]                         = g#apply[get]
 
     override  def swap: swap = Left(get)
     override type swap       = Left[get]
@@ -112,4 +115,7 @@ final case class Right[e <: Any](override val get: e) extends AsEither {
 
     override  def isRight: isRight = `true`
     override type isRight          = `true`
+
+    override  def asList: asList = `true` :: get :: Nil
+    override type asList         = `true` :: get :: Nil
 }
