@@ -286,25 +286,25 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testNaturalOrdering1 {
         val s = Some(_5)
         val t = Some(_6)
-        Test.assertTrue(s.naturalOrdering.lt(s, t))
+        Test.assertTrue(s.kind.naturalOrdering.lt(s, t))
     }
 
     def testNaturalOrdering2 {
         val s = None
         val t = Some(_6)
-        Test.assertTrue(s.naturalOrdering.lt(s, t))
+        Test.assertTrue(s.kind.naturalOrdering.lt(s, t))
     }
 
     def testNaturalOrdering3 {
         val s = Some(_6)
         val t = Some(_6)
-        Test.assertTrue(s.naturalOrdering.equiv(s, t))
+        Test.assertTrue(s.kind.naturalOrdering.equiv(s, t))
     }
 
     def testNaturalOrdering4 {
         val s = None
         val t = None
-        Test.assertTrue(s.naturalOrdering.equiv(s, t))
+        Test.assertTrue(s.kind.naturalOrdering.equiv(s, t))
     }
 
     def testLift {

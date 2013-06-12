@@ -14,7 +14,4 @@ package sing
 trait ListLike extends Any {
     override  def equal[that <: Any](that: that): equal[that] = asList.equal(that.asList)
     override type equal[that <: Any]                          = asList#equal[that#asList]
-
-    override  def naturalOrdering: naturalOrdering = List.naturalOrdering
-    override type naturalOrdering                  = List.naturalOrdering
 }

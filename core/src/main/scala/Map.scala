@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Map extends AsMapKind
+object Map {
+    lazy val kind: kind = new MapKind
+        type kind       =     MapKind
+}
 
 
 /**

@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-trait AsNat extends Nat with AsAny with UnsingEquals with AsNatKind {
+trait AsNat extends Nat with AsAny with UnsingEquals {
+    override  def kind: kind = Nat.kind
+    override type kind       = Nat.kind
+
     override  def asNat: asNat = self
     override type asNat        = self
 

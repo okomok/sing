@@ -18,8 +18,8 @@ import junit.framework.Assert._
 class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
     def testSingle {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
         type s = SortedMap.empty[o]#put[_3, _Box[Int]]
         val s: s = SortedMap.empty(o).put(_3, _Box(3))
 
@@ -35,8 +35,8 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testPut {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type m = SortedMap.empty[o]#put[_3, _Box[Int]]#put[_5, _Box[Char]]#put[_1, _Box[String]]
         val m: m = SortedMap.empty(o).put(_3, _Box(3)).put(_5, _Box('c')).put(_1, _Box("wow"))
@@ -56,8 +56,8 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testContains {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type m = SortedMap.empty[o]#put[_3, _Box[Int]]#put[_5, _Box[Char]]#put[_1, _Box[String]]
         val m: m = SortedMap.empty(o).put(_3, _Box(3)).put(_5, _Box('c')).put(_1, _Box("wow"))
@@ -75,14 +75,14 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testUnsing {
-        type m   = SortedMap.empty[Nat.naturalOrdering]#put[_3, _4]#put[_1, _2]#put[_5, _6]
-        val m: m = SortedMap.empty(Nat.naturalOrdering).put(_3, _4).put(_1, _2).put(_5, _6)
+        type m   = SortedMap.empty[Nat.kind.naturalOrdering]#put[_3, _4]#put[_1, _2]#put[_5, _6]
+        val m: m = SortedMap.empty(Nat.kind.naturalOrdering).put(_3, _4).put(_1, _2).put(_5, _6)
         assertEquals(Predef.Map(1 -> 2, 3 -> 4, 5 -> 6), m.unsing)
     }
 
     def testDupePut {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type m = SortedMap.empty[o]#put[_3, _Box[Int]]#put[_5, _Box[Char]]#put[_1, _Box[String]]
         val m: m = SortedMap.empty(o).put(_3, _Box(3)).put(_5, _Box('c')).put(_1, _Box("wow"))

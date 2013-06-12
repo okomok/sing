@@ -19,8 +19,8 @@ object ListSet {
     /**
      * Constructs a one-entry list-map.
      */
-     def add[k <: Any](k: k): add[k] = empty(k.naturalOrdering).add(k).asInstanceOf[add[k]]
-    type add[k <: Any]               = empty[k#naturalOrdering]#add[k]
+     def add[k <: Any](k: k): add[k] = empty(k.kind.naturalOrdering).add(k).asInstanceOf[add[k]]
+    type add[k <: Any]               = empty[k#kind#naturalOrdering]#add[k]
 
     private[sing]
     final case class Related[r <: Relation, k <: Any](r: r, k: k) extends AsFunction1 {

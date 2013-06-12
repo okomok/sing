@@ -11,11 +11,22 @@ package sing
 /**
  * The sing Any
  */
-trait Any extends AnyType with scala.Equals {
+trait Any extends scala.Equals {
 
     @Annotation.returnThis
     final val self: self = this.asInstanceOf[self]
     type self <: Any
+
+     def kind: kind = unsupported("Any.kind")
+    type kind <: Kind
+
+    // likely to work
+     def is[K <: Kind](K: K): is[K] = unsupported("Any.is")
+    type is[K <: Kind] <: Boolean
+
+    // unlikely to work
+     def as[K <: Kind](K: K): as[K] = ???
+    type as[K <: Kind] <: K
 
      def asBoolean: asBoolean = unsupported("Any.asBoolean")
     type asBoolean <: Boolean
@@ -108,4 +119,15 @@ trait Any extends AnyType with scala.Equals {
     final protected def refHashCode = super.hashCode
     final protected def refToString = super.toString
 
+    /**
+     * Trivial helper to throw UnsupportedOperationException
+     */
+    protected  def unsupported(what: Predef.String): unsupported[_] = throw new UnsupportedOperationException("sing." + what)
+    protected type unsupported[_] <: Nothing // keep it abstract.
+
+    /**
+     * Trivial helper to throw NoSuchElementException
+     */
+    protected  def noSuchElement(what: Predef.String): noSuchElement[_] = throw new NoSuchElementException("sing." + what)
+    protected type noSuchElement[_] <: Nothing
 }

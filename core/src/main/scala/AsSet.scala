@@ -11,7 +11,10 @@ package sing
 import set._
 
 
-trait AsSet extends Set with AsAny with UnsingEquals with AsSetKind {
+trait AsSet extends Set with AsAny with UnsingEquals {
+    override  def kind: kind = Set.kind
+    override type kind       = Set.kind
+
     override  def asSet: asSet = self
     override type asSet        = self
 

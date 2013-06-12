@@ -8,6 +8,13 @@ package com.github.okomok
 package sing
 
 
+object Ordering {
+
+     lazy val kind: kind = new OrderingKind
+         type kind       =     OrderingKind
+}
+
+
 trait Ordering extends Equiv {
     override type self <: Ordering
 

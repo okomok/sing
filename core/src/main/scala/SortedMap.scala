@@ -20,7 +20,7 @@ object SortedMap {
     /**
      * Constructs a one-entry sorted map.
      */
-     def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = empty(k.naturalOrdering).put(k, v).asInstanceOf[put[k, v]]
-    type put[k <: Any, v <: Any]                        = empty[k#naturalOrdering]#put[k, v]
+     def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = empty(k.kind.naturalOrdering).put(k, v).asInstanceOf[put[k, v]]
+    type put[k <: Any, v <: Any]                        = empty[k#kind#naturalOrdering]#put[k, v]
 
 }

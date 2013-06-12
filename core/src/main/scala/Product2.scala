@@ -8,6 +8,12 @@ package com.github.okomok
 package sing
 
 
+object Product2 {
+    lazy val kind: kind = new Product2Kind
+        type kind       =     Product2Kind
+}
+
+
 trait Product2 extends Product {
     override type self <: Product2
 

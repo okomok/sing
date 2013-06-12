@@ -16,8 +16,8 @@ import junit.framework.Assert._
 
 
 object Samples {
-    type o = Nat.naturalOrdering
-    val o: o = Nat.naturalOrdering
+    type o = Nat.kind.naturalOrdering
+    val o: o = Nat.kind.naturalOrdering
 
     type map_single[k <: Any, v <: Any, o <: Ordering] = BSNil[o]#put[k, v]
     def map_single[k <: Any, v <: Any, o <: Ordering](k: k, v: v, o: o) = BSNil(o).put(k, v)

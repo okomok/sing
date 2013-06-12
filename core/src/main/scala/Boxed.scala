@@ -12,6 +12,12 @@ import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
+object Boxed {
+    lazy val kind: kind = new BoxedKind
+        type kind       =     BoxedKind
+}
+
+
 /**
  * The kind of boxed types
  */
@@ -26,6 +32,9 @@ trait Boxed extends Any {
 
 private[sing]
 sealed abstract class AsBoxed extends Boxed with AsAny with UnsingEquals with ListLike {
+    override  def kind: kind = Boxed.kind
+    override type kind       = Boxed.kind
+
     override  def asBoxed: asBoxed = self
     override type asBoxed          = self
 

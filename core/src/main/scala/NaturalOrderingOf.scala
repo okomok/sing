@@ -10,7 +10,7 @@ package sing
 
 final case class NaturalOrderingOf[x <: Any](x: x) extends AsFunction0 {
     override type self = NaturalOrderingOf[x]
-    override  def apply: apply = x.naturalOrdering
-    override type apply        = x#naturalOrdering
+    override  def apply: apply = x.kind.naturalOrdering
+    override type apply        = x#kind#naturalOrdering
 }
 

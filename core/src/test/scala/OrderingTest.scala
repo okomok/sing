@@ -16,8 +16,8 @@ import Peano.Literal._
 class OrderingTest extends org.scalatest.junit.JUnit3Suite {
 
     def testLT {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type r = o#compare[_1, _3]
         val r: r = o.compare(_1, _3)
@@ -28,8 +28,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testGT {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type r = o#compare[_4, _2]
         val r: r = o.compare(_4, _2)
@@ -40,8 +40,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testEQ {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type r = o#compare[_5, _5]
         val r: r = o.compare(_5, _5)
@@ -52,8 +52,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testMatchLT {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type r = o#`match`[_5, _6, Const[_0], Const[_1], Const[_2]]
         val r: r = o.`match`(_5, _6, Const(_0), Const(_1), Const(_2))
@@ -62,8 +62,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testMatchGT {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type r = o#`match`[_7, _6, Const[_0], Const[_1], Const[_2]]
         val r: r = o.`match`(_7, _6, Const(_0), Const(_1), Const(_2))
@@ -72,8 +72,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testMatchEQ {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type r = o#`match`[_7, _7, Const[_0], Const[_1], Const[_2]]
         val r: r = o.`match`(_7, _7, Const(_0), Const(_1), Const(_2))

@@ -8,7 +8,5 @@ package com.github.okomok
 package sing
 
 
-import set._
-
-
-trait AsSetKind
+private[sing]
+final class OptionKind extends AsKind with ListLikeKind

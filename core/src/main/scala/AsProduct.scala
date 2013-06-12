@@ -9,6 +9,9 @@ package sing
 
 
 trait AsProduct extends Product with AsAny with UnsingEquals with ListLike {
+//    override  def kind: kind = Product.kind
+//    override type kind       = Product.kind
+
     override  def asProduct: asProduct = self
     override type asProduct            = self
 

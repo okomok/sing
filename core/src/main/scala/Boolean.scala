@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Boolean extends AsBooleanKind
+object Boolean {
+    lazy val kind: kind = new BooleanKind
+        type kind       =     BooleanKind
+}
 
 
 /**
@@ -39,7 +42,10 @@ sealed abstract class Boolean extends Any {
 
 
 private[sing]
-sealed abstract class AsBoolean extends Boolean with AsAny with UnsingEquals with AsBooleanKind {
+sealed abstract class AsBoolean extends Boolean with AsAny with UnsingEquals {
+    override  def kind: kind = Boolean.kind
+    override type kind       = Boolean.kind
+
     override  def asBoolean: asBoolean = self
     override type asBoolean            = self
 

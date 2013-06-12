@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Nat extends AsNatKind
+object Nat {
+    lazy val kind: kind = new NatKind
+        type kind       =     NatKind
+}
 
 
 /**

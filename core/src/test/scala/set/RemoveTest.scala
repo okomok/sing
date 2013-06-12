@@ -18,8 +18,8 @@ import junit.framework.Assert._
 class RemoveTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-        type o = Nat.naturalOrdering
-        val o: o = Nat.naturalOrdering
+        type o = Nat.kind.naturalOrdering
+        val o: o = Nat.kind.naturalOrdering
 
         type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
         val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)

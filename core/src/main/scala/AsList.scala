@@ -11,7 +11,10 @@ package sing
 import list._
 
 
-trait AsList extends List with AsAny with UnsingEquals with AsListKind {
+trait AsList extends List with AsAny with UnsingEquals {
+    override  def kind: kind = List.kind
+    override type kind       = List.kind
+
     override  def asList: asList = self
     override type asList         = self
 

@@ -11,7 +11,8 @@ package sing
 import list._
 
 
-trait AsListKind extends AsAnyKind {
+private[sing]
+final class ListKind extends AsKind {
     /**
      * Makes a lexicographical Ordering from element natural ordering.
      */

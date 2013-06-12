@@ -24,8 +24,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
 
-        Test.assertTrue[List.lexicographicalOrdering[Nat.naturalOrdering]#equiv[xs, ys]]
-        dassert(List.lexicographicalOrdering(Nat.naturalOrdering).equiv(xs, ys))
+        Test.assertTrue[List.lexicographicalOrdering[Nat.kind.naturalOrdering]#equiv[xs, ys]]
+        dassert(List.lexicographicalOrdering(Nat.kind.naturalOrdering).equiv(xs, ys))
     }
 
     def testTrivial2 {
@@ -35,8 +35,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = Nil
         val ys: ys = Nil
 
-        Test.assertTrue[List.lexicographicalOrdering[Nat.naturalOrdering]#equiv[xs, ys]]
-        dassert(List.lexicographicalOrdering(Nat.naturalOrdering).equiv(xs, ys))
+        Test.assertTrue[List.lexicographicalOrdering[Nat.kind.naturalOrdering]#equiv[xs, ys]]
+        dassert(List.lexicographicalOrdering(Nat.kind.naturalOrdering).equiv(xs, ys))
     }
 
     def testNilYS {
@@ -46,8 +46,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: Nil
         val ys: ys = _5 :: _6 :: Nil
 
-        Test.assertTrue[List.lexicographicalOrdering[Nat.naturalOrdering]#lt[xs, ys]]
-        dassert(List.lexicographicalOrdering(Nat.naturalOrdering).lt(xs, ys))
+        Test.assertTrue[List.lexicographicalOrdering[Nat.kind.naturalOrdering]#lt[xs, ys]]
+        dassert(List.lexicographicalOrdering(Nat.kind.naturalOrdering).lt(xs, ys))
     }
 
     def testXSNil {
@@ -57,8 +57,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = Nil
         val ys: ys = Nil
 
-        Test.assertTrue[List.lexicographicalOrdering[Nat.naturalOrdering]#gt[xs, ys]]
-        dassert(List.lexicographicalOrdering(Nat.naturalOrdering).gt(xs, ys))
+        Test.assertTrue[List.lexicographicalOrdering[Nat.kind.naturalOrdering]#gt[xs, ys]]
+        dassert(List.lexicographicalOrdering(Nat.kind.naturalOrdering).gt(xs, ys))
     }
 
     def testLonger {
@@ -68,8 +68,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: Nil
 
-        Test.assertTrue[List.lexicographicalOrdering[Nat.naturalOrdering]#gt[xs, ys]]
-        dassert(List.lexicographicalOrdering(Nat.naturalOrdering).gt(xs, ys))
+        Test.assertTrue[List.lexicographicalOrdering[Nat.kind.naturalOrdering]#gt[xs, ys]]
+        dassert(List.lexicographicalOrdering(Nat.kind.naturalOrdering).gt(xs, ys))
     }
 
     def testShorter {
@@ -79,8 +79,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
 
-        Test.assertTrue[List.lexicographicalOrdering[Nat.naturalOrdering]#lt[xs, ys]]
-        dassert(List.lexicographicalOrdering(Nat.naturalOrdering).lt(xs, ys))
+        Test.assertTrue[List.lexicographicalOrdering[Nat.kind.naturalOrdering]#lt[xs, ys]]
+        dassert(List.lexicographicalOrdering(Nat.kind.naturalOrdering).lt(xs, ys))
     }
 
     def testComplicated {
@@ -90,8 +90,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
 
-        Test.assertTrue[List.lexicographicalOrdering[Nat.naturalOrdering]#gt[xs, ys]]
-        dassert(List.lexicographicalOrdering(Nat.naturalOrdering).gt(xs, ys))
+        Test.assertTrue[List.lexicographicalOrdering[Nat.kind.naturalOrdering]#gt[xs, ys]]
+        dassert(List.lexicographicalOrdering(Nat.kind.naturalOrdering).gt(xs, ys))
     }
 
     def testComplicated2 {
@@ -101,8 +101,8 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
         type ys    = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val ys: ys = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
 
-        Test.assertTrue[List.lexicographicalOrdering[Nat.naturalOrdering]#lt[ys, xs]]
-        dassert(List.lexicographicalOrdering(Nat.naturalOrdering).lt(ys, xs))
+        Test.assertTrue[List.lexicographicalOrdering[Nat.kind.naturalOrdering]#lt[ys, xs]]
+        dassert(List.lexicographicalOrdering(Nat.kind.naturalOrdering).lt(ys, xs))
     }
 
 }

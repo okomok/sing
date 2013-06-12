@@ -27,8 +27,8 @@ object Term {
         private[this] lazy val x: x = xs.head
         private[this]     type x    = xs#head
         override  def apply: apply =
-            `if`(y.naturalOrdering.equiv(y, x), Const(PegSuccess(x, xs.tail)), Const(PegFailure(xs))).apply.asInstanceOf[apply]
+            `if`(y.kind.naturalOrdering.equiv(y, x), Const(PegSuccess(x, xs.tail)), Const(PegFailure(xs))).apply.asInstanceOf[apply]
         override type apply =
-            `if`[y#naturalOrdering#equiv[y, x], Const[PegSuccess[x, xs#tail]], Const[PegFailure[xs]]]#apply
+            `if`[y#kind#naturalOrdering#equiv[y, x], Const[PegSuccess[x, xs#tail]], Const[PegFailure[xs]]]#apply
     }
 }

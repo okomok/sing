@@ -9,6 +9,8 @@ package sing
 
 
 object Option {
+    lazy val kind: kind = new OptionKind
+        type kind       =     OptionKind
 
     /**
      * Lifts scala.Options.
@@ -18,7 +20,6 @@ object Option {
 
     def liftNone(x: scala.None.type): None = None
     def liftSome[A](x: scala.Some[A])(implicit _A: Boxer[A]): Some[_A.box] = Some(_A.box(x.get))
-
 }
 
 
@@ -72,6 +73,9 @@ sealed abstract class Option extends Any {
 
 private[sing]
 sealed abstract class AsOption extends Option with AsAny with ListLike {
+    override  def kind: kind = Option.kind
+    override type kind       = Option.kind
+
     override  def asOption: asOption = self
     override type asOption           = self
 

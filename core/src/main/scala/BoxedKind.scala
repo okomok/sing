@@ -8,4 +8,5 @@ package com.github.okomok
 package sing
 
 
-trait AsOrderingKind
+private[sing]
+final class BoxedKind extends AsKind with ListLikeKind

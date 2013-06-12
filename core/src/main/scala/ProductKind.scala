@@ -8,7 +8,5 @@ package com.github.okomok
 package sing
 
 
-import map._
-
-
-trait AsMapKind extends AsAnyKind
+private[sing]
+final class ProductKind extends AsKind with ListLikeKind

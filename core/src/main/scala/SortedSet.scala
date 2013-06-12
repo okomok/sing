@@ -20,7 +20,7 @@ object SortedSet {
     /**
      * Constructs a one-entry sorted set.
      */
-     def add[k <: Any](k: k): add[k] = empty(k.naturalOrdering).add(k).asInstanceOf[add[k]]
-    type add[k <: Any]               = empty[k#naturalOrdering]#add[k]
+     def add[k <: Any](k: k): add[k] = empty(k.kind.naturalOrdering).add(k).asInstanceOf[add[k]]
+    type add[k <: Any]               = empty[k#kind#naturalOrdering]#add[k]
 
 }
