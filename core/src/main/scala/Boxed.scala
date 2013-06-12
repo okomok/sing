@@ -12,9 +12,9 @@ import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
-object Boxed {
-    lazy val kind: kind = new BoxedKind
-        type kind       =     BoxedKind
+object Boxed extends HasKind {
+    override lazy val kind: kind = new BoxedKind
+    override     type kind       =     BoxedKind
 }
 
 

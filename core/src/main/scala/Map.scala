@@ -8,9 +8,9 @@ package com.github.okomok
 package sing
 
 
-object Map {
-    lazy val kind: kind = new MapKind
-        type kind       =     MapKind
+object Map extends HasKind {
+    override lazy val kind: kind = new MapKind
+    override     type kind       =     MapKind
 }
 
 

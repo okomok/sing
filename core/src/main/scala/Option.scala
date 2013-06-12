@@ -8,9 +8,9 @@ package com.github.okomok
 package sing
 
 
-object Option {
-    lazy val kind: kind = new OptionKind
-        type kind       =     OptionKind
+object Option extends HasKind {
+    override lazy val kind: kind = new OptionKind
+    override     type kind       =     OptionKind
 
     /**
      * Lifts scala.Options.

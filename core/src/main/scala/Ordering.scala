@@ -8,10 +8,9 @@ package com.github.okomok
 package sing
 
 
-object Ordering {
-
-     lazy val kind: kind = new OrderingKind
-         type kind       =     OrderingKind
+object Ordering extends HasKind {
+     override lazy val kind: kind = new OrderingKind
+     override     type kind       =     OrderingKind
 }
 
 

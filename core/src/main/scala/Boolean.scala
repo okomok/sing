@@ -8,9 +8,9 @@ package com.github.okomok
 package sing
 
 
-object Boolean {
-    lazy val kind: kind = new BooleanKind
-        type kind       =     BooleanKind
+object Boolean extends HasKind {
+    override lazy val kind: kind = new BooleanKind
+    override     type kind       =     BooleanKind
 }
 
 

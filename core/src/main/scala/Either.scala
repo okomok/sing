@@ -8,9 +8,9 @@ package com.github.okomok
 package sing
 
 
-object Either {
-    lazy val kind: kind = new EitherKind
-        type kind       =     EitherKind
+object Either extends HasKind {
+    override lazy val kind: kind = new EitherKind
+    override     type kind       =     EitherKind
 }
 
 

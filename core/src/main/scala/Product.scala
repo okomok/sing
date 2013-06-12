@@ -8,9 +8,9 @@ package com.github.okomok
 package sing
 
 
-object Product {
-    lazy val kind: kind = new ProductKind
-        type kind       =     ProductKind
+object Product extends HasKind {
+    override lazy val kind: kind = new ProductKind
+    override     type kind       =     ProductKind
 }
 
 

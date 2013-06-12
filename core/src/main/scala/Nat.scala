@@ -8,9 +8,9 @@ package com.github.okomok
 package sing
 
 
-object Nat {
-    lazy val kind: kind = new NatKind
-        type kind       =     NatKind
+object Nat extends HasKind {
+    override lazy val kind: kind = new NatKind
+    override     type kind       =     NatKind
 }
 
 

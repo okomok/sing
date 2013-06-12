@@ -11,10 +11,10 @@ package sing
 import list._
 
 
-object List extends ToSTuple {
+object List extends HasKind with ToSTuple {
 
-    lazy val kind: kind = new ListKind
-        type kind       =     ListKind
+    override lazy val kind: kind = new ListKind
+    override     type kind       =     ListKind
 
     @Annotation.equivalentTo("Nil")
      val empty: empty = Nil
