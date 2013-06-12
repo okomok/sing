@@ -6,39 +6,31 @@
 
 package com.github.okomoktest; package singtest; package example
 
-    import com.github.okomok.sing
-    import sing.{map, Nat, Box}
-    import sing.Dense.Literal._
-    import scala.language.existentials
-
-
-// Buggy implicit macro
-//
-// needes wildcard imports, and
-    import sing._
-
-// needs to be visible from outside.
-
-    // Notice there is no common super trait.
-    class WinButton {
-        def paint = "I'm a WinButton"
-    }
-    class OSXButton {
-        def paint = "I'm a OSXButton"
-    }
-
-    object WinFactory {
-        def createButton = new WinButton
-        val ID = _0
-    }
-    object OSXFactory {
-        def createButton = new OSXButton
-        val ID = _1
-    }
+    import com.github.okomok.sing._
 
     class AbstractFactoryTest extends org.scalatest.junit.JUnit3Suite {
-        // Needs explicit boxing to make a sing object from a non-sing one.
-        val factoryMap = SortedMap.put(WinFactory.ID, Box(WinFactory)).put(OSXFactory.ID, Box(OSXFactory))
+
+        // Notice there is no common super trait.
+        class WinButton {
+            def paint = "I'm a WinButton"
+        }
+
+        class OSXButton {
+            def paint = "I'm a OSXButton"
+        }
+
+        object WinFactory {
+            def createButton = new WinButton
+            val ID = Peano._0
+        }
+
+        object OSXFactory {
+            def createButton = new OSXButton
+            val ID = Peano._1
+        }
+
+        // Crossing sing world boundary with explicit boxing
+        val factoryMap = ListMap.put(WinFactory.ID, Box(WinFactory)).put(OSXFactory.ID, Box(OSXFactory))
 
         def createFactory[n <: Nat](n: n) = {
             val option = factoryMap.get(n)
