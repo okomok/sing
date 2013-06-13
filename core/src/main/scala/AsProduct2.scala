@@ -18,24 +18,6 @@ trait AsProduct2 extends Product2 with AsProduct {
     override  def arity: arity = Peano._2
     override type arity        = Peano._2
 
-    override  def productElement[n <: Nat](n: n): productElement[n] =
-        `if`(n.equal(Peano._0),
-            Const(_1),
-            `if`(n.equal(Peano._1),
-                Const(_2),
-                Throw(new IndexOutOfBoundsException(n.toString))
-            )
-        ).apply.asInstanceOf[productElement[n]]
-
-    override type productElement[n <: Nat] =
-        `if`[n#equal[Peano._0],
-            Const[_1],
-            `if`[n#equal[Peano._1],
-                Const[_2],
-                Throw
-            ]
-        ]#apply
-
     override  def asList: asList = _1 :: _2 :: Nil
     override type asList         = _1 :: _2 :: Nil
 
