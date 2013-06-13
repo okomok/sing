@@ -20,27 +20,12 @@ package object sing {
 
 // Boolean
 
-     val Boolean_ : Boolean_ = Boolean
-    type Boolean_            = Boolean.type
-
      val `true`: `true` = _TermOfTrue.apply
      val `false`: `false` = _TermOfFalse.apply
 
     @equivalentTo("c.`if`(_then, _else)")
      def `if`[c <: Boolean, _then <: Function0, _else <: Function0](c: c, _then: _then, _else: _else): `if`[c, _then, _else] = c.`if`(_then, _else)
     type `if`[c <: Boolean, _then <: Function0, _else <: Function0]                                                          = c#`if`[_then, _else]
-
-
-// Boxed
-
-     val Boxed_ : Boxed_ = Boxed
-    type Boxed_          = Boxed.type
-
-
-// Either
-
-     val Either_ : Either_ = Either
-    type Either_           = Either.type
 
 
 // Function
@@ -50,9 +35,6 @@ package object sing {
 
 // List
 
-     val List_ : List_ = List
-    type List_         = List.type
-
     val Nil: Nil = _TermOfNil.apply
 
     @aliasOf("Cons")
@@ -60,11 +42,6 @@ package object sing {
 
     @equivalentTo("x# ::[xs]")
     type ::[x <: Any, xs <: List] = xs# ::[x]
-
-
-// Nat
-     val Nat_ : Nat_ = Nat
-    type Nat_        = Nat.type
 
 
 // Dense
@@ -77,22 +54,7 @@ package object sing {
     val Zero: Zero = _TermOfZero.apply
 
 
-// Map
-
-     val Map_ : Map_ = Map
-    type Map_        = Map.type
-
-
-// Set
-
-     val Set_ : Set_ = Set
-    type Set_        = Set.type
-
-
 // Option
-
-     val Option_ : Option_ = Option
-    type Option_           = Option.type
 
     val None: None = _TermOfNone.apply
 
@@ -107,18 +69,6 @@ package object sing {
 
 
 // Product
-
-     val Product_ : Product_ = Product
-    type Product_            = Product.type
-
-     val Product1_ : Product1_ = Product1
-    type Product1_             = Product1.type
-
-     val Product2_ : Product2_ = Product2
-    type Product2_             = Product2.type
-
-     val Product3_ : Product3_ = Product3
-    type Product3_             = Product3.type
 
     @aliasOf("Tuple2")
      val Pair = Tuple2

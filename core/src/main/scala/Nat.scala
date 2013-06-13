@@ -9,40 +9,10 @@ package sing
 
 
 object Nat extends AsKind {
-
-    // You can't use macros
-    //   whic, depend on Dense, which in turn, needs Nat.
-    //   Then kindId can't be defined. (AbstractMethodError)
-    override lazy val kindId: kindId = ???
-    override     type kindId         = Nothing
+    import NatImpl._
 
     override lazy val naturalOrdering: naturalOrdering = new NaturalOrdering
     override     type naturalOrdering                  =     NaturalOrdering
-
-    private[sing]
-    final class NaturalOrdering extends AsOrdering {
-        override type self = NaturalOrdering
-
-        override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asNat.equal(y.asNat)
-        override type equiv[x <: Any, y <: Any]                          = x#asNat#equal[y#asNat]
-
-        override  def compare[x <: Any, y <: Any](x: x, y: y): compare[x, y] =
-            `if`(x.asNat.lt(y.asNat),
-                Const(LT),
-                `if`(x.asNat.gt(y.asNat),
-                    Const(GT),
-                    Const(EQ)
-                )
-            ).apply.asOrderingResult.asInstanceOf[compare[x, y]]
-        override type compare[x <: Any, y <: Any] =
-            `if`[x#asNat#lt[y#asNat],
-                Const[LT],
-                `if`[x#asNat#gt[y#asNat],
-                    Const[GT],
-                    Const[EQ]
-                ]
-            ]#apply#asOrderingResult
-    }
 }
 
 
@@ -109,4 +79,58 @@ trait Nat extends Any {
 
      def bitOr[that <: Nat](that: that): bitOr[that]
     type bitOr[that <: Nat] <: Nat
+}
+
+
+trait AsNat extends NatImpl {
+    override  def kind: kind = Nat
+    override type kind       = Nat.type
+}
+
+
+trait NatImpl extends Nat with AnyImpl with UnsingEquals {
+    override  def asNat: asNat = self
+    override type asNat        = self
+
+    override  def quot[that <: Nat](that: that): quot[that] = quotRem(that)._1.asNat
+    override type quot[that <: Nat]                         = quotRem[that]#_1#asNat
+
+    override  def rem[that <: Nat](that: that): rem[that] = quotRem(that)._2.asNat
+    override type rem[that <: Nat]                        = quotRem[that]#_2#asNat
+
+    override  def gt[that <: Nat](that: that): gt[that] = that.lt(self)
+    override type gt[that <: Nat]                       = that#lt[self]
+
+    override  def gteq[that <: Nat](that: that): gteq[that] = that.lteq(self)
+    override type gteq[that <: Nat]                         = that#lteq[self]
+
+    override def canEqual(that: scala.Any) = that.isInstanceOf[Nat]
+}
+
+
+private[sing]
+object NatImpl {
+    final class NaturalOrdering extends AsOrdering {
+        override type self = NaturalOrdering
+
+        override  def equiv[x <: Any, y <: Any](x: x, y: y): equiv[x, y] = x.asNat.equal(y.asNat)
+        override type equiv[x <: Any, y <: Any]                          = x#asNat#equal[y#asNat]
+
+        override  def compare[x <: Any, y <: Any](x: x, y: y): compare[x, y] =
+            `if`(x.asNat.lt(y.asNat),
+                Const(LT),
+                `if`(x.asNat.gt(y.asNat),
+                    Const(GT),
+                    Const(EQ)
+                )
+            ).apply.asOrderingResult.asInstanceOf[compare[x, y]]
+        override type compare[x <: Any, y <: Any] =
+            `if`[x#asNat#lt[y#asNat],
+                Const[LT],
+                `if`[x#asNat#gt[y#asNat],
+                    Const[GT],
+                    Const[EQ]
+                ]
+            ]#apply#asOrderingResult
+    }
 }

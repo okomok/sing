@@ -8,9 +8,15 @@ package com.github.okomok
 package sing
 
 
+object Unit_ extends AsKind {
+    override  def naturalOrdering: naturalOrdering = AlwaysEQ
+    override type naturalOrdering                  = AlwaysEQ
+}
+
+
 sealed abstract class Unit extends AsAny {
-    override  def kind: kind = new UnitKind
-    override type kind       =     UnitKind
+    override  def kind: kind = Unit_
+    override type kind       = Unit_.type
 
     override type self = Unit
 
@@ -23,7 +29,7 @@ sealed abstract class Unit extends AsAny {
     override  def equal[that <: Any](that: that): equal[that] = `true`
     override type equal[that <: Any]                          = `true`
 
-    override  def canEqual(that: scala.Any) = that.isInstanceOf[Unit]
+    override def canEqual(that: scala.Any) = that.isInstanceOf[Unit]
 }
 
 

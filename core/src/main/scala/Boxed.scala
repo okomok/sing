@@ -38,7 +38,7 @@ sealed abstract class AsBoxed extends Boxed with AsAny with UnsingEquals with Li
     override  def asList: asList = boxId
     override type asList         = boxId
 
-    override  def canEqual(that: scala.Any) = that.isInstanceOf[Boxed]
+    override def canEqual(that: scala.Any) = that.isInstanceOf[Boxed]
 }
 
 

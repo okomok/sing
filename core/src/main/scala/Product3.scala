@@ -23,3 +23,23 @@ trait Product3 extends Product {
      def _3: _3
     type _3 <: Any
 }
+
+
+trait AsProduct3 extends Product3Impl {
+    override  def kind: kind = Product3
+    override type kind       = Product3.type
+}
+
+
+trait Product3Impl extends Product3 with ProductImpl {
+    override  def asProduct3: asProduct3 = self
+    override type asProduct3             = self
+
+    override  def arity: arity = Peano._3
+    override type arity        = Peano._3
+
+    override  def asList: asList = _1 :: _2 :: _3 :: Nil
+    override type asList         = _1 :: _2 :: _3 :: Nil
+
+    override def canEqual(that: scala.Any) = that.isInstanceOf[Product3]
+}

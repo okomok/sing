@@ -8,6 +8,9 @@ package com.github.okomok
 package sing
 
 
+object Any extends AsKind
+
+
 /**
  * The sing Any
  */
@@ -73,17 +76,14 @@ trait Any extends scala.Equals {
      def asEquiv: asEquiv = unsupported("Any.asEquiv")
     type asEquiv <: Equiv
 
+     def asPartialOrdering: asPartialOrdering = unsupported("Any.asPartialOrdering")
+    type asPartialOrdering <: PartialOrdering
+
      def asOrdering: asOrdering = unsupported("Any.asOrdering")
     type asOrdering <: Ordering
 
      def asOrderingResult: asOrderingResult = unsupported("Any.asOrderingResult")
     type asOrderingResult <: OrderingResult
-
-     def asPeg: asPeg = unsupported("Any.asPeg")
-    type asPeg <: Peg
-
-     def asPegResult: asPegResult = unsupported("Any.asPegResult")
-    type asPegResult <: PegResult
 
      def asProduct: asProduct = unsupported("Any.asProduct")
     type asProduct <: Product
@@ -130,4 +130,16 @@ trait Any extends scala.Equals {
      */
     protected  def noSuchElement(what: Predef.String): noSuchElement[_] = throw new NoSuchElementException("sing." + what)
     protected type noSuchElement[_] <: Nothing
+}
+
+
+trait AsAny extends AnyImpl
+
+
+trait AnyImpl extends Any {
+    override  def is[K <: Kind](K: K): is[K] = kind.conformsTo(K)
+    override type is[K <: Kind]              = kind#conformsTo[K]
+
+    override  def nequal[that <: Any](that: that): nequal[that] = equal(that).not
+    override type nequal[that <: Any]                           = equal[that]#not
 }

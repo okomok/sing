@@ -80,7 +80,7 @@ sealed abstract class AsBoolean extends Boolean with AsAny with UnsingEquals {
     override  def asBoolean: asBoolean = self
     override type asBoolean            = self
 
-    override  def canEqual(that: scala.Any) = that.isInstanceOf[Boolean]
+    override def canEqual(that: scala.Any) = that.isInstanceOf[Boolean]
 }
 
 

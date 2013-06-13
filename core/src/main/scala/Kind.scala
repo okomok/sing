@@ -8,11 +8,7 @@ package com.github.okomok
 package sing
 
 
-/**
- * Metatype, or kind
- */
 trait Kind extends Any {
-
     /**
      * ID number
      */
@@ -30,4 +26,22 @@ trait Kind extends Any {
      */
      def naturalOrdering: naturalOrdering = unsupported("Kind.naturalOrdering")
     type naturalOrdering <: Ordering
+}
+
+
+trait AsKind extends KindImpl {
+    // KindKind
+    override  def kind: kind = ???
+    override type kind = Nothing
+}
+
+
+trait KindImpl extends Kind with AnyImpl with UnsingEquals {
+    override  def unsing: unsing = kindId.unsing
+    override type unsing         = kindId#unsing
+
+    override  def conformsTo[that <: Kind](that: that): conformsTo[that] = kindId.hasBitOf(that.kindId)
+    override type conformsTo[that <: Kind]                               = kindId#hasBitOf[that#kindId]
+
+    override def canEqual(that: scala.Any) = that.isInstanceOf[Kind]
 }
