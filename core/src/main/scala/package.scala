@@ -86,6 +86,12 @@ package object sing {
     type `null` = scala.Nothing
 
     /**
+     * Keeps methods from being dependent.
+     */
+     def id[x](x: x): x = x
+    type id[x]          = x
+
+    /**
      * The type of a term
      */
     type typeOf[x](x: x) = macro makro.WeakTypeOf.impl[x]
