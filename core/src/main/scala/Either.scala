@@ -8,10 +8,7 @@ package com.github.okomok
 package sing
 
 
-object Either extends HasKind {
-    override lazy val kind: kind = new EitherKind
-    override     type kind       =     EitherKind
-}
+object Either extends AsKind with ListLikeKind
 
 
 /**
@@ -46,8 +43,8 @@ sealed abstract class Either extends Any {
 
 private[sing]
 sealed abstract class AsEither extends Either with AsAny with UnsingEquals with ListLike {
-    override  def kind: kind = Either.kind
-    override type kind       = Either.kind
+    override  def kind: kind = Either
+    override type kind       = Either.type
 
     override  def asEither: asEither = self
     override type asEither           = self

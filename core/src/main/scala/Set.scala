@@ -8,10 +8,7 @@ package com.github.okomok
 package sing
 
 
-object Set extends HasKind {
-    override lazy val kind: kind = new MapKind
-    override     type kind       =     MapKind
-}
+object Set extends AsKind
 
 
 /**

@@ -11,7 +11,7 @@ package sing
 /**
  * The sing Any
  */
-trait Any extends HasKind with scala.Equals {
+trait Any extends scala.Equals {
 
     @Annotation.returnThis
     final val self: self = this.asInstanceOf[self]

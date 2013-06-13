@@ -18,8 +18,8 @@ import junit.framework.Assert._
 class ToListTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-        type m   = SortedMap.empty[Nat.kind.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_1, _2]#put[_2, _3]#put[_5, _6]#put[_0, _1]
-        val m: m = SortedMap.empty(Nat.kind.naturalOrdering).put(_4, _5).put(_3, _4).put(_1, _2).put(_2, _3).put(_5, _6).put(_0, _1)
+        type m   = SortedMap.empty[Nat.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_1, _2]#put[_2, _3]#put[_5, _6]#put[_0, _1]
+        val m: m = SortedMap.empty(Nat.naturalOrdering).put(_4, _5).put(_3, _4).put(_1, _2).put(_2, _3).put(_5, _6).put(_0, _1)
 
         type l   = Tuple2[_0, _1] :: Pair[_1, _2] :: Tuple2[_2, _3] :: Tuple2[_3, _4] :: Tuple2[_4, _5] :: Tuple2[_5, _6] :: Nil
         val l: l = Pair(_0, _1) :: Tuple2(_1, _2) :: Tuple2(_2, _3) :: Tuple2(_3, _4) :: Tuple2(_4, _5) :: Tuple2(_5, _6) :: Nil

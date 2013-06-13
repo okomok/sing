@@ -23,8 +23,8 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type ys = _9 :: _2 :: _6 :: _10 :: _7 :: _9 :: _8 :: Nil
         val ys: ys = _9 :: _2 :: _6 :: _10 :: _7 :: _9 :: _8 :: Nil
 
-        type u = xs#equalWith[xs, Nat.kind.naturalOrdering]
-        val u: u = xs.equalWith(ys, Nat.kind.naturalOrdering)
+        type u = xs#equalWith[xs, Nat.naturalOrdering]
+        val u: u = xs.equalWith(ys, Nat.naturalOrdering)
         Test.assertSame[`true`, u]
         assertEquals(`true`, u)
     }
@@ -36,8 +36,8 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type ys = _8 :: Nil
         val ys: ys = _8 :: Nil
 
-        type u = xs#equalWith[ys, Nat.kind.naturalOrdering]
-        val u: u = xs.equalWith(ys, Nat.kind.naturalOrdering)
+        type u = xs#equalWith[ys, Nat.naturalOrdering]
+        val u: u = xs.equalWith(ys, Nat.naturalOrdering)
         Test.assertSame[`true`, u]
         assertEquals(`true`, u)
     }
@@ -49,8 +49,8 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type ys = Nil
         val ys: ys = Nil
 
-        type u = xs#equalWith[ys, Nat.kind.naturalOrdering]
-        val u: u = xs.equalWith(ys, Nat.kind.naturalOrdering)
+        type u = xs#equalWith[ys, Nat.naturalOrdering]
+        val u: u = xs.equalWith(ys, Nat.naturalOrdering)
         Test.assertSame[`true`, u]
         assertEquals(`true`, u)
     }
@@ -62,8 +62,8 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type ys = _9 :: _2 :: _6 :: _10 :: _7 :: _9 :: _8 :: Nil
         val ys: ys = _9 :: _2 :: _6 :: _10 :: _7 :: _9 :: _8 :: Nil
 
-        type u = xs#equalWith[ys, Nat.kind.naturalOrdering]
-        val u: u = xs.equalWith(ys, Nat.kind.naturalOrdering)
+        type u = xs#equalWith[ys, Nat.naturalOrdering]
+        val u: u = xs.equalWith(ys, Nat.naturalOrdering)
         Test.assertSame[`false`, u]
         assertEquals(`false`, u)
     }
@@ -75,8 +75,8 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
         type ys = _9 :: _2 :: _6 :: _10 :: _7 :: _9 :: Nil
         val ys: ys = _9 :: _2 :: _6 :: _10 :: _7 :: _9 :: Nil
 
-        type u = xs#equalWith[ys, Nat.kind.naturalOrdering]
-        val u: u = xs.equalWith(ys, Nat.kind.naturalOrdering)
+        type u = xs#equalWith[ys, Nat.naturalOrdering]
+        val u: u = xs.equalWith(ys, Nat.naturalOrdering)
         Test.assertSame[`false`, u]
         assertEquals(`false`, u)
     }

@@ -12,6 +12,6 @@ package sing
  * Mixin for List-like structure based on asList.
  */
 trait ListLikeKind extends Kind {
-    override lazy val naturalOrdering: naturalOrdering = List.kind.naturalOrdering
-    override     type naturalOrdering                  = List.kind#naturalOrdering
+    override lazy val naturalOrdering: naturalOrdering = List.naturalOrdering
+    override     type naturalOrdering                  = List.naturalOrdering
 }

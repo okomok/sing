@@ -12,8 +12,8 @@ import set._
 
 
 trait AsSet extends Set with AsAny with UnsingEquals {
-    override  def kind: kind = Set.kind
-    override type kind       = Set.kind
+    override  def kind: kind = Set
+    override type kind       = Set.type
 
     override  def asSet: asSet = self
     override type asSet        = self

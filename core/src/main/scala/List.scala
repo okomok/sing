@@ -11,10 +11,11 @@ package sing
 import list._
 
 
-object List extends HasKind with ToSTuple {
+object List extends AsKind with ToSTuple {
 
-    override lazy val kind: kind = new ListKind
-    override     type kind       =     ListKind
+    // `lazy` because `None` is initialized later in `package sing`.
+    override lazy val naturalOrdering: naturalOrdering = LexicographicalOrdering.apply(None)
+    override     type naturalOrdering                  = LexicographicalOrdering.apply[None]
 
     @Annotation.equivalentTo("Nil")
      val empty: empty = Nil

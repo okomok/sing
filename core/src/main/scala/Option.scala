@@ -8,9 +8,7 @@ package com.github.okomok
 package sing
 
 
-object Option extends HasKind {
-    override lazy val kind: kind = new OptionKind
-    override     type kind       =     OptionKind
+object Option extends AsKind with ListLikeKind {
 
     /**
      * Lifts scala.Options.
@@ -73,8 +71,8 @@ sealed abstract class Option extends Any {
 
 private[sing]
 sealed abstract class AsOption extends Option with AsAny with ListLike {
-    override  def kind: kind = Option.kind
-    override type kind       = Option.kind
+    override  def kind: kind = Option
+    override type kind       = Option.type
 
     override  def asOption: asOption = self
     override type asOption           = self

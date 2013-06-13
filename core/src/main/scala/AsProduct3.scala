@@ -9,8 +9,8 @@ package sing
 
 
 trait AsProduct3 extends Product3 with AsProduct {
-    override  def kind: kind = Product3.kind
-    override type kind       = Product3.kind
+    override  def kind: kind = Product3
+    override type kind       = Product3.type
 
     override  def asProduct3: asProduct3 = self
     override type asProduct3             = self

@@ -16,8 +16,8 @@ import okomok.sing._
 // `object Helper` would fall in weird compiler error.
 // Also, don't import multiple times.
 class Helper {
-    type natOrd = Nat.kind.naturalOrdering
-    val natOrd: natOrd = Nat.kind.naturalOrdering
+    type natOrd = Nat.naturalOrdering
+    val natOrd: natOrd = Nat.naturalOrdering
 
     type node[k <: Peano, l <: BSTree, r <: BSTree] =
         BSNode[k, k, l, r]

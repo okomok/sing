@@ -9,8 +9,8 @@ package sing
 
 
 trait AsNat extends Nat with AsAny with UnsingEquals {
-    override  def kind: kind = Nat.kind
-    override type kind       = Nat.kind
+    override  def kind: kind = Nat
+    override type kind       = Nat.type
 
     override  def asNat: asNat = self
     override type asNat        = self

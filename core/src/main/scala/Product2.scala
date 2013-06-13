@@ -8,10 +8,7 @@ package com.github.okomok
 package sing
 
 
-object Product2 extends HasKind {
-    override lazy val kind: kind = new Product2Kind
-    override     type kind       =     Product2Kind
-}
+object Product2 extends AsKind with ListLikeKind
 
 
 trait Product2 extends Product {

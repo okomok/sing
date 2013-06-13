@@ -18,8 +18,8 @@ import junit.framework.Assert._
 class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
     def testAdd {
-        type o = Nat.kind.naturalOrdering
-        val o: o = Nat.kind.naturalOrdering
+        type o = Nat.naturalOrdering
+        val o: o = Nat.naturalOrdering
 
         type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
         val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)
@@ -36,8 +36,8 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testContains {
-        type o = Nat.kind.naturalOrdering
-        val o: o = Nat.kind.naturalOrdering
+        type o = Nat.naturalOrdering
+        val o: o = Nat.naturalOrdering
 
         type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
         val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)
@@ -55,8 +55,8 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testUnsing {
-        type o = Nat.kind.naturalOrdering
-        val o: o = Nat.kind.naturalOrdering
+        type o = Nat.naturalOrdering
+        val o: o = Nat.naturalOrdering
 
         type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
         val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)

@@ -12,8 +12,8 @@ import map._
 
 
 trait AsMap extends Map with AsPartialFunction with UnsingEquals {
-    override  def kind: kind = Map.kind
-    override type kind       = Map.kind
+    override  def kind: kind = Map
+    override type kind       = Map.type
 
     override  def asMap: asMap = self
     override type asMap        = self

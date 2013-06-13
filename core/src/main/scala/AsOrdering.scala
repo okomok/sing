@@ -11,8 +11,8 @@ package sing
 trait AsOrdering extends Ordering with AsEquiv {
     import AsOrdering._
 
-    override  def kind: kind = Ordering.kind
-    override type kind       = Ordering.kind
+    override  def kind: kind = Ordering
+    override type kind       = Ordering.type
 
     override  def asOrdering: asOrdering = self
     override type asOrdering             = self
