@@ -11,6 +11,9 @@ package sing
 object Nat extends AsKind {
     import NatImpl._
 
+    override  def kindId: kindId = KindId.ofNat
+    override type kindId         = KindId.ofNat
+
     override lazy val naturalOrdering: naturalOrdering = new NaturalOrdering
     override     type naturalOrdering                  =     NaturalOrdering
 }

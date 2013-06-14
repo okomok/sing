@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Product extends AsKind with ListLikeKind
+object Product extends AsKind with ListLikeKind {
+    override  def kindId: kindId = KindId.ofProduct
+    override type kindId         = KindId.ofProduct
+}
 
 
 trait Product extends Any {

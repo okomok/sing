@@ -9,8 +9,8 @@ package sing
 
 
 object Boolean extends AsKind {
-    override lazy val kindId: kindId = ???
-    override     type kindId         = Nothing
+    override  def kindId: kindId = KindId.ofBoolean
+    override type kindId         = KindId.ofBoolean
 
     override lazy val naturalOrdering: naturalOrdering = new NaturalOrdering
     override     type naturalOrdering                  =     NaturalOrdering

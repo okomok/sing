@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Set extends AsKind
+object Set extends AsKind {
+    override  def kindId: kindId = KindId.ofSet
+    override type kindId         = KindId.ofSet
+}
 
 
 /**

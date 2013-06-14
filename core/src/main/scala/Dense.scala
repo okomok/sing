@@ -15,11 +15,9 @@ import dense._
 
 
 object Dense extends Literal {
-
     @Annotation.aliasOf("DCons")
      val :: = DCons
-    type ::[x <: Boolean, xs <: Dense] = DCons[x, xs]
-
+    type ::[x <: Boolean, xs <: Dense] = xs# ::[x]
 }
 
 

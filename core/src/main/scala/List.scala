@@ -11,6 +11,9 @@ package sing
 object List extends AsKind with list.ToSTuple {
     import list._
 
+    override  def kindId: kindId = KindId.ofList
+    override type kindId         = KindId.ofList
+
     // `lazy` because `None` is initialized later in `package sing`.
     override lazy val naturalOrdering: naturalOrdering = LexicographicalOrdering.apply(None)
     override     type naturalOrdering                  = LexicographicalOrdering.apply[None]

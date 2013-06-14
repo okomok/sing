@@ -9,6 +9,9 @@ package sing
 
 
 object Unit_ extends AsKind {
+    override  def kindId: kindId = KindId.ofUnit
+    override type kindId         = KindId.ofUnit
+
     override  def naturalOrdering: naturalOrdering = AlwaysEQ
     override type naturalOrdering                  = AlwaysEQ
 }

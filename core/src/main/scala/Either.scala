@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Either extends AsKind with ListLikeKind
+object Either extends AsKind with ListLikeKind {
+    override  def kindId: kindId = KindId.ofEither
+    override type kindId         = KindId.ofEither
+}
 
 
 /**

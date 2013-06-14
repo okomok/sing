@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Function1 extends AsKind
+object Function1 extends AsKind {
+    override  def kindId: kindId = KindId.ofFunction1
+    override type kindId         = KindId.ofFunction1
+}
 
 
 trait Function1 extends Relation {

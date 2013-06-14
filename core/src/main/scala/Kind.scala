@@ -8,12 +8,20 @@ package com.github.okomok
 package sing
 
 
+object Kind extends AsKind {
+    override  def kindId: kindId = KindId.ofKind
+    override type kindId         = KindId.ofKind
+}
+
+
 trait Kind extends Any {
+    override type self <: Kind
+
     /**
      * ID number
      */
      def kindId: kindId = unsupported("Kind.kindId")
-    type kindId <: KindId
+    type kindId <: Nat
 
     /**
      * Checks the kind-conformance.
@@ -30,18 +38,19 @@ trait Kind extends Any {
 
 
 trait AsKind extends KindImpl {
-    // KindKind
-    override  def kind: kind = ???
-    override type kind = Nothing
+    override type self = this.type // A `Kind` is usually an `object`.
+
+    override  def kind: kind = Kind
+    override type kind       = Kind.type
 }
 
 
-trait KindImpl extends Kind with AnyImpl with UnsingEquals {
+trait KindImpl extends Kind with AnyImpl with RefEquals {
     override  def unsing: unsing = kindId.unsing
     override type unsing         = kindId#unsing
 
-    override  def conformsTo[that <: Kind](that: that): conformsTo[that] = kindId.hasBitOf(that.kindId)
-    override type conformsTo[that <: Kind]                               = kindId#hasBitOf[that#kindId]
+    override  def conformsTo[that <: Kind](that: that): conformsTo[that] = id(kindId).bitAnd(id(that).kindId).equal(id(that).kindId)
+    override type conformsTo[that <: Kind]                               = id[kindId]#bitAnd[id[that]#kindId]#equal[id[that]#kindId]
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Kind]
 }

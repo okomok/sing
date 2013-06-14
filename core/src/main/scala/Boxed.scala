@@ -12,7 +12,10 @@ import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
-object Boxed extends AsKind with ListLikeKind
+object Boxed extends AsKind with ListLikeKind {
+    override  def kindId: kindId = KindId.ofBoxed
+    override type kindId         = KindId.ofBoxed
+}
 
 
 /**

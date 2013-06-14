@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Any extends AsKind
+object Any extends AsKind {
+    override  def kindId: kindId = KindId.ofAny
+    override type kindId         = KindId.ofAny
+}
 
 
 /**
@@ -55,6 +58,9 @@ trait Any extends scala.Equals {
      def asPartialFunction: asPartialFunction = unsupported("Any.asPartialFunction")
     type asPartialFunction <: PartialFunction
 
+     def asKind: asKind = unsupported("Any.asKind")
+    type asKind <: Kind
+
      def asList: asList = unsupported("Any.asList")
     type asList <: List
 
@@ -99,9 +105,6 @@ trait Any extends scala.Equals {
 
      def asUnit: asUnit = unsupported("Any.asUnit")
     type asUnit <: Unit
-
-     def asKindId: asKindId = unsupported("Any.asKindId")
-    type asKindId <: KindId
 
      def equal[that <: Any](that: that): equal[that] = unsupported("Any.equal")
     type equal[that <: Any] <: Boolean

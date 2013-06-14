@@ -11,6 +11,9 @@ package sing
 object PartialFunction extends AsKind {
     import PartialFunctionImpl._
 
+    override  def kindId: kindId = KindId.ofPartialFunction
+    override type kindId         = KindId.ofPartialFunction
+
     lazy val empty: empty = new Empty
         type empty        =     Empty
 }

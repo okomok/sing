@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Ordering extends AsKind
+object Ordering extends AsKind {
+    override  def kindId: kindId = KindId.ofOrdering
+    override type kindId         = KindId.ofOrdering
+}
 
 
 trait Ordering extends PartialOrdering {

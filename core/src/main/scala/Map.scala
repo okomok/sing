@@ -8,7 +8,10 @@ package com.github.okomok
 package sing
 
 
-object Map extends AsKind
+object Map extends AsKind {
+    override  def kindId: kindId = KindId.ofMap
+    override type kindId         = KindId.ofMap
+}
 
 
 trait Map extends PartialFunction {

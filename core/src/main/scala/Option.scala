@@ -9,6 +9,8 @@ package sing
 
 
 object Option extends AsKind with ListLikeKind {
+    override  def kindId: kindId = KindId.ofOption
+    override type kindId         = KindId.ofOption
 
     /**
      * Lifts scala.Options.
