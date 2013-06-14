@@ -33,7 +33,7 @@ object ScanLeft {
 private[sing]
 object ScanRight {
      def apply[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f): apply[xs, z, f] =
-        `if`(xs.isEmpty, Const(Cons(z, Nil)), Else(xs, z, f)).apply.asList.asInstanceOf[apply[xs, z, f]]
+        `if`(xs.isEmpty, Const(Cons(z, Nil)), Else(xs, z, f)).apply.asList
     type apply[xs <: List, z <: Any, f <: Function2] =
         `if`[xs#isEmpty, Const[Cons[z, Nil]], Else[xs, z, f]]#apply#asList
 

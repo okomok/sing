@@ -54,7 +54,7 @@ object TakeWhile {
 
     case class Else[xs <: List, f <: Function1](xs: xs, f: f) extends AsFunction0 {
         override type self = Else[xs, f]
-        override  def apply: apply = `if`(f.apply(xs.head).asBoolean, Const(xs), Const(Nil)).apply.asInstanceOf[apply]
-        override type apply        = `if`[f#apply[xs#head]#asBoolean, Const[xs], Const[Nil]]#apply
+        override  def apply: apply = `if`(id(f).apply(id(xs).head).asBoolean, Const(xs), Const(Nil)).apply
+        override type apply        = `if`[id[f]#apply[id[xs]#head]#asBoolean, Const[xs], Const[Nil]]#apply
     }
 }

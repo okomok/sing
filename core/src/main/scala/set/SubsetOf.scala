@@ -10,10 +10,8 @@ package sing; package set
 
 private[sing]
 object SubsetOf {
-     def apply[s <: Set, z <: Set](s: s, z: z): apply[s, z] =
-        s.asList.forall(Pred(z)).asInstanceOf[apply[s, z]]
-    type apply[s <: Set, z <: Set] =
-        s#asList#forall[Pred[z]]
+     def apply[s <: Set, z <: Set](s: s, z: z): apply[s, z] = s.asList.forall(Pred(z))
+    type apply[s <: Set, z <: Set]                          = s#asList#forall[Pred[z]]
 
     case class Pred[z <: Set](z: z) extends AsFunction1 {
         override type self = Pred[z]

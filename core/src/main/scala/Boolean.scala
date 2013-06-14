@@ -26,17 +26,17 @@ object Boolean extends AsKind {
         override type compare[x <: Any, y <: Any]                            = _compare[x#asBoolean, y#asBoolean]
 
         private[this]  def _compare[x <: Boolean, y <: Boolean](x: x, y: y): _compare[x, y] =
-            `if`(x.not.and(y),
+            `if`(id(x).not.and(y),
                 Const(LT),
-                `if`(x.and(y.not),
+                `if`(id(x).and(id(y).not),
                     Const(GT),
                     Const(EQ)
                 )
-            ).apply.asOrderingResult.asInstanceOf[_compare[x, y]]
+            ).apply.asOrderingResult
         private[this] type _compare[x <: Boolean, y <: Boolean] =
-            `if`[x#not#and[y],
+            `if`[id[x]#not#and[y],
                 Const[LT],
-                `if`[x#and[y#not],
+                `if`[id[x]#and[id[y]#not],
                     Const[GT],
                     Const[EQ]
                 ]

@@ -61,7 +61,7 @@ sealed abstract class AsPeano extends Peano with AsNat {
     override  def times[that <: Nat](that: that): times[that] = Times.apply(self, that.asPeano)
     override type times[that <: Nat]                          = Times.apply[self, that#asPeano]
 
-    override  def quotRem[that <: Nat](that: that): quotRem[that] = QuotRem.apply(self, that.asPeano).asInstanceOf[quotRem[that]]
+    override  def quotRem[that <: Nat](that: that): quotRem[that] = QuotRem.apply(self, that.asPeano)
     override type quotRem[that <: Nat]                            = QuotRem.apply[self, that#asPeano]
 
     override  def exp[that <: Nat](that: that): exp[that] = asDense.exp(that).asPeano

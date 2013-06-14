@@ -11,7 +11,7 @@ package sing; package list
 private[sing]
 object IsSorted {
      def apply[xs <: List, o <: Option](xs: xs, o: o): apply[xs, o] =
-        `if`(HasTwoOrMore.apply(xs), Then(xs, o), Const(`true`)).apply.asBoolean//.asInstanceOf[apply[xs, o]]
+        `if`(HasTwoOrMore.apply(xs), Then(xs, o), Const(`true`)).apply.asBoolean
     type apply[xs <: List, o <: Option] =
         `if`[HasTwoOrMore.apply[xs], Then[xs, o], Const[`true`]]#apply#asBoolean
 
@@ -19,8 +19,8 @@ object IsSorted {
         override type self = Then[xs, o]
         private[this] lazy val _o: _o = o.getOrNaturalOrdering(xs.head)
         private[this]     type _o     = o#getOrNaturalOrdering[xs#head]
-        override  def apply: apply = `if`(_o.lt(xs.tail.head, xs.head), Const(`false`), ThenElse(xs, o)).apply.asInstanceOf[apply]
-        override type apply        = `if`[_o#lt[xs#tail#head, xs#head], Const[`false`], ThenElse[xs, o]]#apply
+        override  def apply: apply = `if`(id(_o).lt(id(xs).tail.head, id(xs).head), Const(`false`), ThenElse(xs, o)).apply
+        override type apply        = `if`[id[_o]#lt[id[xs]#tail#head, id[xs]#head], Const[`false`], ThenElse[xs, o]]#apply
     }
 
     case class ThenElse[xs <: List, o <: Option](xs: xs, o: o) extends AsFunction0 {

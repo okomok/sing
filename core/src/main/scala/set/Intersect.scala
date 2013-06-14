@@ -10,7 +10,7 @@ package sing; package set
 
 private[sing]
 object Intersect {
-     def apply[s <: Set, z <: Set](s: s, z: z): apply[s, z] = s.clear.addList(s.asList.filter(Pred(z)))//.asInstanceOf[apply[s, z]]
+     def apply[s <: Set, z <: Set](s: s, z: z): apply[s, z] = s.clear.addList(s.asList.filter(Pred(z)))
     type apply[s <: Set, z <: Set]                          = s#clear#addList[s#asList#filter[Pred[z]]]
 
     case class Pred[z <: Set](z: z) extends AsFunction1 {

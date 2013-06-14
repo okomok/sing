@@ -11,7 +11,7 @@ package sing; package dense
 private[sing]
 object DConsDecrement {
      def apply[x <: Boolean, xs <: Dense](x: x, xs: xs): apply[x, xs] =
-        `if`(xs.isZero, Const(xs), `if`(x, Then(x, xs), Else(x, xs))).apply.asNat.asDense.asInstanceOf[apply[x, xs]]
+        `if`(xs.isZero, Const(xs), `if`(x, Then(x, xs), Else(x, xs))).apply.asNat.asDense
     type apply[x <: Boolean, xs <: Dense] =
         `if`[xs#isZero, Const[xs], `if`[x, Then[x, xs], Else[x, xs]]]#apply#asNat#asDense
 

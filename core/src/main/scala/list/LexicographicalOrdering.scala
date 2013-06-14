@@ -23,15 +23,15 @@ object LexicographicalOrdering {
         override type compare[x <: Any, y <: Any]                            = _compare[x#asList, y#asList]
 
         private[this]  def _compare[xs <: List, ys <: List](xs: xs, ys: ys): _compare[xs, ys] =
-            `if`(xs.isEmpty,
-                `if`(ys.isEmpty, Const(EQ), Const(LT)),
-                `if`(ys.isEmpty, Const(GT), Else(xs, ys, eo))
-            ).apply.asOrderingResult.asInstanceOf[_compare[xs, ys]]
+            `if`(id(xs).isEmpty,
+                `if`(id(ys).isEmpty, Const(EQ), Const(LT)),
+                `if`(id(ys).isEmpty, Const(GT), Else(xs, ys, eo))
+            ).apply.asOrderingResult
 
         private[this] type _compare[xs <: List, ys <: List] =
-            `if`[xs#isEmpty,
-                `if`[ys#isEmpty, Const[EQ], Const[LT]],
-                `if`[ys#isEmpty, Const[GT], Else[xs, ys, eo]]
+            `if`[id[xs]#isEmpty,
+                `if`[id[ys]#isEmpty, Const[EQ], Const[LT]],
+                `if`[id[ys]#isEmpty, Const[GT], Else[xs, ys, eo]]
             ]#apply#asOrderingResult
     }
 
@@ -40,14 +40,14 @@ object LexicographicalOrdering {
         private[this] lazy val _eo: _eo = eo.getOrNaturalOrdering(xs.head)
         private[this]     type _eo      = eo#getOrNaturalOrdering[xs#head]
         override  def apply: apply =
-            _eo.`match`(xs.head, ys.head, Const(LT), Const(GT), CaseEQ(xs, ys, eo)).asOrderingResult.asInstanceOf[apply]
+            id(_eo).`match`(id(xs).head, id(ys).head, Const(LT), Const(GT), CaseEQ(xs, ys, eo)).asOrderingResult
         override type apply =
-            _eo#`match`[xs#head, ys#head, Const[LT], Const[GT], CaseEQ[xs, ys, eo]]#asOrderingResult
+            id[_eo]#`match`[id[xs]#head, id[ys]#head, Const[LT], Const[GT], CaseEQ[xs, ys, eo]]#asOrderingResult
     }
 
     case class CaseEQ[xs <: List, ys <: List, eo <: Option](xs: xs, ys: ys, eo: eo) extends AsFunction0 {
         override type self = CaseEQ[xs, ys, eo]
-        override  def apply: apply = Impl(eo).compare(xs.tail, ys.tail).asInstanceOf[apply]
+        override  def apply: apply = Impl(eo).compare(xs.tail, ys.tail)
         override type apply        = Impl[eo]#compare[xs#tail, ys#tail]
     }
 }

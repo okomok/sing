@@ -11,22 +11,22 @@ package sing; package map
 private[sing]
 object Equal {
      def apply[m <: Map, w <: Map, ve <: Option](m: m, w: w, ve: ve): apply[m, w, ve] =
-        `if`(m.size.nequal(w.size), Const(`false`), Else(m, w, ve)).apply.asBoolean.asInstanceOf[apply[m, w, ve]]
+        `if`(id(m).size.nequal(id(w).size), Const(`false`), Else(m, w, ve)).apply.asBoolean
     type apply[m <: Map, w <: Map, ve <: Option] =
-        `if`[m#size#nequal[w#size], Const[`false`], Else[m, w, ve]]#apply#asBoolean
+        `if`[id[m]#size#nequal[id[w]#size], Const[`false`], Else[m, w, ve]]#apply#asBoolean
 
     case class Else[m <: Map, w <: Map, ve <: Option](m: m, w: w, ve: ve) extends AsFunction0 {
         override type self = Else[m, w, ve]
-        override  def apply: apply = m.asList.forall(Pred(w, ve))
-        override type apply        = m#asList#forall[Pred[w, ve]]
+        override  def apply: apply = id(m).asList.forall(Pred(w, ve))
+        override type apply        = id[m]#asList#forall[Pred[w, ve]]
     }
 
     case class Pred[w <: Map, ve <: Option](w: w, ve: ve) extends AsFunction1 {
         override type self = Pred[w, ve]
         override  def apply[kv <: Any](kv: kv): apply[kv] =
-            new PredApply(w.get(kv.asProduct2._1), kv.asProduct2._2, ve).apply.asInstanceOf[apply[kv]]
+            new PredApply(id(w).get(id(kv).asProduct2._1), id(kv).asProduct2._2, ve).apply
         override type apply[kv <: Any] =
-                PredApply[w#get[kv#asProduct2#_1], kv#asProduct2#_2, ve]#apply
+                PredApply[id[w]#get[id[kv]#asProduct2#_1], kv#asProduct2#_2, ve]#apply
     }
 
     case class PredApply[ov <: Option, v <: Any, ve <: Option](ov: ov, v: v, ve: ve) extends AsFunction0 {

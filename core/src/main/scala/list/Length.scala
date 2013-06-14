@@ -17,7 +17,7 @@ object Length {
 
     case class Else[xs <: List](xs: xs) extends AsFunction0 {
         override type self = Else[xs]
-        override  def apply: apply = Length.apply(xs.tail).increment.asInstanceOf[apply]
-        override type apply        = Length.apply[xs#tail]#increment
+        override  def apply: apply = Length.apply(id(xs).tail).increment
+        override type apply        = Length.apply[id[xs]#tail]#increment
     }
 }

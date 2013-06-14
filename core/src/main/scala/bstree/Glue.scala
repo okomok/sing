@@ -11,14 +11,14 @@ package sing; package bstree
 private[sing]
 object Glue {
      def apply[l <: BSTree, r <: BSTree](l: l, r: r): apply[l, r] =
-        `if`(l.isEmpty, Const(r), `if`(r.isEmpty, Const(l), Else(l, r))).apply.asMap.asBSTree.asInstanceOf[apply[l, r]]
+        `if`(id(l).isEmpty, Const(r), `if`(id(r).isEmpty, Const(l), Else(l, r))).apply.asMap.asBSTree
     type apply[l <: BSTree, r <: BSTree] =
-        `if`[l#isEmpty, Const[r], `if`[r#isEmpty, Const[l], Else[l, r]]]#apply#asMap#asBSTree
+        `if`[id[l]#isEmpty, Const[r], `if`[id[r]#isEmpty, Const[l], Else[l, r]]]#apply#asMap#asBSTree
 
     case class Else[l <: BSTree, r <: BSTree](l: l, r: r) extends AsFunction0 {
         override type self = Else[l, r]
-        override  def apply: apply = `if`(l.size.gt(r.size), ElseThen(l, r), ElseElse(l, r)).apply.asInstanceOf[apply]
-        override type apply =        `if`[l#size#gt[r#size], ElseThen[l, r], ElseElse[l, r]]#apply
+        override  def apply: apply = `if`(id(l).size.gt(id(r).size), ElseThen(l, r), ElseElse(l, r)).apply
+        override type apply =        `if`[id[l]#size#gt[id[r]#size], ElseThen[l, r], ElseElse[l, r]]#apply
     }
 
     case class ElseThen[l <: BSTree, r <: BSTree](l: l, r: r) extends AsFunction0 {
@@ -60,7 +60,7 @@ object RemoveMax { // => Tuple2(Tuple2(maxKey, value), map)
         private[this] lazy val d: d = RemoveMax.apply(m.right)
         private[this]     type d    = RemoveMax.apply[m#right]
 
-        override  def apply: apply = Tuple2(d._1, Balance.apply(m.key, m.value, m.left, d._2.asMap.asBSTree)).asInstanceOf[apply]
+        override  def apply: apply = Tuple2(d._1, Balance.apply(m.key, m.value, m.left, d._2.asMap.asBSTree))
         override type apply        = Tuple2[d#_1, Balance.apply[m#key, m#value, m#left, d#_2#asMap#asBSTree]]
     }
 }
@@ -82,7 +82,7 @@ object RemoveMin { // => Tuple2(Tuple2(minKey, value), map)
         private[this] lazy val d: d = RemoveMin.apply(m.left)
         private[this]     type d    = RemoveMin.apply[m#left]
 
-        override  def apply: apply = Tuple2(d._1, Balance.apply(m.key, m.value, d._2.asMap.asBSTree, m.right)).asInstanceOf[apply]
+        override  def apply: apply = Tuple2(d._1, Balance.apply(m.key, m.value, d._2.asMap.asBSTree, m.right))
         override type apply        = Tuple2[d#_1, Balance.apply[m#key, m#value, d#_2#asMap#asBSTree, m#right]]
     }
 }

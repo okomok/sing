@@ -11,21 +11,21 @@ package sing; package list
 private[sing]
 object Equal {
      def apply[xs <: List, ys <: List, ee <: Option](xs: xs, ys: ys, ee: ee): apply[xs, ys, ee] =
-        `if`(xs.isEmpty.and(ys.isEmpty), Const(`true`), `if`(xs.isEmpty.nequal(ys.isEmpty), Const(`false`), Else(xs, ys, ee))).apply.asBoolean.asInstanceOf[apply[xs, ys, ee]]
+        `if`(id(xs).isEmpty.and(id(ys).isEmpty), Const(`true`), `if`(id(xs).isEmpty.nequal(id(ys).isEmpty), Const(`false`), Else(xs, ys, ee))).apply.asBoolean
     type apply[xs <: List, ys <: List, ee <: Option] =
-        `if`[xs#isEmpty#and[ys#isEmpty], Const[`true`], `if`[xs#isEmpty#nequal[ys#isEmpty], Const[`false`], Else[xs, ys, ee]]]#apply#asBoolean
+        `if`[id[xs]#isEmpty#and[id[ys]#isEmpty], Const[`true`], `if`[id[xs]#isEmpty#nequal[id[ys]#isEmpty], Const[`false`], Else[xs, ys, ee]]]#apply#asBoolean
 
     case class Else[xs <: List, ys <: List, ee <: Option](xs: xs, ys: ys, ee: ee) extends AsFunction0 {
         override type self = Else[xs, ys, ee]
         private[this] lazy val _ee: _ee = ee.getOrNaturalEquiv(xs.head)
         private[this]     type _ee      = ee#getOrNaturalEquiv[xs#head]
-        override  def apply: apply = `if`(_ee.equiv(xs.head, ys.head), Then(xs, ys, ee), Const(`false`)).apply.asInstanceOf[apply]
-        override type apply        = `if`[_ee#equiv[xs#head, ys#head], Then[xs, ys, ee], Const[`false`]]#apply
+        override  def apply: apply = `if`(id(_ee).equiv(id(xs).head, id(ys).head), Then(xs, ys, ee), Const(`false`)).apply
+        override type apply        = `if`[id[_ee]#equiv[id[xs]#head, id[ys]#head], Then[xs, ys, ee], Const[`false`]]#apply
     }
 
     case class Then[xs <: List, ys <: List, ee <: Option](xs: xs, ys: ys, ee: ee) extends AsFunction0 {
         override type self = Then[xs, ys, ee]
-        override  def apply: apply = Equal.apply(xs.tail, ys.tail, ee)//.asInstanceOf[apply]
+        override  def apply: apply = Equal.apply(xs.tail, ys.tail, ee)
         override type apply        = Equal.apply[xs#tail, ys#tail, ee]
     }
 }

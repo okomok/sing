@@ -117,17 +117,17 @@ object NatImpl {
         override type equiv[x <: Any, y <: Any]                          = x#asNat#equal[y#asNat]
 
         override  def compare[x <: Any, y <: Any](x: x, y: y): compare[x, y] =
-            `if`(x.asNat.lt(y.asNat),
+            `if`(id(x).asNat.lt(id(y).asNat),
                 Const(LT),
-                `if`(x.asNat.gt(y.asNat),
+                `if`(id(x).asNat.gt(id(y).asNat),
                     Const(GT),
                     Const(EQ)
                 )
-            ).apply.asOrderingResult.asInstanceOf[compare[x, y]]
+            ).apply.asOrderingResult
         override type compare[x <: Any, y <: Any] =
-            `if`[x#asNat#lt[y#asNat],
+            `if`[id[x]#asNat#lt[id[y]#asNat],
                 Const[LT],
-                `if`[x#asNat#gt[y#asNat],
+                `if`[id[x]#asNat#gt[id[y]#asNat],
                     Const[GT],
                     Const[EQ]
                 ]

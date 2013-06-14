@@ -275,8 +275,8 @@ trait ListImpl extends List with AnyImpl with UnsingEquals {
     override  def isSortedWith[o <: Ordering](o: o): isSortedWith[o] = IsSorted.apply(self, Some(o))
     override type isSortedWith[o <: Ordering]                        = IsSorted.apply[self, Some[o]]
 
-    override  def forall[f <: Function1](f: f): forall[f] = exists(f.not).not.asInstanceOf[forall[f]]
-    override type forall[f <: Function1]                  = exists[f#not]#not
+    override  def forall[f <: Function1](f: f): forall[f] = exists(id(f).not).not
+    override type forall[f <: Function1]                  = exists[id[f]#not]#not
 
     override  def exists[f <: Function1](f: f): exists[f] = find(f).isEmpty.not
     override type exists[f <: Function1]                  = find[f]#isEmpty#not

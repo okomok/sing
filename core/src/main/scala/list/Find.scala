@@ -14,7 +14,7 @@ object Find {
     type apply[xs <: List, f <: Function1]                             = toOption[xs#dropWhile[f#not]]
 
      def toOption[ys <: List](ys: ys): toOption[ys] =
-        `if`(ys.isEmpty, Const(None), Else(ys)).apply.asOption//.asInstanceOf[toOption[ys]]
+        `if`(ys.isEmpty, Const(None), Else(ys)).apply.asOption
     type toOption[ys <: List] =
         `if`[ys#isEmpty, Const[None], Else[ys]]#apply#asOption
 

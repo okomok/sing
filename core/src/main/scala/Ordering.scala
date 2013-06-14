@@ -81,7 +81,7 @@ object OrderingImpl {
         private[this] lazy val c: c = o.compare(x, y)
         private[this]     type c    = o#compare[x, y]
 
-        override  def apply: apply = `if`(c.equal(LT), flt, `if`(c.equal(GT), fgt, feq)).apply.asInstanceOf[apply]
-        override type apply        = `if`[c#equal[LT], flt, `if`[c#equal[GT], fgt, feq]]#apply
+        override  def apply: apply = `if`(id(c).equal(LT), flt, `if`(id(c).equal(GT), fgt, feq)).apply
+        override type apply        = `if`[id[c]#equal[LT], flt, `if`[id[c]#equal[GT], fgt, feq]]#apply
     }
 }

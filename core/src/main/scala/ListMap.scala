@@ -22,8 +22,8 @@ object ListMap {
     /**
      * Constructs a one-entry list-map.
      */
-     def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = empty(k.kind.naturalOrdering).put(k, v).asInstanceOf[put[k, v]]
-    type put[k <: Any, v <: Any]                        = empty[k#kind#naturalOrdering]#put[k, v]
+     def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = empty(id(k).kind.naturalOrdering).put(k, v)
+    type put[k <: Any, v <: Any]                        = empty[id[k]#kind#naturalOrdering]#put[k, v]
 
     private[sing]
     final case class Related[r <: Relation, k <: Any](r: r, k: k) extends AsFunction1 {

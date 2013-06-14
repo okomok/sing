@@ -17,7 +17,7 @@ object FoldLeft {
 
     case class Else[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f) extends AsFunction0 {
         override type self = Else[xs, z, f]
-        override  def apply: apply = FoldLeft.apply(xs.tail, f.apply(z, xs.head), f).asInstanceOf[apply]
+        override  def apply: apply = FoldLeft.apply(xs.tail, f.apply(z, xs.head), f)
         override type apply        = FoldLeft.apply[xs#tail, f#apply[z, xs#head], f]
     }
 }
@@ -32,7 +32,7 @@ object FoldRight {
 
     case class Else[xs <: List, z <: Any, f <: Function2](xs: xs, z: z, f: f) extends AsFunction0 {
         override type self = Else[xs, z, f]
-        override  def apply: apply = f.apply(xs.head, FoldRight.apply(xs.tail, z, f)).asInstanceOf[apply]
+        override  def apply: apply = f.apply(xs.head, FoldRight.apply(xs.tail, z, f))
         override type apply        = f#apply[xs#head, FoldRight.apply[xs#tail, z, f]]
     }
 }

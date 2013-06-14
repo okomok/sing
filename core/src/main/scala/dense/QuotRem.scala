@@ -14,9 +14,9 @@ import Dense._1
 private[sing]
 object QuotRem {
      def apply[x <: Dense, y <: Dense](x: x, y: y): apply[x, y] =
-        `if`(y.size.lt(x.size), Then(x, y), Else(x, y)).apply.asProduct2.asInstanceOf[apply[x, y]]
+        `if`(id(y).size.lt(id(x).size), Then(x, y), Else(x, y)).apply.asProduct2
     type apply[x <: Dense, y <: Dense] =
-        `if`[y#size#lt[x#size], Then[x, y], Else[x, y]]#apply#asProduct2
+        `if`[id[y]#size#lt[id[x]#size], Then[x, y], Else[x, y]]#apply#asProduct2
 
     case class Then[x <: Dense, y <: Dense](x: x, y: y) extends AsFunction0 {
         override type self = Then[x, y]
@@ -40,7 +40,7 @@ object QuotRem {
             type quot2        = _1#shiftLeftBy[count2]
 
         override  def apply: apply =
-            `if`(canMinus2.lteq(x), Next(x, y, quot2, canMinus2), Next(x, y, quot1, canMinus1)).apply.asInstanceOf[apply]
+            `if`(canMinus2.lteq(x), Next(x, y, quot2, canMinus2), Next(x, y, quot1, canMinus1)).apply
         override type apply =
             `if`[canMinus2#lteq[x], Next[x, y, quot2, canMinus2], Next[x, y, quot1, canMinus1]]#apply
     }

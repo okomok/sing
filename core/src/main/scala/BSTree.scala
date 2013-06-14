@@ -105,8 +105,8 @@ final case class BSNode[k <: Any, v <: Any, l <: BSTree, r <: BSTree](
 
     override  def unsing: unsing = (left.unsing + (key.unsing -> value.unsing)) ++ right.unsing
 
-    override  val size: size = left.size.plus(right.size).increment.asInstanceOf[size]
-    override type size       = left#size#plus[right#size]#increment
+    override  val size: size = id(left).size.plus(id(right).size).increment
+    override type size       = id[left]#size#plus[id[right]#size]#increment
 
     override type key = k
     override type value = v
@@ -128,12 +128,12 @@ final case class BSNode[k <: Any, v <: Any, l <: BSTree, r <: BSTree](
     override  def remove[k <: Any](k: k): remove[k] = NodeRemove.apply(self, k)
     override type remove[k <: Any]                  = NodeRemove.apply[self, k]
 
-    override  def asList: asList = left.asList.append(Tuple2(key, value) :: right.asList).asInstanceOf[asList]
+    override  def asList: asList = left.asList.append(Tuple2(key, value) :: right.asList)
     override type asList         = left#asList#append[Tuple2[key, value] :: right#asList]
 
-    override  def keyList: keyList = left.keyList.append(key :: right.keyList).asInstanceOf[keyList]
+    override  def keyList: keyList = left.keyList.append(key :: right.keyList)
     override type keyList          = left#keyList#append[key :: right#keyList]
 
-    override  def valueList: valueList = left.valueList.append(value :: right.valueList).asInstanceOf[valueList]
+    override  def valueList: valueList = left.valueList.append(value :: right.valueList)
     override type valueList            = left#valueList#append[value :: right#valueList]
 }

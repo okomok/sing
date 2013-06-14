@@ -11,14 +11,14 @@ package sing; package set
 private[sing]
 object Equal {
      def apply[s <: Set, z <: Set](s: s, z: z): apply[s, z] =
-        `if`(s.size.nequal(z.size), Const(`false`), Else(s, z)).apply.asBoolean.asInstanceOf[apply[s, z]]
+        `if`(id(s).size.nequal(id(z).size), Const(`false`), Else(s, z)).apply.asBoolean
     type apply[s <: Set, z <: Set] =
-        `if`[s#size#nequal[z#size], Const[`false`], Else[s, z]]#apply#asBoolean
+        `if`[id[s]#size#nequal[id[z]#size], Const[`false`], Else[s, z]]#apply#asBoolean
 
     case class Else[s <: Set, z <: Set](s: s, z: z) extends AsFunction0 {
         override type self = Else[s, z]
-        override  def apply: apply = s.asList.forall(Pred(z))
-        override type apply        = s#asList#forall[Pred[z]]
+        override  def apply: apply = id(s).asList.forall(Pred(z))
+        override type apply        = id[s]#asList#forall[Pred[z]]
     }
 
     case class Pred[z <: Set](z: z) extends AsFunction1 {

@@ -88,6 +88,7 @@ package object sing {
     /**
      * Keeps methods from being dependent.
      */
+    @inline
      def id[x](x: x): x = x
     type id[x]          = x
 

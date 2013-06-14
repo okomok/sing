@@ -11,9 +11,9 @@ package sing; package bstree
 private[sing]
 object NodeGet {
      def apply[m <: BSTree, k <: Any](m: m, k: k): apply[m, k] =
-        m.ord.`match`(k, m.key, CaseLT(m, k), CaseGT(m, k), CaseEQ(m, k)).asOption.asInstanceOf[apply[m, k]]
+        id(m).ord.`match`(k, id(m).key, CaseLT(m, k), CaseGT(m, k), CaseEQ(m, k)).asOption
     type apply[m <: BSTree, k <: Any] =
-        m#ord#`match`[k, m#key, CaseLT[m, k], CaseGT[m, k], CaseEQ[m, k]]#asOption
+        id[m]#ord#`match`[k, id[m]#key, CaseLT[m, k], CaseGT[m, k], CaseEQ[m, k]]#asOption
 
     case class CaseLT[m <: BSTree, k <: Any](m: m, k: k) extends AsFunction0 {
         override type self = CaseLT[m, k]

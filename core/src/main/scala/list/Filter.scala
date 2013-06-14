@@ -19,13 +19,13 @@ object Filter {
         private[this] lazy val ys: ys = xs.dropWhile(f.not)
         private[this]     type ys     = xs#dropWhile[f#not]
 
-        override  def isEmpty: isEmpty = ys.isEmpty.asInstanceOf[isEmpty]
+        override  def isEmpty: isEmpty = ys.isEmpty
         override type isEmpty          = ys#isEmpty
 
-        override  def head: head = ys.head.asInstanceOf[head]
+        override  def head: head = ys.head
         override type head       = ys#head
 
-        override  def tail: tail = Impl(ys.tail.asInstanceOf[ys#tail], f)
+        override  def tail: tail = Impl(ys.tail, f)
         override type tail       = Impl[ys#tail, f]
     }
 }

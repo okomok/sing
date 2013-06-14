@@ -17,7 +17,7 @@ object DConsTimes {
 
     case class Then[x <: Boolean, xs <: Dense, ys <: Dense](x: x, xs: xs, ys: ys) extends AsFunction0 {
         override type self = Then[x, xs, ys]
-        override  def apply: apply = ys.plus(xs.times(ys).shiftLeft).asInstanceOf[apply]
+        override  def apply: apply = ys.plus(xs.times(ys).shiftLeft)
         override type apply        = ys#plus[xs.times[ys]#shiftLeft]
     }
 

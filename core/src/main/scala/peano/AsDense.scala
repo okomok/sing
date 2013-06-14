@@ -31,7 +31,7 @@ object Div2 {
 
     case class Else[x <: Peano](x: x) extends AsFunction0 {
         override type self = Else[x]
-        override  def apply: apply = Div2.apply(x.decrement.decrement).increment.asInstanceOf[apply]
-        override type apply        = Div2.apply[x#decrement#decrement]#increment
+        override  def apply: apply = Div2.apply(id(x).decrement.decrement).increment
+        override type apply        = Div2.apply[id[x]#decrement#decrement]#increment
     }
 }
