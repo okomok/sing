@@ -8,7 +8,7 @@ package com.github.okomok
 package sing
 
 
-object Unit_ extends AsKind {
+object _Unit_ extends AsKind {
     override  def kindId: kindId = KindId.ofUnit
     override type kindId         = KindId.ofUnit
 
@@ -17,9 +17,9 @@ object Unit_ extends AsKind {
 }
 
 
-sealed abstract class Unit extends AsAny {
-    override  def kind: kind = Unit_
-    override type kind       = Unit_.type
+sealed abstract class Unit extends AnyImpl {
+    override  def kind: kind = _Unit_
+    override type kind       = _Unit_.type
 
     override type self = Unit
 

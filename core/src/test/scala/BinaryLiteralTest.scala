@@ -18,43 +18,43 @@ import junit.framework.{Assert => JAssert}
 class BinaryLiteralTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-         val bs: bs = binary("101")
-        type bs     = binary("101")
+         val bs: bs = Binary_("101")
+        type bs     = Binary_("101")
         assertSame(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
         assertSame[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testNil {
-         val bs: bs = binary("")
-        type bs     = binary("")
+         val bs: bs = Binary_("")
+        type bs     = Binary_("")
         assertSame(bs, DNil)
         assertSame[bs, DNil]
 
-         val bs_ : bs = binary("00")
-        type bs_      = binary("00")
+         val bs_ : bs = Binary_("00")
+        type bs_      = Binary_("00")
         assertSame(bs_, DNil)
         assertSame[bs_, DNil]
     }
 
     def testTrailingZero {
-         val bs: bs = binary("000101")
-        type bs     = binary("000101")
+         val bs: bs = Binary_("000101")
+        type bs     = Binary_("000101")
         assertSame(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
         assertSame[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testThrow {
         expectError {
-            val bs = binary("a0")
+            val bs = Binary_("a0")
         }
 
         expectError {
-            unused[ binary("a0") ]
+            unused[ Binary_("a0") ]
         }
     }
 
     def testTrivial2 {
-         val bs = binary("101010")
+         val bs = Binary_("101010")
          JAssert.assertEquals(42, bs.unsing)
     }
 }

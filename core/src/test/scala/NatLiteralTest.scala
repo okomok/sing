@@ -18,31 +18,34 @@ import junit.framework.{Assert => JAssert}
 class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-         val bs: bs = nat(5)
-        type bs     = nat(5)
+         val bs: bs = Nat_(5)
+        type bs     = Nat_(5)
         assertSame(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
         assertSame[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testNil {
-         val bs: bs = nat(0)
-        type bs     = nat(0)
+         val bs: bs = Nat_(0)
+        type bs     = Nat_(0)
         assertSame(bs, DNil)
         assertSame[bs, DNil]
     }
 
     def testThrow {
         expectError {
-            val bs = nat(-1)
+            val bs = Nat_(-1)
         }
 
         expectError {
-            unused[ nat(-1) ]
+            unused[ Nat_(-1) ]
         }
     }
 
     def testTrivial2 {
-         val bs = nat(42)
+         val bs = Nat_(42)
          JAssert.assertEquals(42, bs.unsing)
+
+         type n = Nat_(42)#plus[Nat_(10)]
+         assertSame[Nat_(52), n]
     }
 }

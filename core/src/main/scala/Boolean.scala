@@ -73,10 +73,14 @@ sealed abstract class Boolean extends Any {
 
 
 private[sing]
-sealed abstract class AsBoolean extends Boolean with AsAny with UnsingEquals {
+sealed abstract class AsBoolean extends BooleanImpl {
     override  def kind: kind = Boolean
     override type kind       = Boolean.type
+}
 
+
+private[sing]
+sealed abstract class BooleanImpl extends Boolean with AnyImpl with UnsingEquals {
     override  def asBoolean: asBoolean = self
     override type asBoolean            = self
 

@@ -72,10 +72,14 @@ sealed abstract class Option extends Any {
 
 
 private[sing]
-sealed abstract class AsOption extends Option with AsAny with ListLike {
+sealed abstract class AsOption extends OptionImpl {
     override  def kind: kind = Option
     override type kind       = Option.type
+}
 
+
+private[sing]
+sealed abstract class OptionImpl extends Option with AnyImpl with ListLike {
     override  def asOption: asOption = self
     override type asOption           = self
 

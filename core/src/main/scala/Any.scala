@@ -136,7 +136,10 @@ trait Any extends scala.Equals {
 }
 
 
-trait AsAny extends AnyImpl
+trait AsAny extends AnyImpl {
+    override  def kind: kind = Any
+    override type kind       = Any.type
+}
 
 
 trait AnyImpl extends Any {

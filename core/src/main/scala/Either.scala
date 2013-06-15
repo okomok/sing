@@ -45,10 +45,14 @@ sealed abstract class Either extends Any {
 
 
 private[sing]
-sealed abstract class AsEither extends Either with AsAny with UnsingEquals with ListLike {
+sealed abstract class AsEither extends EitherImpl {
     override  def kind: kind = Either
     override type kind       = Either.type
+}
 
+
+private[sing]
+sealed abstract class EitherImpl extends Either with AnyImpl with UnsingEquals with ListLike {
     override  def asEither: asEither = self
     override type asEither           = self
 

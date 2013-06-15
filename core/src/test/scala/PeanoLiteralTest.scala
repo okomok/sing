@@ -17,31 +17,31 @@ import junit.framework.{Assert => JAssert}
 class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-         val bs: bs = peano(3)
-        type bs     = peano(3)
+         val bs: bs = Peano_(3)
+        type bs     = Peano_(3)
         assertSame(bs, Succ(Succ(Succ(Zero))))
         assertSame[bs, Succ[Succ[Succ[Zero]]]]
     }
 
     def testNil {
-         val bs: bs = peano(0)
-        type bs     = peano(0)
+         val bs: bs = Peano_(0)
+        type bs     = Peano_(0)
         assertSame(bs, Zero)
         assertSame[bs, Zero]
     }
 
     def testThrow {
         expectError {
-            val bs = peano(-1)
+            val bs = Peano_(-1)
         }
 
         expectError {
-            unused[ peano(-1) ]
+            unused[ Peano_(-1) ]
         }
     }
 
     def testTrivial2 {
-         val bs = peano(42)
+         val bs = Peano_(42)
          JAssert.assertEquals(42, bs.unsing)
     }
 }

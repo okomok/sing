@@ -31,10 +31,14 @@ trait Boxed extends Any {
 
 
 private[sing]
-sealed abstract class AsBoxed extends Boxed with AsAny with UnsingEquals with ListLike {
+sealed abstract class AsBoxed extends BoxedImpl {
     override  def kind: kind = Boxed
     override type kind       = Boxed.type
+}
 
+
+private[sing]
+sealed abstract class BoxedImpl extends Boxed with AnyImpl with UnsingEquals with ListLike {
     override  def asBoxed: asBoxed = self
     override type asBoxed          = self
 
