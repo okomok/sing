@@ -10,7 +10,7 @@ package com.github.okomok
 package sing
 
 
-import bstree._
+import _bstree._
 
 
 sealed abstract class BSTree extends Map {

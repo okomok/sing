@@ -70,7 +70,7 @@ trait AsMap extends MapImpl {
 
 
 trait MapImpl extends Map with PartialFunctionImpl with UnsingEquals {
-    import map._
+    import _map._
 
     override  def asMap: asMap = self
     override type asMap        = self

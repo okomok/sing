@@ -54,8 +54,8 @@ class BalanceTest extends org.scalatest.junit.JUnit3Suite {
         AssertInvariant(l)
         AssertInvariant(r)
 
-        type bm = bstree.Balance.apply[_3, _3, l, r]
-        val bm: bm = bstree.Balance.apply(_3, _3, l, r)
+        type bm = _bstree.Balance.apply[_3, _3, l, r]
+        val bm: bm = _bstree.Balance.apply(_3, _3, l, r)
         Test.assertSame[node[_11, node[_3, t1, t2], t3], bm]
         assertEquals(_15, bm.size)
         AssertInvariant(bm)
@@ -86,8 +86,8 @@ class BalanceTest extends org.scalatest.junit.JUnit3Suite {
         AssertInvariant(l)
         AssertInvariant(r)
 
-        type bm = bstree.Balance.apply[_3, _3, l, r]
-        val bm: bm = bstree.Balance.apply(_3, _3, l, r)
+        type bm = _bstree.Balance.apply[_3, _3, l, r]
+        val bm: bm = _bstree.Balance.apply(_3, _3, l, r)
         Test.assertSame[node[_7, node[_3, t1, t2], node[_11, t3, t4]], bm]
         assertEquals(_13, bm.size)
         AssertInvariant(bm)

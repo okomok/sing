@@ -12,7 +12,7 @@ package sing
 //      at http://www.assembla.com/wiki/show/metascala
 
 
-import peano._
+import _peano._
 
 
 object Peano extends Literal

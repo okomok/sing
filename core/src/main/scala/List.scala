@@ -8,8 +8,8 @@ package com.github.okomok
 package sing
 
 
-object List extends AsKind with list.ToSTuple {
-    import list._
+object List extends AsKind with _list.ToSTuple {
+    import _list._
 
     override  def kindId: kindId = KindId.ofList
     override type kindId         = KindId.ofList
@@ -226,7 +226,7 @@ trait AsList extends ListImpl {
 
 
 trait ListImpl extends List with AnyImpl with UnsingEquals {
-    import list._
+    import _list._
 
     override  def asList: asList = self
     override type asList         = self
@@ -251,8 +251,8 @@ trait ListImpl extends List with AnyImpl with UnsingEquals {
     override  def append[that <: List](that: that): append[that] = Append.apply(self, that)
     override type append[that <: List]                           = Append.apply[self, that]
 
-    override  def map[f <: Function1](f: f): map[f] = list.Map.apply(self, f)
-    override type map[f <: Function1]               = list.Map.apply[self, f]
+    override  def map[f <: Function1](f: f): map[f] = _list.Map.apply(self, f)
+    override type map[f <: Function1]               = _list.Map.apply[self, f]
 
     override  def flatMap[f <: Function1](f: f): flatMap[f] = map(f).flatten
     override type flatMap[f <: Function1]                   = map[f]#flatten

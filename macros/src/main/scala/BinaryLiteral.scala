@@ -15,55 +15,20 @@ import scala.reflect.macros.Context
 
 
 object BinaryLiteral {
-
-    // "0010..." --> ...DCons(`false`, DCons(`true`, DNil))
-
      def apply(x: String) = macro term_impl
     type apply(x: String) = macro type_impl
 
     def term_impl(c: Context)(x: c.Expr[String]): c.Expr[Any] = {
         import c.universe._
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
-
-        val nil: c.Tree = q"$singlib.DNil"
-        val cons: c.Tree = q"$singlib.DCons"
-        val t: c.Tree = q"$singlib.`true`"
-        val f: c.Tree = q"$singlib.`false`"
-
-        val Literal(Constant(str: String)) = x.tree
-
-        val res = str.dropWhile(_ == '0').reverse.map {
-            case '1' => t
-            case '0' => f
-            case w => c.abort(c.enclosingPosition, "invalid binary literal: " + w.toString)
-        }.foldRight(nil) { (tf, x) =>
-            Apply(cons, List(tf, x))
-        }
-
-        c.Expr[Any](res)
+        val Literal(Constant(s: String)) = x.tree
+        DenseLiteral.term_fromBinaryString(c)(s)
     }
 
     def type_impl(c: Context)(x: c.Expr[String]): c.Tree = {
         import c.universe._
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
-
-        val nil: c.Tree = tq"$singlib.DNil"
-        val cons: c.Tree = tq"$singlib.DCons"
-        val t: c.Tree = tq"$singlib.`true`"
-        val f: c.Tree = tq"$singlib.`false`"
-
-        val Literal(Constant(str: String)) = x.tree
-
-        val res = str.dropWhile(_ == '0').reverse.map {
-            case '1' => t
-            case '0' => f
-            case w => c.abort(c.enclosingPosition, "invalid binary literal: " + w.toString)
-        }.foldRight(nil) { (tf, x) =>
-            AppliedTypeTree(cons, List(tf, x))
-        }
-
-        res
+        val Literal(Constant(s: String)) = x.tree
+        DenseLiteral.type_fromBinaryString(c)(s)
     }
 }

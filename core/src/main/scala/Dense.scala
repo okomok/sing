@@ -11,7 +11,7 @@ package sing
 // See: http://apocalisp.wordpress.com/2010/06/24/type-level-programming-in-scala-part-5a-binary-numbers/
 
 
-import dense._
+import _dense._
 
 
 object Dense extends Literal

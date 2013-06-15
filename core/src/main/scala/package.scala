@@ -41,12 +41,21 @@ package object sing {
     type ::[x <: Any, xs <: List] = xs# ::[x]
 
 
+// Nat
+
+     def nat(x: Int) = macro makro.DenseLiteral.term_impl
+    type nat(x: Int) = macro makro.DenseLiteral.type_impl
+
+
 // Dense
 
     val DNil: DNil = _TermOfDNil.apply
 
      val D_:: = DCons
     type D_::[b <: Boolean, bs <: Dense] = bs# D_::[b]
+
+     def dense(x: Int) = macro makro.DenseLiteral.term_impl
+    type dense(x: Int) = macro makro.DenseLiteral.type_impl
 
      def binary(x: String) = macro makro.BinaryLiteral.term_impl
     type binary(x: String) = macro makro.BinaryLiteral.type_impl
@@ -55,6 +64,9 @@ package object sing {
 // Peano
 
     val Zero: Zero = _TermOfZero.apply
+
+     def peano(x: Int) = macro makro.PeanoLiteral.term_impl
+    type peano(x: Int) = macro makro.PeanoLiteral.type_impl
 
 
 // Option

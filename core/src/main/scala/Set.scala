@@ -66,7 +66,7 @@ trait AsSet extends SetImpl {
 
 
 trait SetImpl extends Set with AnyImpl with UnsingEquals {
-    import set._
+    import _set._
 
     override  def asSet: asSet = self
     override type asSet        = self
