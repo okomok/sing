@@ -14,11 +14,7 @@ package sing
 import dense._
 
 
-object Dense extends Literal {
-    @Annotation.aliasOf("DCons")
-     val :: = DCons
-    type ::[x <: Boolean, xs <: Dense] = xs# ::[x]
-}
+object Dense extends Literal
 
 
 sealed abstract class Dense extends Nat {
@@ -41,9 +37,8 @@ sealed abstract class Dense extends Nat {
     override type bitAnd[that <: Nat] <: Dense
     override type bitOr[that <: Nat] <: Dense
 
-    @Annotation.equivalentTo("DCons(e. self)")
-     def ::[e <: Boolean](e: e): ::[e]
-    type ::[e <: Boolean] <: Dense
+     def D_::[e <: Boolean](e: e): D_::[e]
+    type D_::[e <: Boolean] <: Dense
 
      def shiftLeft: shiftLeft
     type shiftLeft <: Dense
@@ -64,9 +59,8 @@ sealed abstract class AsDense extends Dense with AsNat {
     override  def asDense: asDense = self
     override type asDense          = self
 
-    @Annotation.equivalentTo("DCons(e. self)")
-    override  def ::[e <: Boolean](e: e): ::[e] = DCons(e, self)
-    override type ::[e <: Boolean]              = DCons[e, self]
+    override  def D_::[e <: Boolean](e: e): D_::[e] = DCons(e, self)
+    override type D_::[e <: Boolean]                = DCons[e, self]
 
     override  def plus[that <: Nat](that: that): plus[that] = Plus.apply(self, that.asDense)
     override type plus[that <: Nat]                         = Plus.apply[self, that#asDense]

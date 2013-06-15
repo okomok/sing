@@ -14,7 +14,7 @@ import junit.framework.Assert._
 
 
 import okomok.sing.Dense.Literal._
-import okomok.sing.Dense.{::, _1B, _0B}
+import okomok.sing.Dense.{_1B, _0B}
 // import SlowFibonacci._
 import FastFibonacci._
 

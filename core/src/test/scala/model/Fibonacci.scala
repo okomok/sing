@@ -10,7 +10,7 @@ package com.github.okomoktest; package singtest; package modeltest
 import com.github.okomok
 import okomok.sing._
 import okomok.sing.Dense.Literal._
-import okomok.sing.Dense.{::, _1B, _0B}
+import okomok.sing.Dense.{_1B, _0B}
 
 
 object FastFibonacci {

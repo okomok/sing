@@ -37,16 +37,16 @@ package object sing {
 
     val Nil: Nil = _TermOfNil.apply
 
-    @aliasOf("Cons")
-    val :: = Cons
-
-    @equivalentTo("x# ::[xs]")
+     val :: = Cons
     type ::[x <: Any, xs <: List] = xs# ::[x]
 
 
 // Dense
 
     val DNil: DNil = _TermOfDNil.apply
+
+     val D_:: = DCons
+    type D_::[b <: Boolean, bs <: Dense] = bs# D_::[b]
 
 
 // Peano
