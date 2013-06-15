@@ -83,7 +83,7 @@ object Test {
     private def _assertNotNothing_impl[x](c: Context)(xt: c.WeakTypeTag[x]) {
         import c.universe._
         if (weakTypeOf(xt) =:= weakTypeOf[Nothing]) {
-            c.error(c.enclosingPosition, show(weakTypeOf[x]) + " is Nothing unexpectedly.")
+            c.abort(c.enclosingPosition, show(weakTypeOf[x]) + " is Nothing unexpectedly.")
         }
     }
 
@@ -124,7 +124,7 @@ object Test {
     private def _assertNotSame_impl[x, y](c: Context)(xt: c.WeakTypeTag[x], yt: c.WeakTypeTag[y]) {
         import c.universe._
         if (weakTypeOf(xt) =:= weakTypeOf(yt)) {
-            c.error(c.enclosingPosition, show(weakTypeOf(xt)) + " is the same type as " + show(weakTypeOf(yt)) + " unexpectedly.")
+            c.abort(c.enclosingPosition, show(weakTypeOf(xt)) + " is the same type as " + show(weakTypeOf(yt)) + " unexpectedly.")
         }
     }
 
@@ -165,7 +165,7 @@ object Test {
     private def _assertNotConforms_impl[x, y](c: Context)(xt: c.WeakTypeTag[x], yt: c.WeakTypeTag[y]) {
         import c.universe._
         if (weakTypeOf(xt) <:< weakTypeOf(yt)) {
-            c.error(c.enclosingPosition, show(weakTypeOf[x]) + " conforms to " + show(weakTypeOf[y]) + " unexpectedly.")
+            c.abort(c.enclosingPosition, show(weakTypeOf[x]) + " conforms to " + show(weakTypeOf[y]) + " unexpectedly.")
         }
     }
 
@@ -190,7 +190,7 @@ object Test {
 
     private def _error_impl(c: Context) {
         import c.universe._
-        c.error(c.enclosingPosition, "compile-error expectedly.")
+        c.abort(c.enclosingPosition, "compile-error expectedly.")
     }
 
 
@@ -204,7 +204,7 @@ object Test {
         import c.universe._
 
         if (c.typeCheck(x, silent = true) != EmptyTree) {
-            c.error(c.enclosingPosition, show(x) + " compiles unexpectedly.")
+            c.abort(c.enclosingPosition, show(x) + " compiles unexpectedly.")
         }
         reify(())
     }

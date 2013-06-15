@@ -48,6 +48,9 @@ package object sing {
      val D_:: = DCons
     type D_::[b <: Boolean, bs <: Dense] = bs# D_::[b]
 
+     def binary(x: String) = macro makro.BinaryLiteral.term_impl
+    type binary(x: String) = macro makro.BinaryLiteral.type_impl
+
 
 // Peano
 
