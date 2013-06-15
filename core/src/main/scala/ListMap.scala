@@ -8,16 +8,12 @@ package com.github.okomok
 package sing
 
 
-/**
- * In sing, this is a multimap.
- */
 object ListMap {
-
     /**
      * Constructs an empty list-map.
      */
-     def empty[r <: Relation](r: r): empty[r] = ListMap(r, Nil)
-    type empty[r <: Relation]                 = ListMap[r, Nil]
+     def empty[e <: Equiv](e: e): empty[e] = ListMap(e, Nil)
+    type empty[e <: Equiv]                 = ListMap[e, Nil]
 
     /**
      * Constructs a one-entry list-map.
@@ -26,10 +22,10 @@ object ListMap {
     type put[k <: Any, v <: Any]                        = empty[id[k]#kind#naturalOrdering]#put[k, v]
 
     private[sing]
-    final case class Related[r <: Relation, k <: Any](r: r, k: k) extends AsFunction1 {
-        override type self = Related[r, k]
-        override  def apply[x <: Any](x: x): apply[x] = r.related(k, x.asProduct2._1)
-        override type apply[x <: Any]                 = r#related[k, x#asProduct2#_1]
+    final case class EquivTo[e <: Equiv, k <: Any](e: e, k: k) extends AsFunction1 {
+        override type self = EquivTo[e, k]
+        override  def apply[x <: Any](x: x): apply[x] = e.equiv(k, x.asProduct2._1)
+        override type apply[x <: Any]                 = e#equiv[k, x#asProduct2#_1]
     }
 
     private[sing]
@@ -53,10 +49,13 @@ object ListMap {
 
 
 private[sing]
-final case class ListMap[r <: Relation, kvs <: List](r: r, override val asList: kvs) extends AsMap {
+final case class ListMap[e <: Equiv, kvs <: List](e: e, override val asList: kvs) extends AsMap {
     import ListMap._
 
-    override type self = ListMap[r, kvs]
+    override type self = ListMap[e, kvs]
+
+    override  def unsing: unsing = scala.collection.immutable.ListMap.empty ++ asList.unsing.map{ case (k, v) => (k, v) }
+    override type unsing         = scala.collection.immutable.ListMap[scala.Any, scala.Any]
 
     override type asList = kvs
 
@@ -66,20 +65,20 @@ final case class ListMap[r <: Relation, kvs <: List](r: r, override val asList: 
     override  def isEmpty: isEmpty = asList.isEmpty
     override type isEmpty          = asList#isEmpty
 
-    override  def clear: clear = ListMap(r, Nil)
-    override type clear        = ListMap[r, Nil]
+    override  def clear: clear = ListMap(e, Nil)
+    override type clear        = ListMap[e, Nil]
 
-    override  def get[k <: Any](k: k): get[k] = asList.find(Related(r, k)).map(Get2)
-    override type get[k <: Any]               = asList#find[Related[r, k]]#map[Get2]
+    override  def get[k <: Any](k: k): get[k] = asList.find(EquivTo(e, k)).map(Get2)
+    override type get[k <: Any]               = asList#find[EquivTo[e, k]]#map[Get2]
 
-    override  def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = ListMap(r, Cons(Tuple2(k, v), asList))
-    override type put[k <: Any, v <: Any]                        = ListMap[r, Cons[Tuple2[k, v], asList]]
+    override  def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = ListMap(e, Cons(Tuple2(k, v), remove(k).asList))
+    override type put[k <: Any, v <: Any]                        = ListMap[e, Cons[Tuple2[k, v], remove[k]#asList]]
 
-    override  def remove[k <: Any](k: k): remove[k] = ListMap(r, asList.filter(Related(r, k).not))
-    override type remove[k <: Any]                  = ListMap[r, asList#filter[Related[r, k]#not]]
+    override  def remove[k <: Any](k: k): remove[k] = ListMap(e, asList.filter(EquivTo(e, k).not))
+    override type remove[k <: Any]                  = ListMap[e, asList#filter[EquivTo[e, k]#not]]
 
-    override  def keySet: keySet = ListSet(r, keyList)
-    override type keySet         = ListSet[r, keyList]
+    override  def keySet: keySet = ListSet(e, keyList)
+    override type keySet         = ListSet[e, keyList]
 
     override  def keyList: keyList = asList.map(Get1)
     override type keyList          = asList#map[Get1]

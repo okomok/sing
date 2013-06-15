@@ -52,7 +52,7 @@ class ListMapTest extends org.scalatest.junit.JUnit3Suite {
     def testUnsing {
         type m   = ListMap.put[_3, _4]#put[_1, _2]#put[_5, _6]
         val m: m = ListMap.put(_3, _4).put(_1, _2).put(_5, _6)
-        assertEquals(scala.List(5 -> 6, 1 -> 2, 3 -> 4), m.asList.unsing)
+        assertEquals(scala.collection.immutable.ListMap(5 -> 6, 1 -> 2, 3 -> 4), m.unsing)
     }
 
     def testDupePut {
@@ -67,7 +67,7 @@ class ListMapTest extends org.scalatest.junit.JUnit3Suite {
 
         type m2 = m.put[_5, _Box[String]]
         val m2: m2 = m.put(_5, _Box("hw"))
-        Test.assertSame[`true`, m2#size#equal[m#size#increment]]
+        Test.assertSame[`true`, m2#size#equal[m#size]]
         Test.assertSame[_Box[String], m2#get[_5]#get]
         assertEquals("hw", m2.get(_5).get.unsing)
     }

@@ -58,7 +58,7 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = m.add[_1]
         val m2: m2 = m.add(_1)
 
-        Test.assertSame[`true`, m#size#increment#equal[m2#size]]
+        Test.assertSame[`true`, m#size#equal[m2#size]]
     }
 
     def testAdd {
@@ -96,7 +96,7 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type m = ListSet.add[_3]#add[_5]#add[_1]
         val m: m = ListSet.add(_3).add(_5).add(_1)
 
-        assertEquals(scala.List(1, 5, 3), m.asList.unsing)
+        assertEquals(scala.collection.immutable.ListSet(1, 5, 3), m.unsing)
     }
 
 }
