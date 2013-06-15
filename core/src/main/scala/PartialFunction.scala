@@ -73,14 +73,13 @@ trait PartialFunctionImpl extends PartialFunction with RelationImpl with RefEqua
     override  def not: not = Not(self)
     override type not      = Not[self]
 
-    override  def related[x <: Any, y <: Any](x: x, y: y): related[x, y] = y.equal(apply(x))
-    override type related[x <: Any, y <: Any]                            = y#equal[apply[x]]
+    override  def related[x <: Any, y <: Any](x: x, y: y): related[x, y] = `if`(isDefinedAt(x), EqualApply(self, x, y), Const(`false`)).apply.asBoolean
+    override type related[x <: Any, y <: Any]                            = `if`[isDefinedAt[x], EqualApply[self, x, y], Const[`false`]]#apply#asBoolean
 }
 
 
 private[sing]
 object PartialFunctionImpl {
-
     final class Empty extends AsPartialFunction {
         override type self = Empty
         override  def isDefinedAt[x <: Any](x: x): isDefinedAt[x] = `false`
@@ -123,5 +122,11 @@ object PartialFunctionImpl {
         override type isDefinedAt[x <: Any]                       = pf#isDefinedAt[x]
         override  def apply[x <: Any](x: x): apply[x] = pf.apply(x).asBoolean.not
         override type apply[x <: Any]                 = pf#apply[x]#asBoolean#not
+    }
+
+    final case class EqualApply[pf <: PartialFunction, x <: Any, y <: Any](pf: pf, x: x, y: y) extends AsFunction0 {
+        override type self = EqualApply[pf, x, y]
+        override  def apply: apply = y.equal(pf.apply(x))
+        override type apply        = y#equal[pf#apply[x]]
     }
 }
