@@ -11,8 +11,7 @@ package sing.makro
 import scala.reflect.macros.Context
 
 
-object RemoveSingmethodAnnotation {
-
+private object RemoveSingmethodAnnotation {
     def apply(c: Context)(mods: c.Modifiers): c.Modifiers = {
         import c.universe._
 

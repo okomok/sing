@@ -12,8 +12,7 @@ import scala.reflect.macros.Context
 
 
 // Canonical way?
-object ConstructorParamMods {
-
+private object ConstructorParamMods {
     def apply(c: Context): c.Modifiers = {
         import c.universe._
 

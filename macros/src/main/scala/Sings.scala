@@ -13,13 +13,11 @@ import scala.reflect.macros.Context
 
 
 object Sings {
-
     type apply = macro impl
 
     def impl(c: Context): c.Tree = {
         import c.universe._
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
         val Template(parents, self, body) = c.enclosingTemplate
         val res = Template(RemoveMacro(c)(parents), self, singize(c)(body))
         //println(res)

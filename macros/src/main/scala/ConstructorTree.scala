@@ -12,8 +12,7 @@ import scala.reflect.macros.Context
 
 
 // Canonical way?
-object ConstructorTree {
-
+private object ConstructorTree {
     def apply(c: Context)(params: List[c.universe.ValDef]): c.Tree = {
         import c.universe._
         val ClassDef(_, _, _, Template(_, _, body)) = q"class X(..$params)"

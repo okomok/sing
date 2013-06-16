@@ -12,8 +12,7 @@ import scala.reflect.macros.Context
 
 
 // Canonical way?
-object RemoveDefaultConstructor {
-
+private object RemoveDefaultConstructor {
     def apply(c: Context)(from: List[c.Tree]): List[c.Tree] = {
         import c.universe._
 

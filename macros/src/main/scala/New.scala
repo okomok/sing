@@ -22,9 +22,7 @@ object New {
         val name = weakTypeOf[T].typeSymbol.name.toString
         val implName = TypeName("As" + name)
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
-
-        val zuper: c.Tree = tq"$singlib.$implName"
+        val zuper: c.Tree = tq"${sing_(c)}.$implName"
         val selfdef: c.Tree = q"override type self = ${TypeOfSelf.impl(c)}"
 
         Mixin(c)(zuper, List(selfdef))

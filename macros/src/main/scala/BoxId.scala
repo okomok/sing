@@ -15,11 +15,10 @@ import scala.reflect.macros.Context
 
 
 object BoxId {
-
     def apply(c: Context)(fullName: String): (c.Tree, c.Tree) = {
         val ids = idList(fullName)
-        val v = vListFrom(c)( ids.map { id => vNatFrom(c)(Bits(id)) } )
-        val t = tListFrom(c)( ids.map { id => tNatFrom(c)(Bits(id)) } )
+        val v = term_ListFrom(c)( ids.map { id => term_NatFrom(c)(Bits(id)) } )
+        val t = type_ListFrom(c)( ids.map { id => type_NatFrom(c)(Bits(id)) } )
         (v, t)
     }
 
@@ -33,48 +32,44 @@ object BoxId {
     }
 
     // Nat List --> n1 :: n2 :: ... :: Nil
-    private def vListFrom(c: Context)(ns: List[c.Tree]): c.Tree = {
+    private def term_ListFrom(c: Context)(ns: List[c.Tree]): c.Tree = {
         import c.universe._
-        val singlib: c.Tree = q"com.github.okomok.sing"
 
-        val vnil: c.Tree = q"$singlib.Nil"
-        val vcons: c.Tree = q"$singlib.Cons"
+        val vnil: c.Tree = q"${sing_(c)}.Nil"
+        val vcons: c.Tree = q"${sing_(c)}.Cons"
 
         ns.foldRight(vnil) { (n, x) => Apply(vcons, List(n, x)) }
     }
 
-    private def tListFrom(c: Context)(ns: List[c.Tree]): c.Tree = {
+    private def type_ListFrom(c: Context)(ns: List[c.Tree]): c.Tree = {
         import c.universe._
-        val singlib: c.Tree = q"com.github.okomok.sing"
 
-        val tnil: c.Tree = tq"$singlib.Nil"
-        val tcons: c.Tree = tq"$singlib.Cons"
+        val tnil: c.Tree = tq"${sing_(c)}.Nil"
+        val tcons: c.Tree = tq"${sing_(c)}.Cons"
 
         ns.foldRight(tnil) { (n, x) => AppliedTypeTree(tcons, List(n, x)) }
     }
 
     // Boolean List --> a Nat
-    private def vNatFrom(c: Context)(bs: List[Boolean]): c.Tree = {
+    private def term_NatFrom(c: Context)(bs: List[Boolean]): c.Tree = {
         import c.universe._
-        val singlib: c.Tree = q"com.github.okomok.sing"
 
-        val vzero: c.Tree = q"$singlib.`false`"
-        val vone: c.Tree  = q"$singlib.`true`"
-        val vnil: c.Tree  = q"$singlib.DNil"
-        val vcons: c.Tree = q"$singlib.DCons"
+        val vzero: c.Tree = q"${sing_(c)}.`false`"
+        val vone: c.Tree  = q"${sing_(c)}.`true`"
+        val vnil: c.Tree  = q"${sing_(c)}.DNil"
+        val vcons: c.Tree = q"${sing_(c)}.DCons"
         def vbit(b: Boolean): c.Tree = if (b) vone else vzero
 
         bs.foldRight(vnil) { (b, x) => Apply(vcons, List(vbit(b), x)) }
     }
 
-    private def tNatFrom(c: Context)(bs: List[Boolean]): c.Tree = {
+    private def type_NatFrom(c: Context)(bs: List[Boolean]): c.Tree = {
         import c.universe._
-        val singlib: c.Tree = q"com.github.okomok.sing"
 
-        val tzero: c.Tree = tq"$singlib.`false`"
-        val tone: c.Tree  = tq"$singlib.`true`"
-        val tnil: c.Tree  = tq"$singlib.DNil"
-        val tcons: c.Tree = tq"$singlib.DCons"
+        val tzero: c.Tree = tq"${sing_(c)}.`false`"
+        val tone: c.Tree  = tq"${sing_(c)}.`true`"
+        val tnil: c.Tree  = tq"${sing_(c)}.DNil"
+        val tcons: c.Tree = tq"${sing_(c)}.DCons"
         def tbit(b: Boolean): c.Tree = if (b) tone else tzero
 
         bs.foldRight(tnil) { (b, x) => AppliedTypeTree(tcons, List(tbit(b), x)) }

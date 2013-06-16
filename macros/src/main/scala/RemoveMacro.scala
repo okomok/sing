@@ -12,7 +12,6 @@ import scala.reflect.macros.Context
 
 
 object RemoveMacro {
-
     def apply(c: Context)(parents: List[c.Tree]): List[c.Tree] = {
         parents.filter { x =>
             !x.equalsStructure(c.macroApplication)

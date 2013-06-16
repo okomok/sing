@@ -11,7 +11,7 @@ package sing.makro
 import scala.reflect.macros.Context
 
 
-object IsSingmethodAnnotation {
+private object IsSingmethodAnnotation {
 
     def apply(c: Context)(an: c.Tree): Boolean = {
         import c.universe._

@@ -11,8 +11,7 @@ package sing.makro
 import scala.reflect.macros.Context
 
 
-object AddLazyFlag {
-
+private object AddLazyFlag {
     def apply(c: Context)(mods: c.Modifiers): c.Modifiers = {
         import c.universe._
 

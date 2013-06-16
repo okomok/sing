@@ -8,15 +8,12 @@ package com.github.okomok
 package sing.makro
 
 
-import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
-object WeakTypeOf {
-    type apply[T](x: T) = macro impl[T]
-
-    def impl[T: c.WeakTypeTag](c: Context)(x: c.Expr[T]): c.Tree = {
+private object sing_ {
+    def apply(c: Context): c.Tree = {
         import c.universe._
-        tq"${weakTypeOf[T]}"
+        q"com.github.okomok.sing"
     }
 }

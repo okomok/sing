@@ -13,7 +13,6 @@ import scala.reflect.macros.Context
 
 
 object Check {
-
      def apply[x](x: x) = macro term_impl[x]
     type apply[x]       = macro type_impl[x]
 

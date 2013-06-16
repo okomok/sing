@@ -3,8 +3,6 @@
 // Copyright Shunsuke Sogame 2008-2013.
 // Distributed under the New BSD license.
 
-// See: https://github.com/leonardschneider/macrogen
-
 
 package com.github.okomok
 package sing.makro
@@ -21,6 +19,7 @@ object BinaryLiteral {
     def term_impl(c: Context)(x: c.Expr[String]): c.Expr[Any] = {
         import c.universe._
 
+        RequireConstantLiteral(c)(x)
         val Literal(Constant(s: String)) = x.tree
         DenseLiteral.term_fromBinaryString(c)(s)
     }
@@ -28,6 +27,7 @@ object BinaryLiteral {
     def type_impl(c: Context)(x: c.Expr[String]): c.Tree = {
         import c.universe._
 
+        RequireConstantLiteral(c)(x)
         val Literal(Constant(s: String)) = x.tree
         DenseLiteral.type_fromBinaryString(c)(s)
     }

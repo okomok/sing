@@ -13,7 +13,6 @@ import scala.reflect.macros.Context
 
 
 object Self {
-
     type apply = macro impl
 
     def impl(c: Context): c.Tree = {

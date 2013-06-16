@@ -3,8 +3,6 @@
 // Copyright Shunsuke Sogame 2008-2013.
 // Distributed under the New BSD license.
 
-// See: https://github.com/leonardschneider/macrogen
-
 
 package com.github.okomok
 package sing.makro
@@ -14,7 +12,6 @@ package sing.makro
 
 
 object Bits {
-
     def apply(from: String): List[Boolean] = {
         removeTrailingFalse(stringToBooleans(from)).toList
     }

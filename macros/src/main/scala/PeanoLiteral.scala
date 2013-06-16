@@ -3,8 +3,6 @@
 // Copyright Shunsuke Sogame 2008-2013.
 // Distributed under the New BSD license.
 
-// See: https://github.com/leonardschneider/macrogen
-
 
 package com.github.okomok
 package sing.makro
@@ -22,13 +20,12 @@ object PeanoLiteral {
     def term_impl(c: Context)(x: c.Expr[Int]): c.Expr[Any] = {
         import c.universe._
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
-
-        val zero: c.Tree = q"$singlib.Zero"
-        val succ: c.Tree = q"$singlib.Succ"
-
+        RequireConstantLiteral(c)(x)
         val Literal(Constant(i: Int)) = x.tree
-        CheckNat(c)(i)
+        RequireNat(c)(i)
+
+        val zero: c.Tree = q"${sing_(c)}.Zero"
+        val succ: c.Tree = q"${sing_(c)}.Succ"
 
         val res = (0 until i).foldRight(zero) { (_, res) =>
             Apply(succ, List(res))
@@ -40,13 +37,12 @@ object PeanoLiteral {
     def type_impl(c: Context)(x: c.Expr[Int]): c.Tree = {
         import c.universe._
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
-
-        val zero: c.Tree = tq"$singlib.Zero"
-        val succ: c.Tree = tq"$singlib.Succ"
-
+        RequireConstantLiteral(c)(x)
         val Literal(Constant(i: Int)) = x.tree
-        CheckNat(c)(i)
+        RequireNat(c)(i)
+
+        val zero: c.Tree = tq"${sing_(c)}.Zero"
+        val succ: c.Tree = tq"${sing_(c)}.Succ"
 
         val res = (0 until i).foldRight(zero) { (_, res) =>
             AppliedTypeTree(succ, List(res))

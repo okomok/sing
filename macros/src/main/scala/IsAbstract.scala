@@ -16,7 +16,6 @@ import scala.reflect.macros.Context
 
 
 object IsAbstract {
-
     def apply[T: c.WeakTypeTag](c: Context): Boolean = {
         import c.universe._
         weakTypeOf[T].typeSymbol.asType.isAbstractType

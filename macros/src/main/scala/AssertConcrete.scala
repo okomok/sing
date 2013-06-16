@@ -15,7 +15,6 @@ import scala.reflect.macros.Context
 
 
 object AssertConcrete {
-
     def apply[T: c.WeakTypeTag](c: Context) {
         import c.universe._
 

@@ -3,8 +3,6 @@
 // Copyright Shunsuke Sogame 2008-2013.
 // Distributed under the New BSD license.
 
-// See: https://github.com/leonardschneider/macrogen
-
 
 package com.github.okomok
 package sing.makro
@@ -21,8 +19,9 @@ object DenseLiteral {
     def term_impl(c: Context)(x: c.Expr[Int]): c.Expr[Any] = {
         import c.universe._
 
+        RequireConstantLiteral(c)(x)
         val Literal(Constant(i: Int)) = x.tree
-        CheckNat(c)(i)
+        RequireNat(c)(i)
 
         term_fromBinaryString(c)(Integer.toBinaryString(i))
     }
@@ -30,8 +29,9 @@ object DenseLiteral {
     def type_impl(c: Context)(x: c.Expr[Int]): c.Tree = {
         import c.universe._
 
+        RequireConstantLiteral(c)(x)
         val Literal(Constant(i: Int)) = x.tree
-        CheckNat(c)(i)
+        RequireNat(c)(i)
 
         type_fromBinaryString(c)(Integer.toBinaryString(i))
     }
@@ -40,12 +40,10 @@ object DenseLiteral {
     def term_fromBinaryString(c: Context)(bs: String): c.Expr[Any] = {
         import c.universe._
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
-
-        val nil: c.Tree = q"$singlib.DNil"
-        val cons: c.Tree = q"$singlib.DCons"
-        val t: c.Tree = q"$singlib.`true`"
-        val f: c.Tree = q"$singlib.`false`"
+        val nil: c.Tree = q"${sing_(c)}.DNil"
+        val cons: c.Tree = q"${sing_(c)}.DCons"
+        val t: c.Tree = q"${sing_(c)}.`true`"
+        val f: c.Tree = q"${sing_(c)}.`false`"
 
         val res = bs.dropWhile(_ == '0').reverse.map {
             case '1' => t
@@ -61,12 +59,10 @@ object DenseLiteral {
     def type_fromBinaryString(c: Context)(bs: String): c.Tree = {
         import c.universe._
 
-        val singlib: c.Tree = q"com.github.okomok.sing"
-
-        val nil: c.Tree = tq"$singlib.DNil"
-        val cons: c.Tree = tq"$singlib.DCons"
-        val t: c.Tree = tq"$singlib.`true`"
-        val f: c.Tree = tq"$singlib.`false`"
+        val nil: c.Tree = tq"${sing_(c)}.DNil"
+        val cons: c.Tree = tq"${sing_(c)}.DCons"
+        val t: c.Tree = tq"${sing_(c)}.`true`"
+        val f: c.Tree = tq"${sing_(c)}.`false`"
 
         val res = bs.dropWhile(_ == '0').reverse.map {
             case '1' => t

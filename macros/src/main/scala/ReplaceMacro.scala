@@ -12,7 +12,6 @@ import scala.reflect.macros.Context
 
 
 object ReplaceMacro {
-
     def apply(c: Context)(parents: List[c.Tree], zuper: c.Tree): List[c.Tree] = {
         parents.map { x =>
             if (x.equalsStructure(c.macroApplication)) zuper else x

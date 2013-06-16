@@ -16,7 +16,6 @@ import scala.reflect.macros.Context
 
 
 object TypeOfSelf {
-
     type apply = macro impl
 
     def impl(c: Context): c.Tree = {
