@@ -8,180 +8,62 @@ package com.github.okomok
 package sing
 
 
+import makro.BinaryLiteral.{apply => B_}
+
+
 private[sing]
 object KindId {
-    import Dense._
-
-     def fresh[bs <: Dense](bs: bs): fresh[bs] = DCons(_0B, bs.tail)
-    type fresh[bs <: Dense]                    = DCons[_0B, bs#tail]
-
-    object ReverseAppend {
-         def apply[xs <: Dense, ys <: Dense](xs: xs, ys: ys): apply[xs, ys] =
-            `if`(xs.isZero, Const(ys), Else(xs, ys)).apply.asNat.asDense
-        type apply[xs <: Dense, ys <: Dense] =
-            `if`[xs#isZero, Const[ys], Else[xs, ys]]#apply#asNat#asDense
-
-        case class Else[xs <: Dense, ys <: Dense](xs: xs, ys: ys) extends AsFunction0 {
-            override type self = Else[xs, ys]
-            override  def apply: apply = ReverseAppend.apply(xs.tail, DCons(xs.head, ys))
-            override type apply        = ReverseAppend.apply[xs#tail, DCons[xs#head, ys]]
-        }
-    }
-
-     def rev[bs <: Dense](bs: bs): rev[bs] = ReverseAppend.apply(bs, DNil)
-    type rev[bs <: Dense]                  = ReverseAppend.apply[bs, DNil]
-
-    lazy val _ofAny: _ofAny                         = _1B D_:: DNil
-        type _ofAny                                 = _1B D_:: DNil
-
-    lazy val ofAny: ofAny = rev(_ofAny)
-        type ofAny        = rev[_ofAny]
-
+    lazy val ofAny: ofAny                           = B_("0000000000000000000000000001")
+        type ofAny                                  = B_("0000000000000000000000000001")
 // Singles
-
-    lazy val _ofBoxed: _ofBoxed                     = _1B D_:: _ofAny
-        type _ofBoxed                               = _1B D_:: _ofAny
-
-    lazy val ofBoxed: ofBoxed = rev(_ofBoxed)
-        type ofBoxed          = rev[_ofBoxed]
-
-    lazy val _ofEither: _ofEither                   = _1B D_:: fresh(_ofBoxed)
-        type _ofEither                              = _1B D_:: fresh[_ofBoxed]
-
-    lazy val ofEither: ofEither = rev(_ofEither)
-        type ofEither           = rev[_ofEither]
-
-    lazy val _ofFunction0: _ofFunction0             = _1B D_:: fresh(_ofEither)
-        type _ofFunction0                           = _1B D_:: fresh[_ofEither]
-
-    lazy val ofFunction0: ofFunction0 = rev(_ofFunction0)
-        type ofFunction0              = rev[_ofFunction0]
-
-    lazy val _ofFunction2: _ofFunction2             = _1B D_:: fresh(_ofFunction0)
-        type _ofFunction2                           = _1B D_:: fresh[_ofFunction0]
-
-    lazy val ofFunction2: ofFunction2 = rev(_ofFunction2)
-        type ofFunction2              = rev[_ofFunction2]
-
-    lazy val _ofFunction3: _ofFunction3             = _1B D_:: fresh(_ofFunction2)
-        type _ofFunction3                           = _1B D_:: fresh[_ofFunction2]
-
-    lazy val ofFunction3: ofFunction3 = rev(_ofFunction3)
-        type ofFunction3              = rev[_ofFunction3]
-
-    lazy val _ofKind: _ofKind                       = _1B D_:: fresh(_ofFunction3)
-        type _ofKind                                = _1B D_:: fresh[_ofFunction3]
-
-    lazy val ofKind: ofKind = rev(_ofKind)
-        type ofKind         = rev[_ofKind]
-
-    lazy val _ofOption: _ofOption                   = _1B D_:: fresh(_ofKind)
-        type _ofOption                              = _1B D_:: fresh[_ofKind]
-
-    lazy val ofOption: ofOption = rev(_ofOption)
-        type ofOption           = rev[_ofOption]
-
-    lazy val _ofSet: _ofSet                         = _1B D_:: fresh(_ofOption)
-        type _ofSet                                 = _1B D_:: fresh[_ofOption]
-
-    lazy val ofSet: ofSet = rev(_ofSet)
-        type ofSet        = rev[_ofSet]
-
-    lazy val _ofUnit: _ofUnit                       = _1B D_:: fresh(_ofSet)
-        type _ofUnit                                = _1B D_:: fresh[_ofSet]
-
-    lazy val ofUnit: ofUnit = rev(_ofUnit)
-        type ofUnit         = rev[_ofUnit]
-
+    lazy val ofBoxed: ofBoxed                       = B_("0000000000000000000000000011")
+        type ofBoxed                                = B_("0000000000000000000000000011")
+    lazy val ofEither: ofEither                     = B_("0000000000000000000000000101")
+        type ofEither                               = B_("0000000000000000000000000101")
+    lazy val ofFunction0: ofFunction0               = B_("0000000000000000000000001001")
+        type ofFunction0                            = B_("0000000000000000000000001001")
+    lazy val ofFunction2: ofFunction2               = B_("0000000000000000000000010001")
+        type ofFunction2                            = B_("0000000000000000000000010001")
+    lazy val ofFunction3: ofFunction3               = B_("0000000000000000000000100001")
+        type ofFunction3                            = B_("0000000000000000000000100001")
+    lazy val ofKind: ofKind                         = B_("0000000000000000000001000001")
+        type ofKind                                 = B_("0000000000000000000001000001")
+    lazy val ofOption: ofOption                     = B_("0000000000000000000010000001")
+        type ofOption                               = B_("0000000000000000000010000001")
+    lazy val ofSet: ofSet                           = B_("0000000000000000000100000001")
+        type ofSet                                  = B_("0000000000000000000100000001")
+    lazy val ofUnit: ofUnit                         = B_("0000000000000000001000000001")
+        type ofUnit                                 = B_("0000000000000000001000000001")
 // Nats
-
-    lazy val _ofNat: _ofNat                         = _1B D_:: fresh(_ofUnit)
-        type _ofNat                                 = _1B D_:: fresh[_ofUnit]
-
-    lazy val ofNat: ofNat = rev(_ofNat)
-        type ofNat        = rev[_ofNat]
-
-    lazy val _ofBoolean: _ofBoolean                 = _1B D_:: _ofNat
-        type _ofBoolean                             = _1B D_:: _ofNat
-
-    lazy val ofBoolean: ofBoolean = rev(_ofBoolean)
-        type ofBoolean            = rev[_ofBoolean]
-
+    lazy val ofNat: ofNat                           = B_("0000000000000000010000000001")
+        type ofNat                                  = B_("0000000000000000010000000001")
+    lazy val ofBoolean: ofBoolean                   = B_("0000000000000000110000000001")
+        type ofBoolean                              = B_("0000000000000000110000000001")
 // Lists
-
-    lazy val _ofList: _ofList                       = _1B D_:: fresh(fresh(_ofBoolean))
-        type _ofList                                = _1B D_:: fresh[fresh[_ofBoolean]]
-
-    lazy val ofList: ofList = rev(_ofList)
-        type ofList         = rev[_ofList]
-
-    lazy val _ofProduct: _ofProduct                 = _1B D_:: fresh(_ofList)
-        type _ofProduct                             = _1B D_:: fresh[_ofList]
-
-    lazy val ofProduct: ofProduct = rev(_ofProduct)
-        type ofProduct            = rev[_ofProduct]
-
-    lazy val _ofProduct1: _ofProduct1               = _1B D_:: _ofProduct
-        type _ofProduct1                            = _1B D_:: _ofProduct
-
-    lazy val ofProduct1: ofProduct1 = rev(_ofProduct1)
-        type ofProduct1             = rev[_ofProduct1]
-
-    lazy val _ofProduct2: _ofProduct2               = _1B D_:: fresh(_ofProduct1)
-        type _ofProduct2                            = _1B D_:: fresh[_ofProduct1]
-
-    lazy val ofProduct2: ofProduct2 = rev(_ofProduct2)
-        type ofProduct2             = rev[_ofProduct2]
-
-    lazy val _ofProduct3: _ofProduct3               = _1B D_:: fresh(_ofProduct2)
-        type _ofProduct3                            = _1B D_:: fresh[_ofProduct2]
-
-    lazy val ofProduct3: ofProduct3 = rev(_ofProduct3)
-        type ofProduct3             = rev[_ofProduct3]
-
+    lazy val ofList: ofList                         = B_("0000000000000001000000000001")
+        type ofList                                 = B_("0000000000000001000000000001")
+    lazy val ofProduct: ofProduct                   = B_("0000000000000011000000000001")
+        type ofProduct                              = B_("0000000000000011000000000001")
+    lazy val ofProduct1: ofProduct1                 = B_("0000000000000111000000000001")
+        type ofProduct1                             = B_("0000000000000111000000000001")
+    lazy val ofProduct2: ofProduct2                 = B_("0000000000001011000000000001")
+        type ofProduct2                             = B_("0000000000001011000000000001")
+    lazy val ofProduct3: ofProduct3                 = B_("0000000000010011000000000001")
+        type ofProduct3                             = B_("0000000000010011000000000001")
 // Relations
-
-    lazy val _ofRelation: _ofRelation               = _1B D_:: fresh(fresh(fresh(fresh(_ofProduct3))))
-        type _ofRelation                            = _1B D_:: fresh[fresh[fresh[fresh[_ofProduct3]]]]
-
-    lazy val ofRelation: ofRelation = rev(_ofRelation)
-        type ofRelation             = rev[_ofRelation]
-
-    lazy val _ofEquiv: _ofEquiv                     = _1B D_:: _ofRelation
-        type _ofEquiv                               = _1B D_:: _ofRelation
-
-    lazy val ofEquiv: ofEquiv = rev(_ofEquiv)
-        type ofEquiv          = rev[_ofEquiv]
-
-    lazy val _ofPartialOrdering: _ofPartialOrdering = _1B D_:: _ofEquiv
-        type _ofPartialOrdering                     = _1B D_:: _ofEquiv
-
-    lazy val ofPartialOrdering: ofPartialOrdering = rev(_ofPartialOrdering)
-        type ofPartialOrdering                    = rev[_ofPartialOrdering]
-
-    lazy val _ofOrdering: _ofOrdering               = _1B D_:: _ofPartialOrdering
-        type _ofOrdering                            = _1B D_:: _ofPartialOrdering
-
-    lazy val ofOrdering: ofOrdering = rev(_ofOrdering)
-        type ofOrdering             = rev[_ofOrdering]
-
+    lazy val ofRelation: ofRelation                 = B_("0000000000100000000000000001")
+        type ofRelation                             = B_("0000000000100000000000000001")
+    lazy val ofEquiv: ofEquiv                       = B_("0000000001100000000000000001")
+        type ofEquiv                                = B_("0000000001100000000000000001")
+    lazy val ofPartialOrdering: ofPartialOrdering   = B_("0000000010100000000000000001")
+        type ofPartialOrdering                      = B_("0000000010100000000000000001")
+    lazy val ofOrdering: ofOrdering                 = B_("0000000100100000000000000001")
+        type ofOrdering                             = B_("0000000100100000000000000001")
 // Function1s (extends Relation)
-
-    lazy val _ofFunction1: _ofFunction1             = _1B D_:: fresh(fresh(fresh(_ofOrdering)))
-        type _ofFunction1                           = _1B D_:: fresh[fresh[fresh[_ofOrdering]]]
-
-    lazy val ofFunction1: ofFunction1 = rev(_ofFunction1)
-        type ofFunction1              = rev[_ofFunction1]
-
-    lazy val _ofPartialFunction: _ofPartialFunction = _1B D_:: _ofFunction1
-        type _ofPartialFunction                     = _1B D_:: _ofFunction1
-
-    lazy val ofPartialFunction: ofPartialFunction = rev(_ofPartialFunction)
-        type ofPartialFunction                    = rev[_ofPartialFunction]
-
-    lazy val _ofMap: _ofMap                         = _1B D_:: _ofPartialFunction
-        type _ofMap                                 = _1B D_:: _ofPartialFunction
-
-    lazy val ofMap: ofMap = rev(_ofMap)
-        type ofMap        = rev[_ofMap]
+    lazy val ofFunction1: ofFunction1               = B_("0000001000100000000000000001")
+        type ofFunction1                            = B_("0000001000100000000000000001")
+    lazy val ofPartialFunction: ofPartialFunction   = B_("0000011000100000000000000001")
+        type ofPartialFunction                      = B_("0000011000100000000000000001")
+    lazy val ofMap: ofMap                           = B_("0000101000100000000000000001")
+        type ofMap                                  = B_("0000101000100000000000000001")
 }
