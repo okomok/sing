@@ -29,6 +29,9 @@ object List extends AsKind with _list.ToSTuple {
      def range[n <: Nat, m <: Nat](n: n, m: m): range[n, m] = Range.apply(n, m)
     type range[n <: Nat, m <: Nat]                          = Range.apply[n, m]
 
+     def rangeFrom[n <: Nat](n: n): rangeFrom[n] = RangeFrom.apply(n)
+    type rangeFrom[n <: Nat]                     = RangeFrom.apply[n]
+
      def iterate[z <: Any, f <: Function1](z: z, f: f): iterate[z, f] = Iterate.apply(z, f)
     type iterate[z <: Any, f <: Function1]                            = Iterate.apply[z, f]
 
@@ -216,6 +219,9 @@ trait List extends Any {
 
      def times[n <: Nat](n: n): times[n]
     type times[n <: Nat] <: List
+
+     def caseNil[ifNil <: Function0, _else <: Function2](ifNil: ifNil, _else: _else): caseNil[ifNil, _else]
+    type caseNil[ifNil <: Function0, _else <: Function2] <: Function0
 }
 
 
@@ -364,6 +370,9 @@ trait ListImpl extends List with AnyImpl with UnsingEquals {
 
     override  def times[n <: Nat](n: n): times[n] = Times.apply(self, n)
     override type times[n <: Nat]                 = Times.apply[self, n]
+
+    override  def caseNil[ifNil <: Function0, _else <: Function2](ifNil: ifNil, _else: _else): caseNil[ifNil, _else] = CaseNil.apply(self, ifNil, _else)
+    override type caseNil[ifNil <: Function0, _else <: Function2]                                                    = CaseNil.apply[self, ifNil, _else]
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[List]
 }

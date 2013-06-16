@@ -213,10 +213,17 @@ object Test {
     /**
      * Prints a type name.
      */
-     def echo[x]: scala.Unit = macro echo_term_impl[x]
-    type echo[x]             = macro echo_type_impl[x]
+     def echo[x]: scala.Unit       = macro echo_term_impl_[x]
+     def echo[x](x: x): scala.Unit = macro echo_term_impl[x]
+    type echo[x]                   = macro echo_type_impl[x]
 
-    def echo_term_impl[x](c: Context)(implicit xt: c.WeakTypeTag[x]): c.Expr[scala.Unit] = {
+    def echo_term_impl_[x](c: Context)(implicit xt: c.WeakTypeTag[x]): c.Expr[scala.Unit] = {
+        import c.universe._
+        _echo_impl(c)(xt)
+        reify(())
+    }
+
+    def echo_term_impl[x](c: Context)(x: c.Expr[x])(implicit xt: c.WeakTypeTag[x]): c.Expr[scala.Unit] = {
         import c.universe._
         _echo_impl(c)(xt)
         reify(())

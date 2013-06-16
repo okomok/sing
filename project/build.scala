@@ -4,7 +4,7 @@ import Keys._
 object build extends Build {
     lazy val theSettings = Project.defaultSettings ++ Seq(
         organization := "com.github.okomok",
-        version := "0.1.1-SNAPSHOT",
+        version := "0.2.0-SNAPSHOT",
         scalaVersion := "2.11.0-SNAPSHOT",
 
         scalacOptions ++=
