@@ -42,4 +42,9 @@ class PrimesTest extends org.scalatest.junit.JUnit3Suite {
         Test.assertSame(some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil)
         Test.assertSame[some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil]
     }
+
+    def testBench {
+//        makro.Benchmark { unused[primes#take[_10]#force] } // memoized (nearly 0msec)
+//        makro.Benchmark { unused[primes#take[_12]#force] } // about 4000msec
+    }
 }
