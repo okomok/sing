@@ -11,8 +11,8 @@ class PrimesTest extends org.scalatest.junit.JUnit3Suite {
 
     final class Sieve extends AsFunction1 {
         override type self = Sieve
-        override  def apply[ns <: Any](ns: ns) = ns.asList.drop(_1).filter(NonDiv(ns.asList.head.asNat))
-        override type apply[ns <: Any]         = ns#asList#drop[_1]#filter[NonDiv[ns#asList#head#asNat]]
+        override  def apply[ns <: Any](ns: ns): apply[ns] = ns.asList.tail.filter(NonDiv(ns.asList.head.asNat))
+        override type apply[ns <: Any]                    = ns#asList#tail#filter[NonDiv[ns#asList#head#asNat]]
     }
     val Sieve: Sieve = new Sieve
 
