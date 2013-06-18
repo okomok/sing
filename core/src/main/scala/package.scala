@@ -98,8 +98,6 @@ package object sing {
 
 // misc
 
-    type `null` = scala.Nothing
-
     /**
      * Keeps methods from being dependent.
      */
@@ -130,6 +128,23 @@ package object sing {
 
     @equivalentTo("AsT with Self")
     type New[T] = macro makro.New.impl[T]
+
+
+// errors
+
+    type `null` = Nothing
+
+    /**
+     * Trivial helper to throw UnsupportedOperationException
+     */
+     def unsupported(what: Predef.String): unsupported = throw new UnsupportedOperationException("sing." + what)
+    type unsupported                                    = Nothing
+
+    /**
+     * Trivial helper to throw NoSuchElementException
+     */
+     def noSuchElement(what: Predef.String): noSuchElement = throw new NoSuchElementException("sing." + what)
+    type noSuchElement                                      = Nothing
 
 
 // assertions

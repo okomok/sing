@@ -18,13 +18,15 @@ object Check {
 
     def term_impl[x: c.WeakTypeTag](c: Context)(x: c.Expr[x]): c.Expr[x] = {
         import c.universe._
-        AssertConcrete(c)
+        AssertConcrete._impl(c)
+        AssertNotNothing._impl(c)
         x
     }
 
     def type_impl[x: c.WeakTypeTag](c: Context): c.Tree = {
         import c.universe._
-        AssertConcrete(c)
+        AssertConcrete._impl(c)
+        AssertNotNothing._impl(c)
         tq"${weakTypeOf[x]}"
     }
 }

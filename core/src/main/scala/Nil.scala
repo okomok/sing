@@ -15,10 +15,10 @@ sealed abstract class Nil extends AsList {
     override type isEmpty          = `true`
 
     override  def head: head = noSuchElement("Nil.head")
-    override type head       = noSuchElement[_]
+    override type head       = noSuchElement
 
     override  def tail: tail = noSuchElement("Nil.tail")
-    override type tail       = noSuchElement[_]
+    override type tail       = noSuchElement
 
     def unapply(that: Nil) = true
 }

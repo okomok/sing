@@ -85,7 +85,7 @@ object PartialFunctionImpl {
         override  def isDefinedAt[x <: Any](x: x): isDefinedAt[x] = `false`
         override type isDefinedAt[x <: Any]                       = `false`
         override  def apply[x <: Any](x: x): apply[x] = unsupported("PartialFunction.empty.apply")
-        override type apply[x <: Any] <: Nothing
+        override type apply[x <: Any]                 = unsupported
     }
 
     final case class OrElse[f1 <: PartialFunction, f2 <: PartialFunction](f1: f1, f2: f2) extends AsPartialFunction {

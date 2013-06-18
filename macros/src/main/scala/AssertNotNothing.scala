@@ -35,7 +35,7 @@ object AssertNotNothing {
         tq"scala.Unit"
     }
 
-    private def _impl[x](c: Context)(xt: c.WeakTypeTag[x]) {
+    def _impl[x](c: Context)(implicit xt: c.WeakTypeTag[x]): Unit = {
         import c.universe._
         if (weakTypeOf(xt) =:= weakTypeOf[Nothing]) {
             c.abort(c.enclosingPosition, show(weakTypeOf[x]) + " is Nothing unexpectedly.")

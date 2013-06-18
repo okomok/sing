@@ -131,5 +131,21 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         ()
     }
+
+    def testNull {
+         def foo[x <: Nat](x: x): foo[x] = `if`(id(x).equal(Dense._2), Throw(new java.lang.Error("doh")), Const(id(x).increment)).apply
+        type foo[x <: Nat]               = `if`[id[x]#equal[Dense._2], Throw                            , Const[id[x]#increment]]#apply
+
+        val x: x = check(foo(Dense._3))
+        type x   = check[foo[Dense._3]]
+
+        expectError {
+            check(foo(Dense._2))
+        }
+
+        expectError {
+            check(ignore[foo[Dense._2]])
+        }
+    }
 }
 

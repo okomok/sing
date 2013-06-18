@@ -121,18 +121,6 @@ trait Any extends scala.Equals {
     final protected def refEquals(that: scala.Any) = super.equals(that)
     final protected def refHashCode = super.hashCode
     final protected def refToString = super.toString
-
-    /**
-     * Trivial helper to throw UnsupportedOperationException
-     */
-    protected  def unsupported(what: Predef.String): unsupported[_] = throw new UnsupportedOperationException("sing." + what)
-    protected type unsupported[_] <: Nothing // keep it abstract.
-
-    /**
-     * Trivial helper to throw NoSuchElementException
-     */
-    protected  def noSuchElement(what: Predef.String): noSuchElement[_] = throw new NoSuchElementException("sing." + what)
-    protected type noSuchElement[_] <: Nothing
 }
 
 

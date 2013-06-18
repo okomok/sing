@@ -14,8 +14,8 @@ import scala.reflect.macros.Context
 // See: http://stackoverflow.com/questions/15898037/how-to-check-if-weaktypetag-or-type-represents-concrete-type
 
 
-object AssertConcrete {
-    def apply[T: c.WeakTypeTag](c: Context) {
+private object AssertConcrete {
+    def _impl[T: c.WeakTypeTag](c: Context) {
         import c.universe._
 
         val t = weakTypeOf[T]

@@ -88,7 +88,7 @@ sealed trait Zero extends AsPeano {
     override type isZero         = `true`
 
     override  def decrement: decrement = unsupported("Zero.decrement")
-    override type decrement            = unsupported[_]
+    override type decrement            = unsupported
 
     override  def equal[that <: Any](that: that): equal[that] = that.asNat.isZero
     override type equal[that <: Any]                          = that#asNat#isZero

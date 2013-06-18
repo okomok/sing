@@ -65,7 +65,7 @@ class ConstantTypeTest extends org.scalatest.junit.JUnit3Suite {
             val x: ct = false
         }
 
-        Test.echo[ct]
+        // Test.echo[ct]
 
         val c: Boolean = ConstantTermOf.apply[ct]
         assertEquals(true, c)

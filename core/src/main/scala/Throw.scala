@@ -12,5 +12,5 @@ final case class Throw(what: Throwable) extends AsFunction0 {
     override type self = Throw
 
     override  def apply: apply = throw what
-    override type apply <: Nothing // keep it abstract.
+    override type apply = Nothing
 }

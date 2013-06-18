@@ -125,7 +125,7 @@ sealed abstract class None extends AsOption {
     override type isEmpty          = `true`
 
     override  def get: get = noSuchElement("None.get")
-    override type get      = noSuchElement[_]
+    override type get      = noSuchElement
 
     override  def getOrElse[f <: Function0](f: f): getOrElse[f] = f.apply
     override type getOrElse[f <: Function0]                     = f#apply
