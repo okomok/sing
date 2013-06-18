@@ -70,14 +70,14 @@ object Test {
    type assertNotSame[x, y]                         = macro makro.AssertNotSame.type_impl[x, y]
 
     /**
-     * Asserts that <code>A</code> conforms to <code>B</code>.
+     * Asserts that <code>x</code> conforms to <code>y</code>.
      */
     @elidable(ALL)
      def assertConforms[x <: y, y](implicit x: x = dummy[x], y: y = dummy[y]): assertConforms[x, y] = Unit
     type assertConforms[x <: y, y]                                                                  = Unit
 
     /**
-     * Asserts that <code>A</code> doesn't conform to <code>B</code>.
+     * Asserts that <code>x</code> doesn't conform to <code>y</code>.
      */
      def assertNotConforms[x, y]: scala.Unit             = macro makro.AssertNotConforms.term_impl_[x, y]
      def assertNotConforms[x, y](x: x, y: y): scala.Unit = macro makro.AssertNotConforms.term_impl[x, y]

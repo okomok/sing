@@ -55,5 +55,21 @@ class ConstantTypeTest extends org.scalatest.junit.JUnit3Suite {
         assertEquals(c, 3)
     }
 
+    final val THREE = 3
+
+    def testSmart {
+        type ct = ConstantTypeOf.apply(1+2 == THREE)
+        val x: ct = true
+
+        Test.expectError {
+            val x: ct = false
+        }
+
+        Test.echo[ct]
+
+        val c: Boolean = ConstantTermOf.apply[ct]
+        assertEquals(true, c)
+    }
+
 }
 
