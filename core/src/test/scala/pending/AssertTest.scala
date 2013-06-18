@@ -50,18 +50,18 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         type no = Nothing
 
-        assertNotNothing[Int]
+        makro.AssertNotNothing.apply[Int]
 
         expectError {
-            assertNotNothing[no]
+            makro.AssertNotNothing.apply[no]
         }
-
+/*
         assertNothing[no]
 
         expectError {
             assertNothing[Int]
         }
-
+*/
         assertConforms[Int, AnyVal]
 
         expectError {
