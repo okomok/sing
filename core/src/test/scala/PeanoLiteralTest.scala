@@ -36,7 +36,7 @@ class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
         }
 
         expectError {
-            unused[ Peano_(-1) ]
+            dummy[ Peano_(-1) ]
         }
     }
 

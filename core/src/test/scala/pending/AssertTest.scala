@@ -90,7 +90,7 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         }
 
         expectError {
-            unused[ check[foo[Nil]] ]
+            dummy[ check[foo[Nil]] ]
         }
 
         val x: x = check(Some(Dense._2).get)
@@ -110,7 +110,7 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
 
         expectError {
-            // unused[ assertSame[Char, Int] ] // compiles, funny.
+            // dummy[ assertSame[Char, Int] ] // compiles, funny.
             wow
         }
 

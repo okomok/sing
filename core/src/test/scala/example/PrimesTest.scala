@@ -44,7 +44,7 @@ class PrimesTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testBench {
-//        makro.Benchmark { unused[primes#take[_10]#force] } // memoized (nearly 0msec)
-//        makro.Benchmark { unused[primes#take[_12]#force] } // about 4000msec
+//        makro.Benchmark { dummy[primes#take[_10]#force] } // memoized (nearly 0msec)
+//        makro.Benchmark { dummy[primes#take[_12]#force] } // about 4000msec
     }
 }

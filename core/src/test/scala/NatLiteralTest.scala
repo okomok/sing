@@ -37,7 +37,7 @@ class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
         }
 
         expectError {
-            unused[ Nat_(-1) ]
+            dummy[ Nat_(-1) ]
         }
     }
 

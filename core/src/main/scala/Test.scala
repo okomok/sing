@@ -35,7 +35,7 @@ object Test {
      * Asserts that a condition is true.
      */
     @elidable(ALL)
-     def assertTrue[x >: `true` <: `true`](implicit x: x = unused[x]): assertTrue[`true`] = () // implicit for `assertTrue[x]` to be well-formed.
+     def assertTrue[x >: `true` <: `true`](implicit x: x = dummy[x]): assertTrue[`true`] = () // implicit for `assertTrue[x]` to be well-formed.
     type assertTrue[x >: `true` <: `true`]                                                = scala.Unit
 
 
@@ -43,7 +43,7 @@ object Test {
      * Asserts that a condition is false.
      */
     @elidable(ALL)
-     def assertFalse[x >: `false` <: `false`](implicit x: x = unused[x]): assertFalse[`false`] = ()
+     def assertFalse[x >: `false` <: `false`](implicit x: x = dummy[x]): assertFalse[`false`] = ()
     type assertFalse[x >: `false` <: `false`]                                                  = scala.Unit
 
 
@@ -51,7 +51,7 @@ object Test {
      * Asserts that a type is Nothing.
      */
     @elidable(ALL)
-     def assertNothing[x >: Nothing <: Nothing](implicit x: x = unused[x]): assertNothing[x] = ()
+     def assertNothing[x >: Nothing <: Nothing](implicit x: x = dummy[x]): assertNothing[x] = ()
     type assertNothing[x >: Nothing <: Nothing]                                              = scala.Unit
 
 
@@ -92,7 +92,7 @@ object Test {
      * Asserts that two types refer to the same type.
      */
     @elidable(ALL)
-     def assertSame[x >: y <: y, y](implicit x: x = unused[x], y: y = unused[y]): assertSame[x, y] = ()
+     def assertSame[x >: y <: y, y](implicit x: x = dummy[x], y: y = dummy[y]): assertSame[x, y] = ()
     type assertSame[x >: y <: y, y]                                                                = scala.Unit
 
 
@@ -133,7 +133,7 @@ object Test {
      * Asserts that <code>A</code> conforms to <code>B</code>.
      */
     @elidable(ALL)
-     def assertConforms[x <: y, y](implicit x: x = unused[x], y: y = unused[y]): assertConforms[x, y] = Unit
+     def assertConforms[x <: y, y](implicit x: x = dummy[x], y: y = dummy[y]): assertConforms[x, y] = Unit
     type assertConforms[x <: y, y]                                                                    = Unit
 
 

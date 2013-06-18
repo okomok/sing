@@ -49,7 +49,7 @@ class BinaryLiteralTest extends org.scalatest.junit.JUnit3Suite {
         }
 
         expectError {
-            unused[ Binary_("a0") ]
+            dummy[ Binary_("a0") ]
         }
     }
 
