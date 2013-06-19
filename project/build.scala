@@ -26,21 +26,25 @@ object build extends Build {
     )
 
     lazy val root = Project(
-        "root",
-        file("core"),
-        settings = theSettings
+        "sing-root",
+        file("."),
+        settings = theSettings ++ Seq(
+            publish := (),
+            publishLocal := ()
+        )
     ) aggregate(macros, core)
 
-    lazy val macros = Project(
-        "macros",
-        file("macros"),
-        settings = theSettings ++ Seq(
-            libraryDependencies <+= (scalaVersion)("org.scala-lang.macro-paradise" % "scala-reflect" % _))
-    )
-
     lazy val core = Project(
-        "core",
+        "sing-core",
         file("core"),
         settings = theSettings
     ) dependsOn(macros)
+
+    lazy val macros = Project(
+        "sing-macros",
+        file("macros"),
+        settings = theSettings ++ Seq(
+            libraryDependencies <+= (scalaVersion)("org.scala-lang.macro-paradise" % "scala-reflect" % _)
+        )
+    )
 }
