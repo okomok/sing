@@ -13,7 +13,7 @@ object Minus {
      def apply[xs <: Dense, ys <: Dense](xs: xs, ys: ys): apply[xs, ys] =
         Match(xs, ys,
             Const(DNil),
-            Throw(new UnsupportedOperationException("sing.Dense.DNil.subtract positive")),
+            Throw(new UnsupportedOperationException("sing.DNil.minus positive")),
             Const(xs),
             DConsMatch(xs, ys,
                 CaseXX(xs, ys),

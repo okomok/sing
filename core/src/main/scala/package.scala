@@ -132,8 +132,6 @@ package object sing {
 
 // errors
 
-    type `null` = Nothing
-
     /**
      * Trivial helper to throw UnsupportedOperationException
      */

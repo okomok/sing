@@ -16,6 +16,6 @@ object Assert {
      case class Else[c <: Boolean](c: c) extends AsFunction0 {
          override type self = Else[c]
          override  def apply: apply = throw new AssertionError("sing.assert")
-         override type apply = `null` // Assert.apply[c]
+         override type apply = Nothing // Assert.apply[c]
      }
 }
