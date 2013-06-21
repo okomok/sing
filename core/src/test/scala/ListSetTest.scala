@@ -23,8 +23,8 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type rm = m#remove[_5]
         val rm: rm = m.remove(_5)
 
-        Test.assertSame[_2, rm#size]
-        Test.assertSame[`false`, rm#contains[_5]]
+        Test.cassertSame[_2, rm#size]
+        Test.cassertSame[`false`, rm#contains[_5]]
     }
 
     def testClear {
@@ -34,7 +34,7 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type n = m1#clear
         val n: n = m1.clear
 
-        Test.assertTrue[n#isEmpty]
+        Test.cassert[n#isEmpty]
         assertTrue(n.isEmpty.unsing)
     }
 
@@ -45,9 +45,9 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = SortedSet.add[_3]#add[_4]#add[_0]#add[_2]#add[_5]#add[_1]
         val m2: m2 = SortedSet.add(_3).add(_4).add(_0).add(_2).add(_5).add(_1)
 
-        Test.assertSame[`true`, m#equal[m]]
-        Test.assertSame[`true`, m#equal[m2]]
-        Test.assertSame[`true`, m2#equal[m]]
+        Test.cassertSame[`true`, m#equal[m]]
+        Test.cassertSame[`true`, m#equal[m2]]
+        Test.cassertSame[`true`, m2#equal[m]]
         assertEquals(`true`, m.equal(m2))
     }
 
@@ -58,38 +58,38 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = m.add[_1]
         val m2: m2 = m.add(_1)
 
-        Test.assertSame[`true`, m#size#equal[m2#size]]
+        Test.cassertSame[`true`, m#size#equal[m2#size]]
     }
 
     def testAdd {
         type m = ListSet.add[_3]#add[_5]#add[_1]
         val m: m = ListSet.add(_3).add(_5).add(_1)
 
-        Test.assertSame[_3, m#size]
+        Test.cassertSame[_3, m#size]
 
         type v8 = m#contains[_8]
         val v8: v8 = m.contains(_8)
-        Test.assertSame[`false`, v8]
+        Test.cassertSame[`false`, v8]
 
         type v5 = m#contains[_5]
         val v5: v5 = m.contains(_5)
-        Test.assertSame[`true`, v5]
+        Test.cassertSame[`true`, v5]
     }
 
     def testContains {
         type m = ListSet.add[_3]#add[_5]#add[_1]
         val m: m = ListSet.add(_3).add(_5).add(_1)
 
-        Test.assertSame[`false`, m#contains[_9]]
-        Test.assertSame[`true`, m#contains[_5]]
+        Test.cassertSame[`false`, m#contains[_9]]
+        Test.cassertSame[`true`, m#contains[_5]]
     }
 
     def testSorted1 {
         type m = ListSet.add[_3]#add[_5]#add[_1]
         val m: m = ListSet.add(_3).add(_5).add(_1)
 
-        Test.assertSame[`false`, m#contains[_9]]
-        Test.assertSame[`true`, m#contains[_5]]
+        Test.cassertSame[`false`, m#contains[_9]]
+        Test.cassertSame[`true`, m#contains[_5]]
     }
 
     def testUnsing {

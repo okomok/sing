@@ -43,13 +43,13 @@ class DropTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object DropTezt {
-    import Test.assertSame
+    import Test.cassertSame
 
     trait testTrivial {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil
-        assertSame[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#drop[_0]#force]
-        assertSame[_Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#drop[_2]#force]
-        assertSame[Nil, lst#drop[_5]#force]
-        assertSame[Nil, lst#drop[_10]#force]
+        cassertSame[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#drop[_0]#force]
+        cassertSame[_Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#drop[_2]#force]
+        cassertSame[Nil, lst#drop[_5]#force]
+        cassertSame[Nil, lst#drop[_10]#force]
     }
 }

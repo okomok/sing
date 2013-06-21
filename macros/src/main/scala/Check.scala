@@ -16,17 +16,28 @@ object Check {
      def apply[x](x: x) = macro term_impl[x]
     type apply[x]       = macro type_impl[x]
 
-    def term_impl[x: c.WeakTypeTag](c: Context)(x: c.Expr[x]): c.Expr[x] = {
+    def term_impl[x](c: Context)(x: c.Expr[x])(implicit tx: c.WeakTypeTag[x]): c.Expr[x] = {
         import c.universe._
-        AssertConcrete._impl(c)
-        AssertNotNothing._impl(c)
+
+        _impl(c)(tx)
         x
     }
 
-    def type_impl[x: c.WeakTypeTag](c: Context): c.Tree = {
+    def type_impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Tree = {
         import c.universe._
-        AssertConcrete._impl(c)
-        AssertNotNothing._impl(c)
+
+        _impl(c)(tx)
         tq"${weakTypeOf[x]}"
+    }
+
+    def _impl[x](c: Context)(tx: c.WeakTypeTag[x]): Unit = {
+        import c.universe._
+
+        val t = weakTypeOf(tx)
+        if (IsAbstract._impl(c)(tx)) {
+            c.abort(c.enclosingPosition, show(t) + " is abstract")
+        } else if (IsSame._impl(c)(tx, implicitly[c.WeakTypeTag[Nothing]])) {
+            c.abort(c.enclosingPosition, show(t) + " is Nothing")
+        }
     }
 }

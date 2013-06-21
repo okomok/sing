@@ -30,7 +30,7 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
         type bi = typeOf(bi)
         type k = typeOf(k)
 
-        Test.assertSame[`true`, bi#equal[k]]
+        Test.cassertSame[`true`, bi#equal[k]]
 
         ()
     }

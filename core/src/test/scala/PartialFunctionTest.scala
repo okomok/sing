@@ -17,16 +17,16 @@ class PartialFunctionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         val pf = SortedMap.put(Box.empty[Int], Box.empty[AnyVal]).put(Box.empty[String], Box.empty[AnyRef])
-        assertFalse {
+        cassertNot {
             pf.related(Box('a'), Box("abc"))
         }
-        assertFalse {
+        cassertNot {
             pf.related(Box("hello"), Box(3))
         }
-        assertTrue {
+        cassert {
             pf.related(Box(3), Box.empty[AnyVal])
         }
-        assertTrue {
+        cassert {
             pf.related(Box.empty[String], Box.empty[AnyRef])
         }
     }

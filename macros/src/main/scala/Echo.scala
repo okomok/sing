@@ -37,6 +37,8 @@ object Echo {
 
     private def _impl[x](c: Context)(xt: c.WeakTypeTag[x]) {
         import c.universe._
-        c.echo(c.enclosingPosition, show(weakTypeOf(xt).normalize))
+        val t = weakTypeOf(xt)
+        val nt = t.normalize
+        c.echo(c.enclosingPosition, "type: " + show(t) + ", tree: " + showRaw(t) + ", normalized type: " + show(nt) + ", normalized tree: " + showRaw(nt))
     }
 }

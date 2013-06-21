@@ -29,13 +29,13 @@ class BooleanTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testTrivial {
-        Test.assertSame[scala.Boolean, `true`#unsing]
-        Test.assertSame[`true`, `true`]
-     //   Test.assertTrue[`false` === if_Boolean[`true`, `false`, `true`]]
-     //   Test.assertTrue[`false` === if_Boolean[`false`, `true`, `false`]]
+        Test.cassertSame[scala.Boolean, `true`#unsing]
+        Test.cassertSame[`true`, `true`]
+     //   Test.cassert[`false` === if_Boolean[`true`, `false`, `true`]]
+     //   Test.cassert[`false` === if_Boolean[`false`, `true`, `false`]]
 
-    //    Test.assertSame[`false`, if_Boolean[`true`, `false`, `true`]]
-    //    Test.assertSame[`false`, if_Boolean[`false`, `true`, `false`]]
+    //    Test.cassertSame[`false`, if_Boolean[`true`, `false`, `true`]]
+    //    Test.cassertSame[`false`, if_Boolean[`false`, `true`, `false`]]
     }
 
     def testDuality {
@@ -45,26 +45,26 @@ class BooleanTest extends org.scalatest.junit.JUnit3Suite {
         okomok.sing.assert(x equal `false`)
     }
 
-    Test.assertTrue[`true`]
-    Test.assertFalse[`false`]
+    Test.cassert[`true`]
+    Test.cassertNot[`false`]
 
-    Test.assertTrue[`true`# equal [`true`]]
-    Test.assertTrue[`false`# equal [`false`]]
-    Test.assertTrue[`true`# nequal [`false`]]
-    Test.assertTrue[`false`# nequal [`true`]]
+    Test.cassert[`true`# equal [`true`]]
+    Test.cassert[`false`# equal [`false`]]
+    Test.cassert[`true`# nequal [`false`]]
+    Test.cassert[`false`# nequal [`true`]]
 
     type myNot[b <: Boolean] = b#not
-    Test.assertTrue[myNot[`true`]# nequal [`true`]]
-    Test.assertTrue[myNot[`false`]# nequal [`false`]]
-    Test.assertTrue[myNot[`true`]# equal [`false`]]
-    Test.assertTrue[myNot[`false`]# equal [`true`]]
+    Test.cassert[myNot[`true`]# nequal [`true`]]
+    Test.cassert[myNot[`false`]# nequal [`false`]]
+    Test.cassert[myNot[`true`]# equal [`false`]]
+    Test.cassert[myNot[`false`]# equal [`true`]]
 
     /*
     trait testOperator {
-        Test.assertTrue[`true` && `true`]
-        Test.assertTrue[(`false` && `true`)#not]
-        Test.assertTrue[`false` || `true`]
-        Test.assertTrue[`true` || `false`]
+        Test.cassert[`true` && `true`]
+        Test.cassert[(`false` && `true`)#not]
+        Test.cassert[`false` || `true`]
+        Test.cassert[`true` || `false`]
     }
     */
 
@@ -72,9 +72,9 @@ class BooleanTest extends org.scalatest.junit.JUnit3Suite {
         type incinc[n <: Peano] = `if`[n# equal[_3], Inc_Nat[n], Const[n]]#apply#asNat#increment#decrement#increment
         Test.assertConforms[incinc[_2], Peano]
 
-        Test.assertTrue[`if`[_2# equal[_3], Inc_Nat[_2], Const[_2]]#apply#increment# equal[_3]]
-        Test.assertTrue[incinc[_2]# equal[_3]]
-        Test.assertTrue[incinc[_3]# equal[_5]]
+        Test.cassert[`if`[_2# equal[_3], Inc_Nat[_2], Const[_2]]#apply#increment# equal[_3]]
+        Test.cassert[incinc[_2]# equal[_3]]
+        Test.cassert[incinc[_3]# equal[_5]]
     }
 
     class Inc_Nat[e <: Peano](val e: e) extends AsFunction0 {

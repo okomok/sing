@@ -16,8 +16,35 @@ import scala.reflect.macros.Context
 
 
 object IsAbstract {
-    def apply[T: c.WeakTypeTag](c: Context): Boolean = {
+     def apply[x](x: x) = macro term_impl[x]
+    type apply[x]       = macro type_impl[x]
+
+    def term_impl[x](c: Context)(x: c.Expr[x])(implicit tx: c.WeakTypeTag[x]): c.Expr[Any] = {
         import c.universe._
-        weakTypeOf[T].typeSymbol.asType.isAbstractType
+
+        val res = if (_impl(c)(tx)) {
+            q"${sing_(c)}.`true`"
+        } else {
+            q"${sing_(c)}.`false`"
+        }
+
+        c.Expr[Any](res)
+    }
+
+    def type_impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Tree = {
+        import c.universe._
+
+        val res = if (_impl(c)(tx)) {
+            tq"${sing_(c)}.`true`"
+        } else {
+            tq"${sing_(c)}.`false`"
+        }
+
+        res
+    }
+
+    def _impl[x](c: Context)(tx: c.WeakTypeTag[x]): Boolean = {
+        import c.universe._
+        weakTypeOf(tx).typeSymbol.asType.isAbstractType
     }
 }

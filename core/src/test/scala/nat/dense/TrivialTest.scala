@@ -55,73 +55,73 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testTrivial {
-        Test.assertSame[scala.Int, _2#unsing]
-        Test.assertTrue[_0# equal [_0]]
+        Test.cassertSame[scala.Int, _2#unsing]
+        Test.cassert[_0# equal [_0]]
 
-        Test.assertTrue[_0# nequal [_1]]
-        Test.assertTrue[_1# nequal [_0]]
+        Test.cassert[_0# nequal [_1]]
+        Test.cassert[_1# nequal [_0]]
 
-        Test.assertTrue[_1# equal [_1]]
+        Test.cassert[_1# equal [_1]]
 
-        Test.assertTrue[_1# nequal [_2]]
-        Test.assertTrue[_1# nequal [_3]]
-        Test.assertTrue[_2# nequal [_1]]
-        Test.assertTrue[_3# nequal[_1]]
+        Test.cassert[_1# nequal [_2]]
+        Test.cassert[_1# nequal [_3]]
+        Test.cassert[_2# nequal [_1]]
+        Test.cassert[_3# nequal[_1]]
 
-        Test.assertTrue[_7# equal[_7]]
-        Test.assertTrue[_2# nequal[_7]]
-        Test.assertTrue[_7# nequal[_2]]
-        Test.assertTrue[_6# nequal[_7]]
-        Test.assertTrue[_7# nequal[_6]]
-        Test.assertTrue[_0# nequal[_7]]
-        Test.assertTrue[_7# nequal[_0]]
-        Test.assertTrue[_1# nequal[_7]]
-        Test.assertTrue[_7# nequal[_1]]
+        Test.cassert[_7# equal[_7]]
+        Test.cassert[_2# nequal[_7]]
+        Test.cassert[_7# nequal[_2]]
+        Test.cassert[_6# nequal[_7]]
+        Test.cassert[_7# nequal[_6]]
+        Test.cassert[_0# nequal[_7]]
+        Test.cassert[_7# nequal[_0]]
+        Test.cassert[_1# nequal[_7]]
+        Test.cassert[_7# nequal[_1]]
 
-        Test.assertTrue[_1#increment# equal [_2]]
-        Test.assertTrue[_1#increment#increment# equal [_3]]
+        Test.cassert[_1#increment# equal [_2]]
+        Test.cassert[_1#increment#increment# equal [_3]]
 
-        Test.assertTrue[_1#decrement# equal [_0]]
-        Test.assertTrue[_3#decrement#decrement# equal [_1]]
-        Test.assertTrue[_4#decrement# equal [_3]]
-        Test.assertTrue[_7#increment#decrement#decrement# equal [_6]]
+        Test.cassert[_1#decrement# equal [_0]]
+        Test.cassert[_3#decrement#decrement# equal [_1]]
+        Test.cassert[_4#decrement# equal [_3]]
+        Test.cassert[_7#increment#decrement#decrement# equal [_6]]
     }
 
     trait testAdd {
-        Test.assertTrue[_0#plus[_0]# equal[_0]]
-        Test.assertTrue[_0#plus[_3]# equal[_3]]
-        Test.assertTrue[_4#plus[_3]# equal[_7]]
-        Test.assertTrue[_1#plus[_8]# equal[_9]]
-        Test.assertTrue[_5#plus[_2]# equal[_7]]
+        Test.cassert[_0#plus[_0]# equal[_0]]
+        Test.cassert[_0#plus[_3]# equal[_3]]
+        Test.cassert[_4#plus[_3]# equal[_7]]
+        Test.cassert[_1#plus[_8]# equal[_9]]
+        Test.cassert[_5#plus[_2]# equal[_7]]
     }
 
     trait testSubtract {
-        Test.assertTrue[_0# minus[_0]# equal[_0]]
-        Test.assertTrue[_1# minus[_1]# equal[_0]]
-        Test.assertTrue[_3# minus[_0]# equal[_3]]
-        Test.assertTrue[_4# minus[_3]# equal[_1]]
-        Test.assertTrue[_8# minus[_1]# equal[_7]]
-        Test.assertTrue[_5# minus[_2]# equal[_3]]
-        Test.assertTrue[_6# minus[_5]# equal[_1]]
-        Test.assertTrue[_5# minus[_5]# equal[_0]]
+        Test.cassert[_0# minus[_0]# equal[_0]]
+        Test.cassert[_1# minus[_1]# equal[_0]]
+        Test.cassert[_3# minus[_0]# equal[_3]]
+        Test.cassert[_4# minus[_3]# equal[_1]]
+        Test.cassert[_8# minus[_1]# equal[_7]]
+        Test.cassert[_5# minus[_2]# equal[_3]]
+        Test.cassert[_6# minus[_5]# equal[_1]]
+        Test.cassert[_5# minus[_5]# equal[_0]]
     }
 
     trait testComparison {
-        Test.assertTrue[_0#lt[_2]]
-        Test.assertTrue[_3#lt[_5]]
-        Test.assertTrue[_3#lteq[_3]]
-        Test.assertTrue[_5#gt[_3]]
-        Test.assertTrue[_4#gt[_0]]
-        Test.assertTrue[_4# gteq[_2]]
-        Test.assertTrue[_0#lteq[_0]]
-        Test.assertTrue[_0# gteq[_0]]
-        Test.assertFalse[_3#gt[_5]]
-        Test.assertFalse[_0#lt[_0]]
-        Test.assertFalse[_0#gt[_0]]
-        Test.assertFalse[_4# gteq[_5]]
-        Test.assertFalse[_4#lteq[_2]]
-        Test.assertFalse[_4#lt[_4]]
-        Test.assertFalse[_4#gt[_4]]
+        Test.cassert[_0#lt[_2]]
+        Test.cassert[_3#lt[_5]]
+        Test.cassert[_3#lteq[_3]]
+        Test.cassert[_5#gt[_3]]
+        Test.cassert[_4#gt[_0]]
+        Test.cassert[_4# gteq[_2]]
+        Test.cassert[_0#lteq[_0]]
+        Test.cassert[_0# gteq[_0]]
+        Test.cassertNot[_3#gt[_5]]
+        Test.cassertNot[_0#lt[_0]]
+        Test.cassertNot[_0#gt[_0]]
+        Test.cassertNot[_4# gteq[_5]]
+        Test.cassertNot[_4#lteq[_2]]
+        Test.cassertNot[_4#lt[_4]]
+        Test.cassertNot[_4#gt[_4]]
     }
 
     trait testPropagation {
@@ -129,17 +129,17 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type id[n <: Dense] = n#increment#decrement
         type equaL[n <: Dense, m <: Dense] = plusPlus[n]# equal [id[m]]
 
-        Test.assertTrue[plusPlus[_4]# equal [_6]]
-        Test.assertTrue[plusPlus[_7]# equal [_9]]
-        Test.assertTrue[id[_9]# equal [_9]]
-        Test.assertTrue[id[_7]# equal [_7]]
+        Test.cassert[plusPlus[_4]# equal [_6]]
+        Test.cassert[plusPlus[_7]# equal [_9]]
+        Test.cassert[id[_9]# equal [_9]]
+        Test.cassert[id[_7]# equal [_7]]
 
-        Test.assertTrue[equaL[_3, _5]]
-        Test.assertTrue[equaL[_4, _6]]
+        Test.cassert[equaL[_3, _5]]
+        Test.cassert[equaL[_4, _6]]
 
         // Must work.
         type subsub[n <: Dense, m <: Dense] = n# minus[m]# minus[m]
-        Test.assertTrue[subsub[_9, _2]# equal [_5]]
+        Test.cassert[subsub[_9, _2]# equal [_5]]
     }
 
 }

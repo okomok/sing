@@ -24,6 +24,6 @@ package com.github.okomoktest; package singtest; package example
             // Filter a heterogeneous List.
             val xs = _2 :: _3 :: _4 :: _2 :: _5 :: _6 :: _2 :: sing.Nil
             val ys = _3 :: _4 :: _5 :: _6 :: sing.Nil
-            sing.Test.assertTrue(xs.filter(not2).equal(ys)) // checked in compile-time thanks to the singleton.
+            sing.Test.cassert(xs.filter(not2).equal(ys)) // checked in compile-time thanks to the singleton.
         }
     }

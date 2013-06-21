@@ -27,7 +27,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        Test.assertSame[`true`, SortedMap.empty[Nat.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_5, _6]#put[_0, _1]#put[_1, _2]#put[_2, _3]#equalWith[um, Nat.naturalOrdering]]
+        Test.cassertSame[`true`, SortedMap.empty[Nat.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_5, _6]#put[_0, _1]#put[_1, _2]#put[_2, _3]#equalWith[um, Nat.naturalOrdering]]
         assertEquals(SortedMap.empty(Nat.naturalOrdering).put(_4, _5).put(_3, _4).put(_5, _6).put(_0, _1).put(_1, _2).put(_2, _3), um)
    }
 
@@ -41,7 +41,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        Test.assertSame[SortedMap.empty[Nat.naturalOrdering], um]
+        Test.cassertSame[SortedMap.empty[Nat.naturalOrdering], um]
         assertEquals(SortedMap.empty(Nat.naturalOrdering), um)
    }
 
@@ -55,7 +55,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        Test.assertSame[`true`,  SortedMap.empty[Nat.naturalOrdering]#put[_3, _4]#put[_1, _2]#put[_2, _3]#equalWith[um, Nat.naturalOrdering]]
+        Test.cassertSame[`true`,  SortedMap.empty[Nat.naturalOrdering]#put[_3, _4]#put[_1, _2]#put[_2, _3]#equalWith[um, Nat.naturalOrdering]]
         assertEquals(SortedMap.empty(Nat.naturalOrdering).put(_3, _4).put(_1, _2).put(_2, _3), um)
    }
 
@@ -69,7 +69,7 @@ class UnionTest extends org.scalatest.junit.JUnit3Suite {
         type um = m#union[m2]
         val um: um = m.union(m2)
 
-        Test.assertSame[`true`,  SortedMap.empty[Nat.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_5, _6]#put[_0, _1]#put[_2, _3]#equalWith[um, Nat.naturalOrdering]]
+        Test.cassertSame[`true`,  SortedMap.empty[Nat.naturalOrdering]#put[_4, _5]#put[_3, _4]#put[_5, _6]#put[_0, _1]#put[_2, _3]#equalWith[um, Nat.naturalOrdering]]
         assertEquals(SortedMap.empty(Nat.naturalOrdering).put(_4, _5).put(_3, _4).put(_5, _6).put(_0, _1).put(_2, _3), um)
    }
 

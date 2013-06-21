@@ -20,15 +20,15 @@ class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial {
          val bs: bs = Nat_(5)
         type bs     = Nat_(5)
-        assertSame(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
-        assertSame[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
+        cassertSame(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
+        cassertSame[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testNil {
          val bs: bs = Nat_(0)
         type bs     = Nat_(0)
-        assertSame(bs, DNil)
-        assertSame[bs, DNil]
+        cassertSame(bs, DNil)
+        cassertSame[bs, DNil]
     }
 
     def testThrow {
@@ -46,6 +46,6 @@ class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
          JAssert.assertEquals(42, bs.unsing)
 
          type n = Nat_(42)#plus[Nat_(10)]
-         assertSame[Nat_(52), n]
+         cassertSame[Nat_(52), n]
     }
 }

@@ -14,15 +14,15 @@ import okomok.sing._
 class TeztTest {
 
     def testTrueFalse {
-        Test.assertTrue(`true`)
-        Test.assertTrue[`true`]
-        Test.assertFalse(`false`)
-        Test.assertFalse[`false`]
+        Test.cassert(`true`)
+        Test.cassert[`true`]
+        Test.cassertNot(`false`)
+        Test.cassertNot[`false`]
 
-        //Test.assertTrue(`false`)
-        //Test.assertTrue[`false`]
+        //Test.cassert(`false`)
+        //Test.cassert[`false`]
         //Test.assertFalse(`true`)
-        //Test.assertFalse[`true`]
+        //Test.cassertNot[`true`]
     }
 
     class A
@@ -30,17 +30,17 @@ class TeztTest {
 
     def testSame {
         /*
-        Test.assertSame(3, 2)
+        Test.cassertSame(3, 2)
         */
-        Test.assertSame[Int, Int]
+        Test.cassertSame[Int, Int]
 
-        //Test.assertSame(new A, new B)
+        //Test.cassertSame(new A, new B)
         /*
-        Test.assertSame(new B, new A)
+        Test.cassertSame(new B, new A)
         */
 
-        //Test.assertSame(3, '2')
-        //Test.assertSame[Int, Char]
+        //Test.cassertSame(3, '2')
+        //Test.cassertSame[Int, Char]
     }
 
     def testConforms {

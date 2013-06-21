@@ -50,36 +50,30 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         type no = Nothing
 
-        makro.AssertNotNothing.apply[Int]
+        cassertNothing[no]
 
         expectError {
-            makro.AssertNotNothing.apply[no]
+            cassertNothing[Int]
         }
-/*
-        assertNothing[no]
 
-        expectError {
-            assertNothing[Int]
-        }
-*/
-        assertConforms[Int, AnyVal]
+        cassert[conforms[Int, AnyVal]]
 
         expectError {
             assertConforms[AnyVal, Int]
         }
 
-        assertNotConforms[AnyVal, Int]
+        cassertNot[conforms[AnyVal, Int]]
 
         expectError {
-            assertNotConforms[Int, AnyVal]
+            assertNot[conforms[Int, AnyVal]]
         }
 
         type i = Int
 
-        assertNotSame[AnyVal, i]
+        cassertNot[isSame[AnyVal, i]]
 
         expectError {
-            assertNotSame[i, Int]
+            cassertNot[isSame[i, Int]]
         }
 
         def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
@@ -97,33 +91,33 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         type x   = check[Some[Dense._2]#get]
 
         expectError {
-            assertSame(Dense._3, x)
+            cassertSame(Dense._3, x)
         }
         expectError {
-            assertSame[Dense._3, x]
-        }
-
-
-        expectError {
-            ignore[ assertSame[Char, Int] ]
+            cassertSame[Dense._3, x]
         }
 
 
         expectError {
-            // dummy[ assertSame[Char, Int] ] // compiles, funny.
+            ignore[ cassertSame[Char, Int] ]
+        }
+
+
+        expectError {
+            // dummy[ cassertSame[Char, Int] ] // compiles, funny.
             wow
         }
 
         expectError {
-            ignore[ assertNotConforms[Int, Int] ]
+            ignore[ cassertNot[conforms[Int, Int]] ]
         }
 
         expectError {
             ignore[error]
         }
 
-        assertSame(Dense._2, x)
-        assertSame[Dense._2, x]
+        cassertSame(Dense._2, x)
+        cassertSame[Dense._2, x]
 
         expectError {
             check(None.get)

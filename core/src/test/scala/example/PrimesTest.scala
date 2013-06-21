@@ -39,8 +39,8 @@ class PrimesTest extends org.scalatest.junit.JUnit3Suite {
          val some: some = primes.take(_10).force
         type some       = primes#take[_10]#force
 
-        Test.assertSame(some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil)
-        Test.assertSame[some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil]
+        Test.cassertSame(some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil)
+        Test.cassertSame[some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil]
     }
 
     def testBench {

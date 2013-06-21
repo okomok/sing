@@ -23,9 +23,9 @@ class _TermOfTest extends org.scalatest.junit.JUnit3Suite {
         val s: `false` = termOf[s]
         assertEquals(`false`, s)
 
-        Test.assertSame[`true`, typeOf(`true`)]
-        Test.assertSame[`true`, typeOf(r)]
-        Test.assertSame[`true`, typeOf(sing.`true`)]
+        Test.cassertSame[`true`, typeOf(`true`)]
+        Test.cassertSame[`true`, typeOf(r)]
+        Test.cassertSame[`true`, typeOf(sing.`true`)]
 
     }
 

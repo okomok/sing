@@ -27,7 +27,7 @@ class PartitionTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _9 :: _2 :: _6 :: _10 :: _7 :: _8 :: _9 :: Nil
         type u = xs#partition[Lt8]
         val u: u = xs.partition(Lt8())
-        Test.assertSame[Tuple2[_2 :: _6 :: _7 :: Nil, _9 :: _10 :: _8 :: _9 :: Nil], List.force2[u]]
+        Test.cassertSame[Tuple2[_2 :: _6 :: _7 :: Nil, _9 :: _10 :: _8 :: _9 :: Nil], List.force2[u]]
         assertEquals(Tuple2(_2 :: _6 :: _7 :: Nil,  _9 :: _10 :: _8 :: _9 :: Nil), u)
     }
 
@@ -36,7 +36,7 @@ class PartitionTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type u = xs#partition[Lt8]
         val u: u = xs.partition(Lt8())
-        Test.assertSame[Tuple2[Nil, Nil], List.force2[u]]
+        Test.cassertSame[Tuple2[Nil, Nil], List.force2[u]]
         assertEquals(Tuple2(Nil, Nil), u)
     }
 
@@ -45,7 +45,7 @@ class PartitionTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _7 :: _4 :: _5 :: _6 :: _7 :: Nil
         type u = xs#partition[Lt8]
         val u: u = xs.partition(Lt8())
-        Test.assertSame[Tuple2[xs, Nil], List.force2[u]]
+        Test.cassertSame[Tuple2[xs, Nil], List.force2[u]]
         assertEquals(Tuple2(xs, Nil), u)
     }
 
@@ -54,7 +54,7 @@ class PartitionTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _9 :: _8 :: _10 :: _8 :: Nil
         type u = xs#partition[Lt8]
         val u: u = xs.partition(Lt8())
-        Test.assertSame[Tuple2[Nil, xs], List.force2[u]]
+        Test.cassertSame[Tuple2[Nil, xs], List.force2[u]]
         assertEquals(Tuple2(Nil, xs), u)
     }
 

@@ -19,15 +19,15 @@ class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial {
          val bs: bs = Peano_(3)
         type bs     = Peano_(3)
-        assertSame(bs, Succ(Succ(Succ(Zero))))
-        assertSame[bs, Succ[Succ[Succ[Zero]]]]
+        cassertSame(bs, Succ(Succ(Succ(Zero))))
+        cassertSame[bs, Succ[Succ[Succ[Zero]]]]
     }
 
     def testNil {
          val bs: bs = Peano_(0)
         type bs     = Peano_(0)
-        assertSame(bs, Zero)
-        assertSame[bs, Zero]
+        cassertSame(bs, Zero)
+        cassertSame[bs, Zero]
     }
 
     def testThrow {
