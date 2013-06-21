@@ -102,9 +102,8 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
             ignore[ cassertSame[Char, Int] ]
         }
 
-
         expectError {
-            // dummy[ cassertSame[Char, Int] ] // compiles, funny.
+            // dummy[ cassertSame[Char, Int] ] // why not error?
             wow
         }
 
@@ -126,7 +125,7 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         ()
     }
 
-    def testNull {
+    def testCheck {
          def foo[x <: Nat](x: x): foo[x] = `if`(id(x).equal(Dense._2), Throw(new java.lang.Error("doh")), Const(id(x).increment)).apply
         type foo[x <: Nat]               = `if`[id[x]#equal[Dense._2], Throw                            , Const[id[x]#increment]]#apply
 
@@ -138,7 +137,11 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         }
 
         expectError {
-            check(ignore[foo[Dense._2]])
+            check(dummy[foo[Dense._2]]) // Nothing
+        }
+
+        expectError {
+            check(dummy[Nat#increment]) // abstract
         }
     }
 }

@@ -35,10 +35,10 @@ object Echo {
         tq"scala.Unit"
     }
 
-    private def _impl[x](c: Context)(xt: c.WeakTypeTag[x]) {
+    def _impl[x](c: Context)(xt: c.WeakTypeTag[x]) {
         import c.universe._
         val t = weakTypeOf(xt)
         val nt = t.normalize
-        c.echo(c.enclosingPosition, "type: " + show(t) + ", tree: " + showRaw(t) + ", normalized type: " + show(nt) + ", normalized tree: " + showRaw(nt))
+        c.echo(c.enclosingPosition, show(nt))
     }
 }

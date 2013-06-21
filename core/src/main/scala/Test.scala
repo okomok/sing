@@ -31,15 +31,15 @@ object Test {
      * Asserts that a condition is true. `c` represents "Concrete".
      */
     @elidable(ALL) // implicit for `cassert[x]` to be well-formed.
-     def cassert[x >: `true` <: `true`](implicit x: x = dummy[x]): cassert[`true`] = ()
-    type cassert[x >: `true` <: `true`]                                            = scala.Unit
+     def cassert[x >: `true` <: `true`](implicit x: x = dummy[x]): cassert[x] = ()
+    type cassert[x >: `true` <: `true`]                                       = scala.Unit
 
     /**
      * Asserts that a condition is false.
      */
     @elidable(ALL)
-     def cassertNot[x >: `false` <: `false`](implicit x: x = dummy[x]): cassertNot[`false`] = ()
-    type cassertNot[x >: `false` <: `false`]                                                = scala.Unit
+     def cassertNot[x >: `false` <: `false`](implicit x: x = dummy[x]): cassertNot[x] = ()
+    type cassertNot[x >: `false` <: `false`]                                          = scala.Unit
 
     /**
      * Asserts that two types refer to the same type.
@@ -62,10 +62,8 @@ object Test {
      def cassertNothing[x >: Nothing <: Nothing](implicit x: x = dummy[x]): cassertNothing[x] = ()
     type cassertNothing[x >: Nothing <: Nothing]                                              = scala.Unit
 
-
      def conforms[x, y](x: x, y: y) = macro makro.Conforms.term_impl[x, y]
     type conforms[x, y]             = macro makro.Conforms.type_impl[x, y]
-
 
      def isSame[x, y](x: x, y: y) = macro makro.IsSame.term_impl[x, y]
     type isSame[x, y]             = macro makro.IsSame.type_impl[x, y]
