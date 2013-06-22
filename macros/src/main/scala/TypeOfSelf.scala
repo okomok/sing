@@ -20,18 +20,6 @@ object TypeOfSelf {
 
     def impl(c: Context): c.Tree = {
         import c.universe._
-
-        c.enclosingImpl match {
-            case ClassDef(_, name, tparams, _) if tparams.length > 0 => {
-                val targs = tparams.map(t => tq"${t.name}")
-                tq"$name[..$targs]"
-            }
-            case ClassDef(_, name, _, _) => {
-                tq"$name"
-            }
-            case ModuleDef(_, name, _) => {
-                tq"$name.type"
-            }
-        }
+        tq"${here(c)}.WeakTypeOf.apply(this)"
     }
 }
