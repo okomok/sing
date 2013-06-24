@@ -12,7 +12,7 @@ import com.github.okomok.sing
 import sing._
 
 
-class SelfTest extends org.scalatest.junit.JUnit3Suite {
+trait SelfTezt {
 
     import makro._
 

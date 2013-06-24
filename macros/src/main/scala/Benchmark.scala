@@ -19,9 +19,9 @@ object Benchmark {
         import c.universe._
 
         val start = System.currentTimeMillis
-        val res = c.typeCheck(x)
+        val res1 = c.typeCheck(x)
         val elapsed = System.currentTimeMillis - start
-        c.echo(c.enclosingPosition, "elapsed: " + elapsed + "ms")
-        c.Expr[Any](res)
+//        c.echo(c.enclosingPosition, "elapsed: " + elapsed + "ms")
+        c.Expr[Any](Literal(Constant(elapsed)))
     }
 }
