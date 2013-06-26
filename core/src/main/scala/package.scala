@@ -118,7 +118,7 @@ package object sing {
     /**
      * A sort of `declval` in C++
      */
-    def dummy[x] = null.asInstanceOf[x]
+    def dummy[x]: x = null.asInstanceOf[x]
 
     /**
      * Checks a type concrete, compile-error otherwise.
