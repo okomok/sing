@@ -30,7 +30,13 @@ trait Kind extends Any {
     type conformsTo[that <: Kind] <: Boolean
 
     /**
-     * Returns the natural ordering.
+     * Returns the natural Equiv.
+     */
+     def naturalEquiv: naturalEquiv = unsupported("Kind.naturalEquiv")
+    type naturalEquiv <: Equiv
+
+    /**
+     * Returns the natural Ordering.
      */
      def naturalOrdering: naturalOrdering = unsupported("Kind.naturalOrdering")
     type naturalOrdering <: Ordering
@@ -51,6 +57,9 @@ trait KindImpl extends Kind with AnyImpl with RefEquals {
 
     override  def conformsTo[that <: Kind](that: that): conformsTo[that] = id(kindId).bitAnd(id(that).kindId).equal(id(that).kindId)
     override type conformsTo[that <: Kind]                               = id[kindId]#bitAnd[id[that]#kindId]#equal[id[that]#kindId]
+
+    override  def naturalEquiv: naturalEquiv = new NaturalEquiv
+    override type naturalEquiv               =     NaturalEquiv
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Kind]
 }

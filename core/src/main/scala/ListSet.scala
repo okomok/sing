@@ -18,8 +18,8 @@ object ListSet {
     /**
      * Constructs a one-entry list-set.
      */
-     def add[k <: Any](k: k): add[k] = empty(id(k).kind.naturalOrdering).add(k)
-    type add[k <: Any]               = empty[id[k]#kind#naturalOrdering]#add[k]
+     def add[k <: Any](k: k): add[k] = empty(id(k).kind.naturalEquiv).add(k)
+    type add[k <: Any]               = empty[id[k]#kind#naturalEquiv]#add[k]
 
     private[sing]
     final case class EquivTo[e <: Equiv, k <: Any](e: e, k: k) extends AsFunction1 {

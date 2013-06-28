@@ -18,8 +18,8 @@ object ListMap {
     /**
      * Constructs a one-entry list-map.
      */
-     def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = empty(id(k).kind.naturalOrdering).put(k, v)
-    type put[k <: Any, v <: Any]                        = empty[id[k]#kind#naturalOrdering]#put[k, v]
+     def put[k <: Any, v <: Any](k: k, v: v): put[k, v] = empty(id(k).kind.naturalEquiv).put(k, v)
+    type put[k <: Any, v <: Any]                        = empty[id[k]#kind#naturalEquiv]#put[k, v]
 
     private[sing]
     final case class EquivTo[e <: Equiv, k <: Any](e: e, k: k) extends AsFunction1 {

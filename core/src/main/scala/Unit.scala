@@ -12,8 +12,8 @@ object _Unit_ extends AsKind {
     override  def kindId: kindId = KindId.ofUnit
     override type kindId         = KindId.ofUnit
 
-    override  def naturalOrdering: naturalOrdering = AlwaysEQ
-    override type naturalOrdering                  = AlwaysEQ
+    override  def naturalOrdering: naturalOrdering = new AlwaysEQ
+    override type naturalOrdering                  =     AlwaysEQ
 }
 
 
