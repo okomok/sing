@@ -60,7 +60,7 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
         object c
         val cBox = Box.empty[c.type]
 
-        val poly = SortedMap.put(IntBox, Function.lift1((x: Int) => x + 1)).
+        val poly = ListMap.put(IntBox, Function.lift1((x: Int) => x + 1)).
             put(StringBox, Function.lift1((x: String) => x.reverse)).
             put(BooleanBox, Function.lift1((x: scala.Boolean) => c))
 

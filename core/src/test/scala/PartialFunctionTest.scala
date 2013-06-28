@@ -16,7 +16,7 @@ import scala.language.existentials
 class PartialFunctionTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-        val pf = SortedMap.put(Box.empty[Int], Box.empty[AnyVal]).put(Box.empty[String], Box.empty[AnyRef])
+        val pf = ListMap.put(Box.empty[Int], Box.empty[AnyVal]).put(Box.empty[String], Box.empty[AnyRef])
         cassertNot {
             pf.related(Box('a'), Box("abc"))
         }

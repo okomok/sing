@@ -12,8 +12,6 @@ import com.github.okomok.sing
 import sing._
 import scala.language.existentials
 
-import modeltest.FastFibonacci._
-
 
 /*
 trait SleepTezt extends org.scalatest.junit.JUnit3Suite {

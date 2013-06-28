@@ -12,7 +12,7 @@ import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
-object Boxed extends AsKind with ListLikeKind {
+object Boxed extends AsKind {
     override  def kindId: kindId = KindId.ofBoxed
     override type kindId         = KindId.ofBoxed
 }
@@ -24,7 +24,6 @@ object Boxed extends AsKind with ListLikeKind {
 trait Boxed extends Any {
     override type self <: Boxed
 
-    // List of Denses
      def boxId: boxId
     type boxId <: List
 }
@@ -38,12 +37,12 @@ sealed abstract class AsBoxed extends BoxedImpl {
 
 
 private[sing]
-sealed abstract class BoxedImpl extends Boxed with AnyImpl with UnsingEquals with ListLike {
+sealed abstract class BoxedImpl extends Boxed with AnyImpl with UnsingEquals {
     override  def asBoxed: asBoxed = self
     override type asBoxed          = self
 
-    override  def asList: asList = boxId
-    override type asList         = boxId
+    override  def equal[that <: Any](that: that): equal[that] = boxId.equal(that.asBoxed.boxId)
+    override type equal[that <: Any]                          = boxId#equal[that#asBoxed#boxId]
 
     override def canEqual(that: scala.Any) = that.isInstanceOf[Boxed]
 }
@@ -74,6 +73,7 @@ object Box {
 
 
 trait Boxer[x] {
+    // this.type seems broken, so we define...
      val self: self = this
     type self       = this.type
 
@@ -87,22 +87,22 @@ trait Boxer[x] {
     type empty        = EmptyBox[x, boxId]
 }
 
-object Boxer {
-    // Macro is smart enough to keep types structural.
-    implicit def apply[A]: Boxer[A] = macro impl[A]
 
-    def impl[A: c.WeakTypeTag](c: Context): c.Expr[Boxer[A]] = {
+object Boxer {
+    implicit def apply[x] = macro impl[x]
+
+    def impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Expr[Boxer[x]] = {
         import c.universe._
 
-        val fullName = weakTypeOf[A].typeSymbol.fullName.toString
-        val (vid, tid) = makro.BoxId(c)(fullName)
+        val vid = makro.TypeId.inTerm(c)(weakTypeOf(tx))
+        val tid = makro.TypeId.inType(c)(weakTypeOf(tx))
 
         val res = q"""
-            new Boxer[${weakTypeOf[A]}] {
+            new Boxer[${weakTypeOf(tx)}] {
                 override lazy val boxId: boxId = $vid
                 override     type boxId        = $tid
             }
         """
-        c.Expr[Boxer[A]](c.typeCheck(res))
+        c.Expr[Boxer[x]](c.typeCheck(res))
     }
 }
