@@ -21,7 +21,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
 
         type r = o#compare[_1, _3]
         val r: r = o.compare(_1, _3)
-        Test.cassertSame[LT, r]
+        Test.cassertEq[LT, r]
         assertEquals(-1, r.unsing)
         assertSame(LT, r)
         assertEquals(LT, r)
@@ -33,7 +33,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
 
         type r = o#compare[_4, _2]
         val r: r = o.compare(_4, _2)
-        Test.cassertSame[GT, r]
+        Test.cassertEq[GT, r]
         assertEquals(1, r.unsing)
         assertSame(GT, r)
         assertEquals(GT, r)
@@ -45,7 +45,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
 
         type r = o#compare[_5, _5]
         val r: r = o.compare(_5, _5)
-        Test.cassertSame[EQ, r]
+        Test.cassertEq[EQ, r]
         assertEquals(0, r.unsing)
         assertSame(EQ, r)
         assertEquals(EQ, r)
@@ -57,7 +57,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
 
         type r = o#`match`[_5, _6, Const[_0], Const[_1], Const[_2]]
         val r: r = o.`match`(_5, _6, Const(_0), Const(_1), Const(_2))
-        Test.cassertSame[_0, r]
+        Test.cassertEq[_0, r]
         assertEquals(_0, r)
     }
 
@@ -67,7 +67,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
 
         type r = o#`match`[_7, _6, Const[_0], Const[_1], Const[_2]]
         val r: r = o.`match`(_7, _6, Const(_0), Const(_1), Const(_2))
-        Test.cassertSame[_1, r]
+        Test.cassertEq[_1, r]
         assertEquals(_1, r)
     }
 
@@ -77,7 +77,7 @@ class OrderingTest extends org.scalatest.junit.JUnit3Suite {
 
         type r = o#`match`[_7, _7, Const[_0], Const[_1], Const[_2]]
         val r: r = o.`match`(_7, _7, Const(_0), Const(_1), Const(_2))
-        Test.cassertSame[_2, r]
+        Test.cassertEq[_2, r]
         assertEquals(_2, r)
     }
 

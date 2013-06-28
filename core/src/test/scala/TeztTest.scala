@@ -30,17 +30,17 @@ class TeztTest {
 
     def testSame {
         /*
-        Test.cassertSame(3, 2)
+        Test.cassertEq(3, 2)
         */
-        Test.cassertSame[Int, Int]
+        Test.cassertEq[Int, Int]
 
-        //Test.cassertSame(new A, new B)
+        //Test.cassertEq(new A, new B)
         /*
-        Test.cassertSame(new B, new A)
+        Test.cassertEq(new B, new A)
         */
 
-        //Test.cassertSame(3, '2')
-        //Test.cassertSame[Int, Char]
+        //Test.cassertEq(3, '2')
+        //Test.cassertEq[Int, Char]
     }
 
     def testConforms {

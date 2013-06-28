@@ -70,10 +70,10 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         type i = Int
 
-        cassertNot[isSame[AnyVal, i]]
+        cassertNot[isEq[AnyVal, i]]
 
         expectError {
-            cassertNot[isSame[i, Int]]
+            cassertNot[isEq[i, Int]]
         }
 
         def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
@@ -91,19 +91,19 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         type x   = check[Some[Dense._2]#get]
 
         expectError {
-            cassertSame(Dense._3, x)
+            cassertEq(Dense._3, x)
         }
         expectError {
-            cassertSame[Dense._3, x]
+            cassertEq[Dense._3, x]
         }
 
 
         expectError {
-            ignore[ cassertSame[Char, Int] ]
+            ignore[ cassertEq[Char, Int] ]
         }
 
         expectError {
-            // dummy[ cassertSame[Char, Int] ] // why not error?
+            // dummy[ cassertEq[Char, Int] ] // why not error?
             wow
         }
 
@@ -115,8 +115,8 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
             ignore[error]
         }
 
-        cassertSame(Dense._2, x)
-        cassertSame[Dense._2, x]
+        cassertEq(Dense._2, x)
+        cassertEq[Dense._2, x]
 
         expectError {
             check(None.get)

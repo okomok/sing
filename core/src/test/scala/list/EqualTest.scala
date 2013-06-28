@@ -26,7 +26,7 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equal[xs]
         val u: u = xs.equal(ys)
-        Test.cassertSame[`true`, u]
+        Test.cassertEq[`true`, u]
         assertEquals(`true`, u)
     }
 
@@ -39,7 +39,7 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equal[ys]
         val u: u = xs.equal(ys)
-        Test.cassertSame[`true`, u]
+        Test.cassertEq[`true`, u]
         assertEquals(`true`, u)
     }
 
@@ -52,7 +52,7 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equal[ys]
         val u: u = xs.equal(ys)
-        Test.cassertSame[`true`, u]
+        Test.cassertEq[`true`, u]
         assertEquals(`true`, u)
     }
 
@@ -65,7 +65,7 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equal[ys]
         val u: u = xs.equal(ys)
-        Test.cassertSame[`false`, u]
+        Test.cassertEq[`false`, u]
         assertEquals(`false`, u)
     }
 
@@ -78,7 +78,7 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equal[ys]
         val u: u = xs.equal(ys)
-        Test.cassertSame[`false`, u]
+        Test.cassertEq[`false`, u]
         assertEquals(`false`, u)
     }
 }

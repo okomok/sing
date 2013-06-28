@@ -30,16 +30,16 @@ object GenericMethodOverrideTezt {
 
     // OK
     type foo1[b <: B, x <: Peano] = b#foo[Peano, x]
-    cassertSame[foo1[d, _2]#increment, _3]
+    cassertEq[foo1[d, _2]#increment, _3]
 
     // NO
     type foo2[b <: B, x <: Peano] = b#foo[Peano, x]#increment
-    // cassertSame[foo2[d, _2], _3]
+    // cassertEq[foo2[d, _2], _3]
 
     // NO
     type foo3[b <: B { type foo[Peano, x <: Peano] <: Peano }, x <: Peano] = b#foo[Peano, x]#increment
     type wow = foo3[d, _2] // Scala is smart!
-    // cassertSame[wow, _3] // but fails.
+    // cassertEq[wow, _3] // but fails.
 }
 
 object GenericMethodOverride2Tezt {
@@ -54,7 +54,7 @@ object GenericMethodOverride2Tezt {
 
     // OK
     type foo1[b <: B, x <: Peano] = b#foo[x]
-    cassertSame[foo1[d, _2]#increment, _4]
+    cassertEq[foo1[d, _2]#increment, _4]
 
     // NO, of course.
     // type foo2[b <: B, x <: Peano] = b#foo[x]#increment
@@ -76,11 +76,11 @@ object TypeConstraintTezt {
 
     // OK
     type foo1[b <: B { type R = Peano }, n <: Peano] = b#inc[n]
-    cassertSame[foo1[d, _2]#increment, _4]
+    cassertEq[foo1[d, _2]#increment, _4]
 
     // NO
     type foo2[b <: B { type R = Peano }, n <: Peano] = b#inc[n]#increment
-    // cassertSame[foo2[d, _2], _4]
+    // cassertEq[foo2[d, _2], _4]
 
 }
 
@@ -96,11 +96,11 @@ object TypeConstraint2Tezt {
 
     // OK
     type foo1[b <: B[Peano], n <: Peano] = b#inc[n]
-    cassertSame[foo1[d, _2]#increment, _4]
+    cassertEq[foo1[d, _2]#increment, _4]
 
     // NO
     type foo2[b <: B[Peano], n <: Peano] = b#inc[n]#increment
-    // cassertSame[foo2[d, _2], _4]
+    // cassertEq[foo2[d, _2], _4]
 
 }
 
@@ -116,11 +116,11 @@ object TypeConstraint3Tezt {
 
     // OK
     type foo1[b <: B, n <: Peano] = b#inc[n]
-    cassertSame[foo1[d, _2]#increment, _4]
+    cassertEq[foo1[d, _2]#increment, _4]
 
     // OK
     type foo2[b <: B, n <: Peano] = b#inc[n]#increment
-    cassertSame[foo2[d, _2], _4]
+    cassertEq[foo2[d, _2], _4]
 
 }
 
@@ -131,11 +131,11 @@ object TypeConstraint4Tezt {
 
     // OK
     type foo1[_inc[_ <: Peano] <: Peano, n <: Peano] = _inc[n]
-    cassertSame[foo1[inc, _2]#increment, _4]
+    cassertEq[foo1[inc, _2]#increment, _4]
 
     // OK
     type foo2[_inc[_ <: Peano] <: Peano, n <: Peano] = _inc[n]#increment
-    cassertSame[foo2[inc, _2], _4]
+    cassertEq[foo2[inc, _2], _4]
 
 }
 
@@ -152,12 +152,12 @@ object TypeConstraint5Tezt {
 
     // OK
     type foo1[b <: B[Peano], n <: Peano] = b#inc[n]
-    cassertSame[foo1[d, _2]#increment, _4]
+    cassertEq[foo1[d, _2]#increment, _4]
 
     // OK (restate constraint!)
     // See also: http://lampsvn.epfl.ch/trac/scala/ticket/1786
     type foo2[b <: B[_] { type inc[n <: Peano] <: Peano }, n <: Peano] = b#inc[n]#increment
-    cassertSame[foo2[d, _2], _4]
+    cassertEq[foo2[d, _2], _4]
 
 }
 
@@ -174,7 +174,7 @@ object TypeConstraint6Tezt {
 
     // OK
     type foo1[b <: B[Peano], n <: Peano] = b#inc[n]
-    cassertSame[foo1[d, _2]#increment, _4]
+    cassertEq[foo1[d, _2]#increment, _4]
 
     // NO
     trait Base {
@@ -184,6 +184,6 @@ object TypeConstraint6Tezt {
         override type foo2[b <: B[Peano], n <: Peano] = b#inc[n]#increment
     }
     type callfoo2[x <: Base, b <: B[Peano], n <: Peano] = x#foo2[b, n]
-    //cassertSame[callfoo2[Derived, d, _2], _4]
+    //cassertEq[callfoo2[Derived, d, _2], _4]
 
 }

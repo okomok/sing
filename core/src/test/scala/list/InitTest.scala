@@ -20,7 +20,7 @@ class InitTest extends org.scalatest.junit.JUnit3Suite {
     trait testMeta {
         type initInit[l <: List] = l#init#init
         type l = _Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: _Box[Char] :: _Box[Int] :: Nil
-        Test.cassertSame[_Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: Nil, initInit[l]#force]
+        Test.cassertEq[_Box[Int] :: _Box[String] :: _Box[java.lang.Integer] :: Nil, initInit[l]#force]
     }
 
     def testTrivial {

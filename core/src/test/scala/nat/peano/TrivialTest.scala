@@ -56,7 +56,7 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testTrivial {
-        Test.cassertSame[scala.Int, _2#unsing]
+        Test.cassertEq[scala.Int, _2#unsing]
         Test.cassert[_0# equal [_0]]
 
         Test.cassert[_0# nequal [_1]]

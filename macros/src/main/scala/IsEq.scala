@@ -12,7 +12,7 @@ import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
-object IsSame {
+object IsEq {
     def apply[x, y](x: x, y: y) = macro term_impl[x, y]
    type apply[x, y]             = macro type_impl[x, y]
 

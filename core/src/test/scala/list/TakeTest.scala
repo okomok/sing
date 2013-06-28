@@ -41,12 +41,12 @@ class TakeTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object TakeTezt {
-    import Test.cassertSame
+    import Test.cassertEq
 
     trait testTrivial {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil
-        cassertSame[Nil, lst#take[_0]#force]
-        cassertSame[_Box[Int] :: _Box[String] :: Nil, lst#take[_2]#force]
-        cassertSame[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#take[_5]#force]
+        cassertEq[Nil, lst#take[_0]#force]
+        cassertEq[_Box[Int] :: _Box[String] :: Nil, lst#take[_2]#force]
+        cassertEq[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#take[_5]#force]
     }
 }

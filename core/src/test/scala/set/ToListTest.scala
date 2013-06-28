@@ -23,7 +23,7 @@ class ToListTest extends org.scalatest.junit.JUnit3Suite {
 
         type l   = _0 :: _1 :: _2 :: _3 :: _4 :: _5 :: Nil
         val l: l = _0 :: _1 :: _2 :: _3 :: _4 :: _5 :: Nil
-        Test.cassertSame[l, m#asList#force]
+        Test.cassertEq[l, m#asList#force]
         assertEquals(l, m.asList)
    }
 

@@ -67,11 +67,11 @@ class SliceTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object SliceTezt {
-    import Test.cassertSame
+    import Test.cassertEq
 
     trait testSlice {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil
-        cassertSame[Nil, lst#slice[_2, _2]#force]
-        cassertSame[_Box[String] :: _Box[Double] :: _Box[Char] :: Nil, lst#slice[_1, _4]#force]
+        cassertEq[Nil, lst#slice[_2, _2]#force]
+        cassertEq[_Box[String] :: _Box[Double] :: _Box[Char] :: Nil, lst#slice[_1, _4]#force]
     }
 }

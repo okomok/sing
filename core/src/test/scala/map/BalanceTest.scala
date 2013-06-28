@@ -56,7 +56,7 @@ class BalanceTest extends org.scalatest.junit.JUnit3Suite {
 
         type bm = _bstree.Balance.apply[_3, _3, l, r]
         val bm: bm = _bstree.Balance.apply(_3, _3, l, r)
-        Test.cassertSame[node[_11, node[_3, t1, t2], t3], bm]
+        Test.cassertEq[node[_11, node[_3, t1, t2], t3], bm]
         assertEquals(_15, bm.size)
         AssertInvariant(bm)
     }
@@ -88,7 +88,7 @@ class BalanceTest extends org.scalatest.junit.JUnit3Suite {
 
         type bm = _bstree.Balance.apply[_3, _3, l, r]
         val bm: bm = _bstree.Balance.apply(_3, _3, l, r)
-        Test.cassertSame[node[_7, node[_3, t1, t2], node[_11, t3, t4]], bm]
+        Test.cassertEq[node[_7, node[_3, t1, t2], node[_11, t3, t4]], bm]
         assertEquals(_13, bm.size)
         AssertInvariant(bm)
     }

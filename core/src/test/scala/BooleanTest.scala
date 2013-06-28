@@ -29,13 +29,13 @@ class BooleanTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testTrivial {
-        Test.cassertSame[scala.Boolean, `true`#unsing]
-        Test.cassertSame[`true`, `true`]
+        Test.cassertEq[scala.Boolean, `true`#unsing]
+        Test.cassertEq[`true`, `true`]
      //   Test.cassert[`false` === if_Boolean[`true`, `false`, `true`]]
      //   Test.cassert[`false` === if_Boolean[`false`, `true`, `false`]]
 
-    //    Test.cassertSame[`false`, if_Boolean[`true`, `false`, `true`]]
-    //    Test.cassertSame[`false`, if_Boolean[`false`, `true`, `false`]]
+    //    Test.cassertEq[`false`, if_Boolean[`true`, `false`, `true`]]
+    //    Test.cassertEq[`false`, if_Boolean[`false`, `true`, `false`]]
     }
 
     def testDuality {

@@ -37,14 +37,14 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         {
             type s = Some[_Box[Int]]
             val s: s = Some(_Box(3))
-            Test.cassertSame[`false`, s#isEmpty]
+            Test.cassertEq[`false`, s#isEmpty]
             val e: s#isEmpty = s.isEmpty
             val k: `false` = e
         }
         {
             type s = None
             val s: s = None
-            Test.cassertSame[`true`, s#isEmpty]
+            Test.cassertEq[`true`, s#isEmpty]
             val e: s#isEmpty = s.isEmpty
             val k: `true` = e
         }
@@ -55,14 +55,14 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         {
             type s = Some[_Box[Int]]
             val s: s = Some(_Box(3))
-            Test.cassertSame[`true`, s#isDefined]
+            Test.cassertEq[`true`, s#isDefined]
             val e: s#isDefined = s.isDefined
             val k: `true` = e
         }
         {
             type s = None
             val s: s = None
-            Test.cassertSame[`false`, s#isDefined]
+            Test.cassertEq[`false`, s#isDefined]
             val e: s#isEmpty = s.isEmpty
             val k: `true` = e
         }
@@ -73,14 +73,14 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         {
             type s = Some[_Box[Int]]
             val s: s = Some(_Box(3))
-            Test.cassertSame[scala.Some[Int], s#unsing]
+            Test.cassertEq[scala.Some[Int], s#unsing]
             val e: s#unsing = s.unsing
             assertEquals(scala.Some(3), e)
         }
         {
             type s = None
             val s: s = None
-            Test.cassertSame[scala.None.type, s#unsing]
+            Test.cassertEq[scala.None.type, s#unsing]
             val e: s#unsing = s.unsing
             assertSame(scala.None, s.unsing)
         }
@@ -112,14 +112,14 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testNatty {
         type s = Some[_3]
         val s = Some(_3)
-        Test.cassertSame[_4, natty#apply[s]]
+        Test.cassertEq[_4, natty#apply[s]]
         okomok.sing.assert(_4 equal natty(s))
     }
 */
     def testGetOrElse {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertSame[_3, s#getOrElse[Const[_8]]]
+        Test.cassertEq[_3, s#getOrElse[Const[_8]]]
         val r: s#getOrElse[Const[_8]] = s.getOrElse(Const(_8))
         val k: _3 = r
 
@@ -140,7 +140,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testMapSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertSame[Some[_4], s#map[Plus1]]
+        Test.cassertEq[Some[_4], s#map[Plus1]]
         val m: s#map[Plus1] = s.map(Plus1())
         assertEquals(Some(_4), m)
     }
@@ -148,7 +148,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testMapNone {
         type s = None
         val s: s = None
-        Test.cassertSame[None, s#map[Plus1]]
+        Test.cassertEq[None, s#map[Plus1]]
         val m: s#map[Plus1] = s.map(Plus1())
         assertEquals(None, m)
     }
@@ -163,7 +163,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFlatMapSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertSame[Some[_4], s#flatMap[Plus1Get]]
+        Test.cassertEq[Some[_4], s#flatMap[Plus1Get]]
         val m: s#flatMap[Plus1Get] = s.flatMap(Plus1Get())
         assertEquals(Some(_4), m)
     }
@@ -171,7 +171,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFlatMapNone {
         type s = None
         val s: s = None
-        Test.cassertSame[None, s#map[Plus1Get]]
+        Test.cassertEq[None, s#map[Plus1Get]]
         val m: s#flatMap[Plus1Get] = s.flatMap(Plus1Get())
         assertEquals(None, m)
     }
@@ -186,7 +186,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFilterSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertSame[None, s#filter[Is2]]
+        Test.cassertEq[None, s#filter[Is2]]
         val m: s#filter[Is2] = s.filter(Is2())
         assertEquals(None, m)
     }
@@ -194,7 +194,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFilterSome2 {
         type s = Some[_2]
         val s: s = Some(_2)
-        Test.cassertSame[Some[_2], s#filter[Is2]]
+        Test.cassertEq[Some[_2], s#filter[Is2]]
         val m: s#filter[Is2] = s.filter(Is2())
         assertEquals(Some(_2), m)
     }
@@ -202,7 +202,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFilterNone {
         type s = None
         val s: s = None
-        Test.cassertSame[None, s#filter[Is2]]
+        Test.cassertEq[None, s#filter[Is2]]
         val m: s#filter[Is2] = s.filter(Is2())
         assertEquals(None, m)
     }
@@ -211,7 +211,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testExistsSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertSame[`false`, s#exists[Is2]]
+        Test.cassertEq[`false`, s#exists[Is2]]
         val m: s#exists[Is2] = s.exists(Is2())
         assertEquals(`false`, m)
     }
@@ -219,7 +219,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testExistsSome2 {
         type s = Some[_2]
         val s: s = Some(_2)
-        Test.cassertSame[`true`, s#exists[Is2]]
+        Test.cassertEq[`true`, s#exists[Is2]]
         val m: s#exists[Is2] = s.exists(Is2())
         assertEquals(`true`, m)
     }
@@ -227,7 +227,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testExistsNone {
         type s = None
         val s: s = None
-        Test.cassertSame[`false`, s#exists[Is2]]
+        Test.cassertEq[`false`, s#exists[Is2]]
         val m: s#exists[Is2] = s.exists(Is2())
         assertEquals(`false`, m)
     }
@@ -244,7 +244,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         val adder: adder = AddTo(new java.util.ArrayList[Int])
         type s = Some[_2]
         val s: s = Some(_2)
-        Test.cassertSame[Unit, s#foreach[adder]]
+        Test.cassertEq[Unit, s#foreach[adder]]
         val m: s#foreach[adder] = s.foreach(adder)
         assertEquals(1, adder.result.size)
         assertEquals(2, adder.result.get(0))
@@ -255,7 +255,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         val adder: adder = AddTo(new java.util.ArrayList[Int])
         type s = None
         val s: s = None
-        Test.cassertSame[Unit, s#foreach[adder]]
+        Test.cassertEq[Unit, s#foreach[adder]]
         val m: s#foreach[adder] = s.foreach(adder)
         assertTrue(adder.result.isEmpty)
     }
@@ -270,7 +270,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testOrElseSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertSame[Some[_3], s#orElse[Some4]]
+        Test.cassertEq[Some[_3], s#orElse[Some4]]
         val m: s#orElse[Some4] = s.orElse(Some4())
         assertEquals(Some(_3), m)
     }
@@ -278,7 +278,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testOrElseNone {
         type s = None
         val s: s = None
-        Test.cassertSame[Some[_4], s#orElse[Some4]]
+        Test.cassertEq[Some[_4], s#orElse[Some4]]
         val m: s#orElse[Some4] = s.orElse(Some4())
         assertEquals(Some(_4), m)
     }

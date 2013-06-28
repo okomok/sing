@@ -120,15 +120,15 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object TrivialTezt {
-    import Test.{cassert,  cassertSame}
+    import Test.{cassert,  cassertEq}
 
     trait testAt {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: Nil
-        cassertSame[lst#nth[_0], _Box[Int]]
-        cassertSame[lst#nth[_1], _Box[String]]
-        cassertSame[lst#nth[_2], _Box[Double]]
-        cassertSame[lst#nth[_3], _Box[Char]]
-        cassertSame[lst#nth[_2#plus[_1]], _Box[Char]]
+        cassertEq[lst#nth[_0], _Box[Int]]
+        cassertEq[lst#nth[_1], _Box[String]]
+        cassertEq[lst#nth[_2], _Box[Double]]
+        cassertEq[lst#nth[_3], _Box[Char]]
+        cassertEq[lst#nth[_2#plus[_1]], _Box[Char]]
     }
 
     trait testSize {
@@ -139,23 +139,23 @@ object TrivialTezt {
 
     trait testIsEmpty {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: Nil
-        cassertSame[Nil#isEmpty, `true`]
-        cassertSame[lst#isEmpty, `false`]
+        cassertEq[Nil#isEmpty, `true`]
+        cassertEq[lst#isEmpty, `false`]
     }
 
     trait testPrepend {
         type lst1 = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil
         type lst2 = _Box[Boolean] :: _Box[Byte] :: Nil
-        cassertSame[Nil, Nil# append[Nil]#force]
-        cassertSame[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: _Box[Boolean] :: _Box[Byte] :: Nil, lst1# append[lst2]#force]
-        cassertSame[lst1, lst1# append[Nil]#force]
-        cassertSame[lst1, Nil# append[lst1]#force]
+        cassertEq[Nil, Nil# append[Nil]#force]
+        cassertEq[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: _Box[Boolean] :: _Box[Byte] :: Nil, lst1# append[lst2]#force]
+        cassertEq[lst1, lst1# append[Nil]#force]
+        cassertEq[lst1, Nil# append[lst1]#force]
 /*
-        cassertSame[Nil, (Nil ++ Nil)#force]
-        cassertSame[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: _Box[Boolean] :: _Box[Byte] :: Nil, (lst1 ++ lst2)#force]
-        cassertSame[lst1, (lst1 ++ Nil)#force]
-        cassertSame[lst1, (Nil ++ lst1)#force]
-        cassertSame[lst1, ((_Box[Int] :: _Box[String] :: Nil) ++ (_Box[Double] :: Nil) ++ (_Box[Char] :: _Box[Float] :: Nil) ++ Nil)#force]
+        cassertEq[Nil, (Nil ++ Nil)#force]
+        cassertEq[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: _Box[Boolean] :: _Box[Byte] :: Nil, (lst1 ++ lst2)#force]
+        cassertEq[lst1, (lst1 ++ Nil)#force]
+        cassertEq[lst1, (Nil ++ lst1)#force]
+        cassertEq[lst1, ((_Box[Int] :: _Box[String] :: Nil) ++ (_Box[Double] :: Nil) ++ (_Box[Char] :: _Box[Float] :: Nil) ++ Nil)#force]
 */
     }
 
@@ -166,6 +166,6 @@ object TrivialTezt {
         type lst2 = _Box[Boolean] :: _Box[Byte] :: Nil
         type lst3 = _Box[Char] :: _Box[String] :: Nil
         type r = prependprepend[lst2, lst3, lst1]
-        cassertSame[_Box[Char] :: _Box[String] :: _Box[Boolean] :: _Box[Byte] :: _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, r]
+        cassertEq[_Box[Char] :: _Box[String] :: _Box[Boolean] :: _Box[Byte] :: _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, r]
     }
 }

@@ -27,7 +27,7 @@ class ScanTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _4 :: _3 :: Nil
         type u = xs#scanLeft[_15, Div]
         val u: u = xs.scanLeft(_15, Div())
-//        Test.cassertSame[_15 :: _3 :: _1 :: Nil, u#force]
+//        Test.cassertEq[_15 :: _3 :: _1 :: Nil, u#force]
         assertEquals(_15 :: _3 :: _1 :: Nil, u)
     }
 
@@ -36,7 +36,7 @@ class ScanTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type u = xs#scanLeft[_15, Div]
         val u: u = xs.scanLeft(_15, Div())
-        Test.cassertSame[_15 :: Nil, u#force]
+        Test.cassertEq[_15 :: Nil, u#force]
         assertEquals(_15 :: Nil, u)
     }
 
@@ -45,7 +45,7 @@ class ScanTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _8 :: _12  :: _4 :: Nil
         type u = xs#scanRight[_2, Div]
         val u: u = xs.scanRight(_2, Div())
-        Test.cassertSame[_1 :: _6 :: _2 :: _2 :: Nil, u#force]
+        Test.cassertEq[_1 :: _6 :: _2 :: _2 :: Nil, u#force]
         assertEquals(_1 :: _6 :: _2 :: _2 :: Nil, u)
     }
 
@@ -54,7 +54,7 @@ class ScanTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type u = xs#scanRight[_15, Div]
         val u: u = xs.scanRight(_15, Div())
-        Test.cassertSame[_15 :: Nil, u#force]
+        Test.cassertEq[_15 :: Nil, u#force]
         assertEquals(_15 :: Nil, u)
     }
 

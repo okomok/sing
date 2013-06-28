@@ -45,8 +45,8 @@ object Test {
      * Asserts that two types refer to the same type.
      */
     @elidable(ALL)
-     def cassertSame[x >: y <: y, y](implicit x: x = dummy[x], y: y = dummy[y]): cassertSame[x, y] = ()
-    type cassertSame[x >: y <: y, y]                                                               = scala.Unit
+     def cassertEq[x >: y <: y, y](implicit x: x = dummy[x], y: y = dummy[y]): cassertEq[x, y] = ()
+    type cassertEq[x >: y <: y, y]                                                               = scala.Unit
 
     /**
      * Asserts that <code>x</code> conforms to <code>y</code>.
@@ -65,8 +65,8 @@ object Test {
      def conforms[x, y](x: x, y: y) = macro makro.Conforms.term_impl[x, y]
     type conforms[x, y]             = macro makro.Conforms.type_impl[x, y]
 
-     def isSame[x, y](x: x, y: y) = macro makro.IsSame.term_impl[x, y]
-    type isSame[x, y]             = macro makro.IsSame.type_impl[x, y]
+     def isEq[x, y](x: x, y: y) = macro makro.IsEq.term_impl[x, y]
+    type isEq[x, y]             = macro makro.IsEq.type_impl[x, y]
 
     /**
      * Compile-error (any usecase?)
