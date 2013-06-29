@@ -25,26 +25,41 @@ object Test {
      def ignore[x](x: x): ignore[x] = ()
     type ignore[x]                  = scala.Unit
 
-    // Typemethod forms don't work correctly in fact.
-
     /**
      * Asserts that a condition is true. `c` represents "Concrete".
      */
-    @elidable(ALL) // implicit for `cassert[x]` to be well-formed.
-     def cassert[x >: `true` <: `true`](implicit x: x = dummy[x]): cassert[x] = ()
-    type cassert[x >: `true` <: `true`]                                       = scala.Unit
+     def cassert[x]: scala.Unit       = macro CAssert.term_impl_[x]
+     def cassert[x](x: x): scala.Unit = macro CAssert.term_impl[x]
+    type cassert[x]                   = macro CAssert.type_impl[x]
+
+    private object CAssert extends makro.Assert1Impl {
+        override protected def impl(c: Context)(x: c.Type): scala.Unit = {
+            import c.universe._
+            if (!(x =:= weakTypeOf[`true`])) {
+                c.abort(c.enclosingPosition, show(x.normalize) + " is not `true`")
+            }
+        }
+    }
 
     /**
      * Asserts that a condition is false.
      */
-    @elidable(ALL)
-     def cassertNot[x >: `false` <: `false`](implicit x: x = dummy[x]): cassertNot[x] = ()
-    type cassertNot[x >: `false` <: `false`]                                          = scala.Unit
+     def cassertNot[x]: scala.Unit       = macro CAssertNot.term_impl_[x]
+     def cassertNot[x](x: x): scala.Unit = macro CAssertNot.term_impl[x]
+    type cassertNot[x]                   = macro CAssertNot.type_impl[x]
+
+    private object CAssertNot extends makro.Assert1Impl {
+        override protected def impl(c: Context)(x: c.Type): scala.Unit = {
+            import c.universe._
+            if (!(x =:= weakTypeOf[`false`])) {
+                c.abort(c.enclosingPosition, show(x.normalize) + " is not `false`")
+            }
+        }
+    }
 
     /**
      * Asserts that two types refer to the same type.
      */
-    @elidable(ALL)
      def cassertEq[x, y]: scala.Unit             = macro makro.AssertEq.term_impl_[x, y]
      def cassertEq[x, y](x: x, y: y): scala.Unit = macro makro.AssertEq.term_impl[x, y]
     type cassertEq[x, y]                         = macro makro.AssertEq.type_impl[x, y]
@@ -52,23 +67,9 @@ object Test {
     /**
      * Asserts that <code>x</code> conforms to <code>y</code>.
      */
-    @elidable(ALL)
      def cassertConforms[x, y]: scala.Unit             = macro makro.AssertConforms.term_impl_[x, y]
      def cassertConforms[x, y](x: x, y: y): scala.Unit = macro makro.AssertConforms.term_impl[x, y]
     type cassertConforms[x, y]                         = macro makro.AssertConforms.type_impl[x, y]
-
-    /**
-     * Asserts that <code>x</code> is <code>Nothing</code> type.
-     */
-    @elidable(ALL)
-     def cassertNothing[x >: Nothing <: Nothing](implicit x: x = dummy[x]): cassertNothing[x] = ()
-    type cassertNothing[x >: Nothing <: Nothing]                                              = scala.Unit
-
-     def conforms[x, y](x: x, y: y) = macro makro.Conforms.term_impl[x, y]
-    type conforms[x, y]             = macro makro.Conforms.type_impl[x, y]
-
-     def isEq[x, y](x: x, y: y) = macro makro.IsEq.term_impl[x, y]
-    type isEq[x, y]             = macro makro.IsEq.type_impl[x, y]
 
     /**
      * Compile-error (any usecase?)
@@ -87,4 +88,16 @@ object Test {
      def echo[x]: scala.Unit       = macro makro.Echo.term_impl_[x]
      def echo[x](x: x): scala.Unit = macro makro.Echo.term_impl[x]
     type echo[x]                   = macro makro.Echo.type_impl[x]
+
+    /**
+     * @return `true` if x conforms to y. `false` otherwise.
+     */
+     def conforms[x, y](x: x, y: y) = macro makro.Conforms.term_impl[x, y]
+    type conforms[x, y]             = macro makro.Conforms.type_impl[x, y]
+
+    /**
+     * @return `true` if x is equivalent to y. `false` otherwise.
+     */
+     def isEq[x, y](x: x, y: y) = macro makro.IsEq.term_impl[x, y]
+    type isEq[x, y]             = macro makro.IsEq.type_impl[x, y]
 }

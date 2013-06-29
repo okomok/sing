@@ -50,10 +50,10 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         type no = Nothing
 
-        cassertNothing[no]
+        cassert[isEq[no, Nothing]]
 
         expectError {
-            cassertNothing[Int]
+            cassert[isEq[Int, Nothing]]
         }
 
         cassert[conforms[Int, AnyVal]]

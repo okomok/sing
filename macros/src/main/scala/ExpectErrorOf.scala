@@ -15,6 +15,7 @@ import scala.reflect.macros.{Context, TypecheckException}
 object ExpectErrorOf {
     def apply(r: String)(x: _): scala.Unit = macro impl
 
+    // For some reason, typed and untyped macro can't be mixed.
     def impl(c: Context)(r: c.Tree)(x: c.Tree): c.Expr[scala.Unit] = {
         import c.universe._
 
