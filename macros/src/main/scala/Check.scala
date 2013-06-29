@@ -35,9 +35,9 @@ object Check {
 
         val t = weakTypeOf(tx)
         if (IsAbstract._impl(c)(tx)) {
-            c.abort(c.enclosingPosition, show(t) + " is abstract")
-        } else if (IsEq._impl(c)(tx, implicitly[c.WeakTypeTag[Nothing]])) {
-            c.abort(c.enclosingPosition, show(t) + " is Nothing")
+            c.abort(c.enclosingPosition, show(t) + " is abstract type: " + show(t.normalize))
+        } else if (t <:< weakTypeOf[Nothing]) {
+            c.abort(c.enclosingPosition, show(t) + " is Nothing type: " + show(t.normalize))
         }
     }
 }
