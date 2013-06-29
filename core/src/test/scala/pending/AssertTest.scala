@@ -59,7 +59,7 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         cassert[conforms[Int, AnyVal]]
 
         expectError {
-            assertConforms[AnyVal, Int]
+            cassertConforms[AnyVal, Int]
         }
 
         cassertNot[conforms[AnyVal, Int]]

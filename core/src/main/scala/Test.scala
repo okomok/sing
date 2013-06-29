@@ -45,15 +45,17 @@ object Test {
      * Asserts that two types refer to the same type.
      */
     @elidable(ALL)
-     def cassertEq[x >: y <: y, y](implicit x: x = dummy[x], y: y = dummy[y]): cassertEq[x, y] = ()
-    type cassertEq[x >: y <: y, y]                                                               = scala.Unit
+     def cassertEq[x, y]: scala.Unit             = macro makro.AssertEq.term_impl_[x, y]
+     def cassertEq[x, y](x: x, y: y): scala.Unit = macro makro.AssertEq.term_impl[x, y]
+    type cassertEq[x, y]                         = macro makro.AssertEq.type_impl[x, y]
 
     /**
      * Asserts that <code>x</code> conforms to <code>y</code>.
      */
     @elidable(ALL)
-     def assertConforms[x <: y, y](implicit x: x = dummy[x], y: y = dummy[y]): assertConforms[x, y] = ()
-    type assertConforms[x <: y, y]                                                                  = scala.Unit
+     def cassertConforms[x, y]: scala.Unit             = macro makro.AssertConforms.term_impl_[x, y]
+     def cassertConforms[x, y](x: x, y: y): scala.Unit = macro makro.AssertConforms.term_impl[x, y]
+    type cassertConforms[x, y]                         = macro makro.AssertConforms.type_impl[x, y]
 
     /**
      * Asserts that <code>x</code> is <code>Nothing</code> type.

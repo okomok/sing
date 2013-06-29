@@ -45,18 +45,18 @@ class TeztTest {
 
     def testConforms {
         /*
-        Test.assertConforms(new B, new A)
+        Test.cassertConforms(new B, new A)
         */
-        Test.assertConforms[B, A]
+        Test.cassertConforms[B, A]
         /*
-        Test.assertConforms(new A, new A)
+        Test.cassertConforms(new A, new A)
         */
-        Test.assertConforms[A, A]
+        Test.cassertConforms[A, A]
 
         /*
-        Test.assertConforms(new A, new B)
+        Test.cassertConforms(new A, new B)
         */
-        //Test.assertConforms[A, B]
+        //Test.cassertConforms[A, B]
     }
 
 }
