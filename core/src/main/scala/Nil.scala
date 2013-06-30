@@ -14,11 +14,11 @@ sealed abstract class Nil extends AsList {
     override  def isEmpty: isEmpty = `true`
     override type isEmpty          = `true`
 
-    override  def head: head = noSuchElement("Nil.head")
-    override type head       = noSuchElement
+    override  def head: head = makro.NoSuchElement.apply("Nil.head")
+    override type head       = makro.NoSuchElement.apply("Nil.head")
 
-    override  def tail: tail = noSuchElement("Nil.tail")
-    override type tail       = noSuchElement
+    override  def tail: tail = makro.NoSuchElement.apply("Nil.tail")
+    override type tail       = makro.NoSuchElement.apply("Nil.tail")
 
     def unapply(that: Nil) = true
 }

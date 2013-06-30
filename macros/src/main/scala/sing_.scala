@@ -11,9 +11,9 @@ package sing.makro
 import scala.reflect.macros.Context
 
 
-private object sing_ {
+object sing_ {
     def apply(c: Context): c.Tree = {
         import c.universe._
-        q"com.github.okomok.sing"
+        q"_root_.com.github.okomok.sing"
     }
 }

@@ -13,9 +13,9 @@ import scala.reflect.macros.Context
 
 
 object ExpectError {
-    def apply(x: _): scala.Unit = macro impl
+    def apply(x: _): Unit = macro impl
 
-    def impl(c: Context)(x: c.Tree): c.Expr[scala.Unit] = {
+    def impl(c: Context)(x: c.Tree): c.Expr[Unit] = {
         import c.universe._
 
         if (!IsError._impl(c)(x)) {

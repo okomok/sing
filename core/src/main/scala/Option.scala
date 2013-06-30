@@ -124,8 +124,8 @@ sealed abstract class None extends AsOption {
     override  def isEmpty: isEmpty = `true`
     override type isEmpty          = `true`
 
-    override  def get: get = noSuchElement("None.get")
-    override type get      = noSuchElement
+    override  def get: get = makro.NoSuchElement.apply("None.get")
+    override type get      = makro.NoSuchElement.apply("None.get")
 
     override  def getOrElse[f <: Function0](f: f): getOrElse[f] = f.apply
     override type getOrElse[f <: Function0]                     = f#apply

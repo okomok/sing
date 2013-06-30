@@ -33,7 +33,7 @@ trait Assert2Impl {
         import c.universe._
 
         _impl(c)(tx, ty)
-        tq"scala.Unit"
+        tq"_root_.scala.Unit"
     }
 
     private def _impl[x, y](c: Context)(tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): Unit = {

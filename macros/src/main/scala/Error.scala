@@ -13,10 +13,10 @@ import scala.reflect.macros.Context
 
 
 object Error {
-     def apply: scala.Unit = macro term_impl
+     def apply: Unit = macro term_impl
     type apply             = macro type_impl
 
-    def term_impl(c: Context): c.Expr[scala.Unit] = {
+    def term_impl(c: Context): c.Expr[Unit] = {
         import c.universe._
         _impl(c)
         reify(())
@@ -25,7 +25,7 @@ object Error {
     def type_impl(c: Context): c.Tree = {
         import c.universe._
         _impl(c)
-        tq"scala.Unit"
+        tq"_root_.scala.Unit"
     }
 
     private def _impl(c: Context) {

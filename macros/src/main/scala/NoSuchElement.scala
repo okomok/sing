@@ -12,11 +12,12 @@ import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
-object Abandon {
-    def apply(x: _): Unit = macro impl
+object NoSuchElement extends TypeThrow {
+     def apply(msg: String) = macro term_impl
+    type apply(msg: String) = macro type_impl
 
-    def impl(c: Context)(x: c.Tree): c.Expr[Unit] = {
+    override protected def what(c: Context): c.Tree = {
         import c.universe._
-        reify(())
+        tq"_root_.java.util.NoSuchElementException"
     }
 }

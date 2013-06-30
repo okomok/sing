@@ -13,10 +13,10 @@ import scala.reflect.macros.{Context, TypecheckException}
 
 
 object ExpectErrorOf {
-    def apply(r: String)(x: _): scala.Unit = macro impl
+    def apply(r: String)(x: _): Unit = macro impl
 
     // For some reason, typed and untyped macro can't be mixed.
-    def impl(c: Context)(r: c.Tree)(x: c.Tree): c.Expr[scala.Unit] = {
+    def impl(c: Context)(r: c.Tree)(x: c.Tree): c.Expr[Unit] = {
         import c.universe._
 
         val pos = c.enclosingPosition
@@ -28,11 +28,11 @@ object ExpectErrorOf {
 
         try {
             c.typeCheck(x)
-            c.abort(pos, show(x) + " compiles unexpectedly")
+            c.abort(pos, "\n" + show(x) + "\ncompiles unexpectedly")
         } catch {
             case e: TypecheckException => {
                 if (!e.getMessage.matches(rgx)) {
-                    c.abort(pos, show(x) + " doesn't compile unexpectedly - " + e.getMessage)
+                    c.abort(pos, "\n" + show(x) + "\ndoes not compile unexpectedly due to\n" + e.getMessage)
                 }
             }
         }

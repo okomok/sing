@@ -128,21 +128,6 @@ package object sing {
     type New[T] = macro makro.New.impl[T]
 
 
-// errors
-
-    /**
-     * Trivial helper to throw UnsupportedOperationException
-     */
-     def unsupported(what: Predef.String): unsupported = throw new UnsupportedOperationException("sing." + what)
-    type unsupported                                    = Nothing
-
-    /**
-     * Trivial helper to throw NoSuchElementException
-     */
-     def noSuchElement(what: Predef.String): noSuchElement = throw new NoSuchElementException("sing." + what)
-    type noSuchElement                                      = Nothing
-
-
 // assertions
 
     /**
