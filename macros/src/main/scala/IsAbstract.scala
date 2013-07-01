@@ -15,36 +15,11 @@ import scala.reflect.macros.Context
 // See: http://stackoverflow.com/questions/15898037/how-to-check-if-weaktypetag-or-type-represents-concrete-type
 
 
-object IsAbstract {
+object IsAbstract extends Predicate1Impl {
      def apply[x](x: x) = macro term_impl[x]
     type apply[x]       = macro type_impl[x]
 
-    def term_impl[x](c: Context)(x: c.Expr[x])(implicit tx: c.WeakTypeTag[x]): c.Expr[Any] = {
-        import c.universe._
-
-        val res = if (_impl(c)(tx)) {
-            q"${sing_(c)}.`true`"
-        } else {
-            q"${sing_(c)}.`false`"
-        }
-
-        c.Expr[Any](res)
-    }
-
-    def type_impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Tree = {
-        import c.universe._
-
-        val res = if (_impl(c)(tx)) {
-            tq"${sing_(c)}.`true`"
-        } else {
-            tq"${sing_(c)}.`false`"
-        }
-
-        res
-    }
-
-    def _impl[x](c: Context)(tx: c.WeakTypeTag[x]): Boolean = {
-        import c.universe._
-        weakTypeOf(tx).typeSymbol.asType.isAbstractType
+    override protected def impl(c: Context)(x: c.Type): Boolean = {
+        x.typeSymbol.asType.isAbstractType
     }
 }

@@ -8,7 +8,6 @@ package com.github.okomok
 package sing.makro
 
 
-import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
@@ -36,7 +35,7 @@ trait Assert2Impl {
         tq"_root_.scala.Unit"
     }
 
-    private def _impl[x, y](c: Context)(tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): Unit = {
+    def _impl[x, y](c: Context)(tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): Unit = {
         import c.universe._
 
         val x = weakTypeOf(tx)

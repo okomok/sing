@@ -14,6 +14,6 @@ import scala.reflect.macros.Context
 private object here {
     def apply(c: Context): c.Tree = {
         import c.universe._
-        q"com.github.okomok.sing.makro"
+        q"_root_.com.github.okomok.sing.makro"
     }
 }
