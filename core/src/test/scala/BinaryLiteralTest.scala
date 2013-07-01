@@ -13,6 +13,7 @@ import sing.Test._
 import sing.Dense._
 import scala.language.existentials
 import junit.framework.{Assert => JAssert}
+import sing.Test.CompileError._
 
 
 class BinaryLiteralTest extends org.scalatest.junit.JUnit3Suite {
@@ -44,11 +45,11 @@ class BinaryLiteralTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testThrow {
-        expectError {
+        expectError(IllegalArgument) {
             val bs = Binary_("a0")
         }
 
-        expectError {
+        expectError(IllegalArgument) {
             dummy[ Binary_("a0") ]
         }
     }

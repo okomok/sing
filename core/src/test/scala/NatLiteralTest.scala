@@ -13,6 +13,7 @@ import sing.Test._
 import sing.Dense._
 import scala.language.existentials
 import junit.framework.{Assert => JAssert}
+import sing.Test.CompileError._
 
 
 class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
@@ -32,11 +33,11 @@ class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testThrow {
-        expectError {
+        expectError(IllegalArgument) {
             val bs = Nat_(-1)
         }
 
-        expectError {
+        expectError(IllegalArgument) {
             dummy[ Nat_(-1) ]
         }
     }

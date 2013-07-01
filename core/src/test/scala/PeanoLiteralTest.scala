@@ -12,6 +12,7 @@ import sing._
 import sing.Test._
 import scala.language.existentials
 import junit.framework.{Assert => JAssert}
+import sing.Test.CompileError._
 
 
 class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
@@ -31,11 +32,11 @@ class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testThrow {
-        expectError {
+        expectError(IllegalArgument) {
             val bs = Peano_(-1)
         }
 
-        expectError {
+        expectError(IllegalArgument) {
             dummy[ Peano_(-1) ]
         }
     }

@@ -12,6 +12,7 @@ import com.github.okomok.sing
 import sing.makro._
 import junit.framework.Assert._
 import sing.Test
+import sing.Test.CompileError._
 
 
 import scala.language.existentials
@@ -23,7 +24,7 @@ class ConstantTypeTest extends org.scalatest.junit.JUnit3Suite {
         type ct = ConstantTypeOf.apply(3)
 
         val x: ct = 3
-        Test.expectError {
+        Test.expectError(TypeMismatch) {
             val x: ct = 4
         }
 
@@ -36,7 +37,7 @@ class ConstantTypeTest extends org.scalatest.junit.JUnit3Suite {
         val c: String = ConstantTermOf.apply[ct]
 
         val x: ct = "hello"
-        Test.expectError {
+        Test.expectError(TypeMismatch) {
             val x: ct = "hi"
         }
 
@@ -47,7 +48,7 @@ class ConstantTypeTest extends org.scalatest.junit.JUnit3Suite {
         type ct = ConstantTypeOf.apply(1+2)
 
         val x: ct = 3
-        Test.expectError {
+        Test.expectError(TypeMismatch) {
             val x: ct = 4
         }
 
@@ -61,7 +62,7 @@ class ConstantTypeTest extends org.scalatest.junit.JUnit3Suite {
         type ct = ConstantTypeOf.apply(1+2 == THREE)
         val x: ct = true
 
-        Test.expectError {
+        Test.expectError(TypeMismatch) {
             val x: ct = false
         }
 

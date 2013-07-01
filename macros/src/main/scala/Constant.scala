@@ -25,7 +25,7 @@ object ConstantTypeOf {
 
         x.tree match {
             case Literal(c @ Constant(_)) => TypeTree(ConstantType(c))
-            case t => c.abort(c.enclosingPosition, show(t) + " is not constant")
+            case t => CompileError.illegalArgument(c)(show(t) + " is not constant expression.")
         }
     }
 }
@@ -39,7 +39,7 @@ object ConstantTermOf {
 
         weakTypeOf[T].normalize match {
             case ConstantType(Constant(x)) => c.Expr[Any](Literal(Constant(x)))
-            case t => c.abort(c.enclosingPosition, show(t) + " is not constant")
+            case t => CompileError.illegalArgument(c)(show(t) + " is not constant expression.")
         }
     }
 }

@@ -33,10 +33,12 @@ object Test {
     type cassert[x]                   = macro CAssert.type_impl[x]
 
     private object CAssert extends makro.Assert1Impl {
-        override protected def impl(c: Context)(x: c.Type): scala.Unit = {
+        override protected def impl(c: Context)(x: c.Type): makro.AssertResult = {
             import c.universe._
-            if (!(x =:= weakTypeOf[`true`])) {
-                c.abort(c.enclosingPosition, show(x.normalize) + " is not `true`")
+            if (x =:= weakTypeOf[`true`]) {
+                makro.AssertSuccess
+            } else {
+                makro.AssertFailure(show(x.normalize) + " is not `true`.")
             }
         }
     }
@@ -49,10 +51,12 @@ object Test {
     type cassertNot[x]                   = macro CAssertNot.type_impl[x]
 
     private object CAssertNot extends makro.Assert1Impl {
-        override protected def impl(c: Context)(x: c.Type): scala.Unit = {
+        override protected def impl(c: Context)(x: c.Type): makro.AssertResult = {
             import c.universe._
-            if (!(x =:= weakTypeOf[`false`])) {
-                c.abort(c.enclosingPosition, show(x.normalize) + " is not `false`")
+            if (x =:= weakTypeOf[`false`]) {
+                makro.AssertSuccess
+            } else {
+                makro.AssertFailure(show(x.normalize) + " is not `false`.")
             }
         }
     }
@@ -80,7 +84,9 @@ object Test {
     /**
      * Expects a compile-error.
      */
-    def expectError(x: _): scala.Unit = macro makro.ExpectError.impl
+    def expectError(r: String)(x: _): scala.Unit = macro makro.ExpectError.impl
+
+    val CompileError = makro.CompileError
 
     /**
      * Prints a type name.

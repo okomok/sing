@@ -17,8 +17,9 @@ object Echo extends Assert1Impl {
      def apply[x](x: x): Unit = macro term_impl[x]
     type apply[x]             = macro type_impl[x]
 
-    override protected def impl(c: Context)(x: c.Type): Unit = {
+    override protected def impl(c: Context)(x: c.Type): AssertResult = {
         import c.universe._
         c.echo(c.enclosingPosition, show(x.normalize))
+        AssertSuccess
     }
 }

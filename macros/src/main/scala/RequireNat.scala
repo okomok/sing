@@ -14,7 +14,7 @@ import scala.reflect.macros.Context
 private object RequireNat {
     def apply(c: Context)(i: Int): Unit = {
         if (i < 0) {
-            c.abort(c.enclosingPosition, "natural number literal can't be negative: " + i.toString)
+            CompileError.illegalArgument(c)(i.toString + "is negative.")
         }
     }
 }

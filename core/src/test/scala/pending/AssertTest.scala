@@ -11,6 +11,7 @@ package pending
 import com.github.okomok.sing
 import sing._
 import Test._
+import sing.Test.CompileError._
 
 
 import scala.language.existentials
@@ -20,31 +21,31 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial() {
 
-        expectError {
+        expectError(NotFound) {
             // good error
             woo
         }
 
-        expectError {
+        expectError(UnexpectedCompile) {
             // good error
-            expectError {
+            expectError(AnyError) {
                 // bad success
                 1
             }
         }
 
-        expectError {
+        expectError(UnexpectedCompile) {
             // good error
-            expectError {
+            expectError(AnyError) {
                 // bad success
-                expectError {
+                expectError(NotFound) {
                     // good error
                     wow
                 }
             }
         }
 
-        expectError {
+        expectError(AnyError) {
             error
         }
 
@@ -52,73 +53,73 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         cassert[isEq[no, Nothing]]
 
-        expectError {
+        expectError(AssertError) {
             cassert[isEq[Int, Nothing]]
         }
 
         cassert[conforms[Int, AnyVal]]
 
-        expectError {
+        expectError(AssertError) {
             cassertConforms[AnyVal, Int]
         }
 
         cassertNot[conforms[AnyVal, Int]]
 
-        expectError {
-            assertNot[conforms[Int, AnyVal]]
+        expectError(AssertError) {
+            cassertNot[conforms[Int, AnyVal]]
         }
 
         type i = Int
 
         cassertNot[isEq[AnyVal, i]]
 
-        expectError {
+        expectError(AssertError) {
             cassertNot[isEq[i, Int]]
         }
 
         def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
         type foo[x <: Any] = x#asNat#plus[Dense._2]
 
-        expectError {
+        expectError(AbstractType) {
             check(foo(Nil))
         }
 
-        expectError {
+        expectError(AbstractType) {
             dummy[ check[foo[Nil]] ]
         }
 
         val x: x = check(Some(Dense._2).get)
         type x   = check[Some[Dense._2]#get]
 
-        expectError {
+        expectError(AssertError) {
             cassertEq(Dense._3, x)
         }
-        expectError {
+        expectError(AssertError) {
             cassertEq[Dense._3, x]
         }
 
 
-        expectError {
+        expectError(AssertError) {
             ignore[ cassertEq[Char, Int] ]
         }
 
-        expectError {
+        expectError(NotFound) {
             // dummy[ cassertEq[Char, Int] ] // why not error?
             wow
         }
 
-        expectError {
+        expectError(AssertError) {
             ignore[ cassertNot[conforms[Int, Int]] ]
         }
 
-        expectError {
+        expectError(AnyError) {
             ignore[error]
         }
 
         cassertEq(Dense._2, x)
         cassertEq[Dense._2, x]
 
-        expectError {
+        expectError(NothingType) {
             check(None.get)
         }
 
@@ -132,15 +133,15 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         val x: x = check(foo(Dense._3))
         type x   = check[foo[Dense._3]]
 
-        expectError {
+        expectError(NothingType) {
             check(foo(Dense._2))
         }
 
-        expectError {
+        expectError(NothingType) {
             check(dummy[foo[Dense._2]]) // Nothing
         }
 
-        expectError {
+        expectError(AbstractType) {
             check(dummy[Nat#increment]) // abstract
         }
     }

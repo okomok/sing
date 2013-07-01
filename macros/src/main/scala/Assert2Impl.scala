@@ -12,7 +12,7 @@ import scala.reflect.macros.Context
 
 
 trait Assert2Impl {
-    protected def impl(c: Context)(x: c.Type, y: c.Type): Unit
+    protected def impl(c: Context)(x: c.Type, y: c.Type): AssertResult
 
     final def term_impl_[x, y](c: Context)(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Expr[Unit] = {
         import c.universe._
@@ -40,6 +40,9 @@ trait Assert2Impl {
 
         val x = weakTypeOf(tx)
         val y = weakTypeOf(ty)
-        impl(c)(x, y)
+        impl(c)(x, y) match {
+            case AssertFailure(msg) => CompileError.assertError(c)(msg)
+            case _ => ()
+        }
     }
 }

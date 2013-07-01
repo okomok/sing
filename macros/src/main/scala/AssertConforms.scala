@@ -17,11 +17,13 @@ object AssertConforms extends Assert2Impl {
      def apply[x, y](x: x, y: y): Unit = macro term_impl[x, y]
     type apply[x, y]                   = macro type_impl[x, y]
 
-    override protected def impl(c: Context)(x: c.Type, y: c.Type): Unit = {
+    override protected def impl(c: Context)(x: c.Type, y: c.Type): AssertResult = {
         import c.universe._
 
-        if (!(x <:< y)) {
-            c.abort(c.enclosingPosition, show(x.normalize) + " does not conform to " + show(y.normalize))
+        if (x <:< y) {
+            AssertSuccess
+        } else {
+            AssertFailure(show(x.normalize) + " does not conform to " + show(y.normalize))
         }
     }
 }

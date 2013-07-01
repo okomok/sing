@@ -8,6 +8,7 @@ package com.github.okomoktest; package singtest
 
 
 import com.github.okomok.sing._
+import com.github.okomok.sing.Test.CompileError._
 
 
 trait MiscTest {
@@ -24,7 +25,7 @@ trait MiscTest {
         // x <:< r, but not r <:< x
         val rx: r = x
 
-        Test.expectError {
+        Test.expectError(AnyError) {
             val xr: x = null.asInstanceOf[r]
         }
 
@@ -44,7 +45,7 @@ trait MiscTest {
 
         implicitly[self_ <:< self]
 
-        Test.expectError {
+        Test.expectError(CannotProve) {
             implicitly[self <:< self_]
         }
     }

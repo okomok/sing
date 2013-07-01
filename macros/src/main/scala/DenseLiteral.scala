@@ -48,7 +48,7 @@ object DenseLiteral {
         val res = bs.dropWhile(_ == '0').reverse.map {
             case '1' => t
             case '0' => f
-            case w => c.abort(c.enclosingPosition, "invalid binary literal: " + w.toString)
+            case w => CompileError.illegalArgument(c)(w.toString + " is illformed")
         }.foldRight(nil) { (tf, res) =>
             Apply(cons, List(tf, res))
         }
@@ -67,7 +67,7 @@ object DenseLiteral {
         val res = bs.dropWhile(_ == '0').reverse.map {
             case '1' => t
             case '0' => f
-            case w => c.abort(c.enclosingPosition, "invalid binary literal: " + w.toString)
+            case w => CompileError.illegalArgument(c)(w.toString + " is illformed")
         }.foldRight(nil) { (tf, res) =>
             AppliedTypeTree(cons, List(tf, res))
         }

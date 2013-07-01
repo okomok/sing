@@ -16,12 +16,12 @@ class CheckTest extends org.scalatest.junit.JUnit3Suite {
     class Wow
     type No = Nothing with Wow
 
-    def ignore[x](x: x): Unit = ()
+    def ignore[x]: Unit = ()
 
     def testTrivial {
-//        type res = Check.apply[No]
+    //     ignore[Check.apply[No]]
 
-        ExpectErrorOf(NothingType) {
+        ExpectError(AnyError) {
             ignore[Check.apply[No]]
         }
 

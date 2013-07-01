@@ -16,7 +16,7 @@ import scala.language.existentials
 class CheckTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-        makro.ExpectErrorOf(".*NoSuchElementException with String.*") {
+        makro.ExpectError("(?s).*NoSuchElementException with String.*") {
             val x = check(Nil.head)
         }
     }

@@ -17,7 +17,7 @@ private object RequireConstantLiteral {
 
         x.tree match {
             case Literal(Constant(_)) => ()
-            case _ => c.abort(c.enclosingPosition, "constant literal is required")
+            case t => CompileError.illegalArgument(c)(show(t) + " is not constant literal.")
         }
     }
 }

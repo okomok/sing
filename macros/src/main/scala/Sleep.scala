@@ -32,7 +32,7 @@ object Sleep {
         import c.universe._
         x.tree match {
             case Literal(Constant(ms: Long)) => Thread.sleep(ms)
-            case t => c.abort(c.enclosingPosition, show(t) + " is not Long literal")
+            case t => CompileError.illegalArgument(c)(show(t) + " is not Long literal.")
         }
     }
 }

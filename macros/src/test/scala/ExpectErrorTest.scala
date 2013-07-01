@@ -14,7 +14,7 @@ import CompileError._
 class ExpectErrorTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-        ExpectErrorOf(NotFound) {
+        ExpectError(NotFound) {
             wow
         }
     }
@@ -22,8 +22,8 @@ class ExpectErrorTest extends org.scalatest.junit.JUnit3Suite {
     def testSelf {
         val hey = "hello" // not constant
 
-        ExpectErrorOf(NotConstant) {
-            ExpectErrorOf(hey) {
+        ExpectError(IllegalArgument) {
+            ExpectError(hey) {
                 3
             }
         }
