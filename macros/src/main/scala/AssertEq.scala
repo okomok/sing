@@ -17,7 +17,7 @@ object AssertEq extends Assert2Impl {
      def apply[x, y](x: x, y: y): Unit = macro term_impl[x, y]
     type apply[x, y]                   = macro type_impl[x, y]
 
-    override protected def impl(c: Context)(x: c.Type, y: c.Type): AssertResult = {
+    override protected def inType(c: Context)(x: c.Type, y: c.Type): AssertResult = {
         import c.universe._
 
         if (x =:= y) {

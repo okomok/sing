@@ -40,15 +40,15 @@ class MultiplyTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait teztTrivial {
-        Test.cassertEq[_6, _3 # times[ _2]]
-        Test.cassertEq[_6, _2 # times[ _3]]
-        Test.cassertEq[_0, _3 # times[ _0]]
-        Test.cassertEq[_0, _0 # times[ _0]]
-        Test.cassertEq[_0, _0 # times[ _9]]
-        Test.cassertEq[_12, _6 # times[ _2]]
-        Test.cassertEq[_15, _3 # times[ _5]]
-        Test.cassertEq[_8, _4 # times[ _2]]
-        Test.cassertEq[_1, _1 # times[ _1]]
-        Test.cassertEq[_9, _3 # times[ _3]]
+        Test.assertEq[_6, _3 # times[ _2]]
+        Test.assertEq[_6, _2 # times[ _3]]
+        Test.assertEq[_0, _3 # times[ _0]]
+        Test.assertEq[_0, _0 # times[ _0]]
+        Test.assertEq[_0, _0 # times[ _9]]
+        Test.assertEq[_12, _6 # times[ _2]]
+        Test.assertEq[_15, _3 # times[ _5]]
+        Test.assertEq[_8, _4 # times[ _2]]
+        Test.assertEq[_1, _1 # times[ _1]]
+        Test.assertEq[_9, _3 # times[ _3]]
     }
 }

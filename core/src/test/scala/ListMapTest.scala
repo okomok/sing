@@ -21,15 +21,15 @@ class ListMapTest extends org.scalatest.junit.JUnit3Suite {
         type m = ListMap.put[_3, _Box[Int]]#put[_5, _Box[Char]]#put[_1, _Box[String]]
         val m: m = ListMap.put(_3, _Box(3)).put(_5, _Box('c')).put(_1, _Box("wow"))
 
-        Test.cassertEq[Dense._3, m#size]
+        Test.assertEq[Dense._3, m#size]
 
         type v8 = m#get[_8]
         val v8: v8 = m.get(_8)
-        Test.cassertEq[None, v8]
+        Test.assertEq[None, v8]
 
         type v5 = m#get[_5]#get
         val v5: v5 = m.get(_5).get
-        Test.cassertEq[_Box[Char], v5]
+        Test.assertEq[_Box[Char], v5]
         assertEquals('c', v5.unsing)
     }
 
@@ -37,16 +37,16 @@ class ListMapTest extends org.scalatest.junit.JUnit3Suite {
         type m = ListMap.put[_3, _Box[Int]]#put[_5, _Box[Char]]#put[_1, _Box[String]]
         val m: m = ListMap.put(_3, _Box(3)).put(_5, _Box('c')).put(_1, _Box("wow"))
 
-        Test.cassertEq[`false`, m#contains[_9]]
-        Test.cassertEq[`true`, m#contains[_5]]
+        Test.assertEq[`false`, m#contains[_9]]
+        Test.assertEq[`true`, m#contains[_5]]
     }
 
     def testSorted1 {
         type m = ListMap.put[_3, _Box[Int]]#put[_5, _Box[Char]]#put[_1, _Box[String]]
         val m: m = ListMap.put(_3, _Box(3)).put(_5, _Box('c')).put(_1, _Box("wow"))
 
-        Test.cassertEq[`false`, m#contains[_9]]
-        Test.cassertEq[`true`, m#contains[_5]]
+        Test.assertEq[`false`, m#contains[_9]]
+        Test.assertEq[`true`, m#contains[_5]]
     }
 
     def testUnsing {
@@ -62,13 +62,13 @@ class ListMapTest extends org.scalatest.junit.JUnit3Suite {
 
         type v5 = m#get[_5]#get
         val v5: v5 = m.get(_5).get
-        Test.cassertEq[_Box[Char], v5]
+        Test.assertEq[_Box[Char], v5]
         assertEquals('c', v5.unsing)
 
         type m2 = m.put[_5, _Box[String]]
         val m2: m2 = m.put(_5, _Box("hw"))
-        Test.cassertEq[`true`, m2#size#equal[m#size]]
-        Test.cassertEq[_Box[String], m2#get[_5]#get]
+        Test.assertEq[`true`, m2#size#equal[m#size]]
+        Test.assertEq[_Box[String], m2#get[_5]#get]
         assertEquals("hw", m2.get(_5).get.unsing)
     }
 

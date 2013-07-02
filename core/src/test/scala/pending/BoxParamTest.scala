@@ -28,8 +28,8 @@ class BoxParamTest extends org.scalatest.junit.JUnit3Suite {
         val x_ = Box(new A[B[Int], k])
         val y = Box(new A[B[Int], Int])
 
-        Test.cassert(x.equal(x_))
-        Test.cassertNot(x.equal(y))
+        Test.assertTrue(x.equal(x_))
+        Test.assertFalse(x.equal(y))
     }
 
 }

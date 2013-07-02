@@ -17,6 +17,6 @@ object IsEq extends Predicate2Impl {
     type apply[x, y]             = macro type_impl[x, y]
 
     override protected def impl(c: Context)(x: c.Type, y: c.Type): Boolean = {
-        x =:= y
+        x <:< y && y <:< x
     }
 }

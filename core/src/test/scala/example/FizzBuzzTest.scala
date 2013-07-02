@@ -37,7 +37,7 @@ package com.github.okomoktest; package singtest; package example
 
            // sing.echo[res]
 
-            sing.Test.cassertEq[res,
+            sing.Test.assertEq[res,
                 _1 :: _2 :: Fizz :: _4 :: Buzz :: Fizz :: _7 :: _8 :: Fizz :: Buzz :: _11 :: Fizz :: _13 :: _14 :: FizzBuzz :: sing.Nil]
 
         }

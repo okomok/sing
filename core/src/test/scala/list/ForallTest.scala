@@ -26,7 +26,7 @@ class ForallTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val u: xs#forall[Gt3] = xs.forall(Gt3())
-        Test.cassertEq[`true`, xs#forall[Gt3]]
+        Test.assertEq[`true`, xs#forall[Gt3]]
         assertEquals(`true`, u)
     }
 
@@ -34,7 +34,7 @@ class ForallTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _1 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _1 :: _9 :: Nil
         val u: xs#forall[Gt3] = xs.forall(Gt3())
-        Test.cassertEq[`false`, xs#forall[Gt3]]
+        Test.assertEq[`false`, xs#forall[Gt3]]
         assertEquals(`false`, u)
     }
 
@@ -42,7 +42,7 @@ class ForallTest extends org.scalatest.junit.JUnit3Suite {
         type xs = Nil
         val xs: xs = Nil
         val u: xs#forall[Gt3] = xs.forall(Gt3())
-        Test.cassertEq[`true`, xs#forall[Gt3]]
+        Test.assertEq[`true`, xs#forall[Gt3]]
         assertEquals(`true`, u)
     }
 

@@ -28,9 +28,9 @@ class _TermOfTest extends org.scalatest.junit.JUnit3Suite {
         type tr = typeOf(r)
         type tst = typeOf(sing.`true`)
 
-        Test.cassertEq[`true`, tt]
-        Test.cassertEq[`true`, tr]
-        Test.cassertEq[`true`, tst]
+        Test.assertEq[`true`, tt]
+        Test.assertEq[`true`, tr]
+        Test.assertEq[`true`, tst]
     }
 
     def testUnit {

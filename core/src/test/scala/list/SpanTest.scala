@@ -27,7 +27,7 @@ class SpanTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         type u = xs#span[Lt8]
         val u: u = xs.span(Lt8())
-        Test.cassertEq[Tuple2[_5 :: _6 :: _7 :: Nil, _8 :: _9 :: Nil], List.force2[u]]
+        Test.assertEq[Tuple2[_5 :: _6 :: _7 :: Nil, _8 :: _9 :: Nil], List.force2[u]]
         assertEquals(Tuple2(_5 :: _6 :: _7 :: Nil, _8 :: _9 :: Nil), u)
     }
 
@@ -36,7 +36,7 @@ class SpanTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type u = xs#span[Lt8]
         val u: u = xs.span(Lt8())
-        Test.cassertEq[Tuple2[Nil, Nil], List.force2[u]]
+        Test.assertEq[Tuple2[Nil, Nil], List.force2[u]]
         assertEquals(Tuple2(Nil, Nil), u)
     }
 
@@ -45,7 +45,7 @@ class SpanTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _4 :: _5 :: _6 :: _7 :: Nil
         type u = xs#span[Lt8]
         val u: u = xs.span(Lt8())
-        Test.cassertEq[Tuple2[xs, Nil], List.force2[u]]
+        Test.assertEq[Tuple2[xs, Nil], List.force2[u]]
         assertEquals(Tuple2(xs, Nil), u)
     }
 
@@ -54,7 +54,7 @@ class SpanTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _9 :: _5 :: _6 :: _7 :: _1 :: _9 :: Nil
         type u = xs#span[Lt8]
         val u: u = xs.span(Lt8())
-        Test.cassertEq[Tuple2[Nil, xs], List.force2[u]]
+        Test.assertEq[Tuple2[Nil, xs], List.force2[u]]
         assertEquals(Tuple2(Nil, xs), u)
     }
 

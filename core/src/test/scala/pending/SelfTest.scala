@@ -22,7 +22,7 @@ trait SelfTezt {
 
     class Buz[x, y] extends Self.apply
 
-    Test.cassertEq[Foo#self, Foo]
-    Test.cassertEq[Bar.type, Bar.self]
-    Test.cassertEq[Buz[Int, Char], Buz[Int, Char]#self]
+    Test.assertEq[Foo#self, Foo]
+    Test.assertEq[Bar.type, Bar.self]
+    Test.assertEq[Buz[Int, Char], Buz[Int, Char]#self]
 }

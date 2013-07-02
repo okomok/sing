@@ -26,7 +26,7 @@ class DropWhileTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val u: xs#dropWhile[Lt8] = xs.dropWhile(Lt8())
-        Test.cassertEq[_8 :: _9 :: Nil, xs#dropWhile[Lt8]#force]
+        Test.assertEq[_8 :: _9 :: Nil, xs#dropWhile[Lt8]#force]
         assertEquals(_8 :: _9 :: Nil, u)
     }
 
@@ -34,7 +34,7 @@ class DropWhileTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _9 :: _5 :: _6 :: _7 :: _1 :: _9 :: Nil
         val xs: xs = _9 :: _5 :: _6 :: _7 :: _1 :: _9 :: Nil
         val u: xs#dropWhile[Lt8] = xs.dropWhile(Lt8())
-        Test.cassertEq[_9 :: _5 :: _6 :: _7 :: _1 :: _9 :: Nil, xs#dropWhile[Lt8]#force]
+        Test.assertEq[_9 :: _5 :: _6 :: _7 :: _1 :: _9 :: Nil, xs#dropWhile[Lt8]#force]
         assertEquals(_9 :: _5 :: _6 :: _7 :: _1 :: _9 :: Nil, u)
     }
 
@@ -42,7 +42,7 @@ class DropWhileTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _4 :: _5 :: _6 :: _7 :: Nil
         val xs: xs = _4 :: _5 :: _6 :: _7 :: Nil
         val u: xs#dropWhile[Lt8] = xs.dropWhile(Lt8())
-        Test.cassertEq[Nil, xs#dropWhile[Lt8]#force]
+        Test.assertEq[Nil, xs#dropWhile[Lt8]#force]
         assertEquals(Nil, u)
     }
 
@@ -50,7 +50,7 @@ class DropWhileTest extends org.scalatest.junit.JUnit3Suite {
         type xs = Nil
         val xs: xs = Nil
         val u: xs#dropWhile[Lt8] = xs.dropWhile(Lt8())
-        Test.cassertEq[Nil, xs#dropWhile[Lt8]#force]
+        Test.assertEq[Nil, xs#dropWhile[Lt8]#force]
         assertEquals(Nil, u)
     }
 

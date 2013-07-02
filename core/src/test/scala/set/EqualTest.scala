@@ -24,9 +24,9 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = SortedSet.empty[Nat.naturalOrdering]#add[_3]#add[_4]#add[_0]#add[_2]#add[_5]#add[_1]
         val m2: m2 = SortedSet.empty(Nat.naturalOrdering).add(_3).add(_4).add(_0).add(_2).add(_5).add(_1)
 
-        Test.cassertEq[`true`, m#equal[m]]
-        Test.cassertEq[`true`, m#equal[m2]]
-        Test.cassertEq[`true`, m2#equal[m]]
+        Test.assertEq[`true`, m#equal[m]]
+        Test.assertEq[`true`, m#equal[m2]]
+        Test.assertEq[`true`, m2#equal[m]]
         assertEquals(`true`, m.equal(m2))
     }
 
@@ -37,8 +37,8 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = SortedSet.empty[Nat.naturalOrdering]#add[_3]#add[_4]#add[_0]#add[_2]#add[_5]#add[_1]
         val m2: m2 = SortedSet.empty(Nat.naturalOrdering).add(_3).add(_4).add(_0).add(_2).add(_5).add(_1)
 
-        Test.cassertEq[`false`, m#equal[m2]]
-        Test.cassertEq[`false`, m2#equal[m]]
+        Test.assertEq[`false`, m#equal[m2]]
+        Test.assertEq[`false`, m2#equal[m]]
         assertEquals(`false`, m.equal(m2))
     }
 
@@ -49,8 +49,8 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = SortedSet.empty[Nat.naturalOrdering]#add[_3]#add[_4]#add[_0]#add[_2]#add[_5]#add[_1]
         val m2: m2 = SortedSet.empty(Nat.naturalOrdering).add(_3).add(_4).add(_0).add(_2).add(_5).add(_1)
 
-        Test.cassertEq[`false`, m#equal[m2]]
-        Test.cassertEq[`false`, m2#equal[m]]
+        Test.assertEq[`false`, m#equal[m2]]
+        Test.assertEq[`false`, m2#equal[m]]
         assertEquals(`false`, m.equal(m2))
     }
 
@@ -61,9 +61,9 @@ class EqualTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = SortedSet.empty[Nat.naturalOrdering]
         val m2: m2 = SortedSet.empty(Nat.naturalOrdering)
 
-        Test.cassertEq[`true`, m#equal[m]]
-        Test.cassertEq[`true`, m#equal[m2]]
-        Test.cassertEq[`true`, m2#equal[m]]
+        Test.assertEq[`true`, m#equal[m]]
+        Test.assertEq[`true`, m#equal[m2]]
+        Test.assertEq[`true`, m2#equal[m]]
         assertEquals(`true`, m.equal(m2))
     }
 

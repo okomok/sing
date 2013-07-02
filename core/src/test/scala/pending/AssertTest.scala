@@ -51,30 +51,30 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         type no = Nothing
 
-        cassert[isEq[no, Nothing]]
+        assertTrue[isEq[no, Nothing]]
 
         expectError(AssertError) {
-            cassert[isEq[Int, Nothing]]
+            assertTrue[isEq[Int, Nothing]]
         }
 
-        cassert[conforms[Int, AnyVal]]
+        assertTrue[conforms[Int, AnyVal]]
 
         expectError(AssertError) {
-            cassertConforms[AnyVal, Int]
+            assertConforms[AnyVal, Int]
         }
 
-        cassertNot[conforms[AnyVal, Int]]
+        assertFalse[conforms[AnyVal, Int]]
 
         expectError(AssertError) {
-            cassertNot[conforms[Int, AnyVal]]
+            assertFalse[conforms[Int, AnyVal]]
         }
 
         type i = Int
 
-        cassertNot[isEq[AnyVal, i]]
+        assertFalse[isEq[AnyVal, i]]
 
         expectError(AssertError) {
-            cassertNot[isEq[i, Int]]
+            assertFalse[isEq[i, Int]]
         }
 
         def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
@@ -92,32 +92,32 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         type x   = check[Some[Dense._2]#get]
 
         expectError(AssertError) {
-            cassertEq(Dense._3, x)
+            assertEq(Dense._3, x)
         }
         expectError(AssertError) {
-            cassertEq[Dense._3, x]
+            assertEq[Dense._3, x]
         }
 
 
         expectError(AssertError) {
-            ignore[ cassertEq[Char, Int] ]
+            place[ assertEq[Char, Int] ]
         }
 
         expectError(NotFound) {
-            // dummy[ cassertEq[Char, Int] ] // why not error?
+            // dummy[ assertEq[Char, Int] ] // why not error?
             wow
         }
 
         expectError(AssertError) {
-            ignore[ cassertNot[conforms[Int, Int]] ]
+            place[ assertFalse[conforms[Int, Int]] ]
         }
 
         expectError(AnyError) {
-            ignore[error]
+            place[error]
         }
 
-        cassertEq(Dense._2, x)
-        cassertEq[Dense._2, x]
+        assertEq(Dense._2, x)
+        assertEq[Dense._2, x]
 
         expectError(NothingType) {
             check(None.get)

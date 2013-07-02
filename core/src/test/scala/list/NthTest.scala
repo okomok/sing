@@ -20,7 +20,7 @@ class NthTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val u: xs#nth[_2] = xs.nth(_2)
-        Test.cassertEq[_7, xs#nth[_2]]
+        Test.assertEq[_7, xs#nth[_2]]
         assertEquals(_7, u)
     }
 
@@ -29,7 +29,7 @@ class NthTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val u: xs#nthOption[_2] = xs.nthOption(_2)
-        Test.cassertEq[Some[_7], xs#nthOption[_2]]
+        Test.assertEq[Some[_7], xs#nthOption[_2]]
         assertEquals(Some(_7), u)
     }
 
@@ -37,7 +37,7 @@ class NthTest extends org.scalatest.junit.JUnit3Suite {
         type xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val xs: xs = _5 :: _6 :: _7 :: _8 :: _9 :: Nil
         val u: xs#nthOption[_10] = xs.nthOption(_10)
-        Test.cassertEq[None, xs#nthOption[_10]]
+        Test.assertEq[None, xs#nthOption[_10]]
         assertEquals(None, u)
     }
 
@@ -45,7 +45,7 @@ class NthTest extends org.scalatest.junit.JUnit3Suite {
         type xs = Nil
         val xs: xs = Nil
         val u: xs#nthOption[_10] = xs.nthOption(_10)
-        Test.cassertEq[None, xs#nthOption[_10]]
+        Test.assertEq[None, xs#nthOption[_10]]
         assertEquals(None, u)
     }
 */

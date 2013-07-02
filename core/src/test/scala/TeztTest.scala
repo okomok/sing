@@ -14,15 +14,15 @@ import okomok.sing._
 class TeztTest {
 
     def testTrueFalse {
-        Test.cassert(`true`)
-        Test.cassert[`true`]
-        Test.cassertNot(`false`)
-        Test.cassertNot[`false`]
+        Test.assertTrue(`true`)
+        Test.assertTrue[`true`]
+        Test.assertFalse(`false`)
+        Test.assertFalse[`false`]
 
-        //Test.cassert(`false`)
-        //Test.cassert[`false`]
+        //Test.assertTrue(`false`)
+        //Test.assertTrue[`false`]
         //Test.assertFalse(`true`)
-        //Test.cassertNot[`true`]
+        //Test.assertFalse[`true`]
     }
 
     class A
@@ -30,33 +30,33 @@ class TeztTest {
 
     def testSame {
         /*
-        Test.cassertEq(3, 2)
+        Test.assertEq(3, 2)
         */
-        Test.cassertEq[Int, Int]
+        Test.assertEq[Int, Int]
 
-        //Test.cassertEq(new A, new B)
+        //Test.assertEq(new A, new B)
         /*
-        Test.cassertEq(new B, new A)
+        Test.assertEq(new B, new A)
         */
 
-        //Test.cassertEq(3, '2')
-        //Test.cassertEq[Int, Char]
+        //Test.assertEq(3, '2')
+        //Test.assertEq[Int, Char]
     }
 
     def testConforms {
         /*
-        Test.cassertConforms(new B, new A)
+        Test.assertConforms(new B, new A)
         */
-        Test.cassertConforms[B, A]
+        Test.assertConforms[B, A]
         /*
-        Test.cassertConforms(new A, new A)
+        Test.assertConforms(new A, new A)
         */
-        Test.cassertConforms[A, A]
+        Test.assertConforms[A, A]
 
         /*
-        Test.cassertConforms(new A, new B)
+        Test.assertConforms(new A, new B)
         */
-        //Test.cassertConforms[A, B]
+        //Test.assertConforms[A, B]
     }
 
 }

@@ -5,21 +5,22 @@
 
 
 package com.github.okomok
-package sing.makro
+package sing; package _test
 
 
 import scala.language.experimental.macros
 import scala.reflect.macros.Context
+import makro._
 
 
-object Echo extends Assert1Impl {
-     def apply[x]: Unit       = macro term_impl_[x]
-     def apply[x](x: x): Unit = macro term_impl[x]
-    type apply[x]             = macro type_impl[x]
-
+private[sing]
+object AssertTrue extends Assert1Impl {
     override protected def inType(c: Context)(x: c.Type): AssertResult = {
         import c.universe._
-        c.echo(c.enclosingPosition, show(x.normalize))
-        AssertSuccess
+        if (x =:= weakTypeOf[`true`]) {
+            AssertSuccess
+        } else {
+            AssertFailure(show(x.normalize) + " is not `true`.")
+        }
     }
 }

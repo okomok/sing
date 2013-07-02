@@ -12,35 +12,46 @@ import scala.reflect.macros.Context
 
 
 trait Assert2Impl {
-    protected def impl(c: Context)(x: c.Type, y: c.Type): AssertResult
+    protected def inTerm(c: Context)(xx: Duo[c.type], yy: Duo[c.type]): AssertResult = inType(c)(xx.typ, yy.typ)
+
+    protected def inType(c: Context)(x: c.Type, y: c.Type): AssertResult
 
     final def term_impl_[x, y](c: Context)(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Expr[Unit] = {
         import c.universe._
 
-        _impl(c)(tx, ty)
+        _type_impl(c)(tx, ty)
         reify(())
     }
 
     final def term_impl[x, y](c: Context)(x: c.Expr[x], y: c.Expr[y])(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Expr[Unit] = {
         import c.universe._
 
-        _impl(c)(tx, ty)
+        _term_impl(c)(x, y)(tx, ty)
         reify(())
     }
 
     final def type_impl[x, y](c: Context)(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Tree = {
         import c.universe._
 
-        _impl(c)(tx, ty)
+        _type_impl(c)(tx, ty)
         tq"_root_.scala.Unit"
     }
 
-    def _impl[x, y](c: Context)(tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): Unit = {
+    final def _type_impl[x, y](c: Context)(tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): Unit = {
         import c.universe._
 
-        val x = weakTypeOf(tx)
-        val y = weakTypeOf(ty)
-        impl(c)(x, y) match {
+        inType(c)(weakTypeOf(tx), weakTypeOf(ty)) match {
+            case AssertFailure(msg) => CompileError.assertError(c)(msg)
+            case _ => ()
+        }
+    }
+
+    final def _term_impl[x, y](c: Context)(x: c.Expr[x], y: c.Expr[y])(tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): Unit = {
+        import c.universe._
+
+        val xx = Duo[c.type](x, weakTypeOf(tx))
+        val yy = Duo[c.type](y, weakTypeOf(ty))
+        inTerm(c)(xx, yy) match {
             case AssertFailure(msg) => CompileError.assertError(c)(msg)
             case _ => ()
         }

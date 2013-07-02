@@ -21,27 +21,27 @@ class BinaryLiteralTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial {
          val bs: bs = Binary_("101")
         type bs     = Binary_("101")
-        cassertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
-        cassertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
+        assertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
+        assertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testNil {
          val bs: bs = Binary_("")
         type bs     = Binary_("")
-        cassertEq(bs, DNil)
-        cassertEq[bs, DNil]
+        assertEq(bs, DNil)
+        assertEq[bs, DNil]
 
          val bs_ : bs = Binary_("00")
         type bs_      = Binary_("00")
-        cassertEq(bs_, DNil)
-        cassertEq[bs_, DNil]
+        assertEq(bs_, DNil)
+        assertEq[bs_, DNil]
     }
 
     def testTrailingZero {
          val bs: bs = Binary_("000101")
         type bs     = Binary_("000101")
-        cassertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
-        cassertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
+        assertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
+        assertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testThrow {

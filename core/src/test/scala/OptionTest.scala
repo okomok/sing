@@ -37,14 +37,14 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         {
             type s = Some[_Box[Int]]
             val s: s = Some(_Box(3))
-            Test.cassertEq[`false`, s#isEmpty]
+            Test.assertEq[`false`, s#isEmpty]
             val e: s#isEmpty = s.isEmpty
             val k: `false` = e
         }
         {
             type s = None
             val s: s = None
-            Test.cassertEq[`true`, s#isEmpty]
+            Test.assertEq[`true`, s#isEmpty]
             val e: s#isEmpty = s.isEmpty
             val k: `true` = e
         }
@@ -55,14 +55,14 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         {
             type s = Some[_Box[Int]]
             val s: s = Some(_Box(3))
-            Test.cassertEq[`true`, s#isDefined]
+            Test.assertEq[`true`, s#isDefined]
             val e: s#isDefined = s.isDefined
             val k: `true` = e
         }
         {
             type s = None
             val s: s = None
-            Test.cassertEq[`false`, s#isDefined]
+            Test.assertEq[`false`, s#isDefined]
             val e: s#isEmpty = s.isEmpty
             val k: `true` = e
         }
@@ -73,14 +73,14 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         {
             type s = Some[_Box[Int]]
             val s: s = Some(_Box(3))
-            Test.cassertEq[scala.Some[Int], s#unsing]
+            Test.assertEq[scala.Some[Int], s#unsing]
             val e: s#unsing = s.unsing
             assertEquals(scala.Some(3), e)
         }
         {
             type s = None
             val s: s = None
-            Test.cassertEq[scala.None.type, s#unsing]
+            Test.assertEq[scala.None.type, s#unsing]
             val e: s#unsing = s.unsing
             assertSame(scala.None, s.unsing)
         }
@@ -112,14 +112,14 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testNatty {
         type s = Some[_3]
         val s = Some(_3)
-        Test.cassertEq[_4, natty#apply[s]]
+        Test.assertEq[_4, natty#apply[s]]
         okomok.sing.assert(_4 equal natty(s))
     }
 */
     def testGetOrElse {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertEq[_3, s#getOrElse[Const[_8]]]
+        Test.assertEq[_3, s#getOrElse[Const[_8]]]
         val r: s#getOrElse[Const[_8]] = s.getOrElse(Const(_8))
         val k: _3 = r
 
@@ -140,7 +140,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testMapSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertEq[Some[_4], s#map[Plus1]]
+        Test.assertEq[Some[_4], s#map[Plus1]]
         val m: s#map[Plus1] = s.map(Plus1())
         assertEquals(Some(_4), m)
     }
@@ -148,7 +148,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testMapNone {
         type s = None
         val s: s = None
-        Test.cassertEq[None, s#map[Plus1]]
+        Test.assertEq[None, s#map[Plus1]]
         val m: s#map[Plus1] = s.map(Plus1())
         assertEquals(None, m)
     }
@@ -163,7 +163,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFlatMapSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertEq[Some[_4], s#flatMap[Plus1Get]]
+        Test.assertEq[Some[_4], s#flatMap[Plus1Get]]
         val m: s#flatMap[Plus1Get] = s.flatMap(Plus1Get())
         assertEquals(Some(_4), m)
     }
@@ -171,7 +171,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFlatMapNone {
         type s = None
         val s: s = None
-        Test.cassertEq[None, s#map[Plus1Get]]
+        Test.assertEq[None, s#map[Plus1Get]]
         val m: s#flatMap[Plus1Get] = s.flatMap(Plus1Get())
         assertEquals(None, m)
     }
@@ -186,7 +186,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFilterSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertEq[None, s#filter[Is2]]
+        Test.assertEq[None, s#filter[Is2]]
         val m: s#filter[Is2] = s.filter(Is2())
         assertEquals(None, m)
     }
@@ -194,7 +194,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFilterSome2 {
         type s = Some[_2]
         val s: s = Some(_2)
-        Test.cassertEq[Some[_2], s#filter[Is2]]
+        Test.assertEq[Some[_2], s#filter[Is2]]
         val m: s#filter[Is2] = s.filter(Is2())
         assertEquals(Some(_2), m)
     }
@@ -202,7 +202,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testFilterNone {
         type s = None
         val s: s = None
-        Test.cassertEq[None, s#filter[Is2]]
+        Test.assertEq[None, s#filter[Is2]]
         val m: s#filter[Is2] = s.filter(Is2())
         assertEquals(None, m)
     }
@@ -211,7 +211,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testExistsSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertEq[`false`, s#exists[Is2]]
+        Test.assertEq[`false`, s#exists[Is2]]
         val m: s#exists[Is2] = s.exists(Is2())
         assertEquals(`false`, m)
     }
@@ -219,7 +219,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testExistsSome2 {
         type s = Some[_2]
         val s: s = Some(_2)
-        Test.cassertEq[`true`, s#exists[Is2]]
+        Test.assertEq[`true`, s#exists[Is2]]
         val m: s#exists[Is2] = s.exists(Is2())
         assertEquals(`true`, m)
     }
@@ -227,7 +227,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testExistsNone {
         type s = None
         val s: s = None
-        Test.cassertEq[`false`, s#exists[Is2]]
+        Test.assertEq[`false`, s#exists[Is2]]
         val m: s#exists[Is2] = s.exists(Is2())
         assertEquals(`false`, m)
     }
@@ -244,7 +244,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         val adder: adder = AddTo(new java.util.ArrayList[Int])
         type s = Some[_2]
         val s: s = Some(_2)
-        Test.cassertEq[Unit, s#foreach[adder]]
+        Test.assertEq[Unit, s#foreach[adder]]
         val m: s#foreach[adder] = s.foreach(adder)
         assertEquals(1, adder.result.size)
         assertEquals(2, adder.result.get(0))
@@ -255,7 +255,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
         val adder: adder = AddTo(new java.util.ArrayList[Int])
         type s = None
         val s: s = None
-        Test.cassertEq[Unit, s#foreach[adder]]
+        Test.assertEq[Unit, s#foreach[adder]]
         val m: s#foreach[adder] = s.foreach(adder)
         assertTrue(adder.result.isEmpty)
     }
@@ -270,7 +270,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testOrElseSome {
         type s = Some[_3]
         val s: s = Some(_3)
-        Test.cassertEq[Some[_3], s#orElse[Some4]]
+        Test.assertEq[Some[_3], s#orElse[Some4]]
         val m: s#orElse[Some4] = s.orElse(Some4())
         assertEquals(Some(_3), m)
     }
@@ -278,7 +278,7 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testOrElseNone {
         type s = None
         val s: s = None
-        Test.cassertEq[Some[_4], s#orElse[Some4]]
+        Test.assertEq[Some[_4], s#orElse[Some4]]
         val m: s#orElse[Some4] = s.orElse(Some4())
         assertEquals(Some(_4), m)
     }
@@ -286,25 +286,25 @@ class OptionTest extends org.scalatest.junit.JUnit3Suite {
     def testNaturalOrdering1 {
         val s = Some(_5)
         val t = Some(_6)
-        Test.cassert(s.kind.naturalOrdering.lt(s, t))
+        Test.assertTrue(s.kind.naturalOrdering.lt(s, t))
     }
 
     def testNaturalOrdering2 {
         val s = None
         val t = Some(_6)
-        Test.cassert(s.kind.naturalOrdering.lt(s, t))
+        Test.assertTrue(s.kind.naturalOrdering.lt(s, t))
     }
 
     def testNaturalOrdering3 {
         val s = Some(_6)
         val t = Some(_6)
-        Test.cassert(s.kind.naturalOrdering.equiv(s, t))
+        Test.assertTrue(s.kind.naturalOrdering.equiv(s, t))
     }
 
     def testNaturalOrdering4 {
         val s = None
         val t = None
-        Test.cassert(s.kind.naturalOrdering.equiv(s, t))
+        Test.assertTrue(s.kind.naturalOrdering.equiv(s, t))
     }
 
     def testLift {

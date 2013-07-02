@@ -14,86 +14,75 @@ import scala.language.experimental.macros
 import scala.reflect.macros.Context
 
 
-object Test {
+import _test._
 
-    // scala.Unit is used to suppress a warning.
+
+object Test {
+    // Unit is used to suppress a warning.
+    import scala.Unit
 
     /**
-     * Ignores an expression, or places a type in term expressions.
+     * Places a type in term expressions.
      */
-    @elidable(ALL)
-     def ignore[x](x: x): ignore[x] = ()
-    type ignore[x]                  = scala.Unit
+    def place[x]: Unit = ()
 
     /**
      * Asserts that a condition is true. `c` represents "Concrete".
      */
-     def cassert[x]: scala.Unit       = macro CAssert.term_impl_[x]
-     def cassert[x](x: x): scala.Unit = macro CAssert.term_impl[x]
-    type cassert[x]                   = macro CAssert.type_impl[x]
-
-    private object CAssert extends makro.Assert1Impl {
-        override protected def impl(c: Context)(x: c.Type): makro.AssertResult = {
-            import c.universe._
-            if (x =:= weakTypeOf[`true`]) {
-                makro.AssertSuccess
-            } else {
-                makro.AssertFailure(show(x.normalize) + " is not `true`.")
-            }
-        }
-    }
+     def assertTrue[x]: Unit       = macro AssertTrue.term_impl_[x]
+     def assertTrue[x](x: x): Unit = macro AssertTrue.term_impl[x]
+    type assertTrue[x]             = macro AssertTrue.type_impl[x]
 
     /**
      * Asserts that a condition is false.
      */
-     def cassertNot[x]: scala.Unit       = macro CAssertNot.term_impl_[x]
-     def cassertNot[x](x: x): scala.Unit = macro CAssertNot.term_impl[x]
-    type cassertNot[x]                   = macro CAssertNot.type_impl[x]
-
-    private object CAssertNot extends makro.Assert1Impl {
-        override protected def impl(c: Context)(x: c.Type): makro.AssertResult = {
-            import c.universe._
-            if (x =:= weakTypeOf[`false`]) {
-                makro.AssertSuccess
-            } else {
-                makro.AssertFailure(show(x.normalize) + " is not `false`.")
-            }
-        }
-    }
+     def assertFalse[x]: Unit       = macro AssertFalse.term_impl_[x]
+     def assertFalse[x](x: x): Unit = macro AssertFalse.term_impl[x]
+    type assertFalse[x]             = macro AssertFalse.type_impl[x]
 
     /**
      * Asserts that two types refer to the same type.
      */
-     def cassertEq[x, y]: scala.Unit             = macro makro.AssertEq.term_impl_[x, y]
-     def cassertEq[x, y](x: x, y: y): scala.Unit = macro makro.AssertEq.term_impl[x, y]
-    type cassertEq[x, y]                         = macro makro.AssertEq.type_impl[x, y]
+     def assertEq[x, y]: Unit             = macro makro.AssertEq.term_impl_[x, y]
+     def assertEq[x, y](x: x, y: y): Unit = macro makro.AssertEq.term_impl[x, y]
+    type assertEq[x, y]                   = macro makro.AssertEq.type_impl[x, y]
 
     /**
      * Asserts that <code>x</code> conforms to <code>y</code>.
      */
-     def cassertConforms[x, y]: scala.Unit             = macro makro.AssertConforms.term_impl_[x, y]
-     def cassertConforms[x, y](x: x, y: y): scala.Unit = macro makro.AssertConforms.term_impl[x, y]
-    type cassertConforms[x, y]                         = macro makro.AssertConforms.type_impl[x, y]
+     def assertConforms[x, y]: Unit             = macro makro.AssertConforms.term_impl_[x, y]
+     def assertConforms[x, y](x: x, y: y): Unit = macro makro.AssertConforms.term_impl[x, y]
+    type assertConforms[x, y]                   = macro makro.AssertConforms.type_impl[x, y]
+
+    /**
+     * Asserts that two types refer to the same type.
+     */
+     def assertEqual[x, y]: Unit             = macro AssertEqual.term_impl_[x, y]
+     def assertEqual[x, y](x: x, y: y): Unit = macro AssertEqual.term_impl[x, y]
+    type assertEqual[x, y]                   = macro AssertEqual.type_impl[x, y]
 
     /**
      * Compile-error (any usecase?)
      */
-     def error: scala.Unit = macro makro.Error.term_impl
-    type error             = macro makro.Error.type_impl
+     def error: Unit = macro makro.Error.term_impl
+    type error       = macro makro.Error.type_impl
 
     /**
      * Expects a compile-error.
      */
-    def expectError(r: String)(x: _): scala.Unit = macro makro.ExpectError.impl
+    def expectError(r: String)(x: _): Unit = macro makro.ExpectError.impl
 
+    /**
+     * Compile-error codes
+     */
     val CompileError = makro.CompileError
 
     /**
      * Prints a type name.
      */
-     def echo[x]: scala.Unit       = macro makro.Echo.term_impl_[x]
-     def echo[x](x: x): scala.Unit = macro makro.Echo.term_impl[x]
-    type echo[x]                   = macro makro.Echo.type_impl[x]
+     def echo[x]: Unit       = macro makro.Echo.term_impl_[x]
+     def echo[x](x: x): Unit = macro makro.Echo.term_impl[x]
+    type echo[x]             = macro makro.Echo.type_impl[x]
 
     /**
      * @return `true` if x conforms to y. `false` otherwise.
