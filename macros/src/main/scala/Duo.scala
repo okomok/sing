@@ -8,6 +8,7 @@ package com.github.okomok
 package sing.makro
 
 
+import scala.language.existentials
 import scala.reflect.macros.Context
 
 

@@ -94,11 +94,11 @@ object Boxer {
     def impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Expr[Boxer[x]] = {
         import c.universe._
 
-        val vid = makro.TypeId.inTerm(c)(weakTypeOf(tx))
-        val tid = makro.TypeId.inType(c)(weakTypeOf(tx))
+        val vid = makro.TypeId.inTerm(c)(tx.tpe)
+        val tid = makro.TypeId.inType(c)(tx.tpe)
 
         val res = q"""
-            new Boxer[${weakTypeOf(tx)}] {
+            new Boxer[${tx.tpe}] {
                 override lazy val boxId: boxId = $vid
                 override     type boxId        = $tid
             }

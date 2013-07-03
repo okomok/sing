@@ -27,13 +27,13 @@ object Check {
         import c.universe._
 
         _impl(c)(tx)
-        tq"${weakTypeOf[x]}"
+        tq"${tx.tpe}"
     }
 
     def _impl[x](c: Context)(tx: c.WeakTypeTag[x]): Unit = {
         import c.universe._
 
-        val t = weakTypeOf(tx)
+        val t = tx.tpe
         if (IsAbstract._impl(c)(tx)) {
             CompileError.abstractType(c)(show(t) + ", which is expanded to " + show(t.normalize))
         } else if (t <:< weakTypeOf[Nothing]) {

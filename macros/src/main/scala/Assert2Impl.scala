@@ -40,7 +40,7 @@ trait Assert2Impl {
     final def _type_impl[x, y](c: Context)(tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): Unit = {
         import c.universe._
 
-        inType(c)(weakTypeOf(tx), weakTypeOf(ty)) match {
+        inType(c)(tx.tpe, ty.tpe) match {
             case AssertFailure(msg) => CompileError.assertError(c)(msg)
             case _ => ()
         }
@@ -49,8 +49,8 @@ trait Assert2Impl {
     final def _term_impl[x, y](c: Context)(x: c.Expr[x], y: c.Expr[y])(tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): Unit = {
         import c.universe._
 
-        val xx = Duo[c.type](x, weakTypeOf(tx))
-        val yy = Duo[c.type](y, weakTypeOf(ty))
+        val xx = Duo[c.type](x, tx.tpe)
+        val yy = Duo[c.type](y, ty.tpe)
         inTerm(c)(xx, yy) match {
             case AssertFailure(msg) => CompileError.assertError(c)(msg)
             case _ => ()

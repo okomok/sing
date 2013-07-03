@@ -18,9 +18,9 @@ import scala.reflect.macros.Context
 
 
 object ConstantTypeOf {
-    type apply[T](x: T) = macro impl[T]
+    type apply[x](x: x) = macro impl[x]
 
-    def impl[T: c.WeakTypeTag](c: Context)(x: c.Expr[T]): c.Tree = {
+    def impl[x](c: Context)(x: c.Expr[x])(implicit tx: c.WeakTypeTag[x]): c.Tree = {
         import c.universe._
 
         x.tree match {
@@ -32,12 +32,12 @@ object ConstantTypeOf {
 
 
 object ConstantTermOf {
-    def apply[T] = macro impl[T]
+    def apply[x] = macro impl[x]
 
-    def impl[T: c.WeakTypeTag](c: Context): c.Expr[Any] = {
+    def impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Expr[Any] = {
         import c.universe._
 
-        weakTypeOf[T].normalize match {
+        tx.tpe.normalize match {
             case ConstantType(Constant(x)) => c.Expr[Any](Literal(Constant(x)))
             case t => CompileError.illegalArgument(c)(show(t) + " is not constant expression.")
         }

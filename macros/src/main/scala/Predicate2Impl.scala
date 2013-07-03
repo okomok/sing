@@ -42,8 +42,8 @@ trait Predicate2Impl {
     def _impl[x, y](c: Context)(tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): Boolean = {
         import c.universe._
 
-        val x = weakTypeOf(tx)
-        val y = weakTypeOf(ty)
+        val x = tx.tpe
+        val y = ty.tpe
         impl(c)(x, y)
     }
 }
