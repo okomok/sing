@@ -48,6 +48,13 @@ object Test {
     type assertEq[x, y]                   = macro makro.AssertEq.type_impl[x, y]
 
     /**
+     * Asserts that two types refer not to the same type.
+     */
+     def assertNeq[x, y]: Unit             = macro makro.AssertNeq.term_impl_[x, y]
+     def assertNeq[x, y](x: x, y: y): Unit = macro makro.AssertNeq.term_impl[x, y]
+    type assertNeq[x, y]                   = macro makro.AssertNeq.type_impl[x, y]
+
+    /**
      * Asserts that <code>x</code> conforms to <code>y</code>.
      */
      def assertConforms[x, y]: Unit             = macro makro.AssertConforms.term_impl_[x, y]
@@ -55,11 +62,18 @@ object Test {
     type assertConforms[x, y]                   = macro makro.AssertConforms.type_impl[x, y]
 
     /**
-     * Asserts that two types refer to the same type.
+     * Asserts that <code>x.equal(y)</code>.
      */
      def assertEqual[x, y]: Unit             = macro AssertEqual.term_impl_[x, y]
      def assertEqual[x, y](x: x, y: y): Unit = macro AssertEqual.term_impl[x, y]
     type assertEqual[x, y]                   = macro AssertEqual.type_impl[x, y]
+
+    /**
+     * Asserts that <code>x.nequal(y)</code>.
+     */
+     def assertNequal[x, y]: Unit             = macro AssertNequal.term_impl_[x, y]
+     def assertNequal[x, y](x: x, y: y): Unit = macro AssertNequal.term_impl[x, y]
+    type assertNequal[x, y]                   = macro AssertNequal.type_impl[x, y]
 
     /**
      * Compile-error (any usecase?)

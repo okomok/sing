@@ -24,3 +24,16 @@ object AssertTrue extends Assert1Impl {
         }
     }
 }
+
+
+private[sing]
+object AssertFalse extends Assert1Impl {
+    override protected def inType(c: Context)(x: c.Type): AssertResult = {
+        import c.universe._
+        if (x =:= weakTypeOf[`false`]) {
+            AssertSuccess
+        } else {
+            AssertFailure(show(x.normalize) + " is not `false`.")
+        }
+    }
+}

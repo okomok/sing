@@ -49,3 +49,41 @@ object AssertEqual extends Assert2Impl {
         }
     }
 }
+
+
+private[sing]
+object AssertNequal extends Assert2Impl {
+    override protected def inTerm(c: Context)(xx: Duo[c.type], yy: Duo[c.type]): AssertResult = {
+        import c.universe._
+
+        val x = xx.term
+        val y = yy.term
+
+        val expr =  q"${sing_(c)}.Test.assertTrue($x.nequal($y))"
+
+        try {
+            c.typeCheck(expr)
+            AssertSuccess
+        } catch {
+            case e: TypecheckException if (e.getMessage.matches(CompileError.AssertError)) => {
+                AssertFailure(show(x) + " is equal to " + show(y))
+            }
+        }
+    }
+
+    override protected def inType(c: Context)(x: c.Type, y: c.Type): AssertResult = {
+        import c.universe._
+
+        // Note a type-tree isn't checkable.
+        val expr = q"${sing_(c)}.Test.place[ ${sing_(c)}.Test.assertTrue[$x#nequal[$y]] ]"
+
+        try {
+            c.typeCheck(expr)
+            AssertSuccess
+        } catch {
+            case e: TypecheckException if (e.getMessage.matches(CompileError.AssertError)) => {
+                AssertFailure(show(x.normalize) + " is equal to " + show(y.normalize))
+            }
+        }
+    }
+}

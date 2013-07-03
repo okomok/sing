@@ -19,7 +19,7 @@ import scala.language.existentials
 
 class AssertEqualTest extends org.scalatest.junit.JUnit3Suite {
 
-    def testTrivial() {
+    def testTrivial {
         assertEqual(_3.plus(_2), _6.minus(_1))
         assertEqual[_3#plus[_2], _6.minus[_1]]
         place[ assertEqual[_3#plus[_2], _6.minus[_1]] ]
@@ -28,5 +28,14 @@ class AssertEqualTest extends org.scalatest.junit.JUnit3Suite {
             assertEqual[_3, _5]
         }
     }
-}
 
+    def testTrivialNot {
+        assertNequal(_3.plus(_2), _6.minus(_0))
+        assertNequal[_3#plus[_2], _6.minus[_0]]
+        place[ assertNequal[_3#plus[_2], _6.minus[_0]] ]
+
+        expectError(AssertError) {
+            assertNequal[_3, _3]
+        }
+    }
+}
