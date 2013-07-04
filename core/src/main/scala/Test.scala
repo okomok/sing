@@ -99,6 +99,13 @@ object Test {
     type echo[x]             = macro makro.Echo.type_impl[x]
 
     /**
+     * Prints a raw type name.
+     */
+     def echoRaw[x]: Unit       = macro makro.EchoRaw.term_impl_[x]
+     def echoRaw[x](x: x): Unit = macro makro.EchoRaw.term_impl[x]
+    type echoRaw[x]             = macro makro.EchoRaw.type_impl[x]
+
+    /**
      * @return `true` if x conforms to y. `false` otherwise.
      */
      def conforms[x, y](x: x, y: y) = macro makro.Conforms.term_impl[x, y]

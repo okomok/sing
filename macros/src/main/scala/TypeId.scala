@@ -44,7 +44,7 @@ object TypeId {
     }
 
     private def idList(c: Context)(t: c.Type): List[String] = {
-        t.normalize.typeSymbol.fullName.toString.split("\\.").
+        t.normalize.typeSymbol.fullName.split("\\.").
             reverse. // for faster equality
             toList.
             take(2) // because scalac is too slow

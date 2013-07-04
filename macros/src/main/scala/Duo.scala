@@ -12,4 +12,4 @@ import scala.language.existentials
 import scala.reflect.macros.Context
 
 
-case class Duo[ct <: Context with Singleton](term: ct#Expr[_], typ: ct#Type)
+case class Duo[ct <: Context with Singleton](term: ct#Expr[_], tpe: ct#Type)

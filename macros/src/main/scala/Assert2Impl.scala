@@ -12,7 +12,7 @@ import scala.reflect.macros.Context
 
 
 trait Assert2Impl {
-    protected def inTerm(c: Context)(xx: Duo[c.type], yy: Duo[c.type]): AssertResult = inType(c)(xx.typ, yy.typ)
+    protected def inTerm(c: Context)(xx: Duo[c.type], yy: Duo[c.type]): AssertResult = inType(c)(xx.tpe, yy.tpe)
 
     protected def inType(c: Context)(x: c.Type, y: c.Type): AssertResult
 
