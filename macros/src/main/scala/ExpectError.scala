@@ -37,6 +37,6 @@ object ExpectError {
             }
         }
 
-        reify(())
+        c.literalUnit
     }
 }

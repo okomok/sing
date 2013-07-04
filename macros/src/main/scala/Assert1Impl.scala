@@ -20,14 +20,14 @@ trait Assert1Impl {
         import c.universe._
 
         _type_impl(c)(tx)
-        reify(())
+        c.literalUnit
     }
 
     final def term_impl[x](c: Context)(x: c.Expr[x])(implicit tx: c.WeakTypeTag[x]): c.Expr[Unit] = {
         import c.universe._
 
         _term_impl(c)(x)(tx)
-        reify(())
+        c.literalUnit
     }
 
     final def type_impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Tree = {

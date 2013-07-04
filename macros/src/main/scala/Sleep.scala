@@ -19,7 +19,7 @@ object Sleep {
     def term_impl(c: Context)(x: c.Expr[Long]): c.Expr[Unit] = {
         import c.universe._
         _impl(c)(x)
-        reify(())
+        c.literalUnit
     }
 
     def type_impl(c: Context)(x: c.Expr[Long]): c.Tree = {

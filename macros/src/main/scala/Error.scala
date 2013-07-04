@@ -19,7 +19,7 @@ object Error {
     def term_impl(c: Context): c.Expr[Unit] = {
         import c.universe._
         _impl(c)
-        reify(())
+        c.literalUnit
     }
 
     def type_impl(c: Context): c.Tree = {

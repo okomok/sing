@@ -17,6 +17,6 @@ object Abandon {
 
     def impl(c: Context)(x: c.Tree): c.Expr[Unit] = {
         import c.universe._
-        reify(())
+        c.literalUnit
     }
 }
