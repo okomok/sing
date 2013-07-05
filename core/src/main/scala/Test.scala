@@ -8,10 +8,7 @@ package com.github.okomok
 package sing
 
 
-import scala.annotation.elidable
-import scala.annotation.elidable.ALL
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
 
 
 import _test._
