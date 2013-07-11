@@ -14,16 +14,16 @@ import scala.reflect.macros.Context
 trait TypeThrow {
     protected def what(c: Context): c.Tree
 
-    final def term_impl(c: Context)(msg: c.Expr[String]): c.Expr[Nothing] = {
+    final def term_impl(c: Context)(msg: c.Expr[String]): c.Expr[Any] = {
         import c.universe._
 
-        // val ret = type_impl(c)(msg)
+        val ret = type_impl(c)(msg)
 
         val res = q"""
-            throw new ${what(c)}(${msg.tree})//.asInstanceOf[ret] ~ crash.
+            (throw new ${what(c)}(${msg.tree})): $ret
         """
 
-        c.Expr[Nothing](res)
+        c.Expr[Any](res)
     }
 
     final def type_impl(c: Context)(msg: c.Expr[String]): c.Tree = {
