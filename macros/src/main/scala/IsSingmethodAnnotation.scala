@@ -8,7 +8,7 @@ package com.github.okomok
 package sing.makro
 
 
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 private object IsSingmethodAnnotation {
@@ -16,7 +16,7 @@ private object IsSingmethodAnnotation {
     def apply(c: Context)(an: c.Tree): Boolean = {
         import c.universe._
 
-        val fn = c.typeCheck(an).symbol.fullName
+        val fn = c.typecheck(an).symbol.fullName
         fn == "com.github.okomok.sing.singmethod.<init>"
 /*
         an match {

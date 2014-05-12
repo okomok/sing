@@ -13,12 +13,18 @@ package sing.makro
 //   shapeless.SingletonTypes
 
 
+import scala.annotation.StaticAnnotation
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
-object ConstantTypeOf {
-    type apply[x](x: x) = macro impl[x]
+class ConstantTypeOf extends StaticAnnotation {
+    def macroTransform(annottees: Any*): Any = macro ConstantTypeOf.annot_impl
+}
+
+object ConstantTypeOf extends DependentTypeAnnotation1Impl[Any] {
+//  type apply[x](x: x): Any = macro impl[x]
+    override def type_annot_impl(c: Context)(x: c.Expr[Any]): c.Tree = impl(c)(x)(WeakTypeTagOf(c)(x))
 
     def impl[x](c: Context)(x: c.Expr[x])(implicit tx: c.WeakTypeTag[x]): c.Tree = {
         import c.universe._
@@ -32,7 +38,7 @@ object ConstantTypeOf {
 
 
 object ConstantTermOf {
-    def apply[x] = macro impl[x]
+    def apply[x]: Any = macro impl[x]
 
     def impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Expr[Any] = {
         import c.universe._

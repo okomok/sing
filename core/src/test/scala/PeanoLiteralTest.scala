@@ -18,31 +18,34 @@ import sing.Test.CompileError._
 class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-         val bs: bs = Peano_(3)
-        type bs     = Peano_(3)
+        val _bs = Peano_(3)
+         val bs: bs = _bs.apply
+        type bs     = _bs.apply
         assertEq(bs, Succ(Succ(Succ(Zero))))
         assertEq[bs, Succ[Succ[Succ[Zero]]]]
     }
 
     def testNil {
-         val bs: bs = Peano_(0)
-        type bs     = Peano_(0)
+        val _bs = Peano_(0)
+         val bs: bs = _bs.apply
+        type bs     = _bs.apply
         assertEq(bs, Zero)
         assertEq[bs, Zero]
     }
 
     def testThrow {
-        expectError(IllegalArgument) {
+        expectError(IllegalArgument) {"""
             val bs = Peano_(-1)
-        }
-
+        """}
+/*
         expectError(IllegalArgument) {
             dummy[ Peano_(-1) ]
         }
+*/
     }
 
     def testTrivial2 {
-         val bs = Peano_(42)
+         val bs = Peano_(42).apply
          JAssert.assertEquals(42, bs.unsing)
     }
 }

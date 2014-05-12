@@ -9,14 +9,15 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
-object BinaryLiteral {
-     def apply(x: String) = macro term_impl
-    type apply(x: String) = macro type_impl
+object BinaryLiteral extends Dependent1Impl[String] {
+    def apply(x: String): Unspecified = macro impl
 
-    def term_impl(c: Context)(x: c.Expr[String]): c.Expr[Any] = {
+    def impl(c: Context)(x: c.Expr[String]): c.Expr[Unspecified] = dep_impl(c)(x)
+
+    override protected def term_impl(c: Context)(x: c.Expr[String]): c.Expr[Unspecified] = {
         import c.universe._
 
         RequireConstantLiteral(c)(x)
@@ -24,7 +25,7 @@ object BinaryLiteral {
         DenseLiteral.term_fromBinaryString(c)(s)
     }
 
-    def type_impl(c: Context)(x: c.Expr[String]): c.Tree = {
+    override protected def type_impl(c: Context)(x: c.Expr[String]): c.Tree = {
         import c.universe._
 
         RequireConstantLiteral(c)(x)

@@ -8,7 +8,7 @@ package com.github.okomok
 package sing.makro
 
 
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 trait Assert2Impl {
@@ -20,14 +20,14 @@ trait Assert2Impl {
         import c.universe._
 
         _type_impl(c)(tx, ty)
-        c.literalUnit
+        LiteralUnit(c)
     }
 
     final def term_impl[x, y](c: Context)(x: c.Expr[x], y: c.Expr[y])(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Expr[Unit] = {
         import c.universe._
 
         _term_impl(c)(x, y)(tx, ty)
-        c.literalUnit
+        LiteralUnit(c)
     }
 
     final def type_impl[x, y](c: Context)(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Tree = {

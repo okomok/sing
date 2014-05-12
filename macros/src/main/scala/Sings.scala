@@ -8,12 +8,13 @@ package com.github.okomok
 package sing.makro
 
 
+import scala.annotation.StaticAnnotation
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 object Sings {
-    type apply = macro impl
+//  type apply = macro impl
 
     def impl(c: Context): c.Tree = {
         import c.universe._
@@ -76,7 +77,7 @@ object Sings {
                     val lazymods = AddLazyFlag(c)(mods)
                     q"$lazymods val ${name.toTermName}: $type_ = $term_" // memoized to follow the typemethod behavior.
                 } else {
-                    q"$mods def $name[..$tparams](..$sparams): $type_ = $term_"
+                    q"$mods def ${name.toTermName}[..$tparams](..$sparams): $type_ = $term_"
                 }
 
                 List(t, termmethod)

@@ -9,14 +9,15 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
-object DenseLiteral {
-     def apply(x: Int) = macro term_impl
-    type apply(x: Int) = macro type_impl
+object DenseLiteral extends Dependent1Impl[Int] {
+    def apply(x: Int): Unspecified = macro impl
 
-    def term_impl(c: Context)(x: c.Expr[Int]): c.Expr[Any] = {
+    def impl(c: Context)(x: c.Expr[Int]): c.Expr[Unspecified] = dep_impl(c)(x)
+
+    override protected def term_impl(c: Context)(x: c.Expr[Int]): c.Expr[Unspecified] = {
         import c.universe._
 
         RequireConstantLiteral(c)(x)
@@ -37,7 +38,7 @@ object DenseLiteral {
     }
 
     // "0010..." --> ...DCons(`false`, DCons(`true`, DNil))
-    def term_fromBinaryString(c: Context)(bs: String): c.Expr[Any] = {
+    def term_fromBinaryString(c: Context)(bs: String): c.Expr[Unspecified] = {
         import c.universe._
 
         val nil: c.Tree = q"${sing_(c)}.DNil"
@@ -53,7 +54,7 @@ object DenseLiteral {
             Apply(cons, List(tf, res))
         }
 
-        c.Expr[Any](res)
+        c.Expr[Unspecified](res)
     }
 
     def type_fromBinaryString(c: Context)(bs: String): c.Tree = {

@@ -8,8 +8,9 @@ package com.github.okomok
 package sing.makro
 
 
-import scala.language.existentials
 import scala.reflect.macros.whitebox.Context
 
 
-case class Duo[ct <: Context with Singleton](term: ct#Expr[_], tpe: ct#Type)
+object WeakTypeTagOf {
+    def apply(c: Context)(x: c.Expr[Unspecified]): c.WeakTypeTag[Any] = c.WeakTypeTag[Any](x.tree.tpe)
+}

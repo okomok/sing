@@ -9,14 +9,23 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
-object WeakTypeOf {
-    type apply[x](x: x) = macro impl[x]
+object WeakTypeOf extends Dependent1Impl[Any] {
+    def apply(x: Any): Unspecified = macro impl
 
-    def impl[x](c: Context)(x: c.Expr[x])(implicit tx: c.WeakTypeTag[x]): c.Tree = {
+    def impl(c: Context)(x: c.Expr[Any]): c.Expr[Unspecified] = dep_impl(c)(x)
+
+    override protected def term_impl(c: Context)(x: c.Expr[Any]): c.Expr[Unspecified] = {
+        c.typecheck(x.tree)
+        x
+    }
+
+    override protected def type_impl(c: Context)(x: c.Expr[Any]): c.Tree = {
         import c.universe._
-        TypeTree(tx.tpe)
+
+        c.typecheck(x.tree)
+        TypeTree(x.tree.tpe)
     }
 }

@@ -9,7 +9,7 @@ package sing
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 object Boxed extends AsKind {
@@ -89,7 +89,7 @@ trait Boxer[x] {
 
 
 object Boxer {
-    implicit def apply[x] = macro impl[x]
+    implicit def apply[x]: Boxer[x] = macro impl[x]
 
     def impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Expr[Boxer[x]] = {
         import c.universe._
@@ -104,6 +104,6 @@ object Boxer {
                 override     type boxId        = $tid
             }
         """
-        c.Expr[Boxer[x]](c.typeCheck(res))
+        c.Expr[Boxer[x]](c.typecheck(res))
     }
 }

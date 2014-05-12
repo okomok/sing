@@ -21,8 +21,10 @@ class CheckTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial {
     //     ignore[Check.apply[No]]
 
-        ExpectError(AnyError) {
-            ignore[Check.apply[No]]
+        ExpectError(AnyError) {"""
+//            ignore[Check.apply[No]]
+            Check(ignore[No])
+        """
         }
 
     }

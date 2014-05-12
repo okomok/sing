@@ -8,7 +8,7 @@ package com.github.okomok
 package sing.makro
 
 
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 // scala.::(t1, scala.::(t2, scala.Nil)) --> sing.Cons(t1, sing.Cons(t2, sing.Nil))

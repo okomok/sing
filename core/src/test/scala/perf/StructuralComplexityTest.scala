@@ -22,13 +22,15 @@ trait StructuralComplexityTezt {
     }
 
     final val N = 1
-    type xs = List.range[_0, Nat_(N)]#force
+    val _NatN = Nat_(N)
+    type xs = List.range[_0, _NatN.apply]#force
 
-    type diff = makro.ConstantTypeOf.apply(
+    val _diff = typeOf(
         makro.Benchmark {
              dummy[ xs#filter[not2]#force ]
         }
     )
-   // echo[diff]
+    type diff = _diff.apply
+   // echo[_diff]
 
 }

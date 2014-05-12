@@ -9,15 +9,16 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
-object PeanoLiteral {
-     def apply(x: Int) = macro term_impl
-    type apply(x: Int) = macro type_impl
+object PeanoLiteral extends Dependent1Impl[Int] {
+    def apply(x: Int): Unspecified = macro impl
+
+    def impl(c: Context)(x: c.Expr[Int]): c.Expr[Unspecified] = dep_impl(c)(x)
 
     // 2 --> Succ(Succ(Zero))
-    def term_impl(c: Context)(x: c.Expr[Int]): c.Expr[Any] = {
+    def term_impl(c: Context)(x: c.Expr[Int]): c.Expr[Unspecified] = {
         import c.universe._
 
         RequireConstantLiteral(c)(x)
@@ -31,7 +32,7 @@ object PeanoLiteral {
             Apply(succ, List(res))
         }
 
-        c.Expr[Any](res)
+        c.Expr[Unspecified](res)
     }
 
     def type_impl(c: Context)(x: c.Expr[Int]): c.Tree = {

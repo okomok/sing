@@ -14,11 +14,13 @@ sealed abstract class Nil extends AsList {
     override  def isEmpty: isEmpty = `true`
     override type isEmpty          = `true`
 
-    override  def head: head = makro.NoSuchElement.apply("Nil.head")
-    override type head       = makro.NoSuchElement.apply("Nil.head")
+    private[sing] lazy val _head = makro.NoSuchElement("Nil.head")
+    override  def head: head = _head.apply
+    override type head       = _head.apply
 
-    override  def tail: tail = makro.NoSuchElement.apply("Nil.tail")
-    override type tail       = makro.NoSuchElement.apply("Nil.tail")
+    private[sing] lazy val _tail = makro.NoSuchElement("Nil.tail")
+    override  def tail: tail = _tail.apply
+    override type tail       = _tail.apply
 
     def unapply(that: Nil) = true
 }

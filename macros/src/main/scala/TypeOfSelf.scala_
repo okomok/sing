@@ -11,12 +11,18 @@ package sing.makro
 // Special thanks to: https://github.com/leonardschneider/macrogen
 
 
+import scala.annotation.StaticAnnotation
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
-object TypeOfSelf {
-    type apply = macro impl
+class TypeOfSelf extends StaticAnnotation {
+    def macroTransform(annottees: Any*): Any = macro TypeOfSelf.annot_impl
+}
+
+object TypeOfSelf extends TypeFamilyAnnotation0Impl {
+//  type apply = macro impl
+    override def type_annot_impl(c: Context): c.Tree = impl(c)
 
     def impl(c: Context): c.Tree = {
         import c.universe._

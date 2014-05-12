@@ -9,7 +9,8 @@ package sing; package _test
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.{Context, TypecheckException}
+import scala.reflect.macros.whitebox.Context
+import scala.reflect.macros.TypecheckException
 import makro._
 
 
@@ -24,7 +25,7 @@ object AssertEqual extends Assert2Impl {
         val expr =  q"${sing_(c)}.Test.assertTrue($x.equal($y))"
 
         try {
-            c.typeCheck(expr)
+            c.typecheck(expr)
             AssertSuccess
         } catch {
             case e: TypecheckException if (e.getMessage.matches(CompileError.AssertError)) => {
@@ -40,11 +41,11 @@ object AssertEqual extends Assert2Impl {
         val expr = q"${sing_(c)}.Test.place[ ${sing_(c)}.Test.assertTrue[$x#equal[$y]] ]"
 
         try {
-            c.typeCheck(expr)
+            c.typecheck(expr)
             AssertSuccess
         } catch {
             case e: TypecheckException if (e.getMessage.matches(CompileError.AssertError)) => {
-                AssertFailure(show(x.normalize) + " is not equal to " + show(y.normalize))
+                AssertFailure(show(x.dealias) + " is not equal to " + show(y.dealias))
             }
         }
     }
@@ -62,7 +63,7 @@ object AssertNequal extends Assert2Impl {
         val expr =  q"${sing_(c)}.Test.assertTrue($x.nequal($y))"
 
         try {
-            c.typeCheck(expr)
+            c.typecheck(expr)
             AssertSuccess
         } catch {
             case e: TypecheckException if (e.getMessage.matches(CompileError.AssertError)) => {
@@ -78,11 +79,11 @@ object AssertNequal extends Assert2Impl {
         val expr = q"${sing_(c)}.Test.place[ ${sing_(c)}.Test.assertTrue[$x#nequal[$y]] ]"
 
         try {
-            c.typeCheck(expr)
+            c.typecheck(expr)
             AssertSuccess
         } catch {
             case e: TypecheckException if (e.getMessage.matches(CompileError.AssertError)) => {
-                AssertFailure(show(x.normalize) + " is equal to " + show(y.normalize))
+                AssertFailure(show(x.dealias) + " is equal to " + show(y.dealias))
             }
         }
     }

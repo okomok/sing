@@ -9,17 +9,16 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 object Sleep {
-     def apply(x: Long): Unit = macro term_impl
-    type apply(x: Long)       = macro type_impl
+    def apply(x: Long): Unit = macro term_impl
 
     def term_impl(c: Context)(x: c.Expr[Long]): c.Expr[Unit] = {
         import c.universe._
         _impl(c)(x)
-        c.literalUnit
+        LiteralUnit(c)
     }
 
     def type_impl(c: Context)(x: c.Expr[Long]): c.Tree = {

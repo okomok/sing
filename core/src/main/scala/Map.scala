@@ -18,7 +18,7 @@ trait Map extends PartialFunction {
     override type self <: Map
     override type unsing <: scala.collection.Map[scala.Any, scala.Any]
 
-     def asBSTree: asBSTree = makro.Unsupported.apply("Map.asBSTree")
+     def asBSTree: asBSTree = makro.Unsupported("Map.asBSTree").apply
     type asBSTree <: BSTree
 
      def size: size

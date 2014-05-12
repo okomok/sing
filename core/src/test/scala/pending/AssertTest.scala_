@@ -21,107 +21,107 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial() {
 
-        expectError(NotFound) {
+        expectError(NotFound) {"""
             // good error
             woo
-        }
+        """}
 
-        expectError(UnexpectedCompile) {
+        expectError(UnexpectedCompile) {"""
             // good error
-            expectError(AnyError) {
+            expectError(AnyError) {"""
                 // bad success
                 1
-            }
-        }
+            """}
+        """}
 
-        expectError(UnexpectedCompile) {
+        expectError(UnexpectedCompile) {"""
             // good error
-            expectError(AnyError) {
+            expectError(AnyError) {"""
                 // bad success
-                expectError(NotFound) {
+                expectError(NotFound) {"""
                     // good error
                     wow
-                }
-            }
-        }
+                """}
+            """}
+        """}
 
-        expectError(AnyError) {
+        expectError(AnyError) {"""
             error
-        }
+        """}
 
         type no = Nothing
 
         assertTrue[isEq[no, Nothing]]
 
-        expectError(AssertError) {
+        expectError(AssertError) {"""
             assertTrue[isEq[Int, Nothing]]
-        }
+        """}
 
         assertTrue[conforms[Int, AnyVal]]
 
-        expectError(AssertError) {
+        expectError(AssertError) {"""
             assertConforms[AnyVal, Int]
-        }
+        """}
 
         assertFalse[conforms[AnyVal, Int]]
 
-        expectError(AssertError) {
+        expectError(AssertError) {"""
             assertFalse[conforms[Int, AnyVal]]
-        }
+        """}
 
         type i = Int
 
         assertFalse[isEq[AnyVal, i]]
 
-        expectError(AssertError) {
+        expectError(AssertError) {"""
             assertFalse[isEq[i, Int]]
-        }
+        """}
 
         def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
         type foo[x <: Any] = x#asNat#plus[Dense._2]
 
-        expectError(AbstractType) {
+        expectError(AbstractType) {"""
             check(foo(Nil))
-        }
+        """}
 
-        expectError(AbstractType) {
+        expectError(AbstractType) {"""
             dummy[ check[foo[Nil]] ]
-        }
+        """}
 
         val x: x = check(Some(Dense._2).get)
         type x   = check[Some[Dense._2]#get]
 
-        expectError(AssertError) {
+        expectError(AssertError) {"""
             assertEq(Dense._3, x)
-        }
-        expectError(AssertError) {
+        """}
+        expectError(AssertError) {"""
             assertEq[Dense._3, x]
-        }
+        """}
 
 
-        expectError(AssertError) {
+        expectError(AssertError) {"""
             place[ assertEq[Char, Int] ]
-        }
+        """}
 
-        expectError(NotFound) {
+        expectError(NotFound) {"""
             // dummy[ assertEq[Char, Int] ] // why not error?
             wow
-        }
+        """}
 
-        expectError(AssertError) {
+        expectError(AssertError) {"""
             place[ assertFalse[conforms[Int, Int]] ]
-        }
+        """}
 
-        expectError(AnyError) {
+        expectError(AnyError) {"""
             place[error]
-        }
+        """}
 
         assertEq(Dense._2, x)
         assertEq[Dense._2, x]
 
-        expectError(NothingType) {
+        expectError(NothingType) {"""
             check(None.get)
-        }
+        """}
 
         ()
     }
@@ -133,17 +133,17 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         val x: x = check(foo(Dense._3))
         type x   = check[foo[Dense._3]]
 
-        expectError(NothingType) {
+        expectError(NothingType) {"""
             check(foo(Dense._2))
-        }
+        """}
 
-        expectError(NothingType) {
+        expectError(NothingType) {"""
             check(dummy[foo[Dense._2]]) // Nothing
-        }
+        """}
 
-        expectError(AbstractType) {
+        expectError(AbstractType) {"""
             check(dummy[Nat#increment]) // abstract
-        }
+        """}
     }
 }
 

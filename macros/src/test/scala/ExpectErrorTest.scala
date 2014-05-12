@@ -14,19 +14,17 @@ import CompileError._
 class ExpectErrorTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-        ExpectError(NotFound) {
+        ExpectError(NotFound) {"""
             wow
-        }
+        """}
     }
 
     def testSelf {
         val hey = "hello" // not constant
 
-        ExpectError(IllegalArgument) {
-            ExpectError(hey) {
-                3
-            }
-        }
+        ExpectError(IllegalArgument) {"""
+            ExpectError(hey) {"3"}
+        """}
     }
 
 }

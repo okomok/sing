@@ -9,12 +9,11 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 object Check {
-     def apply[x](x: x) = macro term_impl[x]
-    type apply[x]       = macro type_impl[x]
+    def apply[x](x: x): Unspecified = macro term_impl[x]
 
     def term_impl[x](c: Context)(x: c.Expr[x])(implicit tx: c.WeakTypeTag[x]): c.Expr[x] = {
         import c.universe._
@@ -35,9 +34,9 @@ object Check {
 
         val t = tx.tpe
         if (IsAbstract._impl(c)(tx)) {
-            CompileError.abstractType(c)(show(t) + ", which is expanded to " + show(t.normalize))
+            CompileError.abstractType(c)(show(t) + ", which is expanded to " + show(t.dealias))
         } else if (t <:< weakTypeOf[Nothing]) {
-            CompileError.nothingType (c)(show(t) + ", which is expanded to " + show(t.normalize))
+            CompileError.nothingType (c)(show(t) + ", which is expanded to " + show(t.dealias))
         }
     }
 }

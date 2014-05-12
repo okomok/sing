@@ -16,6 +16,7 @@ package object sing {
 
 
     import Annotation._
+    import makro.Unspecified
 
 
 // Boolean
@@ -43,8 +44,7 @@ package object sing {
 
 // Nat
 
-     def Nat_(x: Int) = macro makro.DenseLiteral.term_impl
-    type Nat_(x: Int) = macro makro.DenseLiteral.type_impl
+    val Nat_ = makro.DenseLiteral
 
 
 // Dense
@@ -54,19 +54,15 @@ package object sing {
      val D_:: = DCons
     type D_::[b <: Boolean, bs <: Dense] = bs# D_::[b]
 
-     def Dense_(x: Int) = macro makro.DenseLiteral.term_impl
-    type Dense_(x: Int) = macro makro.DenseLiteral.type_impl
-
-     def Binary_(x: String) = macro makro.BinaryLiteral.term_impl
-    type Binary_(x: String) = macro makro.BinaryLiteral.type_impl
+    val Dense_ = makro.DenseLiteral
+    val Binary_ = makro.BinaryLiteral
 
 
 // Peano
 
     val Zero: Zero = _TermOfZero.apply
 
-     def Peano_(x: Int) = macro makro.PeanoLiteral.term_impl
-    type Peano_(x: Int) = macro makro.PeanoLiteral.type_impl
+    val Peano_ = makro.PeanoLiteral
 
 
 // Option
@@ -106,7 +102,7 @@ package object sing {
     /**
      * The type of a term
      */
-    type typeOf[x](x: x) = macro makro.WeakTypeOf.impl[x]
+    val typeOf = makro.WeakTypeOf
 
     /**
      * The term of a type
@@ -121,11 +117,10 @@ package object sing {
     /**
      * Checks a type concrete, compile-error otherwise.
      */
-     def check[x](x: x) = macro makro.Check.term_impl[x]
-    type check[x]       = macro makro.Check.type_impl[x]
+    def check[x](x: x): Unspecified = macro makro.Check.term_impl[x]
 
     @equivalentTo("AsT with Self")
-    type New[T] = macro makro.New.impl[T]
+    type New = makro.New
 
 
 // assertions

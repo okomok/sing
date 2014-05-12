@@ -19,34 +19,41 @@ import sing.Test.CompileError._
 class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
-         val bs: bs = Nat_(5)
-        type bs     = Nat_(5)
+        val _bs = Nat_(5)
+         val bs: bs = _bs.apply
+        type bs     = _bs.apply
         assertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
         assertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testNil {
-         val bs: bs = Nat_(0)
-        type bs     = Nat_(0)
+        val _bs = Nat_(0)
+         val bs: bs = _bs.apply
+        type bs     = _bs.apply
         assertEq(bs, DNil)
         assertEq[bs, DNil]
     }
 
     def testThrow {
-        expectError(IllegalArgument) {
-            val bs = Nat_(-1)
-        }
-
+        expectError(IllegalArgument) {"""
+            val bs = Nat_(-1).apply
+        """}
+/*
         expectError(IllegalArgument) {
             dummy[ Nat_(-1) ]
         }
+*/
     }
 
     def testTrivial2 {
-         val bs = Nat_(42)
+         val _bs = Nat_(42)
+         val  bs: bs = _bs.apply
+         type bs     = _bs.apply
          JAssert.assertEquals(42, bs.unsing)
 
-         type n = Nat_(42)#plus[Nat_(10)]
-         assertEq[Nat_(52), n]
+         val _Nat10 = Nat_(10)
+         type n = bs#plus[_Nat10.apply]
+         val _Nat52 = Nat_(52)
+         assertEq[_Nat52.apply, n]
     }
 }

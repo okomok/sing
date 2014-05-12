@@ -27,8 +27,12 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
 
         val bi = Box(mmm)
         val k = Box.empty[MMM]
-        type bi = typeOf(bi)
-        type k = typeOf(k)
+
+        val _bi = typeOf(bi)
+        type bi = _bi.apply
+
+        val _k = typeOf(k)
+        type k = _k.apply
 
         Test.assertEq[`true`, bi#equal[k]]
 

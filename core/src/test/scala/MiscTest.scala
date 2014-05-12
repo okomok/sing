@@ -17,17 +17,20 @@ trait MiscTest {
         val x = n.plus(Dense._1)
         val y = id(n).plus(Dense._1)
 
-        type x = typeOf(x)
-        type y = typeOf(y)
+        val _x = typeOf(x)
+        type x = _x.apply
+
+        val _y = typeOf(y)
+        type y = _y.apply
         type r = n#plus[Dense._1]
 
 
         // x <:< r, but not r <:< x
         val rx: r = x
 
-        Test.expectError(AnyError) {
+        Test.expectError(AnyError) {"""
             val xr: x = null.asInstanceOf[r]
-        }
+        """}
 
         // y =:= x
         val ry: r = y
@@ -37,17 +40,19 @@ trait MiscTest {
     }
 
     trait Foo[T] {
-        type self = typeOf(this)
+        val _self = typeOf(this)
+        type self = _self.apply
         type self_ = this.type
-        type self__ = typeOf(id(null.asInstanceOf[this.type]))
+        val _self__ = typeOf(id(null.asInstanceOf[this.type]))
+        type self__ = _self__.apply
 
         implicitly[self =:= self__ ]
 
         implicitly[self_ <:< self]
 
-        Test.expectError(CannotProve) {
+        Test.expectError(CannotProve) {"""
             implicitly[self <:< self_]
-        }
+        """}
     }
 }
 

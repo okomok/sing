@@ -9,12 +9,13 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
-object NoSuchElement extends TypeThrow {
-     def apply(msg: String) = macro term_impl
-    type apply(msg: String) = macro type_impl
+object NoSuchElement extends Dependent1Impl[String] with TypeThrow {
+    def apply(x: String): Unspecified = macro impl
+
+    def impl(c: Context)(x: c.Expr[String]): c.Expr[Unspecified] = dep_impl(c)(x)
 
     override protected def what(c: Context): c.Tree = {
         import c.universe._

@@ -8,13 +8,13 @@ package com.github.okomok
 package sing.makro
 
 
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 trait Predicate2Impl {
     protected def impl(c: Context)(x: c.Type, y: c.Type): Boolean
 
-    final def term_impl[x, y](c: Context)(x: c.Expr[x], y: c.Expr[y])(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Expr[Any] = {
+    final def term_impl[x, y](c: Context)(x: c.Expr[x], y: c.Expr[y])(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Expr[Unspecified] = {
         import c.universe._
 
         val res = if (_impl(c)(tx, ty)) {
@@ -23,7 +23,7 @@ trait Predicate2Impl {
             q"${sing_(c)}.`false`"
         }
 
-        c.Expr[Any](res)
+        c.Expr[Unspecified](res)
     }
 
     final def type_impl[x, y](c: Context)(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Tree = {

@@ -19,7 +19,7 @@ trait MemoizationTest {
     type N = _1
 
     trait Diff {
-        type diff = makro.ConstantTypeOf.apply(
+        val _diff = typeOf(
             makro.Benchmark {
                 dummy[SlowFibonacci.fibonacci[N]]
             }
@@ -28,6 +28,7 @@ trait MemoizationTest {
                 dummy[FastFibonacci.fibonacci[N]]
             }
         )
+        type diff = _diff.apply
        // echo[diff]
     }
 

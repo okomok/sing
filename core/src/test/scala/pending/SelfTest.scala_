@@ -16,11 +16,17 @@ trait SelfTezt {
 
     import makro._
 
-    trait Foo extends Self.apply
+    trait Foo {
+        @Self
+    }
 
-    object Bar extends Self.apply
+    object Bar {
+        @Self
+    }
 
-    class Buz[x, y] extends Self.apply
+    class Buz[x, y] extends {
+        @Self
+    }
 
     Test.assertEq[Foo#self, Foo]
     Test.assertEq[Bar.type, Bar.self]

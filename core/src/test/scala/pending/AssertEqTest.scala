@@ -24,20 +24,20 @@ class AssertEqTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial {
         assertEq(_3.plus(_2), _6.minus(_1))
         assertEq[_3#plus[_2], _6.minus[_1]]
-        place[ assertEq[_3#plus[_2], _6.minus[_1]] ]
+//        place[ assertEq[_3#plus[_2], _6.minus[_1]] ]
 
-        expectError(AssertError) {
-            assertEq[_3, _5]
-        }
+        expectError(AssertError) {"""
+            assertEq(_3, _5)
+        """}
     }
 
     def testTrivialNot {
         assertNeq(_3.plus(_2), _6.minus(_0))
         assertNeq[_3#plus[_2], _6.minus[_0]]
-        place[ assertNeq[_3#plus[_2], _6.minus[_0]] ]
+//        place[ assertNeq[_3#plus[_2], _6.minus[_0]] ]
 
-        expectError(AssertError) {
-            assertNeq[_3, _3]
-        }
+        expectError(AssertError) {"""
+            assertNeq(_3, _3)
+        """}
     }
 }

@@ -8,19 +8,23 @@ package com.github.okomok
 package sing.makro
 
 
+import scala.annotation.StaticAnnotation
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
-object Self {
-    type apply = macro impl
+class Self extends StaticAnnotation {
+    def macroTransform(annottees: Any*): Unspecified = macro Self.annot_impl
+}
 
-    def impl(c: Context): c.Tree = {
+object Self extends AnnotationImpl {
+    override protected def annot_tree_impl(c: Context)(ts: List[c.Tree]): List[c.Tree] = {
         import c.universe._
 
-        val selfdef: c.Tree = q"type self = ${TypeOfSelf.impl(c)}"
+        val tempname = c.freshName()
+        val tempdef: c.Tree = q"val $tempname = ${here(c)}.WeakTypeOf(this)"
+        val selfdef: c.Tree = q"type self = $tempname.apply"
 
-        val Template(parents, self, body) = c.enclosingTemplate
-        Template(RemoveMacro(c)(parents), self, selfdef :: body)
+        tempdef :: selfdef :: ts
     }
 }

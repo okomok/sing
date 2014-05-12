@@ -9,12 +9,11 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 object Conforms extends Predicate2Impl {
-     def apply[x, y](x: x, y: y) = macro term_impl[x, y]
-    type apply[x, y]             = macro type_impl[x, y]
+    def apply[x, y](x: x, y: y): Unspecified = macro term_impl[x, y]
 
     override protected def impl(c: Context)(x: c.Type, y: c.Type): Boolean = {
         x <:< y

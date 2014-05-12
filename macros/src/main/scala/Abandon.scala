@@ -9,14 +9,14 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 object Abandon {
-    def apply(x: _): Unit = macro impl
+    def apply(x: Any): Unit = macro impl
 
     def impl(c: Context)(x: c.Tree): c.Expr[Unit] = {
         import c.universe._
-        c.literalUnit
+        LiteralUnit(c)
     }
 }

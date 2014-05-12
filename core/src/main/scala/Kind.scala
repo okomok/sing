@@ -20,25 +20,25 @@ trait Kind extends Any {
     /**
      * ID number
      */
-     def kindId: kindId = makro.Unsupported.apply("Kind.kindId")
+     def kindId: kindId = makro.Unsupported("Kind.kindId").apply
     type kindId <: Nat
 
     /**
      * Checks the kind-conformance.
      */
-     def conformsTo[that <: Kind](that: that): conformsTo[that] = makro.Unsupported.apply("Kind.conformsTo")
+     def conformsTo[that <: Kind](that: that): conformsTo[that] = makro.Unsupported("Kind.conformsTo").apply
     type conformsTo[that <: Kind] <: Boolean
 
     /**
      * Returns the natural Equiv.
      */
-     def naturalEquiv: naturalEquiv = makro.Unsupported.apply("Kind.naturalEquiv")
+     def naturalEquiv: naturalEquiv = makro.Unsupported("Kind.naturalEquiv").apply
     type naturalEquiv <: Equiv
 
     /**
      * Returns the natural Ordering.
      */
-     def naturalOrdering: naturalOrdering = makro.Unsupported.apply("Kind.naturalOrdering")
+     def naturalOrdering: naturalOrdering = makro.Unsupported("Kind.naturalOrdering").apply
     type naturalOrdering <: Ordering
 }
 

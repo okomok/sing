@@ -9,25 +9,28 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.{Context, TypecheckException}
+import scala.reflect.macros.whitebox.Context
+import scala.reflect.macros.TypecheckException
 
 
 object ExpectError {
-    def apply(r: String)(x: _): Unit = macro impl
+    def apply(r: String)(x: String): Unit = macro impl
 
     // For some reason, typed and untyped macro can't be mixed.
-    def impl(c: Context)(r: c.Tree)(x: c.Tree): c.Expr[Unit] = {
+    def impl(c: Context)(r: c.Expr[String])(x: c.Expr[String]): c.Expr[Unit] = {
         import c.universe._
 
         val pos = c.enclosingPosition
 
-        val rgx = c.typeCheck(r) match {
-            case Literal(Constant(s: String)) => s
+        val rgx = r match {
+            case Expr(Literal(Constant(s: String))) => s
             case _ => CompileError.illegalArgument(c)(show(r) + " is not constant literal.")
         }
 
+        val Expr(Literal(Constant(code: String))) = x
+
         try {
-            c.typeCheck(x)
+            c.typecheck(c.parse("{" + code + "}"))
             CompileError.unexpectedCompile(c)(show(x))
         } catch {
             case e: TypecheckException => {
@@ -37,6 +40,6 @@ object ExpectError {
             }
         }
 
-        c.literalUnit
+        LiteralUnit(c)
     }
 }

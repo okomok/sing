@@ -9,7 +9,7 @@ package sing; package _test
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 import makro._
 
 
@@ -20,7 +20,7 @@ object AssertTrue extends Assert1Impl {
         if (x =:= weakTypeOf[`true`]) {
             AssertSuccess
         } else {
-            AssertFailure(show(x.normalize) + " is not `true`.")
+            AssertFailure(show(x.dealias) + " is not `true`.")
         }
     }
 }
@@ -33,7 +33,7 @@ object AssertFalse extends Assert1Impl {
         if (x =:= weakTypeOf[`false`]) {
             AssertSuccess
         } else {
-            AssertFailure(show(x.normalize) + " is not `false`.")
+            AssertFailure(show(x.dealias) + " is not `false`.")
         }
     }
 }

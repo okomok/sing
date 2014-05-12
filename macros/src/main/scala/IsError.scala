@@ -9,16 +9,16 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 // Thanks to: https://gist.github.com/travisbrown/5066283
 
 
 object IsError {
-    def apply(x: _) = macro impl
+    def apply(x: Any): Unspecified = macro impl
 
-    def impl(c: Context)(x: c.Tree): c.Expr[Any] = {
+    def impl(c: Context)(x: c.Tree): c.Expr[Unspecified] = {
         import c.universe._
 
         val res = if (_impl(c)(x)) {
@@ -27,11 +27,11 @@ object IsError {
             q"${sing_(c)}.`false`"
         }
 
-        c.Expr[Any](res)
+        c.Expr[Unspecified](res)
     }
 
     def _impl(c: Context)(x: c.Tree): Boolean = {
         import c.universe._
-        c.typeCheck(x, silent = true) == EmptyTree
+        c.typecheck(x, silent = true) == EmptyTree
     }
 }

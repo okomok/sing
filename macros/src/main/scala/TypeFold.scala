@@ -8,7 +8,7 @@ package com.github.okomok
 package sing.makro
 
 
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 object TypeFold {
@@ -24,7 +24,7 @@ object TypeFold {
     def typeArgs(c: Context)(t: c.Type): List[c.Type] = {
         import c.universe._
 
-        t.normalize match {
+        t.dealias match {
             case TypeRef(_, _, args) => args
             case _ => Nil
         }

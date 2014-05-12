@@ -8,8 +8,12 @@ package com.github.okomok
 package sing.makro
 
 
-import scala.language.existentials
 import scala.reflect.macros.whitebox.Context
 
 
-case class Duo[ct <: Context with Singleton](term: ct#Expr[_], tpe: ct#Type)
+object LiteralUnit {
+    def apply(c: Context): c.Expr[Unit] = {
+        import c.universe._
+        c.Expr[Unit](q"()")
+    }
+}

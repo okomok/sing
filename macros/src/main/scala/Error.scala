@@ -9,17 +9,16 @@ package sing.makro
 
 
 import scala.language.experimental.macros
-import scala.reflect.macros.Context
+import scala.reflect.macros.whitebox.Context
 
 
 object Error {
      def apply: Unit = macro term_impl
-    type apply             = macro type_impl
 
     def term_impl(c: Context): c.Expr[Unit] = {
         import c.universe._
         _impl(c)
-        c.literalUnit
+        LiteralUnit(c)
     }
 
     def type_impl(c: Context): c.Tree = {
