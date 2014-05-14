@@ -14,7 +14,7 @@ import makro._
 
 
 private[sing]
-object AssertTrue extends Assert1Impl {
+object AssertTrue extends AssertImpl1 {
     override protected def inType(c: Context)(x: c.Type): AssertResult = {
         import c.universe._
         if (x =:= weakTypeOf[`true`]) {
@@ -27,7 +27,7 @@ object AssertTrue extends Assert1Impl {
 
 
 private[sing]
-object AssertFalse extends Assert1Impl {
+object AssertFalse extends AssertImpl1 {
     override protected def inType(c: Context)(x: c.Type): AssertResult = {
         import c.universe._
         if (x =:= weakTypeOf[`false`]) {

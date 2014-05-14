@@ -20,13 +20,13 @@ trait MemoizationTest {
 
     trait Diff {
         val _diff = typeOf(
-            makro.Benchmark {
+            makro.Benchmark {"""
                 dummy[SlowFibonacci.fibonacci[N]]
-            }
+            """}
             -
-            makro.Benchmark {
+            makro.Benchmark {"""
                 dummy[FastFibonacci.fibonacci[N]]
-            }
+            """}
         )
         type diff = _diff.apply
        // echo[diff]

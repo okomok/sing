@@ -15,7 +15,7 @@ import makro._
 
 
 private[sing]
-object AssertEqual extends Assert2Impl {
+object AssertEqual extends AssertImpl2 {
     override protected def inTerm(c: Context)(xx: Duo[c.type], yy: Duo[c.type]): AssertResult = {
         import c.universe._
 
@@ -53,7 +53,7 @@ object AssertEqual extends Assert2Impl {
 
 
 private[sing]
-object AssertNequal extends Assert2Impl {
+object AssertNequal extends AssertImpl2 {
     override protected def inTerm(c: Context)(xx: Duo[c.type], yy: Duo[c.type]): AssertResult = {
         import c.universe._
 

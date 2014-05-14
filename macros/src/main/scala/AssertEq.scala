@@ -12,7 +12,7 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object AssertEq extends Assert2Impl {
+object AssertEq extends AssertImpl2 {
     def apply[x, y]: Unit             = macro term_impl_[x, y]
     def apply[x, y](x: x, y: y): Unit = macro term_impl[x, y]
 
@@ -28,7 +28,7 @@ object AssertEq extends Assert2Impl {
 }
 
 
-object AssertNeq extends Assert2Impl {
+object AssertNeq extends AssertImpl2 {
     def apply[x, y]: Unit             = macro term_impl_[x, y]
     def apply[x, y](x: x, y: y): Unit = macro term_impl[x, y]
 

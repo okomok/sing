@@ -12,26 +12,29 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object Sleep {
-    def apply(x: Long): Unit = macro term_impl
+object Sleep extends TypedDependentImpl1[Long] {
+    def apply(x: Long): Unit = macro dep_impl
 
-    def term_impl(c: Context)(x: c.Expr[Long]): c.Expr[Unit] = {
+    override protected def dep_extract(c: Context)(x: c.Tree): Long = {
         import c.universe._
-        _impl(c)(x)
-        LiteralUnit(c)
-    }
 
-    def type_impl(c: Context)(x: c.Expr[Long]): c.Tree = {
-        import c.universe._
-        _impl(c)(x)
-        tq"_root_.scala.Unit"
-    }
-
-    private def _impl(c: Context)(x: c.Expr[Long]): Unit = {
-        import c.universe._
-        x.tree match {
-            case Literal(Constant(ms: Long)) => Thread.sleep(ms)
-            case t => CompileError.illegalArgument(c)(show(t) + " is required to be Long literal.")
+        x match {
+            case Literal(Constant(ms: Long)) if (ms >= 0) => ms
+            case t => CompileError.illegalArgument(c)(show(t) + " is required to be non-negative Long literal.")
         }
+    }
+
+    override protected def dep_term_impl(c: Context)(x: Long): c.Tree = {
+        import c.universe._
+
+        Thread.sleep(x)
+        q"()"
+    }
+
+    override protected def dep_type_impl(c: Context)(x: Long): c.Tree = {
+        import c.universe._
+
+        Thread.sleep(x)
+        tq"_root_.scala.Unit"
     }
 }

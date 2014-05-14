@@ -12,16 +12,15 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object Benchmark {
-    def apply(x: Any): Unspecified = macro impl
+object Benchmark extends UntypedImpl {
+    def apply(x: String): Unspecified = macro untyped_impl
 
-    def impl(c: Context)(x: c.Tree): c.Expr[Unspecified] = {
+    override protected def untyped_impl_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._
 
         val start = System.currentTimeMillis
-        val res1 = c.typecheck(x)
+        c.typecheck(x)
         val elapsed = System.currentTimeMillis - start
-//        c.echo(c.enclosingPosition, "elapsed: " + elapsed + "ms")
-        c.Expr[Unspecified](Literal(Constant(elapsed)))
+        q"$elapsed"
     }
 }

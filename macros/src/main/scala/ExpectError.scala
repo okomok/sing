@@ -16,18 +16,11 @@ import scala.reflect.macros.TypecheckException
 object ExpectError {
     def apply(r: String)(x: String): Unit = macro impl
 
-    // For some reason, typed and untyped macro can't be mixed.
-    def impl(c: Context)(r: c.Expr[String])(x: c.Expr[String]): c.Expr[Unit] = {
+    def impl(c: Context)(r: c.Tree)(x: c.Tree): c.Tree = {
         import c.universe._
 
-        val pos = c.enclosingPosition
-
-        val rgx = r match {
-            case Expr(Literal(Constant(s: String))) => s
-            case _ => CompileError.illegalArgument(c)(show(r) + " is required to be constant literal.")
-        }
-
-        val Expr(Literal(Constant(code: String))) = x
+        val rgx = ExtractString(c)(r)
+        val code = ExtractString(c)(x)
 
         try {
             c.typecheck(c.parse("{" + code + "}"))
@@ -40,6 +33,6 @@ object ExpectError {
             }
         }
 
-        LiteralUnit(c)
+        q"()"
     }
 }

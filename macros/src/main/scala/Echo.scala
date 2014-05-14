@@ -12,7 +12,7 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object Echo extends Assert1Impl {
+object Echo extends AssertImpl1 {
     def apply[x]: Unit       = macro term_impl_[x]
     def apply[x](x: x): Unit = macro term_impl[x]
 
@@ -36,7 +36,7 @@ object Echo extends Assert1Impl {
 }
 
 
-object EchoRaw extends Assert1Impl {
+object EchoRaw extends AssertImpl1 {
     def apply[x]: Unit       = macro term_impl_[x]
     def apply[x](x: x): Unit = macro term_impl[x]
 

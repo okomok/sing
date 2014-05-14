@@ -26,11 +26,10 @@ trait StructuralComplexityTezt {
     type xs = List.range[_0, _NatN.apply]#force
 
     val _diff = typeOf(
-        makro.Benchmark {
+        makro.Benchmark {"""
              dummy[ xs#filter[not2]#force ]
-        }
+        """}
     )
     type diff = _diff.apply
-   // echo[_diff]
-
+    // echo[diff]
 }

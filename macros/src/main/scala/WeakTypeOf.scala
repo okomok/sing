@@ -12,20 +12,20 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object WeakTypeOf extends Dependent1Impl[Any] {
-    def apply(x: Any): Unspecified = macro impl
+object WeakTypeOf extends DependentImpl1 {
+    def apply(x: Any): Unspecified = macro dep_impl
 
-    def impl(c: Context)(x: c.Expr[Any]): c.Expr[Unspecified] = dep_impl(c)(x)
+    override protected def dep_term_impl(c: Context)(x: c.Tree): c.Tree = {
+        import c.universe._
 
-    override protected def term_impl(c: Context)(x: c.Expr[Any]): c.Expr[Unspecified] = {
-        c.typecheck(x.tree)
+        c.typecheck(x)
         x
     }
 
-    override protected def type_impl(c: Context)(x: c.Expr[Any]): c.Tree = {
+    override protected def dep_type_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._
 
-        c.typecheck(x.tree)
-        TypeTree(x.tree.tpe)
+        c.typecheck(x)
+        TypeTree(x.tpe)
     }
 }

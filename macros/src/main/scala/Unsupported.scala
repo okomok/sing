@@ -12,10 +12,8 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object Unsupported extends Dependent1Impl[String] with TypeThrow {
-    def apply(x: String): Unspecified = macro impl
-
-    def impl(c: Context)(x: c.Expr[String]): c.Expr[Unspecified] = dep_impl(c)(x)
+object Unsupported extends TypeThrow {
+    def apply(x: String): Unspecified = macro dep_impl
 
     override protected def what(c: Context): c.Tree = {
         import c.universe._

@@ -11,22 +11,20 @@ package sing.makro
 import scala.reflect.macros.whitebox.Context
 
 
-trait TypeThrow {
+trait TypeThrow extends DependentImpl1 {
     protected def what(c: Context): c.Tree
 
-    final def term_impl(c: Context)(msg: c.Expr[String]): c.Expr[Unspecified] = {
+    final override protected def dep_term_impl(c: Context)(msg: c.Tree): c.Tree = {
         import c.universe._
 
-        val ret = type_impl(c)(msg)
+        val ret = dep_type_impl(c)(msg)
 
-        val res = q"""
-            (throw new ${what(c)}(${msg.tree})): $ret
+        q"""
+            (throw new ${what(c)}(${msg})): $ret
         """
-
-        c.Expr[Unspecified](res)
     }
 
-    final def type_impl(c: Context)(msg: c.Expr[String]): c.Tree = {
+    final override protected def dep_type_impl(c: Context)(msg: c.Tree): c.Tree = {
         import c.universe._
 
         tq"""

@@ -12,33 +12,23 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object DenseLiteral extends Dependent1Impl[Int] {
-    def apply(x: Int): Unspecified = macro impl
+object DenseLiteral extends TypedDependentImpl1[Int] {
+    def apply(x: Int): Unspecified = macro dep_impl
 
-    def impl(c: Context)(x: c.Expr[Int]): c.Expr[Unspecified] = dep_impl(c)(x)
+    override protected def dep_extract(c: Context)(x: c.Tree): Int = ExtractNat(c)(x)
 
-    override protected def term_impl(c: Context)(x: c.Expr[Int]): c.Expr[Unspecified] = {
+    override protected def dep_term_impl(c: Context)(x: Int): c.Tree = {
         import c.universe._
-
-        RequireConstantLiteral(c)(x)
-        val Literal(Constant(i: Int)) = x.tree
-        RequireNat(c)(i)
-
-        term_fromBinaryString(c)(Integer.toBinaryString(i))
+        term_fromBinaryString(c)(Integer.toBinaryString(x))
     }
 
-    def type_impl(c: Context)(x: c.Expr[Int]): c.Tree = {
+    override protected def dep_type_impl(c: Context)(x: Int): c.Tree = {
         import c.universe._
-
-        RequireConstantLiteral(c)(x)
-        val Literal(Constant(i: Int)) = x.tree
-        RequireNat(c)(i)
-
-        type_fromBinaryString(c)(Integer.toBinaryString(i))
+        type_fromBinaryString(c)(Integer.toBinaryString(x))
     }
 
     // "0010..." --> ...DCons(`false`, DCons(`true`, DNil))
-    def term_fromBinaryString(c: Context)(bs: String): c.Expr[Unspecified] = {
+    def term_fromBinaryString(c: Context)(bs: String): c.Tree = {
         import c.universe._
 
         val nil: c.Tree = q"${sing_(c)}.DNil"
@@ -46,15 +36,13 @@ object DenseLiteral extends Dependent1Impl[Int] {
         val t: c.Tree = q"${sing_(c)}.`true`"
         val f: c.Tree = q"${sing_(c)}.`false`"
 
-        val res = bs.dropWhile(_ == '0').reverse.map {
+        bs.dropWhile(_ == '0').reverse.map {
             case '1' => t
             case '0' => f
             case w => CompileError.illegalArgument(c)(w.toString + " is illformed")
         }.foldRight(nil) { (tf, res) =>
             Apply(cons, List(tf, res))
         }
-
-        c.Expr[Unspecified](res)
     }
 
     def type_fromBinaryString(c: Context)(bs: String): c.Tree = {
@@ -65,14 +53,12 @@ object DenseLiteral extends Dependent1Impl[Int] {
         val t: c.Tree = tq"${sing_(c)}.`true`"
         val f: c.Tree = tq"${sing_(c)}.`false`"
 
-        val res = bs.dropWhile(_ == '0').reverse.map {
+        bs.dropWhile(_ == '0').reverse.map {
             case '1' => t
             case '0' => f
             case w => CompileError.illegalArgument(c)(w.toString + " is illformed")
         }.foldRight(nil) { (tf, res) =>
             AppliedTypeTree(cons, List(tf, res))
         }
-
-        res
     }
 }

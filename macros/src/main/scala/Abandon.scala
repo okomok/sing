@@ -12,11 +12,11 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object Abandon {
-    def apply(x: Any): Unit = macro impl
+object Abandon extends UntypedImpl {
+    def apply(x: String): Unspecified = macro untyped_impl
 
-    def impl(c: Context)(x: c.Tree): c.Expr[Unit] = {
+    override protected def untyped_impl_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._
-        LiteralUnit(c)
+        q"()"
     }
 }
