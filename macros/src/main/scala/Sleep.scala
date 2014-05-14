@@ -13,7 +13,7 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Sleep extends TypedDependentImpl1[Long] {
-    def apply(x: Long): Unit = macro dep_impl
+    def apply(x: Long): Unit = macro term_impl
 
     override protected def dep_extract(c: Context)(x: c.Tree): Long = {
         import c.universe._

@@ -117,7 +117,7 @@ package object sing {
     /**
      * Checks a type concrete, compile-error otherwise.
      */
-    def check[x](x: x): x = macro makro.Check.term_impl[x]
+    def check(x: Unspecified): Unspecified = macro makro.Check.term_impl
 
     @equivalentTo("AsT with Self")
     type New = makro.New

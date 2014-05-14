@@ -12,13 +12,9 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-// See: http://stackoverflow.com/questions/15898037/how-to-check-if-weaktypetag-or-type-represents-concrete-type
+object IsAbstract extends PredicateImpl1 {
+    def apply[x]             : Unspecified = macro term_impl_[x]
+    def apply(x: Unspecified): Unspecified = macro term_impl
 
-
-object IsAbstract extends Predicate1Impl {
-    def apply[x](x: x): Unspecified = macro term_impl[x]
-
-    override protected def impl(c: Context)(x: c.Type): Boolean = {
-        x.typeSymbol.asType.isAbstract
-    }
+    override protected def pred_type_only(c: Context)(x: c.Type): Boolean = IsAbstractType(c)(x)
 }

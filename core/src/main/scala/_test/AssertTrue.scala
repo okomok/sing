@@ -15,12 +15,12 @@ import makro._
 
 private[sing]
 object AssertTrue extends AssertImpl1 {
-    override protected def inType(c: Context)(x: c.Type): AssertResult = {
+    override protected def assert_type_only(c: Context)(x: c.Type): AssertResult = {
         import c.universe._
         if (x =:= weakTypeOf[`true`]) {
             AssertSuccess
         } else {
-            AssertFailure(show(x.dealias) + " is not `true`.")
+            AssertFailure(show(x.dealias) + " required to be `true`.")
         }
     }
 }
@@ -28,12 +28,12 @@ object AssertTrue extends AssertImpl1 {
 
 private[sing]
 object AssertFalse extends AssertImpl1 {
-    override protected def inType(c: Context)(x: c.Type): AssertResult = {
+    override protected def assert_type_only(c: Context)(x: c.Type): AssertResult = {
         import c.universe._
         if (x =:= weakTypeOf[`false`]) {
             AssertSuccess
         } else {
-            AssertFailure(show(x.dealias) + " is not `false`.")
+            AssertFailure(show(x.dealias) + " required to be `false`.")
         }
     }
 }

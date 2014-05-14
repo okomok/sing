@@ -13,6 +13,7 @@ import com.github.okomok.sing.makro._
 class AssertEqTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
+        AssertEq[Int, Int]
     }
 
 }

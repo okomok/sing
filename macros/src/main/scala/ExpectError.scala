@@ -14,9 +14,9 @@ import scala.reflect.macros.TypecheckException
 
 
 object ExpectError {
-    def apply(r: String)(x: String): Unit = macro impl
+    def apply(r: String)(x: String): Unit = macro term_impl
 
-    def impl(c: Context)(r: c.Tree)(x: c.Tree): c.Tree = {
+    def term_impl(c: Context)(r: c.Tree)(x: c.Tree): c.Tree = {
         import c.universe._
 
         val rgx = ExtractString(c)(r)

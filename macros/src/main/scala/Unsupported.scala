@@ -13,7 +13,7 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Unsupported extends TypeThrow {
-    def apply(x: String): Unspecified = macro dep_impl
+    def apply(x: String): Unspecified = macro term_impl
 
     override protected def what(c: Context): c.Tree = {
         import c.universe._

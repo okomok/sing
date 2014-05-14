@@ -15,17 +15,10 @@ trait DependentImpl1 {
     protected def dep_term_impl(c: Context)(x: c.Tree): c.Tree
     protected def dep_type_impl(c: Context)(x: c.Tree): c.Tree
 
-    final def dep_impl(c: Context)(x: c.Tree): c.Tree = {
+    final def term_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._
 
         val v = dep_term_impl(c)(x)
-        val t = dep_type_impl(c)(x)
-
-        q"""
-            new ${here(c)}.DependentType {
-                override  val apply: apply = $v
-                override type apply        = $t
-            }
-        """
+        q"${here(c)}.DependentType($v)"
     }
 }

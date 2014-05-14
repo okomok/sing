@@ -13,44 +13,40 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Echo extends AssertImpl1 {
-    def apply[x]: Unit       = macro term_impl_[x]
-    def apply[x](x: x): Unit = macro term_impl[x]
+    def apply[x]             : Unit = macro term_impl_[x]
+    def apply(x: Unspecified): Unit = macro term_impl
 
-    override protected def inTerm(c: Context)(xx: Duo[c.type]): AssertResult = {
+    override protected def assert_term_impl(c: Context)(x: c.Tree): AssertResult = {
         import c.universe._
 
-        val x = xx.term.
-            tree // removes "Expr[]".
-        val _x = xx.tpe.dealias
-
-        c.echo(NoPosition, show(x) + ": " + show(_x))
+        c.echo(NoPosition, show(x) + ": " + show(x.tpe.dealias))
         AssertSuccess
     }
 
-    override protected def inType(c: Context)(x: c.Type): AssertResult = {
+    override protected def assert_type_impl(c: Context)(x: c.Tree): AssertResult = {
         import c.universe._
 
-        c.echo(NoPosition, show(x.dealias))
+        c.echo(NoPosition, show(x.tpe.dealias))
         AssertSuccess
     }
 }
 
 
 object EchoRaw extends AssertImpl1 {
-    def apply[x]: Unit       = macro term_impl_[x]
-    def apply[x](x: x): Unit = macro term_impl[x]
+    def apply[x]             : Unit = macro term_impl_[x]
+    def apply(x: Unspecified): Unit = macro term_impl
 
-    override protected def inTerm(c: Context)(xx: Duo[c.type]): AssertResult = {
+    override protected def assert_term_impl(c: Context)(x: c.Tree): AssertResult = {
         import c.universe._
 
-        c.echo(NoPosition, showRaw(xx.term) + ": " + showRaw(xx.tpe.dealias))
+        c.echo(NoPosition, showRaw(x) + ": " + showRaw(x.tpe.dealias))
         AssertSuccess
     }
 
-    override protected def inType(c: Context)(x: c.Type): AssertResult = {
+    override protected def assert_type_impl(c: Context)(x: c.Tree): AssertResult = {
         import c.universe._
 
-        c.echo(NoPosition, showRaw(x.dealias))
+        c.echo(NoPosition, showRaw(x.tpe.dealias))
         AssertSuccess
     }
 }

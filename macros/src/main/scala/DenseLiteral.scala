@@ -13,7 +13,7 @@ import scala.reflect.macros.whitebox.Context
 
 
 object DenseLiteral extends TypedDependentImpl1[Int] {
-    def apply(x: Int): Unspecified = macro dep_impl
+    def apply(x: Int): Unspecified = macro term_impl
 
     override protected def dep_extract(c: Context)(x: c.Tree): Int = ExtractNat(c)(x)
 

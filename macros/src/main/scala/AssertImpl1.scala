@@ -12,47 +12,31 @@ import scala.reflect.macros.whitebox.Context
 
 
 trait AssertImpl1 {
-    protected def inTerm(c: Context)(xx: Duo[c.type]): AssertResult = inType(c)(xx.tpe)
+    protected def assert_type_only(c: Context)(x: c.Type): AssertResult = ???
+    protected def assert_term_impl(c: Context)(x: c.Tree): AssertResult = assert_type_only(c)(x.tpe)
+    protected def assert_type_impl(c: Context)(x: c.Tree): AssertResult = assert_type_only(c)(x.tpe)
 
-    protected def inType(c: Context)(x: c.Type): AssertResult
-
-    final def term_impl_[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Expr[Unit] = {
+    final def term_impl_[x](c: Context)(implicit x: c.WeakTypeTag[x]): c.Tree = {
         import c.universe._
-
-        _type_impl(c)(tx)
-        LiteralUnit(c)
+        type_impl(c)(TypeTree(x.tpe))
+        q"()"
     }
 
-    final def term_impl[x](c: Context)(x: c.Expr[x])(implicit tx: c.WeakTypeTag[x]): c.Expr[Unit] = {
+    final def term_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._
 
-        _term_impl(c)(x)(tx)
-        LiteralUnit(c)
-    }
-
-    final def type_impl[x](c: Context)(implicit tx: c.WeakTypeTag[x]): c.Tree = {
-        import c.universe._
-
-        _type_impl(c)(tx)
-        tq"_root_.scala.Unit"
-    }
-
-    final def _type_impl[x](c: Context)(tx: c.WeakTypeTag[x]): Unit = {
-        import c.universe._
-
-        inType(c)(tx.tpe) match {
+        assert_term_impl(c)(x) match {
             case AssertFailure(msg) => CompileError.assertError(c)(msg)
-            case _ => ()
+            case _ => q"()"
         }
     }
 
-    final def _term_impl[x](c: Context)(x: c.Expr[x])(tx: c.WeakTypeTag[x]): Unit = {
+    final def type_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._
 
-        val xx = Duo[c.type](x, tx.tpe)
-        inTerm(c)(xx) match {
+        assert_type_impl(c)(x) match {
             case AssertFailure(msg) => CompileError.assertError(c)(msg)
-            case _ => ()
+            case _ => tq"_root_.scala.Unit"
         }
     }
 }

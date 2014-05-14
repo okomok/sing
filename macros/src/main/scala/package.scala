@@ -9,5 +9,7 @@ package sing
 
 
 package object makro {
+
     type Unspecified = scala.Any
+
 }

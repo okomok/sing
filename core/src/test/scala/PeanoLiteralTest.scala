@@ -19,16 +19,16 @@ class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         val _bs = Peano_(3)
-         val bs: bs = _bs.apply
-        type bs     = _bs.apply
+         val bs: bs = _bs.self
+        type bs     = _bs.self
         assertEq(bs, Succ(Succ(Succ(Zero))))
         assertEq[bs, Succ[Succ[Succ[Zero]]]]
     }
 
     def testNil {
         val _bs = Peano_(0)
-         val bs: bs = _bs.apply
-        type bs     = _bs.apply
+         val bs: bs = _bs.self
+        type bs     = _bs.self
         assertEq(bs, Zero)
         assertEq[bs, Zero]
     }
@@ -45,7 +45,7 @@ class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testTrivial2 {
-         val bs = Peano_(42).apply
+         val bs = Peano_(42).self
          JAssert.assertEquals(42, bs.unsing)
     }
 }

@@ -16,11 +16,11 @@ import makro._
 
 private[sing]
 object AssertEqual extends AssertImpl2 {
-    override protected def inTerm(c: Context)(xx: Duo[c.type], yy: Duo[c.type]): AssertResult = {
-        import c.universe._
+    def apply[x, y]                          : Unit = macro term_impl_[x, y]
+    def apply(x: Unspecified, y: Unspecified): Unit = macro term_impl
 
-        val x = xx.term
-        val y = yy.term
+    override protected def assert_term_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = {
+        import c.universe._
 
         val expr =  q"${sing_(c)}.Test.assertTrue($x.equal($y))"
 
@@ -34,18 +34,18 @@ object AssertEqual extends AssertImpl2 {
         }
     }
 
-    override protected def inType(c: Context)(x: c.Type, y: c.Type): AssertResult = {
+    override protected def assert_type_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = {
         import c.universe._
 
         // Note a type-tree isn't checkable.
-        val expr = q"${sing_(c)}.Test.place[ ${sing_(c)}.Test.assertTrue[$x#equal[$y]] ]"
+        val expr = q"${sing_(c)}.Test.assertTrue[$x#equal[$y]]"
 
         try {
             c.typecheck(expr)
             AssertSuccess
         } catch {
             case e: TypecheckException if (e.getMessage.matches(CompileError.AssertError)) => {
-                AssertFailure(show(x.dealias) + " is not equal to " + show(y.dealias))
+                AssertFailure(show(x.tpe.dealias) + " is required to be equal to " + show(y.tpe.dealias))
             }
         }
     }
@@ -54,11 +54,11 @@ object AssertEqual extends AssertImpl2 {
 
 private[sing]
 object AssertNequal extends AssertImpl2 {
-    override protected def inTerm(c: Context)(xx: Duo[c.type], yy: Duo[c.type]): AssertResult = {
-        import c.universe._
+    def apply[x, y]                          : Unit = macro term_impl_[x, y]
+    def apply(x: Unspecified, y: Unspecified): Unit = macro term_impl
 
-        val x = xx.term
-        val y = yy.term
+    override protected def assert_term_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = {
+        import c.universe._
 
         val expr =  q"${sing_(c)}.Test.assertTrue($x.nequal($y))"
 
@@ -67,23 +67,23 @@ object AssertNequal extends AssertImpl2 {
             AssertSuccess
         } catch {
             case e: TypecheckException if (e.getMessage.matches(CompileError.AssertError)) => {
-                AssertFailure(show(x) + " is equal to " + show(y))
+                AssertFailure(show(x) + " is not equal to " + show(y))
             }
         }
     }
 
-    override protected def inType(c: Context)(x: c.Type, y: c.Type): AssertResult = {
+    override protected def assert_type_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = {
         import c.universe._
 
         // Note a type-tree isn't checkable.
-        val expr = q"${sing_(c)}.Test.place[ ${sing_(c)}.Test.assertTrue[$x#nequal[$y]] ]"
+        val expr = q"${sing_(c)}.Test.assertTrue[$x#nequal[$y]]"
 
         try {
             c.typecheck(expr)
             AssertSuccess
         } catch {
             case e: TypecheckException if (e.getMessage.matches(CompileError.AssertError)) => {
-                AssertFailure(show(x.dealias) + " is equal to " + show(y.dealias))
+                AssertFailure(show(x.tpe.dealias) + " is required not to be equal to " + show(y.tpe.dealias))
             }
         }
     }

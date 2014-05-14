@@ -13,7 +13,7 @@ import scala.reflect.macros.whitebox.Context
 
 
 object BinaryLiteral extends TypedDependentImpl1[String] {
-    def apply(x: String): Unspecified = macro dep_impl
+    def apply(x: String): Unspecified = macro term_impl
 
     override protected def dep_extract(c: Context)(x: c.Tree): String = ExtractString(c)(x)
 

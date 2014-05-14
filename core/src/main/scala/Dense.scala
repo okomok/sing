@@ -97,12 +97,12 @@ sealed class DNil extends AsDense {
     override  def unsing: unsing = 0
 
     private[sing] lazy val _head = makro.NoSuchElement("DNil.head")
-    override  def head: head = _head.apply
-    override type head       = _head.apply
+    override  def head: head = _head.self
+    override type head       = _head.self
 
     private[sing] lazy val _tail = makro.NoSuchElement("DNil.tail")
-    override  def tail: tail = _tail.apply
-    override type tail       = _tail.apply
+    override  def tail: tail = _tail.self
+    override type tail       = _tail.self
 
     override  def size: size = Zero
     override type size       = Zero
@@ -114,8 +114,8 @@ sealed class DNil extends AsDense {
     override type increment            = DCons[`true`, self]
 
     private[sing] lazy val _decrement = makro.Unsupported("DNil.decrement")
-    override  def decrement: decrement = _decrement.apply
-    override type decrement            = _decrement.apply
+    override  def decrement: decrement = _decrement.self
+    override type decrement            = _decrement.self
 
     override  def times[that <: Nat](that: that): times[that] = self
     override type times[that <: Nat]                          = self

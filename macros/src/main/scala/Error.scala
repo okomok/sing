@@ -13,12 +13,12 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Error {
-     def apply: Unit = macro term_impl
+    def apply: Unit = macro term_impl
 
-    def term_impl(c: Context): c.Expr[Unit] = {
+    def term_impl(c: Context): c.Tree = {
         import c.universe._
         _impl(c)
-        LiteralUnit(c)
+        q"()"
     }
 
     def type_impl(c: Context): c.Tree = {
@@ -29,6 +29,6 @@ object Error {
 
     private def _impl(c: Context) {
         import c.universe._
-        c.abort(c.enclosingPosition, "compile-error expectedly.")
+        c.abort(c.enclosingPosition, "compile-error expectedly")
     }
 }

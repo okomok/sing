@@ -9,10 +9,19 @@ package sing.makro
 
 
 trait DependentType {
-    // `this.type` seems broken, so we define...
-     val self: self = this
-    type self       = this.type
+    // Never override as `val` to keep it from dependent.
+     def self: self
+    type self
+}
 
-     def apply: apply
-    type apply
+
+object DependentType {
+    type Of[x] = DependentType {
+        type self = x
+    }
+
+    def apply[x](x: x): Of[x] = new DependentType {
+        override  def self: self = x
+        override type self       = x
+    }
 }

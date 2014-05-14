@@ -30,6 +30,6 @@ trait TypeThrow extends DependentImpl1 {
         tq"""
             _root_.scala.Nothing with ${what(c)}
         """
-        // with ${ConstantTypeOf.impl(c)(msg)}
+        // with ${ConstantTypeOf.term_impl(c)(msg)}
     }
 }

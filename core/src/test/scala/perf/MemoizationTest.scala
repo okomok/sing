@@ -28,7 +28,7 @@ trait MemoizationTest {
                 dummy[FastFibonacci.fibonacci[N]]
             """}
         )
-        type diff = _diff.apply
+        type diff = _diff.self
        // echo[diff]
     }
 

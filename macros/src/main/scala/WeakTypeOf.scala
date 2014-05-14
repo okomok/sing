@@ -13,7 +13,7 @@ import scala.reflect.macros.whitebox.Context
 
 
 object WeakTypeOf extends DependentImpl1 {
-    def apply(x: Any): Unspecified = macro dep_impl
+    def apply(x: Unspecified): Unspecified = macro term_impl
 
     override protected def dep_term_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._

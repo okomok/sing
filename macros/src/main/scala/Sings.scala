@@ -14,9 +14,9 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Sings {
-//  type apply = macro impl
+//  type apply = macro term_impl
 
-    def impl(c: Context): c.Tree = {
+    def term_impl(c: Context): c.Tree = {
         import c.universe._
 
         val Template(parents, self, body) = c.enclosingTemplate
