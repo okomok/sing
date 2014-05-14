@@ -1,11 +1,10 @@
 
 
-// Copyright Shunsuke Sogame 2008-2013.
+// Copyright Shunsuke Sogame 2008-2014.
 // Distributed under the New BSD license.
 
 
-package com.github.okomok
-package sing.makro
+package com.github.okomok.sing.makro
 
 
 // See: http://stackoverflow.com/questions/16267771/how-to-convert-a-seqbyte-into-an-arrayboolean-representing-each-bit-in-scala

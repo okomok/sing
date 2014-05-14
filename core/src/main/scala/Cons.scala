@@ -1,11 +1,10 @@
 
 
-// Copyright Shunsuke Sogame 2008-2013.
+// Copyright Shunsuke Sogame 2008-2014.
 // Distributed under the New BSD license.
 
 
-package com.github.okomok
-package sing
+package com.github.okomok.sing
 
 
 final case class Cons[x <: Any, xs <: List](override val head: x, override val tail: xs) extends AsList {

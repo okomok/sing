@@ -1,11 +1,10 @@
 
 
-// Copyright Shunsuke Sogame 2008-2013.
+// Copyright Shunsuke Sogame 2008-2014.
 // Distributed under the New BSD license.
 
 
-package com.github.okomok
-package sing
+package com.github.okomok.sing
 
 
 object Any extends AsKind {
@@ -20,7 +19,7 @@ object Any extends AsKind {
 trait Any extends scala.Equals with makro.DependentType {
 
     @Annotation.returnThis
-    final override def self: self = this.asInstanceOf[self]
+    final val self: self = this.asInstanceOf[self]
     type self <: Any
 
      def kind: kind = makro.Unsupported("Any.kind").self

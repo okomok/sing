@@ -1,6 +1,6 @@
 
 
-// Copyright Shunsuke Sogame 2008-2013.
+// Copyright Shunsuke Sogame 2008-2014.
 // Distributed under the New BSD license.
 
 

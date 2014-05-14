@@ -1,11 +1,10 @@
 
 
-// Copyright Shunsuke Sogame 2008-2013.
+// Copyright Shunsuke Sogame 2008-2014.
 // Distributed under the New BSD license.
 
 
-package com.github.okomok
-package sing
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
@@ -25,7 +24,7 @@ object Test {
     def place[x]: Unit = ()
 
     /**
-     * Asserts that a condition is true. `c` represents "Concrete".
+     * Asserts that a condition is true.
      */
     def assertTrue[x]             : Unit = macro AssertTrue.term_impl_[x]
     def assertTrue(x: Unspecified): Unit = macro AssertTrue.term_impl

@@ -1,13 +1,12 @@
 
 
-// Copyright Shunsuke Sogame 2008-2013.
+// Copyright Shunsuke Sogame 2008-2014.
 // Distributed under the New BSD license.
 
 // Copyright Daan Leijen 2002.
 
 
-package com.github.okomok
-package sing
+package com.github.okomok.sing
 
 
 import _bstree._
