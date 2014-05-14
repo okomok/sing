@@ -14,7 +14,7 @@ import scala.reflect.macros.whitebox.Context
 trait Predicate2Impl {
     protected def impl(c: Context)(x: c.Type, y: c.Type): Boolean
 
-    final def term_impl[x, y](c: Context)(x: c.Expr[x], y: c.Expr[y])(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Expr[Unspecified] = {
+    final def term_impl_[x, y](c: Context)(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Expr[Unspecified] = {
         import c.universe._
 
         val res = if (_impl(c)(tx, ty)) {
@@ -24,6 +24,10 @@ trait Predicate2Impl {
         }
 
         c.Expr[Unspecified](res)
+    }
+
+    final def term_impl[x, y](c: Context)(x: c.Expr[x], y: c.Expr[y])(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Expr[Unspecified] = {
+        term_impl_(c)(tx, ty)
     }
 
     final def type_impl[x, y](c: Context)(implicit tx: c.WeakTypeTag[x], ty: c.WeakTypeTag[y]): c.Tree = {

@@ -19,30 +19,30 @@ import scala.language.existentials
 
 class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
+    final val badSuccess = "1"
+
+    final val goodError = "wow"
+
+    final val badSuccess2 = "expectError(NotFound) { goodError }"
+
     def testTrivial() {
 
-        expectError(NotFound) {"""
+        expectError(NotFound) {
+            goodError
+        }
+
+        expectError(UnexpectedCompile) {"""
             // good error
-            woo
+            expectError(AnyError) {
+                badSuccess
+            }
         """}
 
         expectError(UnexpectedCompile) {"""
             // good error
-            expectError(AnyError) {"""
-                // bad success
-                1
-            """}
-        """}
-
-        expectError(UnexpectedCompile) {"""
-            // good error
-            expectError(AnyError) {"""
-                // bad success
-                expectError(NotFound) {"""
-                    // good error
-                    wow
-                """}
-            """}
+            expectError(AnyError) {
+                badSuccess2
+            }
         """}
 
         expectError(AnyError) {"""
@@ -51,30 +51,39 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         type no = Nothing
 
-        assertTrue[isEq[no, Nothing]]
+        val isEq_no_Nothing = isEq[no, Nothing]
+
+        assertTrue[isEq_no_Nothing.self]
 
         expectError(AssertError) {"""
-            assertTrue[isEq[Int, Nothing]]
+            val isEq_Int_Nothing = isEq[Int, Nothing]
+            assertTrue[isEq_Int_Nothing.self]
         """}
 
-        assertTrue[conforms[Int, AnyVal]]
+        val conformes_Int_AnyVal = conforms[Int, AnyVal]
+
+        assertTrue[conformes_Int_AnyVal.self]
 
         expectError(AssertError) {"""
             assertConforms[AnyVal, Int]
         """}
 
-        assertFalse[conforms[AnyVal, Int]]
+        val conforms_AnyVal_Int = conforms[AnyVal, Int]
+
+        assertFalse[conforms_AnyVal_Int.self]
 
         expectError(AssertError) {"""
-            assertFalse[conforms[Int, AnyVal]]
+            assertFalse[conformes_Int_AnyVal.self]
         """}
 
         type i = Int
 
-        assertFalse[isEq[AnyVal, i]]
+        val isEq_AnyVal_i = isEq[AnyVal, i]
+        assertFalse[isEq_AnyVal_i.self]
 
         expectError(AssertError) {"""
-            assertFalse[isEq[i, Int]]
+            val isEq_i_Int = isEq[i, Int]
+            assertFalse[isEq_i_Int.self]
         """}
 
         def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
@@ -83,35 +92,36 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         expectError(AbstractType) {"""
             check(foo(Nil))
         """}
-
+/*
         expectError(AbstractType) {"""
             dummy[ check[foo[Nil]] ]
         """}
-
-        val x: x = check(Some(Dense._2).get)
-        type x   = check[Some[Dense._2]#get]
+*/
+        val _x = check(Some(Dense._2).get)
+        val x = _x.self
+        type x = _x.self //check[Some[Dense._2]#get]
 
         expectError(AssertError) {"""
             assertEq(Dense._3, x)
         """}
+
         expectError(AssertError) {"""
             assertEq[Dense._3, x]
         """}
-
-
+/*
         expectError(AssertError) {"""
             place[ assertEq[Char, Int] ]
         """}
-
+*/
         expectError(NotFound) {"""
             // dummy[ assertEq[Char, Int] ] // why not error?
             wow
         """}
-
+/*
         expectError(AssertError) {"""
             place[ assertFalse[conforms[Int, Int]] ]
         """}
-
+*/
         expectError(AnyError) {"""
             place[error]
         """}
@@ -130,8 +140,9 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
          def foo[x <: Nat](x: x): foo[x] = `if`(id(x).equal(Dense._2), Throw(new java.lang.Error("doh")), Const(id(x).increment)).apply
         type foo[x <: Nat]               = `if`[id[x]#equal[Dense._2], Throw                            , Const[id[x]#increment]]#apply
 
-        val x: x = check(foo(Dense._3))
-        type x   = check[foo[Dense._3]]
+        val _x = check(foo(Dense._3))
+        val x = _x.self
+        type x = _x.self // = check[foo[Dense._3]]
 
         expectError(NothingType) {"""
             check(foo(Dense._2))

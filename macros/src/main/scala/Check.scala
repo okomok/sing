@@ -33,10 +33,12 @@ object Check {
         import c.universe._
 
         val t = tx.tpe
-        if (IsAbstract._impl(c)(tx)) {
-            CompileError.abstractType(c)(show(t) + ", which is expanded to " + show(t.dealias))
-        } else if (t <:< weakTypeOf[Nothing]) {
+
+        // order matters
+        if (t <:< weakTypeOf[Nothing]) {
             CompileError.nothingType (c)(show(t) + ", which is expanded to " + show(t.dealias))
+        } else if (IsAbstract._impl(c)(tx)) {
+            CompileError.abstractType(c)(show(t) + ", which is expanded to " + show(t.dealias))
         }
     }
 }
