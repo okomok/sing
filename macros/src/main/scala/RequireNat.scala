@@ -14,7 +14,7 @@ import scala.reflect.macros.whitebox.Context
 private object RequireNat {
     def apply(c: Context)(i: Int): Unit = {
         if (i < 0) {
-            CompileError.illegalArgument(c)(i.toString + "is negative.")
+            CompileError.illegalArgument(c)(i.toString + " is required not to be negative.")
         }
     }
 }

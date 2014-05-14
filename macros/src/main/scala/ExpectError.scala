@@ -24,7 +24,7 @@ object ExpectError {
 
         val rgx = r match {
             case Expr(Literal(Constant(s: String))) => s
-            case _ => CompileError.illegalArgument(c)(show(r) + " is not constant literal.")
+            case _ => CompileError.illegalArgument(c)(show(r) + " is required to be constant literal.")
         }
 
         val Expr(Literal(Constant(code: String))) = x

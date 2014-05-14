@@ -22,7 +22,7 @@ object AssertEq extends Assert2Impl {
         if (x =:= y) {
             AssertSuccess
         } else {
-            AssertFailure(show(x.dealias) + " is not equivalent to " + show(y.dealias))
+            AssertFailure(show(x.dealias) + " is required to be equivalent to " + show(y.dealias))
         }
     }
 }
@@ -38,7 +38,7 @@ object AssertNeq extends Assert2Impl {
         if (!(x =:= y)) {
             AssertSuccess
         } else {
-            AssertFailure(show(x.dealias) + " is equivalent to " + show(y.dealias))
+            AssertFailure(show(x.dealias) + " is required not to be equivalent to " + show(y.dealias))
         }
     }
 }
