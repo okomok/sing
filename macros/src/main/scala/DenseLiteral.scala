@@ -11,19 +11,17 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object DenseLiteral extends TypedDependentImpl1[Int] {
+object DenseLiteral extends DependentImpl1 {
     def apply(x: Int): Unspecified = macro term_impl
 
-    override protected def dep_extract(c: Context)(x: c.Tree): Int = ExtractNat(c)(x)
-
-    override protected def dep_term_impl(c: Context)(x: Int): c.Tree = {
+    override protected def dep_term_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._
-        term_fromBinaryString(c)(Integer.toBinaryString(x))
+        term_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
     }
 
-    override protected def dep_type_impl(c: Context)(x: Int): c.Tree = {
+    override protected def dep_type_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._
-        type_fromBinaryString(c)(Integer.toBinaryString(x))
+        type_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
     }
 
     // "0010..." --> ...DCons(`false`, DCons(`true`, DNil))

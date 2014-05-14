@@ -12,9 +12,9 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Abandon extends UntypedImpl {
-    def apply(x: String): Unspecified = macro untyped_impl
+    def apply(x: String): Unspecified = macro term_impl
 
-    override protected def untyped_impl_impl(c: Context)(x: c.Tree): c.Tree = {
+    override protected def untyped_term_impl(c: Context)(x: c.Tree): c.Tree = {
         import c.universe._
         q"()"
     }
