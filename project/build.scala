@@ -19,6 +19,9 @@ object build extends Build {
         , parallelExecution := false
         , publishArtifact in packageDoc := false
 //        , offline := true
+
+        , resolvers += Resolver.sonatypeRepo("releases")
+        , addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.0" cross CrossVersion.full)
     )
 
     lazy val root = Project(

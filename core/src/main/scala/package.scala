@@ -119,9 +119,6 @@ package object sing {
      */
     def check(x: Unspecified): Unspecified = macro makro.Check.term_impl
 
-    @equivalentTo("AsT with Self")
-    type New = makro.New
-
 
 // assertions
 

@@ -7,7 +7,14 @@
 package com.github.okomok.sing
 
 
+import scala.annotation.StaticAnnotation
+import scala.language.experimental.macros
+import makro.Unspecified
+
+
 /**
- * Specifies a singmethod.
+ * Annotation to make a singmethod from typemethod
  */
-class singmethod extends scala.annotation.StaticAnnotation
+class singmethod extends StaticAnnotation {
+    def macroTransform(annottees: scala.Any*): Unspecified = macro makro.SingMethod.annot_impl
+}

@@ -9,32 +9,29 @@ package pending
 
 
 import com.github.okomok.sing
-import sing.{Nat, AsFunction1, makro, Any, Nil, ::, singmethod, Boolean, `true`}
+import sing._
 import junit.framework.Assert._
 import sing.Dense.Literal._
 
 
-import scala.language.existentials
-
-
-package object PPP extends makro.Sings.apply {
+package object PPP {
 
     @singmethod
     type id[x] = x
+
 }
 
-
-
-class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
+class SingMethodTest extends org.scalatest.junit.JUnit3Suite {
 
     class dummyAnno extends scala.annotation.StaticAnnotation
 
     @singmethod
     type id[x] = PPP.id[x]
 
-    type singmethodAlias = singmethod
+//    Not supported?
+//    type singmethodAlias = singmethod
 
-    trait AbsFun extends AsFunction1 with makro.Sings.apply {
+    trait AbsFun extends AsFunction1 {
         @singmethod @deprecated("hello", "1.0")
         type foo[n <: Nat, m <: Boolean] <: Nat
 
@@ -42,7 +39,7 @@ class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
         type v <: Nat
     }
 
-    object Inc extends AbsFun with makro.Sings.apply {
+    object Inc extends AbsFun {
         type self = Inc.type
 
         @singmethod @dummyAnno
@@ -53,7 +50,7 @@ class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
 
         def foobar() = Unit
 
-        @singmethodAlias
+        @singmethod
         override type v = _3
     }
 
@@ -61,18 +58,19 @@ class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
         val k: Inc.type = Inc
     }
 
-    object CallFromObj extends AsFunction1 with makro.Sings.apply {
+    object CallFromObj extends AsFunction1 {
+        type self = CallFromObj.type
         @singmethod
         override type apply[n <: Any] = K.k.apply[n]
     }
-
+/*
     @singmethod
-    class foo[m <: Nat] extends AsFunction1 with makro.Sings.apply {
+    class foo[m <: Nat] extends AsFunction1 {
         @singmethod
         override type apply[n <: Any] = n#asNat#plus[m]
     }
-
-    object CallFromPackage extends AsFunction1 with makro.Sings.apply {
+*/
+    object CallFromPackage extends AsFunction1 {
         @singmethod
         override type apply[n <: Any] = id[com.github.okomok.sing.Cons[n, Nil]]
     }
@@ -89,18 +87,10 @@ class SingsTest extends org.scalatest.junit.JUnit3Suite with makro.Sings.apply {
 
         val m: _3 :: Nil = CallFromPackage(_3)
 
-        val q: foo[_3]#apply[_2] = foo(_3)(_2)
-        val z: _5 = q
+//        val q: foo[_3]#apply[_2] = foo(_3)(_2)
+//        val z: _5 = q
 
         ()
     }
-
-/* hmmm, two macros crash.
-    object Inc3 extends makro.Self.apply with makro.Sings.apply {
-        @singmethod @deprecated("hello", "1.0")
-        def apply(n: Any) = n.asNat.increment.plus(_2)
-        def foo = ()
-    }
-*/
 }
 
