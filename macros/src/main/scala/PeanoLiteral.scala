@@ -11,13 +11,15 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object PeanoLiteral extends DependentImpl1 {
-    def apply(x: Int): Unspecified = macro term_impl
+object PeanoLiteral {
+    def apply(x: Int): Unspecified = macro PeanoLiteralImpl.term_impl
+}
+
+class PeanoLiteralImpl(override val c: Context) extends DependentImpl1 {
+    import c.universe._
 
     // 2 --> Succ(Succ(Zero))
-    override protected def dep_term_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
-
+    override protected def dep_term_impl(x: c.Tree): c.Tree = {
         val zero: c.Tree = q"${sing_(c)}.Zero"
         val succ: c.Tree = q"${sing_(c)}.Succ"
 
@@ -26,9 +28,7 @@ object PeanoLiteral extends DependentImpl1 {
         }
     }
 
-    override protected def dep_type_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
-
+    override protected def dep_type_impl(x: c.Tree): c.Tree = {
         val zero: c.Tree = tq"${sing_(c)}.Zero"
         val succ: c.Tree = tq"${sing_(c)}.Succ"
 

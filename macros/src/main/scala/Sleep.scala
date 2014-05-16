@@ -11,26 +11,24 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object Sleep extends DependentImpl1 {
-    def apply(x: Long): Unit = macro term_impl
+object Sleep {
+    def apply(x: Long): Unit = macro SleepImpl.term_impl
+}
 
-    override protected def dep_term_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
+class SleepImpl(override val c: Context) extends DependentImpl1 {
+    import c.universe._
 
-        Thread.sleep(extractLong(c)(x))
+    override protected def dep_term_impl(x: c.Tree): c.Tree = {
+        Thread.sleep(extractLong(x))
         q"()"
     }
 
-    override protected def dep_type_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
-
-        Thread.sleep(extractLong(c)(x))
+    override protected def dep_type_impl(x: c.Tree): c.Tree = {
+        Thread.sleep(extractLong(x))
         tq"_root_.scala.Unit"
     }
 
-    private def extractLong(c: Context)(x: c.Tree): Long = {
-        import c.universe._
-
+    private def extractLong(x: c.Tree): Long = {
         x match {
             case Literal(Constant(ms: Long)) if (ms >= 0) => ms
             case t => CompileError.illegalArgument(c)(show(t) + " is required to be non-negative Long literal.")

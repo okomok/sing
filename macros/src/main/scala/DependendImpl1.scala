@@ -11,13 +11,14 @@ import scala.reflect.macros.whitebox.Context
 
 
 trait DependentImpl1 {
-    protected def dep_term_impl(c: Context)(x: c.Tree): c.Tree
-    protected def dep_type_impl(c: Context)(x: c.Tree): c.Tree
+    val c: Context
+    protected def dep_term_impl(x: c.Tree): c.Tree
+    protected def dep_type_impl(x: c.Tree): c.Tree
 
-    final def term_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
+    import c.universe._
 
-        val v = dep_term_impl(c)(x)
+    final def term_impl(x: c.Tree): c.Tree = {
+        val v = dep_term_impl(x)
         q"${here(c)}.DependentType($v)"
     }
 }

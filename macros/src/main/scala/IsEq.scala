@@ -11,11 +11,15 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object IsEq extends PredicateImpl2 {
-    def apply[x, y]                          : Unspecified = macro term_impl_[x, y]
-    def apply(x: Unspecified, y: Unspecified): Unspecified = macro term_impl
+object IsEq {
+    def apply[x, y]                          : Unspecified = macro IsEqImpl.term_impl_[x, y]
+    def apply(x: Unspecified, y: Unspecified): Unspecified = macro IsEqImpl.term_impl
+}
 
-    override protected def pred_type_only(c: Context)(x: c.Type, y: c.Type): Boolean = {
+class IsEqImpl(override val c: Context) extends PredicateImpl2 {
+    import c.universe._
+
+    override protected def pred_type_only(x: c.Type, y: c.Type): Boolean = {
         x <:< y && y <:< x
     }
 }

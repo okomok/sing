@@ -14,14 +14,10 @@ import scala.reflect.macros.TypecheckException
 import makro._
 
 
-private[sing]
-object AssertEqual extends AssertImpl2 {
-    def apply[x, y]                          : Unit = macro term_impl_[x, y]
-    def apply(x: Unspecified, y: Unspecified): Unit = macro term_impl
+class AssertEqualImpl(override val c: Context) extends AssertImpl2 {
+    import c.universe._
 
-    override protected def assert_term_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = {
-        import c.universe._
-
+    override protected def assert_term_impl(x: c.Tree, y: c.Tree): AssertResult = {
         val expr =  q"${sing_(c)}.Test.assertTrue($x.equal($y))"
 
         try {
@@ -34,9 +30,7 @@ object AssertEqual extends AssertImpl2 {
         }
     }
 
-    override protected def assert_type_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = {
-        import c.universe._
-
+    override protected def assert_type_impl(x: c.Tree, y: c.Tree): AssertResult = {
         // Note a type-tree isn't checkable.
         val expr = q"${sing_(c)}.Test.assertTrue[$x#equal[$y]]"
 
@@ -52,14 +46,10 @@ object AssertEqual extends AssertImpl2 {
 }
 
 
-private[sing]
-object AssertNequal extends AssertImpl2 {
-    def apply[x, y]                          : Unit = macro term_impl_[x, y]
-    def apply(x: Unspecified, y: Unspecified): Unit = macro term_impl
+class AssertNequalImpl(override val c: Context) extends AssertImpl2 {
+    import c.universe._
 
-    override protected def assert_term_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = {
-        import c.universe._
-
+    override protected def assert_term_impl(x: c.Tree, y: c.Tree): AssertResult = {
         val expr =  q"${sing_(c)}.Test.assertTrue($x.nequal($y))"
 
         try {
@@ -72,9 +62,7 @@ object AssertNequal extends AssertImpl2 {
         }
     }
 
-    override protected def assert_type_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = {
-        import c.universe._
-
+    override protected def assert_type_impl(x: c.Tree, y: c.Tree): AssertResult = {
         // Note a type-tree isn't checkable.
         val expr = q"${sing_(c)}.Test.assertTrue[$x#nequal[$y]]"
 

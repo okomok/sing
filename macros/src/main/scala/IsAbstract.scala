@@ -11,9 +11,12 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object IsAbstract extends PredicateImpl1 {
-    def apply[x]             : Unspecified = macro term_impl_[x]
-    def apply(x: Unspecified): Unspecified = macro term_impl
+object IsAbstract {
+    def apply[x]             : Unspecified = macro IsAbstractImpl.term_impl_[x]
+    def apply(x: Unspecified): Unspecified = macro IsAbstractImpl.term_impl
+}
 
-    override protected def pred_type_only(c: Context)(x: c.Type): Boolean = IsAbstractType(c)(x)
+class IsAbstractImpl(override val c: Context) extends PredicateImpl1 {
+    import c.universe._
+    override protected def pred_type_only(x: c.Type): Boolean = IsAbstractType(c)(x)
 }

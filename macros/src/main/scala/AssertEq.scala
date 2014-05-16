@@ -11,13 +11,15 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object AssertEq extends AssertImpl2 {
-    def apply[x, y]                          : Unit = macro term_impl_[x, y]
-    def apply(x: Unspecified, y: Unspecified): Unit = macro term_impl
+object AssertEq {
+    def apply[x, y]                          : Unit = macro AssertEqImpl.term_impl_[x, y]
+    def apply(x: Unspecified, y: Unspecified): Unit = macro AssertEqImpl.term_impl
+}
 
-    override protected def assert_type_only(c: Context)(x: c.Type, y: c.Type): AssertResult = {
-        import c.universe._
+class AssertEqImpl(override val c: Context) extends AssertImpl2 {
+    import c.universe._
 
+    override protected def assert_type_only(x: c.Type, y: c.Type): AssertResult = {
         if (x =:= y) {
             AssertSuccess
         } else {
@@ -27,13 +29,18 @@ object AssertEq extends AssertImpl2 {
 }
 
 
-object AssertNeq extends AssertImpl2 {
+object AssertNeq {
+    def apply[x, y]            : Unit = macro AssertNeqImpl.term_impl_[x, y]
+    def apply[x, y](x: x, y: y): Unit = macro AssertNeqImpl.term_impl
+}
+
+class AssertNeqImpl(override val c: Context) extends AssertImpl2 {
+    import c.universe._
+
     def apply[x, y]            : Unit = macro term_impl_[x, y]
     def apply[x, y](x: x, y: y): Unit = macro term_impl
 
-    override protected def assert_type_only(c: Context)(x: c.Type, y: c.Type): AssertResult = {
-        import c.universe._
-
+    override protected def assert_type_only(x: c.Type, y: c.Type): AssertResult = {
         if (!(x =:= y)) {
             AssertSuccess
         } else {

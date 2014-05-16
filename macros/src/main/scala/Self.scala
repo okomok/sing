@@ -13,13 +13,13 @@ import scala.reflect.macros.whitebox.Context
 
 
 class Self extends StaticAnnotation {
-    def macroTransform(annottees: Any*): Unspecified = macro Self.annot_impl
+    def macroTransform(annottees: Any*): Unspecified = macro SelfImpl.annot_impl
 }
 
-object Self extends AnnotationImpl {
-    override protected def annot_tree_impl(c: Context)(ts: List[c.Tree]): List[c.Tree] = {
-        import c.universe._
+class SelfImpl(override val c: Context) extends AnnotationImpl {
+    import c.universe._
 
+    override protected def annot_tree_impl(ts: List[c.Tree]): List[c.Tree] = {
         ts.flatMap {
             case TypeDef(mods, name, tparams, rhs) => {
                 val v = TermName(c.freshName())

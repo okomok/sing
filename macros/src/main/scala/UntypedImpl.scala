@@ -12,12 +12,13 @@ import scala.reflect.macros.TypecheckException
 
 
 trait UntypedImpl {
-    protected def untyped_term_impl(c: Context)(x: c.Tree): c.Tree
+    val c: Context
+    protected def untyped_term_impl(x: c.Tree): c.Tree
 
-    final def term_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
+    import c.universe._
 
+    final def term_impl(x: c.Tree): c.Tree = {
         val code = ExtractString(c)(x)
-        untyped_term_impl(c)(c.parse(code))
+        untyped_term_impl(c.parse(code))
     }
 }

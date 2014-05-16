@@ -11,13 +11,15 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object AssertConforms extends AssertImpl2 {
-    def apply[x, y]                          : Unit = macro term_impl_[x, y]
-    def apply(x: Unspecified, y: Unspecified): Unit = macro term_impl
+object AssertConforms {
+    def apply[x, y]                          : Unit = macro AssertConformsImpl.term_impl_[x, y]
+    def apply(x: Unspecified, y: Unspecified): Unit = macro AssertConformsImpl.term_impl
+}
 
-    override protected def assert_type_only(c: Context)(x: c.Type, y: c.Type): AssertResult = {
-        import c.universe._
+class AssertConformsImpl(override val c: Context) extends AssertImpl2 {
+    import c.universe._
 
+    final override protected def assert_type_only(x: c.Type, y: c.Type): AssertResult = {
         if (x <:< y) {
             AssertSuccess
         } else {

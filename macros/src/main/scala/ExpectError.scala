@@ -13,11 +13,13 @@ import scala.reflect.macros.TypecheckException
 
 
 object ExpectError {
-    def apply(r: String)(x: String): Unit = macro term_impl
+    def apply(r: String)(x: String): Unit = macro ExpectErrorImpl.term_impl
+}
 
-    def term_impl(c: Context)(r: c.Tree)(x: c.Tree): c.Tree = {
-        import c.universe._
+class ExpectErrorImpl(val c: Context) {
+    import c.universe._
 
+    final def term_impl(r: c.Tree)(x: c.Tree): c.Tree = {
         val rgx = ExtractString(c)(r)
         val code = ExtractString(c)(x)
 

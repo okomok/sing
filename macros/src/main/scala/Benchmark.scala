@@ -11,12 +11,14 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object Benchmark extends UntypedImpl {
-    def apply(x: String): Unspecified = macro term_impl
+object Benchmark {
+    def apply(x: String): Unspecified = macro BenchmarkImpl.term_impl
+}
 
-    override protected def untyped_term_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
+class BenchmarkImpl(override val c: Context) extends UntypedImpl {
+    import c.universe._
 
+    override protected def untyped_term_impl(x: c.Tree): c.Tree = {
         val start = System.currentTimeMillis
         c.typecheck(x)
         val elapsed = System.currentTimeMillis - start

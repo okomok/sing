@@ -12,10 +12,12 @@ import scala.reflect.macros.whitebox.Context
 
 
 trait AnnotationImpl {
-    final def annot_impl(c: Context)(annottees: c.Tree*): c.Tree = {
-        import c.universe._
-        Block(annot_tree_impl(c)(annottees.toList), q"()")
-    }
+    val c: Context
+    protected def annot_tree_impl(ts: List[c.Tree]): List[c.Tree]
 
-    protected def annot_tree_impl(c: Context)(ts: List[c.Tree]): List[c.Tree]
+    import c.universe._
+
+    final def annot_impl(annottees: c.Tree*): c.Tree = {
+        Block(annot_tree_impl(annottees.toList), q"()")
+    }
 }

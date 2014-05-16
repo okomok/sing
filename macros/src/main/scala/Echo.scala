@@ -11,40 +11,40 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object Echo extends AssertImpl1 {
-    def apply[x]             : Unit = macro term_impl_[x]
-    def apply(x: Unspecified): Unit = macro term_impl
+object Echo {
+    def apply[x]             : Unit = macro EchoImpl.term_impl_[x]
+    def apply(x: Unspecified): Unit = macro EchoImpl.term_impl
+}
 
-    override protected def assert_term_impl(c: Context)(x: c.Tree): AssertResult = {
-        import c.universe._
+class EchoImpl(override val c: Context) extends AssertImpl1 {
+    import c.universe._
 
+    override protected def assert_term_impl(x: c.Tree): AssertResult = {
         c.echo(NoPosition, show(x) + ": " + show(x.tpe.dealias))
         AssertSuccess
     }
 
-    override protected def assert_type_impl(c: Context)(x: c.Tree): AssertResult = {
-        import c.universe._
-
+    override protected def assert_type_impl(x: c.Tree): AssertResult = {
         c.echo(NoPosition, show(x.tpe.dealias))
         AssertSuccess
     }
 }
 
 
-object EchoRaw extends AssertImpl1 {
-    def apply[x]             : Unit = macro term_impl_[x]
-    def apply(x: Unspecified): Unit = macro term_impl
+object EchoRaw {
+    def apply[x]             : Unit = macro EchoRawImpl.term_impl_[x]
+    def apply(x: Unspecified): Unit = macro EchoRawImpl.term_impl
+}
 
-    override protected def assert_term_impl(c: Context)(x: c.Tree): AssertResult = {
-        import c.universe._
+class EchoRawImpl(override val c: Context) extends AssertImpl1 {
+    import c.universe._
 
+    override protected def assert_term_impl(x: c.Tree): AssertResult = {
         c.echo(NoPosition, showRaw(x) + ": " + showRaw(x.tpe.dealias))
         AssertSuccess
     }
 
-    override protected def assert_type_impl(c: Context)(x: c.Tree): AssertResult = {
-        import c.universe._
-
+    override protected def assert_type_impl(x: c.Tree): AssertResult = {
         c.echo(NoPosition, showRaw(x.tpe.dealias))
         AssertSuccess
     }

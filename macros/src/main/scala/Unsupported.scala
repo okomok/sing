@@ -11,11 +11,14 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object Unsupported extends TypeThrow {
-    def apply(x: String): Unspecified = macro term_impl
+object Unsupported {
+    def apply(x: String): Unspecified = macro UnsupportedImpl.term_impl
+}
 
-    override protected def what(c: Context): c.Tree = {
-        import c.universe._
+class UnsupportedImpl(override val c: Context) extends TypeThrowImpl {
+    import c.universe._
+
+    override protected def what: c.Tree = {
         tq"_root_.java.lang.UnsupportedOperationException"
     }
 }

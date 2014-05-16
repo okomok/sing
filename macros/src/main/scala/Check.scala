@@ -12,27 +12,18 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Check {
-    def apply[x]             : Unspecified = macro term_impl_[x]
-    def apply(x: Unspecified): Unspecified = macro term_impl
+    def apply[x]             : Unspecified = macro CheckImpl.term_impl_[x]
+    def apply(x: Unspecified): Unspecified = macro CheckImpl.term_impl
+}
 
-    final def term_impl_[x](c: Context)(implicit x: c.WeakTypeTag[x]): c.Tree = {
-        import c.universe._
-        type_impl(c)(TypeTree(x.tpe))
-    }
+class CheckImpl(val c: Context) {
+    import c.universe._
 
-    final def term_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
-        _type_only(c)(x)
-    }
+    final def term_impl_[x](implicit x: c.WeakTypeTag[x]): c.Tree = type_impl(TypeTree(x.tpe))
+    final def term_impl(x: c.Tree): c.Tree = _type_only(x)
+    final def type_impl(x: c.Tree): c.Tree = _type_only(x)
 
-    final def type_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
-        _type_only(c)(x)
-    }
-
-    private def _type_only(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
-
+    private def _type_only(x: c.Tree): c.Tree = {
         // order matters
         val t = x.tpe
         if (t <:< weakTypeOf[Nothing]) {

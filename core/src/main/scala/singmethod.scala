@@ -16,5 +16,5 @@ import makro.Unspecified
  * Annotation to make a singmethod from typemethod
  */
 class singmethod extends StaticAnnotation {
-    def macroTransform(annottees: scala.Any*): Unspecified = macro makro.SingMethod.annot_impl
+    def macroTransform(annottees: scala.Any*): Unspecified = macro makro.SingMethodImpl.annot_impl
 }

@@ -11,29 +11,27 @@ import scala.reflect.macros.whitebox.Context
 
 
 trait AssertImpl2 {
-    protected def assert_type_only(c: Context)(x: c.Type, y: c.Type): AssertResult = ???
-    protected def assert_term_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = assert_type_only(c)(x.tpe, y.tpe)
-    protected def assert_type_impl(c: Context)(x: c.Tree, y: c.Tree): AssertResult = assert_type_only(c)(x.tpe, y.tpe)
+    val c: Context
+    protected def assert_type_only(x: c.Type, y: c.Type): AssertResult = ???
+    protected def assert_term_impl(x: c.Tree, y: c.Tree): AssertResult = assert_type_only(x.tpe, y.tpe)
+    protected def assert_type_impl(x: c.Tree, y: c.Tree): AssertResult = assert_type_only(x.tpe, y.tpe)
 
-    final def term_impl_[x, y](c: Context)(implicit x: c.WeakTypeTag[x], y: c.WeakTypeTag[y]): c.Tree = {
-        import c.universe._
-        type_impl(c)(TypeTree(x.tpe), TypeTree(y.tpe))
+    import c.universe._
+
+    final def term_impl_[x, y](implicit x: c.WeakTypeTag[x], y: c.WeakTypeTag[y]): c.Tree = {
+        type_impl(TypeTree(x.tpe), TypeTree(y.tpe))
         q"()"
     }
 
-    final def term_impl(c: Context)(x: c.Tree, y: c.Tree): c.Tree = {
-        import c.universe._
-
-        assert_term_impl(c)(x, y) match {
+    final def term_impl(x: c.Tree, y: c.Tree): c.Tree = {
+        assert_term_impl(x, y) match {
             case AssertFailure(msg) => CompileError.assertError(c)(msg)
             case _ => q"()"
         }
     }
 
-    final def type_impl(c: Context)(x: c.Tree, y: c.Tree): c.Tree = {
-        import c.universe._
-
-        assert_type_impl(c)(x, y) match {
+    final def type_impl(x: c.Tree, y: c.Tree): c.Tree = {
+        assert_type_impl(x, y) match {
             case AssertFailure(msg) => CompileError.assertError(c)(msg)
             case _ => tq"_root_.scala.Unit"
         }

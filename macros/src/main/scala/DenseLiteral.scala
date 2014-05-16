@@ -11,18 +11,8 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object DenseLiteral extends DependentImpl1 {
-    def apply(x: Int): Unspecified = macro term_impl
-
-    override protected def dep_term_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
-        term_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
-    }
-
-    override protected def dep_type_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
-        type_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
-    }
+object DenseLiteral {
+    def apply(x: Int): Unspecified = macro DenseLiteralImpl.term_impl
 
     // "0010..." --> ...DCons(`false`, DCons(`true`, DNil))
     def term_fromBinaryString(c: Context)(bs: String): c.Tree = {
@@ -57,5 +47,18 @@ object DenseLiteral extends DependentImpl1 {
         }.foldRight(nil) { (tf, res) =>
             AppliedTypeTree(cons, List(tf, res))
         }
+    }
+}
+
+class DenseLiteralImpl(override val c: Context) extends DependentImpl1 {
+    import c.universe._
+
+    override protected def dep_term_impl(x: c.Tree): c.Tree = {
+        DenseLiteral.term_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
+    }
+
+    override protected def dep_type_impl(x: c.Tree): c.Tree = {
+        import c.universe._
+        DenseLiteral.type_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
     }
 }

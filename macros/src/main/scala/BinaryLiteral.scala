@@ -11,15 +11,18 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object BinaryLiteral extends DependentImpl1 {
-    def apply(x: String): Unspecified = macro term_impl
+object BinaryLiteral  {
+    def apply(x: String): Unspecified = macro BinaryLiteralImpl.term_impl
+}
 
-    override protected def dep_term_impl(c: Context)(x: c.Tree): c.Tree = {
-        import c.universe._
+class BinaryLiteralImpl(override val c: Context) extends DependentImpl1 {
+    import c.universe._
+
+    override protected def dep_term_impl(x: c.Tree): c.Tree = {
         DenseLiteral.term_fromBinaryString(c)(ExtractString(c)(x))
     }
 
-    override protected def dep_type_impl(c: Context)(x: c.Tree): c.Tree = {
+    override protected def dep_type_impl(x: c.Tree): c.Tree = {
         import c.universe._
         DenseLiteral.type_fromBinaryString(c)(ExtractString(c)(x))
     }

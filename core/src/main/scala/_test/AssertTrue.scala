@@ -13,10 +13,10 @@ import scala.reflect.macros.whitebox.Context
 import makro._
 
 
-private[sing]
-object AssertTrue extends AssertImpl1 {
-    override protected def assert_type_only(c: Context)(x: c.Type): AssertResult = {
-        import c.universe._
+class AssertTrueImpl(override val c: Context) extends AssertImpl1 {
+    import c.universe._
+
+    override protected def assert_type_only(x: c.Type): AssertResult = {
         if (x =:= weakTypeOf[`true`]) {
             AssertSuccess
         } else {
@@ -26,10 +26,9 @@ object AssertTrue extends AssertImpl1 {
 }
 
 
-private[sing]
-object AssertFalse extends AssertImpl1 {
-    override protected def assert_type_only(c: Context)(x: c.Type): AssertResult = {
-        import c.universe._
+class AssertFalseImpl(override val c: Context) extends AssertImpl1 {
+    import c.universe._
+    override protected def assert_type_only(x: c.Type): AssertResult = {
         if (x =:= weakTypeOf[`false`]) {
             AssertSuccess
         } else {
