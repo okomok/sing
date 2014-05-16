@@ -18,14 +18,6 @@ trait PredicateImpl1 extends DependentImpl1 {
 
     import c.universe._
 
-    final def term_impl_[x](implicit x: c.WeakTypeTag[x]): c.Tree = {
-        if (pred_type_impl(TypeTree(x.tpe))) {
-            q"${sing_(c)}.`true`"
-        } else {
-            q"${sing_(c)}.`false`"
-        }
-    }
-
     final override protected def dep_term_impl(x: c.Tree): c.Tree = {
         import c.universe._
 

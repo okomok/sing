@@ -25,13 +25,13 @@ class _TermOfTest extends org.scalatest.junit.JUnit3Suite {
 
         // named type for some lexical error
         val _tt = typeOf(`true`)
-        type tt = _tt.self
+        type tt = _tt.apply
 
         val _tr = typeOf(r)
-        type tr = _tr.self
+        type tr = _tr.apply
 
         val _tst = typeOf(sing.`true`)
-        type tst = _tst.self
+        type tst = _tst.apply
 
         Test.assertEq[`true`, tt]
         Test.assertEq[`true`, tr]

@@ -17,8 +17,17 @@ trait DependentImpl1 {
 
     import c.universe._
 
+    final def term_impl_[x](implicit x: c.WeakTypeTag[x]): c.Tree = {
+        type_impl(TypeTree(x.tpe))
+    }
+
     final def term_impl(x: c.Tree): c.Tree = {
         val v = dep_term_impl(x)
-        q"${here(c)}.DependentType($v)"
+        q"${here(c)}.DependentTerm.of($v)"
+    }
+
+    final def type_impl(x: c.Tree): c.Tree = {
+        val t = dep_type_impl(x)
+        q"${here(c)}.DependentType.of[$t]"
     }
 }

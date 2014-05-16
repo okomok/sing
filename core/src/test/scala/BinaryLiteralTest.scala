@@ -20,30 +20,30 @@ class BinaryLiteralTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         val _bs = Binary_("101")
-         val bs: bs = _bs.self
-        type bs     = _bs.self
+         val bs: bs = _bs.apply
+        type bs     = _bs.apply
         assertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
         assertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testNil {
         val _bs = Binary_("")
-         val bs: bs = _bs.self
-        type bs     = _bs.self
+         val bs: bs = _bs.apply
+        type bs     = _bs.apply
         assertEq(bs, DNil)
         assertEq[bs, DNil]
 
         val _bs_ = Binary_("00")
-         val bs_ : bs_ = _bs_.self
-        type bs_       = _bs_.self
+         val bs_ : bs_ = _bs_.apply
+        type bs_       = _bs_.apply
         assertEq(bs_, DNil)
         assertEq[bs_, DNil]
     }
 
     def testTrailingZero {
         val _bs = Binary_("000101")
-         val bs: bs = _bs.self
-        type bs     = _bs.self
+         val bs: bs = _bs.apply
+        type bs     = _bs.apply
         assertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
         assertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
@@ -60,7 +60,7 @@ class BinaryLiteralTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     def testTrivial2 {
-         val bs = Binary_("101010").self
+         val bs = Binary_("101010").apply
          JAssert.assertEquals(42, bs.unsing)
     }
 }

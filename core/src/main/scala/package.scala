@@ -117,6 +117,7 @@ package object sing {
     /**
      * Checks a type concrete, compile-error otherwise.
      */
+    def check[x]             : Unspecified = macro makro.CheckImpl.term_impl_[x]
     def check(x: Unspecified): Unspecified = macro makro.CheckImpl.term_impl
 
 

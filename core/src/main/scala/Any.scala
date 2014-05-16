@@ -16,105 +16,105 @@ object Any extends AsKind {
 /**
  * The sing Any
  */
-trait Any extends scala.Equals with makro.DependentType {
+trait Any extends scala.Equals {
 
     @Annotation.returnThis
     final val self: self = this.asInstanceOf[self]
     type self <: Any
 
-     def kind: kind = makro.Unsupported("Any.kind").self
+     def kind: kind = makro.Unsupported("Any.kind").apply
     type kind <: Kind
 
     // likely to work
-     def is[K <: Kind](K: K): is[K] = makro.Unsupported("Any.is").self
+     def is[K <: Kind](K: K): is[K] = makro.Unsupported("Any.is").apply
     type is[K <: Kind] <: Boolean
 
     // unlikely to work
      def as[K <: Kind](K: K): as[K] = ???
     type as[K <: Kind] <: K
 
-     def asBoolean: asBoolean = makro.Unsupported("Any.asBoolean").self
+     def asBoolean: asBoolean = makro.Unsupported("Any.asBoolean").apply
     type asBoolean <: Boolean
 
-     def asBoxed: asBoxed = makro.Unsupported("Any.asBoxed").self
+     def asBoxed: asBoxed = makro.Unsupported("Any.asBoxed").apply
     type asBoxed <: Boxed
 
-     def asEither: asEither = makro.Unsupported("Any.asBoolean").self
+     def asEither: asEither = makro.Unsupported("Any.asBoolean").apply
     type asEither <: Either
 
-     def asFunction0: asFunction0 = makro.Unsupported("Any.asFunction0").self
+     def asFunction0: asFunction0 = makro.Unsupported("Any.asFunction0").apply
     type asFunction0 <: Function0
 
-     def asFunction1: asFunction1 = makro.Unsupported("Any.asFunction1").self
+     def asFunction1: asFunction1 = makro.Unsupported("Any.asFunction1").apply
     type asFunction1 <: Function1
 
-     def asFunction2: asFunction2 = makro.Unsupported("Any.asFunction2").self
+     def asFunction2: asFunction2 = makro.Unsupported("Any.asFunction2").apply
     type asFunction2 <: Function2
 
-     def asFunction3: asFunction3 = makro.Unsupported("Any.asFunction3").self
+     def asFunction3: asFunction3 = makro.Unsupported("Any.asFunction3").apply
     type asFunction3 <: Function3
 
-     def asPartialFunction: asPartialFunction = makro.Unsupported("Any.asPartialFunction").self
+     def asPartialFunction: asPartialFunction = makro.Unsupported("Any.asPartialFunction").apply
     type asPartialFunction <: PartialFunction
 
-     def asKind: asKind = makro.Unsupported("Any.asKind").self
+     def asKind: asKind = makro.Unsupported("Any.asKind").apply
     type asKind <: Kind
 
-     def asList: asList = makro.Unsupported("Any.asList").self
+     def asList: asList = makro.Unsupported("Any.asList").apply
     type asList <: List
 
-     def asMap: asMap = makro.Unsupported("Any.asMap").self
+     def asMap: asMap = makro.Unsupported("Any.asMap").apply
     type asMap <: Map
 
-     def asNat: asNat = makro.Unsupported("Any.asNat").self
+     def asNat: asNat = makro.Unsupported("Any.asNat").apply
     type asNat <: Nat
 
-     def asSet: asSet = makro.Unsupported("Any.asSet").self
+     def asSet: asSet = makro.Unsupported("Any.asSet").apply
     type asSet <: Set
 
-     def asOption: asOption = makro.Unsupported("Any.asOption").self
+     def asOption: asOption = makro.Unsupported("Any.asOption").apply
     type asOption <: Option
 
-     def asRelation: asRelation = makro.Unsupported("Any.asRelation").self
+     def asRelation: asRelation = makro.Unsupported("Any.asRelation").apply
     type asRelation <: Relation
 
-     def asEquiv: asEquiv = makro.Unsupported("Any.asEquiv").self
+     def asEquiv: asEquiv = makro.Unsupported("Any.asEquiv").apply
     type asEquiv <: Equiv
 
-     def asPartialOrdering: asPartialOrdering = makro.Unsupported("Any.asPartialOrdering").self
+     def asPartialOrdering: asPartialOrdering = makro.Unsupported("Any.asPartialOrdering").apply
     type asPartialOrdering <: PartialOrdering
 
-     def asOrdering: asOrdering = makro.Unsupported("Any.asOrdering").self
+     def asOrdering: asOrdering = makro.Unsupported("Any.asOrdering").apply
     type asOrdering <: Ordering
 
-     def asOrderingResult: asOrderingResult = makro.Unsupported("Any.asOrderingResult").self
+     def asOrderingResult: asOrderingResult = makro.Unsupported("Any.asOrderingResult").apply
     type asOrderingResult <: OrderingResult
 
-     def asProduct: asProduct = makro.Unsupported("Any.asProduct").self
+     def asProduct: asProduct = makro.Unsupported("Any.asProduct").apply
     type asProduct <: Product
 
-     def asProduct1: asProduct1 = makro.Unsupported("Any.asProduct1").self
+     def asProduct1: asProduct1 = makro.Unsupported("Any.asProduct1").apply
     type asProduct1 <: Product1
 
-     def asProduct2: asProduct2 = makro.Unsupported("Any.asProduct2").self
+     def asProduct2: asProduct2 = makro.Unsupported("Any.asProduct2").apply
     type asProduct2 <: Product2
 
-     def asProduct3: asProduct3 = makro.Unsupported("Any.asProduct3").self
+     def asProduct3: asProduct3 = makro.Unsupported("Any.asProduct3").apply
     type asProduct3 <: Product3
 
-     def asUnit: asUnit = makro.Unsupported("Any.asUnit").self
+     def asUnit: asUnit = makro.Unsupported("Any.asUnit").apply
     type asUnit <: Unit
 
-     def equal[that <: Any](that: that): equal[that] = makro.Unsupported("Any.equal").self
+     def equal[that <: Any](that: that): equal[that] = makro.Unsupported("Any.equal").apply
     type equal[that <: Any] <: Boolean
 
-     def nequal[that <: Any](that: that): nequal[that] = makro.Unsupported("Any.nequal").self
+     def nequal[that <: Any](that: that): nequal[that] = makro.Unsupported("Any.nequal").apply
     type nequal[that <: Any] <: Boolean
 
     /**
      * Escapes from the sing world.
      */
-     def unsing: unsing = makro.Unsupported("Any.unsing").self
+     def unsing: unsing = makro.Unsupported("Any.unsing").apply
     type unsing
 
     final protected def refEquals(that: scala.Any) = super.equals(that)

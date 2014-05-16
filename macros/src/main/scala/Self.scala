@@ -24,7 +24,7 @@ class SelfImpl(override val c: Context) extends AnnotationImpl {
             case TypeDef(mods, name, tparams, rhs) => {
                 val v = TermName(c.freshName())
                 val termdef = q"val $v = ${here(c)}.WeakTypeOf(this)"
-                val typedef = TypeDef(mods, name, tparams, tq"${Ident(v)}.self")
+                val typedef = TypeDef(mods, name, tparams, tq"${Ident(v)}.apply")
                 List(termdef, typedef)
             }
             case t => List(t)

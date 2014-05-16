@@ -85,8 +85,8 @@ object PartialFunctionImpl {
         override type isDefinedAt[x <: Any]                       = `false`
 
         private[sing] lazy val _apply = makro.Unsupported("PartialFunction.empty.apply")
-        override  def apply[x <: Any](x: x): apply[x] = _apply.self
-        override type apply[x <: Any]                 = _apply.self
+        override  def apply[x <: Any](x: x): apply[x] = _apply.apply
+        override type apply[x <: Any]                 = _apply.apply
     }
 
     final case class OrElse[f1 <: PartialFunction, f2 <: PartialFunction](f1: f1, f2: f2) extends AsPartialFunction {

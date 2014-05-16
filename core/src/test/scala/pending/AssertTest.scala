@@ -53,16 +53,16 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         val isEq_no_Nothing = isEq[no, Nothing]
 
-        assertTrue[isEq_no_Nothing.self]
+        assertTrue[isEq_no_Nothing.apply]
 
         expectError(AssertError) {"""
             val isEq_Int_Nothing = isEq[Int, Nothing]
-            assertTrue[isEq_Int_Nothing.self]
+            assertTrue[isEq_Int_Nothing.apply]
         """}
 
         val conformes_Int_AnyVal = conforms[Int, AnyVal]
 
-        assertTrue[conformes_Int_AnyVal.self]
+        assertTrue[conformes_Int_AnyVal.apply]
 
         expectError(AssertError) {"""
             assertConforms[AnyVal, Int]
@@ -70,20 +70,20 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         val conforms_AnyVal_Int = conforms[AnyVal, Int]
 
-        assertFalse[conforms_AnyVal_Int.self]
+        assertFalse[conforms_AnyVal_Int.apply]
 
         expectError(AssertError) {"""
-            assertFalse[conformes_Int_AnyVal.self]
+            assertFalse[conformes_Int_AnyVal.apply]
         """}
 
         type i = Int
 
         val isEq_AnyVal_i = isEq[AnyVal, i]
-        assertFalse[isEq_AnyVal_i.self]
+        assertFalse[isEq_AnyVal_i.apply]
 
         expectError(AssertError) {"""
             val isEq_i_Int = isEq[i, Int]
-            assertFalse[isEq_i_Int.self]
+            assertFalse[isEq_i_Int.apply]
         """}
 
         def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
@@ -98,8 +98,8 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         """}
 */
         val _x = check(Some(Dense._2).get)
-        val x = _x.self
-        type x = _x.self //check[Some[Dense._2]#get]
+        val x = _x.apply
+        type x = _x.apply //check[Some[Dense._2]#get]
 
         expectError(AssertError) {"""
             assertEq(Dense._3, x)
@@ -141,8 +141,8 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         type foo[x <: Nat]               = `if`[id[x]#equal[Dense._2], Throw                            , Const[id[x]#increment]]#apply
 
         val _x = check(foo(Dense._3))
-        val x = _x.self
-        type x = _x.self // = check[foo[Dense._3]]
+        val x = _x.apply
+        type x = _x.apply // = check[foo[Dense._3]]
 
         expectError(NothingType) {"""
             check(foo(Dense._2))
@@ -155,6 +155,11 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         expectError(AbstractType) {"""
             check(dummy[Nat#increment]) // abstract
         """}
+
+        val _xt = check[Dense._3]
+        type xt = _xt.apply
+
+        makro.AssertEq[xt, Dense._3]
     }
 }
 

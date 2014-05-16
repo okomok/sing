@@ -8,18 +8,15 @@ package com.github.okomok.sing.makro
 
 
 trait DependentType {
-     def self: self
-    type self
+    type apply
 }
 
-
 object DependentType {
-    type Of[x] = DependentType {
-        type self = x
+    def of[x]: of[x] = new DependentType {
+        override type apply = x
     }
 
-    def apply[x](x: x): Of[x] = new DependentType {
-        override  def self: self = x
-        override type self       = x
+    type of[x] = DependentType {
+        type apply = x
     }
 }
