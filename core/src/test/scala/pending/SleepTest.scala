@@ -16,14 +16,14 @@ import scala.language.existentials
 /*
 trait SleepTezt extends org.scalatest.junit.JUnit3Suite {
 
-    makro.Benchmark {
+    Benchmark {
         dummy[fibonacci[Dense._30]] // 922ms
     }
 
     // greedy
     type res[x] = fibonacci[Dense._40]
 
-    makro.Benchmark {
+    Benchmark {
         dummy[fibonacci[Dense._40]] // 0ms (memoized)
     }
 }

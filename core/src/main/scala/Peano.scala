@@ -86,7 +86,7 @@ sealed trait Zero extends AsPeano {
     override  def isZero: isZero = `true`
     override type isZero         = `true`
 
-    private[sing] lazy val _decrement = makro.Unsupported("Zero.decrement")
+    private[sing] lazy val _decrement = Unsupported("Zero.decrement")
     override  def decrement: decrement = _decrement.apply
     override type decrement            = _decrement.apply
 

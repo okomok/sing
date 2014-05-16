@@ -7,7 +7,7 @@
 package com.github.okomoktest.singmakrotest
 
 
-import com.github.okomok.sing.makro._
+import com.github.okomok.sing._
 import CompileError._
 
 
@@ -16,7 +16,7 @@ class CheckTest extends org.scalatest.junit.JUnit3Suite {
     class Wow
     type No = Nothing with Wow
 
-    def ignore[x]: Unit = ()
+    def ignore[x]: scala.Unit = ()
 
     def testTrivial {
     //     ignore[Check.apply[No]]

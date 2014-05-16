@@ -4,7 +4,7 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
@@ -12,11 +12,11 @@ import scala.reflect.macros.whitebox.Context
 
 
 object IsAbstract {
-    def apply[x]             : Unspecified = macro IsAbstractImpl.term_impl_[x]
-    def apply(x: Unspecified): Unspecified = macro IsAbstractImpl.term_impl
+    def apply[x]           : scala.Any = macro IsAbstractImpl.termMacro_[x]
+    def apply(x: scala.Any): scala.Any = macro IsAbstractImpl.termMacro
 }
 
-class IsAbstractImpl(override val c: Context) extends PredicateImpl1 {
-    import c.universe._
-    override protected def pred_type_only(x: c.Type): Boolean = IsAbstractType(c)(x)
+
+class IsAbstractImpl(override val c: Context) extends PredicateMacro1 {
+    override protected def predicateTypeOnly(x: c.Type): scala.Boolean = IsAbstractType(c)(x)
 }

@@ -4,7 +4,7 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
@@ -12,18 +12,19 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Sleep {
-    def apply(x: Long): Unit = macro SleepImpl.term_impl
+    def apply(x: Long): scala.Unit = macro SleepImpl.termMacro
 }
 
-class SleepImpl(override val c: Context) extends DependentImpl1 {
+
+class SleepImpl(override val c: Context) extends DepMacro1 {
     import c.universe._
 
-    override protected def dep_term_impl(x: c.Tree): c.Tree = {
+    override protected def termMacroImpl(x: c.Tree): c.Tree = {
         Thread.sleep(extractLong(x))
         q"()"
     }
 
-    override protected def dep_type_impl(x: c.Tree): c.Tree = {
+    override protected def typeMacroImpl(x: c.Tree): c.Tree = {
         Thread.sleep(extractLong(x))
         tq"_root_.scala.Unit"
     }

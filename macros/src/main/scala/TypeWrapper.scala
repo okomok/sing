@@ -4,19 +4,20 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
-trait DependentType {
+trait TypeWrapper {
     type apply
 }
 
-object DependentType {
-    def of[x]: of[x] = new DependentType {
+
+object TypeWrapper {
+    def of[x]: of[x] = new TypeWrapper {
         override type apply = x
     }
 
-    type of[x] = DependentType {
+    type of[x] = TypeWrapper {
         type apply = x
     }
 }

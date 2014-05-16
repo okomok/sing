@@ -4,23 +4,23 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.reflect.macros.whitebox.Context
 
 
-object TypeFold {
-    def apply[b](c: Context)(t: c.Type)(f: (c.Type, List[b]) => b): b = {
-        term_impl(c)((t: c.Type) => (ts: List[b]) => f(t, ts))(t)
+private object TypeFold {
+    def apply[b](c: Context)(t: c.Type)(f: (c.Type, scala.List[b]) => b): b = {
+        impl(c)((t: c.Type) => (ts: scala.List[b]) => f(t, ts))(t)
     }
 
-    def term_impl[b](c: Context)(f: c.Type => List[b] => b)(t: c.Type): b = {
+    def impl[b](c: Context)(f: c.Type => scala.List[b] => b)(t: c.Type): b = {
         import c.universe._
-        f(t) { typeArgs(c)(t).map(term_impl(c)(f)) }
+        f(t) { typeArgs(c)(t).map(impl(c)(f)) }
     }
 
-    def typeArgs(c: Context)(t: c.Type): List[c.Type] = {
+    def typeArgs(c: Context)(t: c.Type): scala.List[c.Type] = {
         import c.universe._
 
         t.dealias match {

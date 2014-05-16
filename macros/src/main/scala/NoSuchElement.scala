@@ -4,7 +4,7 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
@@ -12,10 +12,11 @@ import scala.reflect.macros.whitebox.Context
 
 
 object NoSuchElement {
-    def apply(x: String): Unspecified = macro NoSuchElementImpl.term_impl
+    def apply(x: String): scala.Any = macro NoSuchElementImpl.termMacro
 }
 
-class NoSuchElementImpl(override val c: Context) extends TypeThrowImpl {
+
+class NoSuchElementImpl(override val c: Context) extends TypeThrowMacro {
     import c.universe._
 
     override protected def what: c.Tree = {

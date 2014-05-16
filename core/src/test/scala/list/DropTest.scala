@@ -43,13 +43,11 @@ class DropTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object DropTezt {
-    import Test.assertEq
-
     trait testTrivial {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil
-        assertEq[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#drop[_0]#force]
-        assertEq[_Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#drop[_2]#force]
-        assertEq[Nil, lst#drop[_5]#force]
-        assertEq[Nil, lst#drop[_10]#force]
+        AssertEq[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#drop[_0]#force]
+        AssertEq[_Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, lst#drop[_2]#force]
+        AssertEq[Nil, lst#drop[_5]#force]
+        AssertEq[Nil, lst#drop[_10]#force]
     }
 }

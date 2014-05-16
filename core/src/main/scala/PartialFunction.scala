@@ -84,7 +84,7 @@ object PartialFunctionImpl {
         override  def isDefinedAt[x <: Any](x: x): isDefinedAt[x] = `false`
         override type isDefinedAt[x <: Any]                       = `false`
 
-        private[sing] lazy val _apply = makro.Unsupported("PartialFunction.empty.apply")
+        private[sing] lazy val _apply = Unsupported("PartialFunction.empty.apply")
         override  def apply[x <: Any](x: x): apply[x] = _apply.apply
         override type apply[x <: Any]                 = _apply.apply
     }

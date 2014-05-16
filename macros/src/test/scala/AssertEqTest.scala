@@ -7,7 +7,7 @@
 package com.github.okomoktest.singmakrotest
 
 
-import com.github.okomok.sing.makro._
+import com.github.okomok.sing._
 
 
 class AssertEqTest extends org.scalatest.junit.JUnit3Suite {

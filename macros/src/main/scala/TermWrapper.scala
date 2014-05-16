@@ -4,20 +4,21 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
-trait DependentTerm extends DependentType {
+trait TermWrapper extends TypeWrapper {
      def apply: apply
 }
 
-object DependentTerm {
-    def of[x](x: x): of[x] = new DependentTerm {
+
+object TermWrapper {
+    def of[x](x: x): of[x] = new TermWrapper {
         override  def apply: apply = x
         override type apply        = x
     }
 
-    type of[x] = DependentTerm {
+    type of[x] = TermWrapper {
         type apply = x
     }
 

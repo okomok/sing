@@ -4,7 +4,7 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.annotation.StaticAnnotation
@@ -12,22 +12,23 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-class Self extends StaticAnnotation {
-    def macroTransform(annottees: Any*): Unspecified = macro SelfImpl.annot_impl
+class selfTypeDef extends StaticAnnotation {
+    def macroTransform(annottees: scala.Any*): scala.Any = macro SelfTypeDefImpl.annot
 }
 
-class SelfImpl(override val c: Context) extends AnnotationImpl {
+
+class SelfTypeDefImpl(override val c: Context) extends AnnotationMacro {
     import c.universe._
 
-    override protected def annot_tree_impl(ts: List[c.Tree]): List[c.Tree] = {
+    override protected def annotImpl(ts: scala.List[c.Tree]): scala.List[c.Tree] = {
         ts.flatMap {
             case TypeDef(mods, name, tparams, rhs) => {
                 val v = TermName(c.freshName())
-                val termdef = q"val $v = ${here(c)}.WeakTypeOf(this)"
+                val termdef = q"val $v = ${sing_(c)}.TypeOf(this)"
                 val typedef = TypeDef(mods, name, tparams, tq"${Ident(v)}.apply")
-                List(termdef, typedef)
+                scala.List(termdef, typedef)
             }
-            case t => List(t)
+            case t => scala.List(t)
         }
     }
 }

@@ -21,35 +21,35 @@ class QuotRemTest extends org.scalatest.junit.JUnit3Suite {
     def testTrivial {
         type n = _3#quotRem[_5]
         val n: n = _3.quotRem(_5)
-        Test.assertEq[Tuple2[_0, _3], n]
+        AssertEq[Tuple2[_0, _3], n]
         assertEquals(Tuple2(_0, _3), n)
     }
 
     def testTrivial2 {
         type n = _13#quotRem[_5]
         val n: n = _13.quotRem(_5)
-        Test.assertEq[Tuple2[_2, _3], n]
+        AssertEq[Tuple2[_2, _3], n]
         assertEquals(Tuple2(_2, _3), n)
     }
 
     def testTrivial3 {
         type n = _15#quotRem[_5]
         val n: n = _15.quotRem(_5)
-        Test.assertEq[Tuple2[_3, _0], n]
+        AssertEq[Tuple2[_3, _0], n]
         assertEquals(Tuple2(_3, _0), n)
     }
 
     def testTrivial4 {
         type n = _14#quot[_3]
         val n: n = _14 quot _3
-        Test.assertEq[_4, n]
+        AssertEq[_4, n]
         assertEquals(_4, n)
     }
 
     def testTrivial5 {
         type n = _14#rem[_3]
         val n: n = _14 rem _3
-        Test.assertEq[_2, n]
+        AssertEq[_2, n]
         assertEquals(_2, n)
     }
 

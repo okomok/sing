@@ -4,7 +4,7 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.annotation.StaticAnnotation
@@ -12,14 +12,14 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-class SingMethod extends StaticAnnotation {
-    def macroTransform(annottees: Any*): Unspecified = macro SingMethodImpl.annot_impl
+class singmethod extends StaticAnnotation {
+    def macroTransform(annottees: scala.Any*): scala.Any = macro SingmethodImpl.annot
 }
 
-class SingMethodImpl(override val c: Context) extends AnnotationImpl {
+class SingmethodImpl(override val c: Context) extends AnnotationMacro {
     import c.universe._
 
-    override protected def annot_tree_impl(ts: List[c.Tree]): List[c.Tree] = {
+    override protected def annotImpl(ts: scala.List[c.Tree]): scala.List[c.Tree] = {
         ts.flatMap {
             case t @ TypeDef(mods, name, tparams, rhs) => {
                 val sparams = singparams(tparams)
@@ -30,33 +30,33 @@ class SingMethodImpl(override val c: Context) extends AnnotationImpl {
 
                 val termmethod = if (tparams.isEmpty) {
                     val lazymods = AddLazyFlag(c)(mods)
-                    q"$lazymods val ${name.toTermName}: $typ = $term" // memoized to follow the typemethod behavior.
+                    q"$lazymods val ${name.toTermName}: $typ = $term" // memoized to follow the typeMacro behavior.
                 } else {
                     q"$mods def ${name.toTermName}[..$tparams](..$sparams): $typ = $term"
                 }
 
-                List(t, termmethod)
+                scala.List(t, termmethod)
             }
-            case t => List(t)
+            case t => scala.List(t)
         }
     }
 
     // [n <: N, m <: M,...] --> (n: n, m: m,...)
-    private def singparams(tparams: List[TypeDef]): List[ValDef] = {
+    private def singparams(tparams: scala.List[TypeDef]): scala.List[ValDef] = {
         tparams.map { case TypeDef(mods, name, tpt, rhs) =>
             ValDef(mods, name.toTermName, Ident(name), EmptyTree)
         }
     }
 
     // [n <: N, m <: M,...] --> [n, m,...]
-    private def typeargs(tparams: List[TypeDef]): List[Ident] = {
+    private def typeargs(tparams: scala.List[TypeDef]): scala.List[Ident] = {
         tparams.map { case TypeDef(_, name, _, _) =>
             Ident(name)
         }
     }
 
     // [n <: N, m <: M,...] --> (n, m,...)
-    private def termargs(tparams: List[TypeDef]): List[Ident] = {
+    private def termargs(tparams: scala.List[TypeDef]): scala.List[Ident] = {
         tparams.map { case TypeDef(_, name, _, _) =>
             Ident(name.toTermName)
         }

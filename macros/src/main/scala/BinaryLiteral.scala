@@ -4,26 +4,27 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object BinaryLiteral  {
-    def apply(x: String): Unspecified = macro BinaryLiteralImpl.term_impl
+object Binary_ {
+    def apply(x: String): scala.Any = macro BinaryLiteralImpl.termMacro
 }
 
-class BinaryLiteralImpl(override val c: Context) extends DependentImpl1 {
+
+class BinaryLiteralImpl(override val c: Context) extends DepMacro1 {
     import c.universe._
 
-    override protected def dep_term_impl(x: c.Tree): c.Tree = {
-        DenseLiteral.term_fromBinaryString(c)(ExtractString(c)(x))
+    override protected def termMacroImpl(x: c.Tree): c.Tree = {
+        Dense_.term_fromBinaryString(c)(ExtractString(c)(x))
     }
 
-    override protected def dep_type_impl(x: c.Tree): c.Tree = {
+    override protected def typeMacroImpl(x: c.Tree): c.Tree = {
         import c.universe._
-        DenseLiteral.type_fromBinaryString(c)(ExtractString(c)(x))
+        Dense_.type_fromBinaryString(c)(ExtractString(c)(x))
     }
 }

@@ -4,17 +4,18 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.reflect.macros.whitebox.Context
 
 
-// See: http://stackoverflow.com/questions/15898037/how-to-check-if-weaktypetag-or-type-represents-concrete-type
+// See:
+//   http://stackoverflow.com/questions/15898037/how-to-check-if-weaktypetag-or-type-represents-concrete-type
 
 
 object IsAbstractType {
-    def apply(c: Context)(x: c.Type): Boolean = {
+    def apply(c: Context)(x: c.Type): scala.Boolean = {
         x.typeSymbol.asType.isAbstract
     }
 }

@@ -4,26 +4,30 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
+/**
+ * Compile-error (any usecase?)
+ */
 object Error {
-    def apply: Unit = macro ErrorImpl.term_impl
+    def apply(): scala.Unit = macro ErrorImpl.termMacro
 }
+
 
 class ErrorImpl(val c: Context) {
     import c.universe._
 
-    def term_impl: c.Tree = {
+    def termMacro(): c.Tree = {
         _impl()
         q"()"
     }
 
-    def type_impl: c.Tree = {
+    def typeMacro(): c.Tree = {
         _impl()
         tq"_root_.scala.Unit"
     }

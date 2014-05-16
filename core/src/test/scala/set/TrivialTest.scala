@@ -24,15 +24,15 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
         val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)
 
-        Test.assertEq[Dense._3, m#size]
+        AssertEq[Dense._3, m#size]
 
         type v8 = m#contains[_8]
         val v8: v8 = m.contains(_8)
-        Test.assertEq[`false`, v8]
+        AssertEq[`false`, v8]
 
         type v5 = m#contains[_5]
         val v5: v5 = m.contains(_5)
-        Test.assertEq[`true`, v5]
+        AssertEq[`true`, v5]
     }
 
     def testContains {
@@ -42,16 +42,16 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
         type m = SortedSet.empty[o]#add[_3]#add[_5]#add[_1]
         val m: m = SortedSet.empty(o).add(_3).add(_5).add(_1)
 
-        Test.assertEq[`false`, m#contains[_9]]
-        Test.assertEq[`true`, m#contains[_5]]
+        AssertEq[`false`, m#contains[_9]]
+        AssertEq[`true`, m#contains[_5]]
     }
 
     def testSorted1 {
         type m = SortedSet.add[_3]#add[_5]#add[_1]
         val m: m = SortedSet.add(_3).add(_5).add(_1)
 
-        Test.assertEq[`false`, m#contains[_9]]
-        Test.assertEq[`true`, m#contains[_5]]
+        AssertEq[`false`, m#contains[_9]]
+        AssertEq[`true`, m#contains[_5]]
     }
 
     def testUnsing {

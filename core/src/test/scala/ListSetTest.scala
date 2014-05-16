@@ -23,8 +23,8 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type rm = m#remove[_5]
         val rm: rm = m.remove(_5)
 
-        Test.assertEq[_2, rm#size]
-        Test.assertEq[`false`, rm#contains[_5]]
+        AssertEq[_2, rm#size]
+        AssertEq[`false`, rm#contains[_5]]
     }
 
     def testClear {
@@ -34,7 +34,7 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type n = m1#clear
         val n: n = m1.clear
 
-        Test.assertTrue[n#isEmpty]
+        AssertTrue[n#isEmpty]
         assertTrue(n.isEmpty.unsing)
     }
 
@@ -45,9 +45,9 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = SortedSet.add[_3]#add[_4]#add[_0]#add[_2]#add[_5]#add[_1]
         val m2: m2 = SortedSet.add(_3).add(_4).add(_0).add(_2).add(_5).add(_1)
 
-        Test.assertEq[`true`, m#equal[m]]
-        Test.assertEq[`true`, m#equal[m2]]
-        Test.assertEq[`true`, m2#equal[m]]
+        AssertEq[`true`, m#equal[m]]
+        AssertEq[`true`, m#equal[m2]]
+        AssertEq[`true`, m2#equal[m]]
         assertEquals(`true`, m.equal(m2))
     }
 
@@ -58,38 +58,38 @@ class ListSetTest extends org.scalatest.junit.JUnit3Suite {
         type m2   = m.add[_1]
         val m2: m2 = m.add(_1)
 
-        Test.assertEq[`true`, m#size#equal[m2#size]]
+        AssertEq[`true`, m#size#equal[m2#size]]
     }
 
     def testAdd {
         type m = ListSet.add[_3]#add[_5]#add[_1]
         val m: m = ListSet.add(_3).add(_5).add(_1)
 
-        Test.assertEq[_3, m#size]
+        AssertEq[_3, m#size]
 
         type v8 = m#contains[_8]
         val v8: v8 = m.contains(_8)
-        Test.assertEq[`false`, v8]
+        AssertEq[`false`, v8]
 
         type v5 = m#contains[_5]
         val v5: v5 = m.contains(_5)
-        Test.assertEq[`true`, v5]
+        AssertEq[`true`, v5]
     }
 
     def testContains {
         type m = ListSet.add[_3]#add[_5]#add[_1]
         val m: m = ListSet.add(_3).add(_5).add(_1)
 
-        Test.assertEq[`false`, m#contains[_9]]
-        Test.assertEq[`true`, m#contains[_5]]
+        AssertEq[`false`, m#contains[_9]]
+        AssertEq[`true`, m#contains[_5]]
     }
 
     def testSorted1 {
         type m = ListSet.add[_3]#add[_5]#add[_1]
         val m: m = ListSet.add(_3).add(_5).add(_1)
 
-        Test.assertEq[`false`, m#contains[_9]]
-        Test.assertEq[`true`, m#contains[_5]]
+        AssertEq[`false`, m#contains[_9]]
+        AssertEq[`true`, m#contains[_5]]
     }
 
     def testUnsing {

@@ -71,10 +71,10 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait testMeta {
-        Test.assertTrue[`true`]
-        Test.assertFalse[`false`]
-        Test.assertTrue[`true`# equal [`true`]]
-        Test.assertFalse[`true`# nequal [`true`]]
+        AssertTrue[`true`]
+        AssertFalse[`false`]
+        AssertTrue[`true`# equal [`true`]]
+        AssertFalse[`true`# nequal [`true`]]
     }
 
 }

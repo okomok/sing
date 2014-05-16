@@ -9,11 +9,11 @@ package com.github.okomoktest; package singtest
 
 import com.github.okomok.sing
 import sing._
-import sing.Test._
+
 import sing.Dense._
 import scala.language.existentials
 import junit.framework.{Assert => JAssert}
-import sing.Test.CompileError._
+import sing.CompileError._
 
 
 class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
@@ -22,24 +22,24 @@ class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
         val _bs = Nat_(5)
          val bs: bs = _bs.apply
         type bs     = _bs.apply
-        assertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
-        assertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
+        AssertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
+        AssertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testNil {
         val _bs = Nat_(0)
          val bs: bs = _bs.apply
         type bs     = _bs.apply
-        assertEq(bs, DNil)
-        assertEq[bs, DNil]
+        AssertEq(bs, DNil)
+        AssertEq[bs, DNil]
     }
 
     def testThrow {
-        expectError(IllegalArgument) {"""
+        ExpectError(IllegalArgument) {"""
             val bs = Nat_(-1).apply
         """}
 /*
-        expectError(IllegalArgument) {
+        ExpectError(IllegalArgument) {
             dummy[ Nat_(-1) ]
         }
 */
@@ -54,6 +54,6 @@ class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
          val _Nat10 = Nat_(10)
          type n = bs#plus[_Nat10.apply]
          val _Nat52 = Nat_(52)
-         assertEq[_Nat52.apply, n]
+         AssertEq[_Nat52.apply, n]
     }
 }

@@ -9,10 +9,10 @@ package com.github.okomoktest; package singtest
 
 import com.github.okomok.sing
 import sing._
-import sing.Test._
+
 import scala.language.existentials
 import junit.framework.{Assert => JAssert}
-import sing.Test.CompileError._
+import sing.CompileError._
 
 
 class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
@@ -21,24 +21,24 @@ class PeanoLiteralTest extends org.scalatest.junit.JUnit3Suite {
         val _bs = Peano_(3)
          val bs: bs = _bs.apply
         type bs     = _bs.apply
-        assertEq(bs, Succ(Succ(Succ(Zero))))
-        assertEq[bs, Succ[Succ[Succ[Zero]]]]
+        AssertEq(bs, Succ(Succ(Succ(Zero))))
+        AssertEq[bs, Succ[Succ[Succ[Zero]]]]
     }
 
     def testNil {
         val _bs = Peano_(0)
          val bs: bs = _bs.apply
         type bs     = _bs.apply
-        assertEq(bs, Zero)
-        assertEq[bs, Zero]
+        AssertEq(bs, Zero)
+        AssertEq[bs, Zero]
     }
 
     def testThrow {
-        expectError(IllegalArgument) {"""
+        ExpectError(IllegalArgument) {"""
             val bs = Peano_(-1)
         """}
 /*
-        expectError(IllegalArgument) {
+        ExpectError(IllegalArgument) {
             dummy[ Peano_(-1) ]
         }
 */

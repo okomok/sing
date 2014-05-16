@@ -11,7 +11,7 @@ package perf
 import com.github.okomok
 import okomok.sing._
 import Dense._
-import Test._
+
 
 
 trait MemoizationTest {
@@ -19,12 +19,12 @@ trait MemoizationTest {
     type N = _1
 
     trait Diff {
-        val _diff = typeOf(
-            makro.Benchmark {"""
+        val _diff = TypeOf(
+            Benchmark {"""
                 dummy[SlowFibonacci.fibonacci[N]]
             """}
             -
-            makro.Benchmark {"""
+            Benchmark {"""
                 dummy[FastFibonacci.fibonacci[N]]
             """}
         )

@@ -21,7 +21,7 @@ class IsSortedTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _2 :: _6 :: _7 :: _8 :: _9 :: _9 :: _10 :: Nil
         type u   = xs#isSortedWith[Nat.naturalOrdering]
         val u: u = xs.isSortedWith(Nat.naturalOrdering)
-        Test.assertTrue[u]
+        AssertTrue[u]
         assertEquals(`true`, u)
     }
 
@@ -30,7 +30,7 @@ class IsSortedTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _5 :: Nil
         type u   = xs#isSortedWith[Nat.naturalOrdering]
         val u: u = xs.isSortedWith(Nat.naturalOrdering)
-        Test.assertTrue[u]
+        AssertTrue[u]
         assertEquals(`true`, u)
     }
 
@@ -39,7 +39,7 @@ class IsSortedTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = Nil
         type u   = xs#isSortedWith[Nat.naturalOrdering]
         val u: u = xs.isSortedWith(Nat.naturalOrdering)
-        Test.assertTrue[u]
+        AssertTrue[u]
         assertEquals(`true`, u)
     }
 
@@ -48,7 +48,7 @@ class IsSortedTest extends org.scalatest.junit.JUnit3Suite {
         val xs: xs = _2 :: _6 :: _7 :: _5 :: _9 :: _9 :: _10 :: Nil
         type u   = xs#isSortedWith[Nat.naturalOrdering]
         val u: u = xs.isSortedWith(Nat.naturalOrdering)
-        Test.assertFalse[u]
+        AssertFalse[u]
         assertEquals(`false`, u)
     }
 

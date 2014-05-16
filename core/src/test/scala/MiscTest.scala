@@ -8,7 +8,7 @@ package com.github.okomoktest; package singtest
 
 
 import com.github.okomok.sing._
-import com.github.okomok.sing.Test.CompileError._
+import com.github.okomok.sing.CompileError._
 
 
 trait MiscTest {
@@ -17,10 +17,10 @@ trait MiscTest {
         val x = n.plus(Dense._1)
         val y = id(n).plus(Dense._1)
 
-        val _x = typeOf(x)
+        val _x = TypeOf(x)
         type x = _x.apply
 
-        val _y = typeOf(y)
+        val _y = TypeOf(y)
         type y = _y.apply
         type r = n#plus[Dense._1]
 
@@ -28,7 +28,7 @@ trait MiscTest {
         // x <:< r, but not r <:< x
         val rx: r = x
 
-        Test.expectError(AnyError) {"""
+        ExpectError(AnyError) {"""
             val xr: x = null.asInstanceOf[r]
         """}
 
@@ -40,17 +40,17 @@ trait MiscTest {
     }
 
     trait Foo[T] {
-        val _self = typeOf(this)
+        val _self = TypeOf(this)
         type self = _self.apply
         type self_ = this.type
-        val _self__ = typeOf(id(null.asInstanceOf[this.type]))
+        val _self__ = TypeOf(id(null.asInstanceOf[this.type]))
         type self__ = _self__.apply
 
         implicitly[self =:= self__ ]
 
         implicitly[self_ <:< self]
 
-        Test.expectError(CannotProve) {"""
+        ExpectError(CannotProve) {"""
             implicitly[self <:< self_]
         """}
     }

@@ -4,15 +4,15 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object DenseLiteral {
-    def apply(x: Int): Unspecified = macro DenseLiteralImpl.term_impl
+object Dense_ {
+    def apply(x: Int): scala.Any = macro DenseLiteralImpl.termMacro
 
     // "0010..." --> ...DCons(`false`, DCons(`true`, DNil))
     def term_fromBinaryString(c: Context)(bs: String): c.Tree = {
@@ -28,7 +28,7 @@ object DenseLiteral {
             case '0' => f
             case w => CompileError.illegalArgument(c)(w.toString + " is illformed")
         }.foldRight(nil) { (tf, res) =>
-            Apply(cons, List(tf, res))
+            Apply(cons, scala.List(tf, res))
         }
     }
 
@@ -45,20 +45,21 @@ object DenseLiteral {
             case '0' => f
             case w => CompileError.illegalArgument(c)(w.toString + " is illformed")
         }.foldRight(nil) { (tf, res) =>
-            AppliedTypeTree(cons, List(tf, res))
+            AppliedTypeTree(cons, scala.List(tf, res))
         }
     }
 }
 
-class DenseLiteralImpl(override val c: Context) extends DependentImpl1 {
+
+class DenseLiteralImpl(override val c: Context) extends DepMacro1 {
     import c.universe._
 
-    override protected def dep_term_impl(x: c.Tree): c.Tree = {
-        DenseLiteral.term_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
+    override protected def termMacroImpl(x: c.Tree): c.Tree = {
+        Dense_.term_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
     }
 
-    override protected def dep_type_impl(x: c.Tree): c.Tree = {
+    override protected def typeMacroImpl(x: c.Tree): c.Tree = {
         import c.universe._
-        DenseLiteral.type_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
+        Dense_.type_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
     }
 }

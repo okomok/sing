@@ -16,7 +16,6 @@ package object sing {
 
 
     import Annotation._
-    import makro.Unspecified
 
 
 // Boolean
@@ -44,7 +43,7 @@ package object sing {
 
 // Nat
 
-    val Nat_ = makro.DenseLiteral
+    val Nat_ = Dense_
 
 
 // Dense
@@ -54,15 +53,10 @@ package object sing {
      val D_:: = DCons
     type D_::[b <: Boolean, bs <: Dense] = bs# D_::[b]
 
-    val Dense_ = makro.DenseLiteral
-    val Binary_ = makro.BinaryLiteral
-
 
 // Peano
 
     val Zero: Zero = _TermOfZero.apply
-
-    val Peano_ = makro.PeanoLiteral
 
 
 // Option
@@ -100,11 +94,6 @@ package object sing {
     type id[x]          = x
 
     /**
-     * The type of a term
-     */
-    val typeOf = makro.WeakTypeOf
-
-    /**
      * The term of a type
      */
     def termOf[x <: Any](implicit _x: _TermOf[x]): x = _x.apply
@@ -115,10 +104,9 @@ package object sing {
     def dummy[x]: x = null.asInstanceOf[x]
 
     /**
-     * Checks a type concrete, compile-error otherwise.
+     * Places a type in term expressions.
      */
-    def check[x]             : Unspecified = macro makro.CheckImpl.term_impl_[x]
-    def check(x: Unspecified): Unspecified = macro makro.CheckImpl.term_impl
+    def place[x]: scala.Unit = ()
 
 
 // assertions

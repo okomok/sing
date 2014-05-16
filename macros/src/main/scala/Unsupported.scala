@@ -4,7 +4,7 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
@@ -12,10 +12,11 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Unsupported {
-    def apply(x: String): Unspecified = macro UnsupportedImpl.term_impl
+    def apply(x: String): scala.Any = macro UnsupportedImpl.termMacro
 }
 
-class UnsupportedImpl(override val c: Context) extends TypeThrowImpl {
+
+class UnsupportedImpl(override val c: Context) extends TypeThrowMacro {
     import c.universe._
 
     override protected def what: c.Tree = {

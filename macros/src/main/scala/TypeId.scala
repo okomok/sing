@@ -4,26 +4,26 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-object TypeId {
+private object TypeId {
     def inTerm(c: Context)(t: c.Type): c.Tree = {
-        TypeFold(c)(t) { (t, ts: List[c.Tree]) =>
+        TypeFold(c)(t) { (t, ts: scala.List[c.Tree]) =>
             SingList.inTerm(c) {
-                List(term_designatorId(c)(t), SingList.inTerm(c)(ts))
+                scala.List(term_designatorId(c)(t), SingList.inTerm(c)(ts))
             }
         }
     }
 
     def inType(c: Context)(t: c.Type): c.Tree = {
-        TypeFold(c)(t) { (t, ts: List[c.Tree]) =>
+        TypeFold(c)(t) { (t, ts: scala.List[c.Tree]) =>
             SingList.inType(c) {
-                List(type_designatorId(c)(t), SingList.inType(c)(ts))
+                scala.List(type_designatorId(c)(t), SingList.inType(c)(ts))
             }
         }
     }
@@ -42,7 +42,7 @@ object TypeId {
         }
     }
 
-    private def idList(c: Context)(t: c.Type): List[String] = {
+    private def idList(c: Context)(t: c.Type): scala.List[String] = {
         t.dealias.typeSymbol.fullName.split("\\.").
             reverse. // for faster equality
             toList.

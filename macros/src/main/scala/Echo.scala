@@ -4,48 +4,56 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
+/**
+ * Prints a tree.
+ */
 object Echo {
-    def apply[x]             : Unit = macro EchoImpl.term_impl_[x]
-    def apply(x: Unspecified): Unit = macro EchoImpl.term_impl
+    def apply[x]             : scala.Unit = macro EchoImpl.termMacro_[x]
+    def apply(x: scala.Any): scala.Unit = macro EchoImpl.termMacro
 }
 
-class EchoImpl(override val c: Context) extends AssertImpl1 {
+
+class EchoImpl(override val c: Context) extends AssertionMacro1 {
     import c.universe._
 
-    override protected def assert_term_impl(x: c.Tree): AssertResult = {
+    override protected def assertionTermImpl(x: c.Tree): AssertionResult = {
         c.echo(NoPosition, show(x) + ": " + show(x.tpe.dealias))
-        AssertSuccess
+        AssertionSuccess
     }
 
-    override protected def assert_type_impl(x: c.Tree): AssertResult = {
+    override protected def assertionTypeImpl(x: c.Tree): AssertionResult = {
         c.echo(NoPosition, show(x.tpe.dealias))
-        AssertSuccess
+        AssertionSuccess
     }
 }
 
 
+/**
+ * Prints a raw tree.
+ */
 object EchoRaw {
-    def apply[x]             : Unit = macro EchoRawImpl.term_impl_[x]
-    def apply(x: Unspecified): Unit = macro EchoRawImpl.term_impl
+    def apply[x]             : scala.Unit = macro EchoRawImpl.termMacro_[x]
+    def apply(x: scala.Any): scala.Unit = macro EchoRawImpl.termMacro
 }
 
-class EchoRawImpl(override val c: Context) extends AssertImpl1 {
+
+class EchoRawImpl(override val c: Context) extends AssertionMacro1 {
     import c.universe._
 
-    override protected def assert_term_impl(x: c.Tree): AssertResult = {
+    override protected def assertionTermImpl(x: c.Tree): AssertionResult = {
         c.echo(NoPosition, showRaw(x) + ": " + showRaw(x.tpe.dealias))
-        AssertSuccess
+        AssertionSuccess
     }
 
-    override protected def assert_type_impl(x: c.Tree): AssertResult = {
+    override protected def assertionTypeImpl(x: c.Tree): AssertionResult = {
         c.echo(NoPosition, showRaw(x.tpe.dealias))
-        AssertSuccess
+        AssertionSuccess
     }
 }

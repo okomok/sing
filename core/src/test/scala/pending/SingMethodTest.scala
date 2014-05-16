@@ -21,7 +21,7 @@ package object PPP {
 
 }
 
-class SingMethodTest extends org.scalatest.junit.JUnit3Suite {
+class SingmethodTest extends org.scalatest.junit.JUnit3Suite {
 
     class dummyAnno extends scala.annotation.StaticAnnotation
 

@@ -123,7 +123,7 @@ sealed abstract class None extends AsOption {
     override  def isEmpty: isEmpty = `true`
     override type isEmpty          = `true`
 
-    private[sing] lazy val _get = makro.NoSuchElement("None.get")
+    private[sing] lazy val _get = NoSuchElement("None.get")
     override  def get: get = _get.apply
     override type get      = _get.apply
 

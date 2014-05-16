@@ -4,13 +4,13 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.reflect.macros.whitebox.Context
 
 
-object ExtractNat {
+private object ExtractNat {
     def apply(c: Context)(x: c.Tree): Int = {
         import c.universe._
 

@@ -43,14 +43,14 @@ class ExpTest extends org.scalatest.junit.JUnit3Suite {
     }
 
     trait teztTrivial {
-        Test.assertEq[_9, _3 # exp[ _2]]
-        Test.assertEq[_8, _2 # exp[ _3]]
-        Test.assertEq[_1, _3 # exp[ _0]]
-        Test.assertEq[_1, _0 # exp[ _0]]
-        Test.assertEq[_0, _0 # exp[ _9]]
-        Test.assertEq[_6# times [_6], _6 # exp[ _2]]
-        Test.assertEq[_15#plus [_1], _4 # exp[ _2]]
-        Test.assertEq[_1, _1 # exp[ _1]]
+        AssertEq[_9, _3 # exp[ _2]]
+        AssertEq[_8, _2 # exp[ _3]]
+        AssertEq[_1, _3 # exp[ _0]]
+        AssertEq[_1, _0 # exp[ _0]]
+        AssertEq[_0, _0 # exp[ _9]]
+        AssertEq[_6# times [_6], _6 # exp[ _2]]
+        AssertEq[_15#plus [_1], _4 # exp[ _2]]
+        AssertEq[_1, _1 # exp[ _1]]
     }
 
 }

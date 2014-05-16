@@ -7,7 +7,7 @@
 package com.github.okomoktest.singmakrotest
 
 
-import com.github.okomok.sing.makro._
+import com.github.okomok.sing._
 import CompileError._
 
 

@@ -25,7 +25,7 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equalWith[xs, Nat.naturalOrdering]
         val u: u = xs.equalWith(ys, Nat.naturalOrdering)
-        Test.assertEq[`true`, u]
+        AssertEq[`true`, u]
         assertEquals(`true`, u)
     }
 
@@ -38,7 +38,7 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equalWith[ys, Nat.naturalOrdering]
         val u: u = xs.equalWith(ys, Nat.naturalOrdering)
-        Test.assertEq[`true`, u]
+        AssertEq[`true`, u]
         assertEquals(`true`, u)
     }
 
@@ -51,7 +51,7 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equalWith[ys, Nat.naturalOrdering]
         val u: u = xs.equalWith(ys, Nat.naturalOrdering)
-        Test.assertEq[`true`, u]
+        AssertEq[`true`, u]
         assertEquals(`true`, u)
     }
 
@@ -64,7 +64,7 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equalWith[ys, Nat.naturalOrdering]
         val u: u = xs.equalWith(ys, Nat.naturalOrdering)
-        Test.assertEq[`false`, u]
+        AssertEq[`false`, u]
         assertEquals(`false`, u)
     }
 
@@ -77,7 +77,7 @@ class EqualWithTest extends org.scalatest.junit.JUnit3Suite {
 
         type u = xs#equalWith[ys, Nat.naturalOrdering]
         val u: u = xs.equalWith(ys, Nat.naturalOrdering)
-        Test.assertEq[`false`, u]
+        AssertEq[`false`, u]
         assertEquals(`false`, u)
     }
 

@@ -120,42 +120,40 @@ class TrivialTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object TrivialTezt {
-    import Test.{assertTrue,  assertEq}
-
     trait testAt {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: Nil
-        assertEq[lst#nth[_0], _Box[Int]]
-        assertEq[lst#nth[_1], _Box[String]]
-        assertEq[lst#nth[_2], _Box[Double]]
-        assertEq[lst#nth[_3], _Box[Char]]
-        assertEq[lst#nth[_2#plus[_1]], _Box[Char]]
+        AssertEq[lst#nth[_0], _Box[Int]]
+        AssertEq[lst#nth[_1], _Box[String]]
+        AssertEq[lst#nth[_2], _Box[Double]]
+        AssertEq[lst#nth[_3], _Box[Char]]
+        AssertEq[lst#nth[_2#plus[_1]], _Box[Char]]
     }
 
     trait testSize {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: Nil
-        assertTrue[lst#length# equal[_4]]
-        assertTrue[Nil#length# equal[_0]]
+        AssertTrue[lst#length# equal[_4]]
+        AssertTrue[Nil#length# equal[_0]]
     }
 
     trait testIsEmpty {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: Nil
-        assertEq[Nil#isEmpty, `true`]
-        assertEq[lst#isEmpty, `false`]
+        AssertEq[Nil#isEmpty, `true`]
+        AssertEq[lst#isEmpty, `false`]
     }
 
     trait testPrepend {
         type lst1 = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil
         type lst2 = _Box[Boolean] :: _Box[Byte] :: Nil
-        assertEq[Nil, Nil# append[Nil]#force]
-        assertEq[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: _Box[Boolean] :: _Box[Byte] :: Nil, lst1# append[lst2]#force]
-        assertEq[lst1, lst1# append[Nil]#force]
-        assertEq[lst1, Nil# append[lst1]#force]
+        AssertEq[Nil, Nil# append[Nil]#force]
+        AssertEq[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: _Box[Boolean] :: _Box[Byte] :: Nil, lst1# append[lst2]#force]
+        AssertEq[lst1, lst1# append[Nil]#force]
+        AssertEq[lst1, Nil# append[lst1]#force]
 /*
-        assertEq[Nil, (Nil ++ Nil)#force]
-        assertEq[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: _Box[Boolean] :: _Box[Byte] :: Nil, (lst1 ++ lst2)#force]
-        assertEq[lst1, (lst1 ++ Nil)#force]
-        assertEq[lst1, (Nil ++ lst1)#force]
-        assertEq[lst1, ((_Box[Int] :: _Box[String] :: Nil) ++ (_Box[Double] :: Nil) ++ (_Box[Char] :: _Box[Float] :: Nil) ++ Nil)#force]
+        AssertEq[Nil, (Nil ++ Nil)#force]
+        AsertEq[_Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: _Box[Boolean] :: _Box[Byte] :: Nil, (lst1 ++ lst2)#force]
+        AssertEq[lst1, (lst1 ++ Nil)#force]
+        AssertEq[lst1, (Nil ++ lst1)#force]
+        AssertEq[lst1, ((_Box[Int] :: _Box[String] :: Nil) ++ (_Box[Double] :: Nil) ++ (_Box[Char] :: _Box[Float] :: Nil) ++ Nil)#force]
 */
     }
 
@@ -166,6 +164,6 @@ object TrivialTezt {
         type lst2 = _Box[Boolean] :: _Box[Byte] :: Nil
         type lst3 = _Box[Char] :: _Box[String] :: Nil
         type r = prependprepend[lst2, lst3, lst1]
-        assertEq[_Box[Char] :: _Box[String] :: _Box[Boolean] :: _Box[Byte] :: _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, r]
+        AssertEq[_Box[Char] :: _Box[String] :: _Box[Boolean] :: _Box[Byte] :: _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil, r]
     }
 }

@@ -4,7 +4,7 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
@@ -12,13 +12,14 @@ import scala.reflect.macros.whitebox.Context
 
 
 object Benchmark {
-    def apply(x: String): Unspecified = macro BenchmarkImpl.term_impl
+    def apply(x: String): scala.Any = macro BenchmarkImpl.untyped
 }
 
-class BenchmarkImpl(override val c: Context) extends UntypedImpl {
+
+class BenchmarkImpl(override val c: Context) extends UntypedMacro {
     import c.universe._
 
-    override protected def untyped_term_impl(x: c.Tree): c.Tree = {
+    override protected def untypedImpl(x: c.Tree): c.Tree = {
         val start = System.currentTimeMillis
         c.typecheck(x)
         val elapsed = System.currentTimeMillis - start

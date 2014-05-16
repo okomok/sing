@@ -11,7 +11,7 @@ package perf
 import com.github.okomok
 import okomok.sing._
 import Dense._
-import Test._
+
 
 
 trait StructuralComplexityTezt {
@@ -25,8 +25,8 @@ trait StructuralComplexityTezt {
     val _NatN = Nat_(N)
     type xs = List.range[_0, _NatN.apply]#force
 
-    val _diff = typeOf(
-        makro.Benchmark {"""
+    val _diff = TypeOf(
+        Benchmark {"""
              dummy[ xs#filter[not2]#force ]
         """}
     )

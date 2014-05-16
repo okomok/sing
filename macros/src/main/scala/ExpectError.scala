@@ -4,7 +4,7 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.language.experimental.macros
@@ -12,14 +12,18 @@ import scala.reflect.macros.whitebox.Context
 import scala.reflect.macros.TypecheckException
 
 
+/**
+ * Expects a specified compile-error.
+ */
 object ExpectError {
-    def apply(r: String)(x: String): Unit = macro ExpectErrorImpl.term_impl
+    def apply(r: String)(x: String): scala.Unit = macro ExpectErrorImpl.termMacro
 }
+
 
 class ExpectErrorImpl(val c: Context) {
     import c.universe._
 
-    final def term_impl(r: c.Tree)(x: c.Tree): c.Tree = {
+    final def termMacro(r: c.Tree)(x: c.Tree): c.Tree = {
         val rgx = ExtractString(c)(r)
         val code = ExtractString(c)(x)
 

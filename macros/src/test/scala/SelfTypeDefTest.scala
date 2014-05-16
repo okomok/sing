@@ -7,20 +7,21 @@
 package com.github.okomoktest.singmakrotest
 
 
-import com.github.okomok.sing.makro._
+import com.github.okomok.sing._
 
-class SelfTest extends org.scalatest.junit.JUnit3Suite {
+
+class SelfTypeDefTest extends org.scalatest.junit.JUnit3Suite {
 
     class Abc {
-        @Self type me
+        @selfTypeDef type me
     }
 
     class Foo[x] {
-        @Self type self
+        @selfTypeDef type self
     }
 
     class DDD {
-        @Self type self[x]
+        @selfTypeDef type self[x]
     }
 
     def testTrivial {

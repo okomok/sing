@@ -67,11 +67,9 @@ class SliceTest extends org.scalatest.junit.JUnit3Suite {
 
 
 object SliceTezt {
-    import Test.assertEq
-
     trait testSlice {
         type lst = _Box[Int] :: _Box[String] :: _Box[Double] :: _Box[Char] :: _Box[Float] :: Nil
-        assertEq[Nil, lst#slice[_2, _2]#force]
-        assertEq[_Box[String] :: _Box[Double] :: _Box[Char] :: Nil, lst#slice[_1, _4]#force]
+        AssertEq[Nil, lst#slice[_2, _2]#force]
+        AssertEq[_Box[String] :: _Box[Double] :: _Box[Char] :: Nil, lst#slice[_1, _4]#force]
     }
 }

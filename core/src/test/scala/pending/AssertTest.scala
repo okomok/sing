@@ -10,8 +10,8 @@ package pending
 
 import com.github.okomok.sing
 import sing._
-import Test._
-import sing.Test.CompileError._
+
+import sing.CompileError._
 
 
 import scala.language.existentials
@@ -23,114 +23,114 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
     final val goodError = "wow"
 
-    final val badSuccess2 = "expectError(NotFound) { goodError }"
+    final val badSuccess2 = "ExpectError(NotFound) { goodError }"
 
     def testTrivial() {
 
-        expectError(NotFound) {
+        ExpectError(NotFound) {
             goodError
         }
 
-        expectError(UnexpectedCompile) {"""
+        ExpectError(UnexpectedCompile) {"""
             // good error
-            expectError(AnyError) {
+            ExpectError(AnyError) {
                 badSuccess
             }
         """}
 
-        expectError(UnexpectedCompile) {"""
+        ExpectError(UnexpectedCompile) {"""
             // good error
-            expectError(AnyError) {
+            ExpectError(AnyError) {
                 badSuccess2
             }
         """}
 
-        expectError(AnyError) {"""
-            error
+        ExpectError(AnyError) {"""
+            Error()
         """}
 
         type no = Nothing
 
-        val isEq_no_Nothing = isEq[no, Nothing]
+        val isEq_no_Nothing = IsEq[no, Nothing]
 
-        assertTrue[isEq_no_Nothing.apply]
+        AssertTrue[isEq_no_Nothing.apply]
 
-        expectError(AssertError) {"""
-            val isEq_Int_Nothing = isEq[Int, Nothing]
-            assertTrue[isEq_Int_Nothing.apply]
+        ExpectError(AssertError) {"""
+            val isEq_Int_Nothing = IsEq[Int, Nothing]
+            AssertTrue[isEq_Int_Nothing.apply]
         """}
 
-        val conformes_Int_AnyVal = conforms[Int, AnyVal]
+        val conformes_Int_AnyVal = Conforms[Int, AnyVal]
 
-        assertTrue[conformes_Int_AnyVal.apply]
+        AssertTrue[conformes_Int_AnyVal.apply]
 
-        expectError(AssertError) {"""
-            assertConforms[AnyVal, Int]
+        ExpectError(AssertError) {"""
+            AssertConforms[AnyVal, Int]
         """}
 
-        val conforms_AnyVal_Int = conforms[AnyVal, Int]
+        val conforms_AnyVal_Int = Conforms[AnyVal, Int]
 
-        assertFalse[conforms_AnyVal_Int.apply]
+        AssertFalse[conforms_AnyVal_Int.apply]
 
-        expectError(AssertError) {"""
-            assertFalse[conformes_Int_AnyVal.apply]
+        ExpectError(AssertError) {"""
+            AssertFalse[conformes_Int_AnyVal.apply]
         """}
 
         type i = Int
 
-        val isEq_AnyVal_i = isEq[AnyVal, i]
-        assertFalse[isEq_AnyVal_i.apply]
+        val isEq_AnyVal_i = IsEq[AnyVal, i]
+        AssertFalse[isEq_AnyVal_i.apply]
 
-        expectError(AssertError) {"""
-            val isEq_i_Int = isEq[i, Int]
-            assertFalse[isEq_i_Int.apply]
+        ExpectError(AssertError) {"""
+            val isEq_i_Int = IsEq[i, Int]
+            AssertFalse[isEq_i_Int.apply]
         """}
 
         def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
         type foo[x <: Any] = x#asNat#plus[Dense._2]
 
-        expectError(AbstractType) {"""
-            check(foo(Nil))
+        ExpectError(AbstractType) {"""
+            Check(foo(Nil))
         """}
 /*
-        expectError(AbstractType) {"""
-            dummy[ check[foo[Nil]] ]
+        ExpectError(AbstractType) {"""
+            dummy[ Check[foo[Nil]] ]
         """}
 */
-        val _x = check(Some(Dense._2).get)
+        val _x = Check(Some(Dense._2).get)
         val x = _x.apply
-        type x = _x.apply //check[Some[Dense._2]#get]
+        type x = _x.apply //Check[Some[Dense._2]#get]
 
-        expectError(AssertError) {"""
-            assertEq(Dense._3, x)
+        ExpectError(AssertError) {"""
+            AssertEq(Dense._3, x)
         """}
 
-        expectError(AssertError) {"""
-            assertEq[Dense._3, x]
+        ExpectError(AssertError) {"""
+            AssertEq[Dense._3, x]
         """}
 /*
-        expectError(AssertError) {"""
-            place[ assertEq[Char, Int] ]
+        ExpectError(AssertError) {"""
+            place[ AssertEq[Char, Int] ]
         """}
 */
-        expectError(NotFound) {"""
-            // dummy[ assertEq[Char, Int] ] // why not error?
+        ExpectError(NotFound) {"""
+            // dummy[ AssertEq[Char, Int] ] // why not error?
             wow
         """}
 /*
-        expectError(AssertError) {"""
-            place[ assertFalse[conforms[Int, Int]] ]
+        ExpectError(AssertError) {"""
+            place[ AssertFalse[conforms[Int, Int]] ]
+        """}
+
+        ExpectError(AnyError) {"""
+            place[Error]
         """}
 */
-        expectError(AnyError) {"""
-            place[error]
-        """}
+        AssertEq(Dense._2, x)
+        AssertEq[Dense._2, x]
 
-        assertEq(Dense._2, x)
-        assertEq[Dense._2, x]
-
-        expectError(NothingType) {"""
-            check(None.get)
+        ExpectError(NothingType) {"""
+            Check(None.get)
         """}
 
         ()
@@ -140,26 +140,26 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
          def foo[x <: Nat](x: x): foo[x] = `if`(id(x).equal(Dense._2), Throw(new java.lang.Error("doh")), Const(id(x).increment)).apply
         type foo[x <: Nat]               = `if`[id[x]#equal[Dense._2], Throw                            , Const[id[x]#increment]]#apply
 
-        val _x = check(foo(Dense._3))
+        val _x = Check(foo(Dense._3))
         val x = _x.apply
-        type x = _x.apply // = check[foo[Dense._3]]
+        type x = _x.apply // = Check[foo[Dense._3]]
 
-        expectError(NothingType) {"""
-            check(foo(Dense._2))
+        ExpectError(NothingType) {"""
+            Check(foo(Dense._2))
         """}
 
-        expectError(NothingType) {"""
-            check(dummy[foo[Dense._2]]) // Nothing
+        ExpectError(NothingType) {"""
+            Check(dummy[foo[Dense._2]]) // Nothing
         """}
 
-        expectError(AbstractType) {"""
-            check(dummy[Nat#increment]) // abstract
+        ExpectError(AbstractType) {"""
+            Check(dummy[Nat#increment]) // abstract
         """}
 
-        val _xt = check[Dense._3]
+        val _xt = Check[Dense._3]
         type xt = _xt.apply
 
-        makro.AssertEq[xt, Dense._3]
+        AssertEq[xt, Dense._3]
     }
 }
 

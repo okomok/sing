@@ -26,7 +26,7 @@ class AddSeqTest extends org.scalatest.junit.JUnit3Suite {
 
         type l   = _0 :: _1 :: _2 :: _3 :: _4 :: _5 :: _8 :: Nil
         val l: l = _0 :: _1 :: _2 :: _3 :: _4 :: _5 :: _8 :: Nil
-        Test.assertEq[l, m#asList#force]
+        AssertEq[l, m#asList#force]
         assertEquals(l, m.asList)
    }
 
@@ -36,7 +36,7 @@ class AddSeqTest extends org.scalatest.junit.JUnit3Suite {
 
         type l   = _8 :: Nil
         val l: l = _8 :: Nil
-        Test.assertEq[l, m#asList#force]
+        AssertEq[l, m#asList#force]
         assertEquals(l, m.asList)
    }
 

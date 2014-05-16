@@ -39,12 +39,12 @@ class PrimesTest extends org.scalatest.junit.JUnit3Suite {
          val some: some = primes.take(_10).force
         type some       = primes#take[_10]#force
 
-        Test.assertEq(some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil)
-        Test.assertEq[some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil]
+        AssertEq(some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil)
+        AssertEq[some, _2 :: _3 :: _5 :: _7 :: _11 :: _13 :: _17 :: _19 :: _23 :: _29 :: Nil]
     }
 
     def testBench {
-//        makro.Benchmark { dummy[primes#take[_10]#force] } // memoized (nearly 0msec)
-//        makro.Benchmark { dummy[primes#take[_12]#force] } // about 4000msec
+//        Benchmark { dummy[primes#take[_10]#force] } // memoized (nearly 0msec)
+//        Benchmark { dummy[primes#take[_12]#force] } // about 4000msec
     }
 }

@@ -4,13 +4,13 @@
 // Distributed under the New BSD license.
 
 
-package com.github.okomok.sing.makro
+package com.github.okomok.sing
 
 
 import scala.reflect.macros.whitebox.Context
 
 
-object ExtractString {
+private object ExtractString {
     def apply(c: Context)(x: c.Tree): String = {
         import c.universe._
 
