@@ -68,9 +68,7 @@ object SingMethod extends AnnotationImpl {
 
                 List(t, termmethod)
             }
-            case t => {
-                List(t)
-            }
+            case t => List(t)
         }
     }
 

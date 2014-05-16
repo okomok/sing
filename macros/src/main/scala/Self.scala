@@ -20,10 +20,14 @@ object Self extends AnnotationImpl {
     override protected def annot_tree_impl(c: Context)(ts: List[c.Tree]): List[c.Tree] = {
         import c.universe._
 
-        val tempname = c.freshName()
-        val tempdef: c.Tree = q"val $tempname = ${here(c)}.WeakTypeOf(this)"
-        val selfdef: c.Tree = q"type self = $tempname.apply"
-
-        tempdef :: selfdef :: ts
+        ts.flatMap {
+            case TypeDef(mods, name, tparams, rhs) => {
+                val v = TermName(c.freshName())
+                val termdef = q"val $v = ${here(c)}.WeakTypeOf(this)"
+                val typedef = TypeDef(mods, name, tparams, tq"${Ident(v)}.self")
+                List(termdef, typedef)
+            }
+            case t => List(t)
+        }
     }
 }
