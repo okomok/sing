@@ -62,6 +62,9 @@ class SingMethodTest extends org.scalatest.junit.JUnit3Suite {
         type self = CallFromObj.type
         @singmethod
         override type apply[n <: Any] = K.k.apply[n]
+
+        @singmethod
+        type foo[n <: Nat] = Inc.foo[n, `true`]
     }
 /*
     @singmethod
@@ -86,6 +89,8 @@ class SingMethodTest extends org.scalatest.junit.JUnit3Suite {
         val p: _3 = Inc.v
 
         val m: _3 :: Nil = CallFromPackage(_3)
+
+        val r: _4 = CallFromObj.foo(_3)
 
 //        val q: foo[_3]#apply[_2] = foo(_3)(_2)
 //        val z: _5 = q
