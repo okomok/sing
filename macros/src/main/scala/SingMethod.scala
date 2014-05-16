@@ -42,21 +42,21 @@ class SingMethodImpl(override val c: Context) extends AnnotationImpl {
     }
 
     // [n <: N, m <: M,...] --> (n: n, m: m,...)
-    private def singparams(tparams: List[c.universe.TypeDef]): List[c.universe.ValDef] = {
+    private def singparams(tparams: List[TypeDef]): List[ValDef] = {
         tparams.map { case TypeDef(mods, name, tpt, rhs) =>
             ValDef(mods, name.toTermName, Ident(name), EmptyTree)
         }
     }
 
     // [n <: N, m <: M,...] --> [n, m,...]
-    private def typeargs(tparams: List[c.universe.TypeDef]): List[c.universe.Ident] = {
+    private def typeargs(tparams: List[TypeDef]): List[Ident] = {
         tparams.map { case TypeDef(_, name, _, _) =>
             Ident(name)
         }
     }
 
     // [n <: N, m <: M,...] --> (n, m,...)
-    private def termargs(tparams: List[c.universe.TypeDef]): List[c.universe.Ident] = {
+    private def termargs(tparams: List[TypeDef]): List[Ident] = {
         tparams.map { case TypeDef(_, name, _, _) =>
             Ident(name.toTermName)
         }
