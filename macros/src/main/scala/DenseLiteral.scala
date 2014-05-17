@@ -51,14 +51,14 @@ object Dense_ {
 }
 
 
-class DenseLiteralImpl(override val c: Context) extends DepMacro1 {
+final class DenseLiteralImpl(val c: Context) {
     import c.universe._
 
-    override protected def termMacroImpl(x: c.Tree): c.Tree = {
+    def termMacro(x: c.Tree): c.Tree = {
         Dense_.term_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
     }
 
-    override protected def typeMacroImpl(x: c.Tree): c.Tree = {
+    def typeMacro(x: c.Tree): c.Tree = {
         import c.universe._
         Dense_.type_fromBinaryString(c)(Integer.toBinaryString(ExtractNat(c)(x)))
     }

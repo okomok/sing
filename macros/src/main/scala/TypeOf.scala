@@ -19,8 +19,6 @@ object TypeOf {
 }
 
 
-class TypeOfImpl(override val c: Context) extends DepMacro1 {
-    import c.universe._
-    override protected def termMacroImpl(x: c.Tree): c.Tree = x
-    override protected def typeMacroImpl(x: c.Tree): c.Tree = TypeTree(x.tpe)
+final class TypeOfImpl(val c: Context) {
+    def termMacro(x: c.Tree): c.Tree = TermWrapper(c)(x)
 }

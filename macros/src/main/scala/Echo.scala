@@ -15,12 +15,12 @@ import scala.reflect.macros.whitebox.Context
  * Prints a tree.
  */
 object Echo {
-    def apply[x]             : scala.Unit = macro EchoImpl.termMacro_[x]
+    def apply[x]           : scala.Unit = macro EchoImpl.termMacro_[x]
     def apply(x: scala.Any): scala.Unit = macro EchoImpl.termMacro
 }
 
 
-class EchoImpl(override val c: Context) extends AssertionMacro1 {
+final class EchoImpl(override val c: Context) extends AssertionMacroImpl1 {
     import c.universe._
 
     override protected def assertionTermImpl(x: c.Tree): AssertionResult = {
@@ -39,12 +39,12 @@ class EchoImpl(override val c: Context) extends AssertionMacro1 {
  * Prints a raw tree.
  */
 object EchoRaw {
-    def apply[x]             : scala.Unit = macro EchoRawImpl.termMacro_[x]
+    def apply[x]           : scala.Unit = macro EchoRawImpl.termMacro_[x]
     def apply(x: scala.Any): scala.Unit = macro EchoRawImpl.termMacro
 }
 
 
-class EchoRawImpl(override val c: Context) extends AssertionMacro1 {
+final class EchoRawImpl(override val c: Context) extends AssertionMacroImpl1 {
     import c.universe._
 
     override protected def assertionTermImpl(x: c.Tree): AssertionResult = {

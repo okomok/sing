@@ -7,22 +7,29 @@
 package com.github.okomok.sing
 
 
-trait TypeThrowMacro extends DepMacro1 {
+// Will be removed.
+
+trait TypeThrowMacroImpl extends InContext {
     protected def what: c.Tree
 
     import c.universe._
 
-    final override protected def termMacroImpl(msg: c.Tree): c.Tree = {
-        val ret = typeMacroImpl(msg)
+    final def termMacro(x: c.Tree): c.Tree = TermWrapper(c) {
         q"""
-            (throw new ${what}(${msg})): $ret
+            (throw new ${what}(${x})): ${_errorType(x)}
         """
     }
 
-    final override protected def typeMacroImpl(msg: c.Tree): c.Tree = {
+    final def typeMacro(x: c.Tree): c.Tree = {
         tq"""
-            _root_.scala.Nothing with ${what}
+            ${_errorType(x)}
         """
-        // with ${ConstantTypeOf.termMacro(c)(msg)}
+    }
+
+    final def _errorType(x: c.Tree): c.Tree = {
+        tq"""
+            _root_.scala.Nothing with ${x}
+        """
+        // with ${ConstantTypeOf.termMacro(c)(x)}
     }
 }

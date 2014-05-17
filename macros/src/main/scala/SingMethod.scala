@@ -12,14 +12,15 @@ import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 
-class singmethod extends StaticAnnotation {
-    def macroTransform(annottees: scala.Any*): scala.Any = macro SingmethodImpl.annot
+final class singmethod extends StaticAnnotation {
+    def macroTransform(annottees: scala.Any*): scala.Any = macro SingmethodImpl.annotMacro
 }
 
-class SingmethodImpl(override val c: Context) extends AnnotationMacro {
+
+final class SingmethodImpl(override val c: Context) extends AnnotationMacroImpl {
     import c.universe._
 
-    override protected def annotImpl(ts: scala.List[c.Tree]): scala.List[c.Tree] = {
+    override protected def annotMacroImpl(ts: scala.List[c.Tree]): scala.List[c.Tree] = {
         ts.flatMap {
             case t @ TypeDef(mods, name, tparams, rhs) => {
                 val sparams = singparams(tparams)

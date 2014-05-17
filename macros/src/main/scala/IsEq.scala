@@ -20,7 +20,7 @@ object IsEq {
 }
 
 
-class IsEqImpl(override val c: Context) extends PredicateMacro2 {
+final class IsEqImpl(override val c: Context) extends PredicateMacroImpl2 {
     override protected def predicateTypeOnly(x: c.Type, y: c.Type): scala.Boolean = {
         x <:< y && y <:< x
     }

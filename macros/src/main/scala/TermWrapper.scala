@@ -7,12 +7,20 @@
 package com.github.okomok.sing
 
 
+import scala.reflect.macros.whitebox.Context
+
+
 trait TermWrapper extends TypeWrapper {
-     def unwrap: unwrap
+    def unwrap: unwrap
 }
 
 
 object TermWrapper {
+    def apply(c: Context)(x: c.Tree): c.Tree = {
+        import c.universe._
+        q"${sing_(c)}.TermWrapper.of($x)"
+    }
+
     def of[x](x: x): of[x] = new TermWrapper {
         override  def unwrap: unwrap = x
         override type unwrap         = x

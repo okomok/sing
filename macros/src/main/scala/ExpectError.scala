@@ -20,10 +20,10 @@ object ExpectError {
 }
 
 
-class ExpectErrorImpl(val c: Context) {
+final class ExpectErrorImpl(val c: Context) {
     import c.universe._
 
-    final def termMacro(r: c.Tree)(x: c.Tree): c.Tree = {
+    def termMacro(r: c.Tree)(x: c.Tree): c.Tree = {
         val rgx = ExtractString(c)(r)
         val code = ExtractString(c)(x)
 

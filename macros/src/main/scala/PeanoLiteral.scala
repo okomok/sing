@@ -15,11 +15,12 @@ object Peano_ {
     def apply(x: Int): scala.Any = macro PeanoLiteralImpl.termMacro
 }
 
-class PeanoLiteralImpl(override val c: Context) extends DepMacro1 {
+
+final class PeanoLiteralImpl(val c: Context) {
     import c.universe._
 
     // 2 --> Succ(Succ(Zero))
-    override protected def termMacroImpl(x: c.Tree): c.Tree = {
+    def termMacro(x: c.Tree): c.Tree = {
         val zero: c.Tree = q"${sing_(c)}.Zero"
         val succ: c.Tree = q"${sing_(c)}.Succ"
 
@@ -28,7 +29,7 @@ class PeanoLiteralImpl(override val c: Context) extends DepMacro1 {
         }
     }
 
-    override protected def typeMacroImpl(x: c.Tree): c.Tree = {
+    def typeMacro(x: c.Tree): c.Tree = {
         val zero: c.Tree = tq"${sing_(c)}.Zero"
         val succ: c.Tree = tq"${sing_(c)}.Succ"
 

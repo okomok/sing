@@ -20,7 +20,7 @@ object AssertEq {
 }
 
 
-class AssertEqImpl(override val c: Context) extends AssertionMacro2 {
+final class AssertEqImpl(override val c: Context) extends AssertionMacroImpl2 {
     import c.universe._
 
     override protected def assertionTypeOnly(x: c.Type, y: c.Type): AssertionResult = {
@@ -42,11 +42,8 @@ object AssertNeq {
 }
 
 
-class AssertNeqImpl(override val c: Context) extends AssertionMacro2 {
+final class AssertNeqImpl(override val c: Context) extends AssertionMacroImpl2 {
     import c.universe._
-
-    def apply[x, y]            : scala.Unit = macro termMacro_[x, y]
-    def apply[x, y](x: x, y: y): scala.Unit = macro termMacro
 
     override protected def assertionTypeOnly(x: c.Type, y: c.Type): AssertionResult = {
         if (!(x =:= y)) {

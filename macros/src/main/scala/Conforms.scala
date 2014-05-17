@@ -20,7 +20,6 @@ object Conforms {
 }
 
 
-class ConformsImpl(override val c: Context) extends PredicateMacro2 {
-    import c.universe._
+final class ConformsImpl(override val c: Context) extends PredicateMacroImpl2 {
     override protected def predicateTypeOnly(x: c.Type, y: c.Type): scala.Boolean = x <:< y
 }

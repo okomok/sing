@@ -10,7 +10,7 @@ package com.github.okomok.sing
 import scala.reflect.macros.whitebox.Context
 
 
-object AddLazyFlag {
+private object AddLazyFlag {
     def apply(c: Context)(mods: c.Modifiers): c.Modifiers = {
         import c.universe._
 

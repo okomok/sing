@@ -16,7 +16,7 @@ object Unsupported {
 }
 
 
-class UnsupportedImpl(override val c: Context) extends TypeThrowMacro {
+final class UnsupportedImpl(override val c: Context) extends TypeThrowMacroImpl {
     import c.universe._
 
     override protected def what: c.Tree = {

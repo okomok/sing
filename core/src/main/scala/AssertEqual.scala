@@ -21,7 +21,7 @@ object AssertEqual {
 }
 
 
-class AssertEqualImpl(override val c: Context) extends AssertionMacro2 {
+final class AssertEqualImpl(override val c: Context) extends AssertionMacroImpl2 {
     import c.universe._
 
     override protected def assertionTermImpl(x: c.Tree, y: c.Tree): AssertionResult = {
@@ -62,7 +62,7 @@ object AssertNequal {
 }
 
 
-class AssertNequalImpl(override val c: Context) extends AssertionMacro2 {
+final class AssertNequalImpl(override val c: Context) extends AssertionMacroImpl2 {
     import c.universe._
 
     override protected def assertionTermImpl(x: c.Tree, y: c.Tree): AssertionResult = {

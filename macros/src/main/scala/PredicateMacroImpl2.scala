@@ -7,7 +7,7 @@
 package com.github.okomok.sing
 
 
-trait PredicateMacro2 extends SingMacro2 {
+trait PredicateMacroImpl2 extends InContext {
     protected def predicateTypeOnly(x: c.Type, y: c.Type): scala.Boolean = ???
     protected def predicateTermImpl(x: c.Tree, y: c.Tree): scala.Boolean = predicateTypeOnly(x.tpe, y.tpe)
     protected def predicateTypeImpl(x: c.Tree, y: c.Tree): scala.Boolean = predicateTypeOnly(x.tpe, y.tpe)
@@ -15,10 +15,14 @@ trait PredicateMacro2 extends SingMacro2 {
     import c.universe._
 
     final def termMacro_[x, y](implicit x: c.WeakTypeTag[x], y: c.WeakTypeTag[y]): c.Tree = {
-        typeMacro(TypeTree(x.tpe), TypeTree(y.tpe))
+        if (predicateTypeImpl(TypeTree(x.tpe), TypeTree(y.tpe))) {
+            q"${sing_(c)}.`true`"
+        } else {
+            q"${sing_(c)}.`false`"
+        }
     }
 
-    final override protected def termMacroImpl(x: c.Tree, y: c.Tree): c.Tree = {
+    final def termMacro(x: c.Tree, y: c.Tree): c.Tree = {
         if (predicateTermImpl(x, y)) {
             q"${sing_(c)}.`true`"
         } else {
@@ -26,7 +30,7 @@ trait PredicateMacro2 extends SingMacro2 {
         }
     }
 
-    final override protected def typeMacroImpl(x: c.Tree, y: c.Tree): c.Tree = {
+    final def typeMacro(x: c.Tree, y: c.Tree): c.Tree = {
         if (predicateTypeImpl(x, y)) {
             tq"${sing_(c)}.`true`"
         } else {

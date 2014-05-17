@@ -19,7 +19,7 @@ object Error {
 }
 
 
-class ErrorImpl(val c: Context) {
+final class ErrorImpl(val c: Context) {
     import c.universe._
 
     def termMacro(): c.Tree = {

@@ -20,10 +20,10 @@ object AssertConforms {
 }
 
 
-class AssertConformsImpl(override val c: Context) extends AssertionMacro2 {
+final class AssertConformsImpl(override val c: Context) extends AssertionMacroImpl2 {
     import c.universe._
 
-    final override protected def assertionTypeOnly(x: c.Type, y: c.Type): AssertionResult = {
+    override protected def assertionTypeOnly(x: c.Type, y: c.Type): AssertionResult = {
         if (x <:< y) {
             AssertionSuccess
         } else {

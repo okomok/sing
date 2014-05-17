@@ -20,7 +20,7 @@ object AssertTrue {
 }
 
 
-class AssertTrueImpl(override val c: Context) extends AssertionMacro1 {
+final class AssertTrueImpl(override val c: Context) extends AssertionMacroImpl1 {
     import c.universe._
 
     override protected def assertionTypeOnly(x: c.Type): AssertionResult = {
@@ -42,7 +42,7 @@ object AssertFalse {
 }
 
 
-class AssertFalseImpl(override val c: Context) extends AssertionMacro1 {
+final class AssertFalseImpl(override val c: Context) extends AssertionMacroImpl1 {
     import c.universe._
     override protected def assertionTypeOnly(x: c.Type): AssertionResult = {
         if (x =:= weakTypeOf[`false`]) {

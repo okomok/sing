@@ -17,6 +17,6 @@ object IsAbstract {
 }
 
 
-class IsAbstractImpl(override val c: Context) extends PredicateMacro1 {
+final class IsAbstractImpl(override val c: Context) extends PredicateMacroImpl1 {
     override protected def predicateTypeOnly(x: c.Type): scala.Boolean = IsAbstractType(c)(x)
 }

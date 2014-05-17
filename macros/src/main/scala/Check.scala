@@ -20,27 +20,28 @@ object Check {
 }
 
 
-class CheckImpl(val c: Context) {
+final class CheckImpl(val c: Context) {
     import c.universe._
 
-    final def termMacro_[x](implicit x: c.WeakTypeTag[x]): c.Tree = typeMacro(TypeTree(x.tpe))
-
-    final def termMacro(x: c.Tree): c.Tree = {
-        _check(x)
-        q"${sing_(c)}.TermWrapper.of($x)"
+    def termMacro_[x](implicit x: c.WeakTypeTag[x]): c.Tree = TypeWrapper(c) {
+        _check(TypeTree(x.tpe))
     }
 
-    final def typeMacro(x: c.Tree): c.Tree = {
+    def termMacro(x: c.Tree): c.Tree = TermWrapper(c) {
         _check(x)
-        q"${sing_(c)}.TypeWrapper.of[$x]"
     }
 
-    private def _check(x: c.Tree): scala.Unit = {
+    def typeMacro(x: c.Tree): c.Tree = {
+        _check(x)
+    }
+
+    private def _check(x: c.Tree): c.Tree = {
         val t = x.tpe
         if (t <:< weakTypeOf[Nothing]) {
             CompileError.nothingType (c)(show(t) + ", which is expanded to " + show(t.dealias))
         } else if (IsAbstractType(c)(t)) {
             CompileError.abstractType(c)(show(t) + ", which is expanded to " + show(t.dealias))
         }
+        x
     }
 }

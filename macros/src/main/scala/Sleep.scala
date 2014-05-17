@@ -16,15 +16,15 @@ object Sleep {
 }
 
 
-class SleepImpl(override val c: Context) extends DepMacro1 {
+final class SleepImpl(val c: Context) {
     import c.universe._
 
-    override protected def termMacroImpl(x: c.Tree): c.Tree = {
+    def termMacro(x: c.Tree): c.Tree = {
         Thread.sleep(extractLong(x))
         q"()"
     }
 
-    override protected def typeMacroImpl(x: c.Tree): c.Tree = {
+    def typeMacro(x: c.Tree): c.Tree = {
         Thread.sleep(extractLong(x))
         tq"_root_.scala.Unit"
     }
