@@ -7,7 +7,7 @@
 package com.github.okomok.sing
 
 
-trait Singular extends Any with RefEquals {
+trait Singular extends AsAny with RefEquals {
     override  def unsing: unsing = self
     override type unsing         = self
 }

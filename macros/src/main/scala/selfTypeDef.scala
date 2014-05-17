@@ -25,7 +25,7 @@ class SelfTypeDefImpl(override val c: Context) extends AnnotationMacro {
             case TypeDef(mods, name, tparams, rhs) => {
                 val v = TermName(c.freshName())
                 val termdef = q"val $v = ${sing_(c)}.TypeOf(this)"
-                val typedef = TypeDef(mods, name, tparams, tq"${Ident(v)}.apply")
+                val typedef = TypeDef(mods, name, tparams, tq"${Ident(v)}.unwrap")
                 scala.List(termdef, typedef)
             }
             case t => scala.List(t)

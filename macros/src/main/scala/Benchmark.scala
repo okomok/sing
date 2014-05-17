@@ -23,6 +23,7 @@ class BenchmarkImpl(override val c: Context) extends UntypedMacro {
         val start = System.currentTimeMillis
         c.typecheck(x)
         val elapsed = System.currentTimeMillis - start
-        q"$elapsed"
+        val i = elapsed.toInt
+        q"${sing_(c)}.Nat_($i)"
     }
 }

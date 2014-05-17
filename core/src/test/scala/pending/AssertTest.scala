@@ -53,16 +53,16 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         val isEq_no_Nothing = IsEq[no, Nothing]
 
-        AssertTrue[isEq_no_Nothing.apply]
+        AssertTrue[isEq_no_Nothing.unwrap]
 
         ExpectError(AssertError) {"""
             val isEq_Int_Nothing = IsEq[Int, Nothing]
-            AssertTrue[isEq_Int_Nothing.apply]
+            AssertTrue[isEq_Int_Nothing.unwrap]
         """}
 
         val conformes_Int_AnyVal = Conforms[Int, AnyVal]
 
-        AssertTrue[conformes_Int_AnyVal.apply]
+        AssertTrue[conformes_Int_AnyVal.unwrap]
 
         ExpectError(AssertError) {"""
             AssertConforms[AnyVal, Int]
@@ -70,20 +70,20 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
 
         val conforms_AnyVal_Int = Conforms[AnyVal, Int]
 
-        AssertFalse[conforms_AnyVal_Int.apply]
+        AssertFalse[conforms_AnyVal_Int.unwrap]
 
         ExpectError(AssertError) {"""
-            AssertFalse[conformes_Int_AnyVal.apply]
+            AssertFalse[conformes_Int_AnyVal.unwrap]
         """}
 
         type i = Int
 
         val isEq_AnyVal_i = IsEq[AnyVal, i]
-        AssertFalse[isEq_AnyVal_i.apply]
+        AssertFalse[isEq_AnyVal_i.unwrap]
 
         ExpectError(AssertError) {"""
             val isEq_i_Int = IsEq[i, Int]
-            AssertFalse[isEq_i_Int.apply]
+            AssertFalse[isEq_i_Int.unwrap]
         """}
 
         def foo[x <: Any](x: x) = x.asNat.plus(Dense._2)
@@ -98,8 +98,8 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         """}
 */
         val _x = Check(Some(Dense._2).get)
-        val x = _x.apply
-        type x = _x.apply //Check[Some[Dense._2]#get]
+        val x = _x.unwrap
+        type x = _x.unwrap //Check[Some[Dense._2]#get]
 
         ExpectError(AssertError) {"""
             AssertEq(Dense._3, x)
@@ -141,8 +141,8 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         type foo[x <: Nat]               = `if`[id[x]#equal[Dense._2], Throw                            , Const[id[x]#increment]]#apply
 
         val _x = Check(foo(Dense._3))
-        val x = _x.apply
-        type x = _x.apply // = Check[foo[Dense._3]]
+        val x = _x.unwrap
+        type x = _x.unwrap // = Check[foo[Dense._3]]
 
         ExpectError(NothingType) {"""
             Check(foo(Dense._2))
@@ -157,7 +157,7 @@ class AssertTest extends org.scalatest.junit.JUnit3Suite {
         """}
 
         val _xt = Check[Dense._3]
-        type xt = _xt.apply
+        type xt = _xt.unwrap
 
         AssertEq[xt, Dense._3]
     }

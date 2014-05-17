@@ -8,16 +8,16 @@ package com.github.okomok.sing
 
 
 trait TypeWrapper {
-    type apply
+    type unwrap
 }
 
 
 object TypeWrapper {
     def of[x]: of[x] = new TypeWrapper {
-        override type apply = x
+        override type unwrap = x
     }
 
     type of[x] = TypeWrapper {
-        type apply = x
+        type unwrap = x
     }
 }

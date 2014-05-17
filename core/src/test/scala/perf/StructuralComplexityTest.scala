@@ -23,13 +23,13 @@ trait StructuralComplexityTezt {
 
     final val N = 1
     val _NatN = Nat_(N)
-    type xs = List.range[_0, _NatN.apply]#force
+    type xs = List.range[_0, _NatN.unwrap]#force
 
     val _diff = TypeOf(
         Benchmark {"""
              dummy[ xs#filter[not2]#force ]
         """}
     )
-    type diff = _diff.apply
+    type diff = _diff.unwrap
     // echo[diff]
 }

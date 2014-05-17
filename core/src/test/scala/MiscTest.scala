@@ -18,10 +18,10 @@ trait MiscTest {
         val y = id(n).plus(Dense._1)
 
         val _x = TypeOf(x)
-        type x = _x.apply
+        type x = _x.unwrap
 
         val _y = TypeOf(y)
-        type y = _y.apply
+        type y = _y.unwrap
         type r = n#plus[Dense._1]
 
 
@@ -41,10 +41,10 @@ trait MiscTest {
 
     trait Foo[T] {
         val _self = TypeOf(this)
-        type self = _self.apply
+        type self = _self.unwrap
         type self_ = this.type
         val _self__ = TypeOf(id(null.asInstanceOf[this.type]))
-        type self__ = _self__.apply
+        type self__ = _self__.unwrap
 
         implicitly[self =:= self__ ]
 

@@ -19,17 +19,11 @@ trait MemoizationTest {
     type N = _1
 
     trait Diff {
-        val _diff = TypeOf(
-            Benchmark {"""
-                dummy[SlowFibonacci.fibonacci[N]]
-            """}
-            -
-            Benchmark {"""
-                dummy[FastFibonacci.fibonacci[N]]
-            """}
-        )
-        type diff = _diff.apply
+        val b1 = Benchmark {"dummy[SlowFibonacci.fibonacci[N]]"}
+        val b2 = Benchmark {"dummy[FastFibonacci.fibonacci[N]]"}
+        type b1 = b1.unwrap
+        type b2 = b2.unwrap
+        type diff = b2#minus[b1]
        // echo[diff]
     }
-
 }

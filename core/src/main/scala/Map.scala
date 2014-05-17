@@ -17,7 +17,7 @@ trait Map extends PartialFunction {
     override type self <: Map
     override type unsing <: scala.collection.Map[scala.Any, scala.Any]
 
-     def asBSTree: asBSTree = Unsupported("Map.asBSTree").apply
+     def asBSTree: asBSTree = Unsupported("Map.asBSTree").unwrap
     type asBSTree <: BSTree
 
      def size: size

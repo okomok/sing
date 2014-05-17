@@ -20,16 +20,16 @@ class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial {
         val _bs = Nat_(5)
-         val bs: bs = _bs.apply
-        type bs     = _bs.apply
+         val bs: bs = _bs.unwrap
+        type bs     = _bs.unwrap
         AssertEq(bs, _1B D_:: _0B D_:: _1B D_:: DNil)
         AssertEq[bs, _1B D_:: _0B D_:: _1B D_:: DNil]
     }
 
     def testNil {
         val _bs = Nat_(0)
-         val bs: bs = _bs.apply
-        type bs     = _bs.apply
+         val bs: bs = _bs.unwrap
+        type bs     = _bs.unwrap
         AssertEq(bs, DNil)
         AssertEq[bs, DNil]
     }
@@ -47,13 +47,13 @@ class NatLiteralTest extends org.scalatest.junit.JUnit3Suite {
 
     def testTrivial2 {
          val _bs = Nat_(42)
-         val  bs: bs = _bs.apply
-         type bs     = _bs.apply
+         val  bs: bs = _bs.unwrap
+         type bs     = _bs.unwrap
          JAssert.assertEquals(42, bs.unsing)
 
          val _Nat10 = Nat_(10)
-         type n = bs#plus[_Nat10.apply]
+         type n = bs#plus[_Nat10.unwrap]
          val _Nat52 = Nat_(52)
-         AssertEq[_Nat52.apply, n]
+         AssertEq[_Nat52.unwrap, n]
     }
 }

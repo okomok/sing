@@ -59,20 +59,20 @@ final case class BSNil[o <: Ordering](override val ord: o) extends AsBSTree {
     override type size       = Dense._0
 
     private[sing] lazy val _key = Unsupported("BSNil.key")
-    override  def key: key = _key.apply
-    override type key      = _key.apply
+    override  def key: key = _key.unwrap
+    override type key      = _key.unwrap
 
     private[sing] lazy val _value =  Unsupported("BSNil.value")
-    override  def value: value = _value.apply
-    override type value        = _value.apply
+    override  def value: value = _value.unwrap
+    override type value        = _value.unwrap
 
     private[sing] lazy val _left = Unsupported("BSNil.left")
-    override  def left: left = _left.apply
-    override type left       = _left.apply
+    override  def left: left = _left.unwrap
+    override type left       = _left.unwrap
 
     private[sing] lazy val _right = Unsupported("BSNil.right")
-    override  def right: right = _right.apply
-    override type right        = _right.apply
+    override  def right: right = _right.unwrap
+    override type right        = _right.unwrap
 
     override type ord = o
 

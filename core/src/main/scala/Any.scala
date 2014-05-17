@@ -16,105 +16,105 @@ object Any extends AsKind {
 /**
  * The sing Any
  */
-trait Any extends scala.Equals {
+trait Any extends scala.Equals with TermWrapper {
 
     @Annotation.returnThis
     final val self: self = this.asInstanceOf[self]
     type self <: Any
 
-     def kind: kind = Unsupported("Any.kind").apply
+     def kind: kind = Unsupported("Any.kind").unwrap
     type kind <: Kind
 
     // likely to work
-     def is[K <: Kind](K: K): is[K] = Unsupported("Any.is").apply
+     def is[K <: Kind](K: K): is[K] = Unsupported("Any.is").unwrap
     type is[K <: Kind] <: Boolean
 
     // unlikely to work
      def as[K <: Kind](K: K): as[K] = ???
     type as[K <: Kind] <: K
 
-     def asBoolean: asBoolean = Unsupported("Any.asBoolean").apply
+     def asBoolean: asBoolean = Unsupported("Any.asBoolean").unwrap
     type asBoolean <: Boolean
 
-     def asBoxed: asBoxed = Unsupported("Any.asBoxed").apply
+     def asBoxed: asBoxed = Unsupported("Any.asBoxed").unwrap
     type asBoxed <: Boxed
 
-     def asEither: asEither = Unsupported("Any.asBoolean").apply
+     def asEither: asEither = Unsupported("Any.asBoolean").unwrap
     type asEither <: Either
 
-     def asFunction0: asFunction0 = Unsupported("Any.asFunction0").apply
+     def asFunction0: asFunction0 = Unsupported("Any.asFunction0").unwrap
     type asFunction0 <: Function0
 
-     def asFunction1: asFunction1 = Unsupported("Any.asFunction1").apply
+     def asFunction1: asFunction1 = Unsupported("Any.asFunction1").unwrap
     type asFunction1 <: Function1
 
-     def asFunction2: asFunction2 = Unsupported("Any.asFunction2").apply
+     def asFunction2: asFunction2 = Unsupported("Any.asFunction2").unwrap
     type asFunction2 <: Function2
 
-     def asFunction3: asFunction3 = Unsupported("Any.asFunction3").apply
+     def asFunction3: asFunction3 = Unsupported("Any.asFunction3").unwrap
     type asFunction3 <: Function3
 
-     def asPartialFunction: asPartialFunction = Unsupported("Any.asPartialFunction").apply
+     def asPartialFunction: asPartialFunction = Unsupported("Any.asPartialFunction").unwrap
     type asPartialFunction <: PartialFunction
 
-     def asKind: asKind = Unsupported("Any.asKind").apply
+     def asKind: asKind = Unsupported("Any.asKind").unwrap
     type asKind <: Kind
 
-     def asList: asList = Unsupported("Any.asList").apply
+     def asList: asList = Unsupported("Any.asList").unwrap
     type asList <: List
 
-     def asMap: asMap = Unsupported("Any.asMap").apply
+     def asMap: asMap = Unsupported("Any.asMap").unwrap
     type asMap <: Map
 
-     def asNat: asNat = Unsupported("Any.asNat").apply
+     def asNat: asNat = Unsupported("Any.asNat").unwrap
     type asNat <: Nat
 
-     def asSet: asSet = Unsupported("Any.asSet").apply
+     def asSet: asSet = Unsupported("Any.asSet").unwrap
     type asSet <: Set
 
-     def asOption: asOption = Unsupported("Any.asOption").apply
+     def asOption: asOption = Unsupported("Any.asOption").unwrap
     type asOption <: Option
 
-     def asRelation: asRelation = Unsupported("Any.asRelation").apply
+     def asRelation: asRelation = Unsupported("Any.asRelation").unwrap
     type asRelation <: Relation
 
-     def asEquiv: asEquiv = Unsupported("Any.asEquiv").apply
+     def asEquiv: asEquiv = Unsupported("Any.asEquiv").unwrap
     type asEquiv <: Equiv
 
-     def asPartialOrdering: asPartialOrdering = Unsupported("Any.asPartialOrdering").apply
+     def asPartialOrdering: asPartialOrdering = Unsupported("Any.asPartialOrdering").unwrap
     type asPartialOrdering <: PartialOrdering
 
-     def asOrdering: asOrdering = Unsupported("Any.asOrdering").apply
+     def asOrdering: asOrdering = Unsupported("Any.asOrdering").unwrap
     type asOrdering <: Ordering
 
-     def asOrderingResult: asOrderingResult = Unsupported("Any.asOrderingResult").apply
+     def asOrderingResult: asOrderingResult = Unsupported("Any.asOrderingResult").unwrap
     type asOrderingResult <: OrderingResult
 
-     def asProduct: asProduct = Unsupported("Any.asProduct").apply
+     def asProduct: asProduct = Unsupported("Any.asProduct").unwrap
     type asProduct <: Product
 
-     def asProduct1: asProduct1 = Unsupported("Any.asProduct1").apply
+     def asProduct1: asProduct1 = Unsupported("Any.asProduct1").unwrap
     type asProduct1 <: Product1
 
-     def asProduct2: asProduct2 = Unsupported("Any.asProduct2").apply
+     def asProduct2: asProduct2 = Unsupported("Any.asProduct2").unwrap
     type asProduct2 <: Product2
 
-     def asProduct3: asProduct3 = Unsupported("Any.asProduct3").apply
+     def asProduct3: asProduct3 = Unsupported("Any.asProduct3").unwrap
     type asProduct3 <: Product3
 
-     def asUnit: asUnit = Unsupported("Any.asUnit").apply
+     def asUnit: asUnit = Unsupported("Any.asUnit").unwrap
     type asUnit <: Unit
 
-     def equal[that <: Any](that: that): equal[that] = Unsupported("Any.equal").apply
+     def equal[that <: Any](that: that): equal[that] = Unsupported("Any.equal").unwrap
     type equal[that <: Any] <: Boolean
 
-     def nequal[that <: Any](that: that): nequal[that] = Unsupported("Any.nequal").apply
+     def nequal[that <: Any](that: that): nequal[that] = Unsupported("Any.nequal").unwrap
     type nequal[that <: Any] <: Boolean
 
     /**
      * Escapes from the sing world.
      */
-     def unsing: unsing = Unsupported("Any.unsing").apply
+     def unsing: unsing = Unsupported("Any.unsing").unwrap
     type unsing
 
     final protected def refEquals(that: scala.Any) = super.equals(that)
@@ -130,6 +130,9 @@ trait AsAny extends AnyImpl {
 
 
 trait AnyImpl extends Any {
+    override  def unwrap: unwrap = self
+    override type unwrap         = self
+
     override  def is[K <: Kind](K: K): is[K] = kind.conformsTo(K)
     override type is[K <: Kind]              = kind#conformsTo[K]
 

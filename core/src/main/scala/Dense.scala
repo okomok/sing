@@ -96,12 +96,12 @@ sealed class DNil extends AsDense {
     override  def unsing: unsing = 0
 
     private[sing] lazy val _head = NoSuchElement("DNil.head")
-    override  def head: head = _head.apply
-    override type head       = _head.apply
+    override  def head: head = _head.unwrap
+    override type head       = _head.unwrap
 
     private[sing] lazy val _tail = NoSuchElement("DNil.tail")
-    override  def tail: tail = _tail.apply
-    override type tail       = _tail.apply
+    override  def tail: tail = _tail.unwrap
+    override type tail       = _tail.unwrap
 
     override  def size: size = Zero
     override type size       = Zero
@@ -113,8 +113,8 @@ sealed class DNil extends AsDense {
     override type increment            = DCons[`true`, self]
 
     private[sing] lazy val _decrement = Unsupported("DNil.decrement")
-    override  def decrement: decrement = _decrement.apply
-    override type decrement            = _decrement.apply
+    override  def decrement: decrement = _decrement.unwrap
+    override type decrement            = _decrement.unwrap
 
     override  def times[that <: Nat](that: that): times[that] = self
     override type times[that <: Nat]                          = self
