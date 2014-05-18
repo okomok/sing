@@ -1,4 +1,4 @@
-# sing 0.2.0-SNAPSHOT
+# sing 0.2.0
 
 `sing` is a type-level metaprogramming library for Scala.
 This is based upon the singleton type system emulation.
