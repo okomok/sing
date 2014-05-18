@@ -17,6 +17,5 @@ object CompileString {
 
 
 final class CompileStringImpl(override val c: Context) extends UntypedMacroImpl {
-    import c.universe._
     override protected def untypedMacroImpl(x: c.Tree): c.Tree = c.typecheck(x)
 }

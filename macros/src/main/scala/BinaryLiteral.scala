@@ -23,7 +23,7 @@ final class BinaryLiteralImpl(val c: Context) {
         Dense_.term_fromBinaryString(c)(ExtractString(c)(x))
     }
 
-    def typeMacroI(x: c.Tree): c.Tree = {
+    def typeMacro(x: c.Tree): c.Tree = {
         import c.universe._
         Dense_.type_fromBinaryString(c)(ExtractString(c)(x))
     }

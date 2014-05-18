@@ -17,7 +17,7 @@ class selfTypeDef extends StaticAnnotation {
 }
 
 
-class SelfTypeDefImpl(override val c: Context) extends AnnotationMacroImpl {
+final class SelfTypeDefImpl(override val c: Context) extends AnnotationMacroImpl {
     import c.universe._
 
     override protected def annotMacroImpl(ts: scala.List[c.Tree]): scala.List[c.Tree] = {
