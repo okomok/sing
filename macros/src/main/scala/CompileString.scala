@@ -12,10 +12,10 @@ import scala.reflect.macros.whitebox.Context
 
 
 object CompileString {
-    def apply(x: String): scala.Any = macro CompileStringImpl.untypedMacro
+    def apply(x: String): scala.Any = macro CompileStringImpl.termMacro
 }
 
 
 final class CompileStringImpl(override val c: Context) extends UntypedMacroImpl {
-    override protected def untypedMacroImpl(x: c.Tree): c.Tree = c.typecheck(x)
+    override protected def termMacroImpl(x: c.Tree): c.Tree = c.typecheck(x)
 }
