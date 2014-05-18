@@ -25,11 +25,9 @@ trait StructuralComplexityTezt {
     val _NatN = Nat_(N)
     type xs = List.range[_0, _NatN.unwrap]#force
 
-    val _diff = TypeOf(
-        Benchmark {"""
-             dummy[ xs#filter[not2]#force ]
-        """}
-    )
-    type diff = _diff.unwrap
-    // echo[diff]
+    final val _diff = Benchmark {
+        "dummy[ xs#filter[not2]#force ]"
+    }
+
+//    Echo(_diff)
 }
