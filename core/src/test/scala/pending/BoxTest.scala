@@ -12,8 +12,6 @@ import com.github.okomok.sing
 import sing._
 import sing.Peano.Literal._
 import junit.framework.Assert._
-
-
 import scala.language.existentials
 
 
@@ -28,13 +26,13 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
         val bi = Box(mmm)
         val k = Box.empty[MMM]
 
-        val _bi = typeOf(bi)
-        type bi = _bi.apply
+        val _bi = TypeOf(bi)
+        type bi = _bi.unwrap
 
-        val _k = typeOf(k)
-        type k = _k.apply
+        val _k = TypeOf(k)
+        type k = _k.unwrap
 
-        Test.assertEq[`true`, bi#equal[k]]
+        AssertEq[`true`, bi#equal[k]]
 
         ()
     }
@@ -70,20 +68,21 @@ class BoxTest extends org.scalatest.junit.JUnit3Suite {
 
         val xs = Box(0) :: Box("hello") :: Box(10) :: Box(true) :: Nil
 
-        object Ap extends New[Function1] {
+        object Ap extends AsFunction1 {
+            override type self = Ap.type
             override  def apply[x <: Any](x: x): apply[x] = poly.get(x).get.asFunction1.apply(x).asInstanceOf[apply[x]]
             override type apply[x <: Any]                 = poly.get[x]#get#asFunction1#apply[x]
         }
 
         val res = xs.map(Ap).force
         val a0: Int = res.nth(_0).unsing
-        expectResult(1)(a0)
+        assertResult(1)(a0)
         val a1: String = res.nth(_1).unsing
-        expectResult("olleh")(a1)
+        assertResult("olleh")(a1)
         val a2: Int = res.nth(_2).unsing
-        expectResult(11)(a2)
+        assertResult(11)(a2)
         val a3: c.type = res.nth(_3).unsing
-        expectResult(c)(a3)
+        assertResult(c)(a3)
 
     }
 

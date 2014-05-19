@@ -13,27 +13,24 @@ import sing._
 import sing.Peano.Literal._
 import junit.framework.{Assert => JAssert}
 
-import scala.language.existentials
 
+class A[T, U]
+class B[T]
 
 class BoxParamTest extends org.scalatest.junit.JUnit3Suite {
-
     def testParam {
-        class A[T, U]
-        class B[T]
-
         type k = Char
 
-/*
-        StackOverflow, I don't know why.
-
+/*      Compiler stack overflows. I don't know why.
+        class A[T, U]
+        class B[T]
+*/
         val x = Box(new A[B[Int], Char])
         val x_ = Box(new A[B[Int], k])
         val y = Box(new A[B[Int], Int])
 
         AssertTrue(x.equal(x_))
         AssertFalse(x.equal(y))
-*/
     }
 
 }
